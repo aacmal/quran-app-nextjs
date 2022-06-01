@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Switch from '../Switch'
 import ChapterCard from './ChapterCard'
 
 const Chapter = ({className}) => {
@@ -17,22 +18,26 @@ const Chapter = ({className}) => {
         })
     }, [])
     return (
-        <div className='grid gap-2'>
-            {
-                isLoading ?
-                <div>Loading</div>:
-                data.chapters.map(e => {
-                    return (
-                        <ChapterCard
-                            id={e.id}
-                            name_simple={e.name_simple}
-                            translated_name={e.translated_name.name}
-                            name_arabic={e.name_arabic}
-                        />
-                    )
-                })
-            }
-        </div>
+        <>
+            <Switch/>
+            <div className='grid gap-2 mt-3'>
+                {
+                    isLoading ?
+                    <div>Loading</div>:
+                    data.chapters.map(e => {
+                        return (
+                            <ChapterCard
+                                key={e.id}
+                                id={e.id}
+                                name_simple={e.name_simple}
+                                translated_name={e.translated_name.name}
+                                name_arabic={e.name_arabic}
+                            />
+                        )
+                    })
+                }
+            </div>
+        </>
     )
 }
 

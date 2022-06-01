@@ -1,5 +1,5 @@
 import React from 'react'
-import Star from '../../icons/start'
+import Star from '../../icons/star'
 
 const ChapterCard = ({id, translated_name, name_arabic, name_simple, bismillah_pre, revelation_place}) => {
   return (
