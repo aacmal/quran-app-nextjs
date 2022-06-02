@@ -1,8 +1,6 @@
-import { data } from "autoprefixer";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Banner from "../src/components/Banner";
-import Bismillah from "../src/components/Bismillah";
 import QuranReader from "../src/components/quranReader/QuranReader";
 import Wrapper from "../src/components/Wrapper";
 
