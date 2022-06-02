@@ -19,3 +19,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: 'Al Qalam Quran';
+  src: url('../assets/fonts/alqalam.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+#arab{
+  font-family: 'Al Qalam Quran';
+}

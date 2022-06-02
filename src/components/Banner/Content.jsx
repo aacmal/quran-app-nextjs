@@ -2,15 +2,15 @@ import React from 'react'
 import Bookmark from '../icons/bookmark'
 import History from '../icons/history'
 
-const Content = ({isInSurah}) => {
+const Content = ({isInSurah, chapterData}) => {
     if(isInSurah){
         return (
             <div className='text-center z-20 relative text-gray-50 p-2'>
                 <Bookmark className="h-5 w-5 absolute right-1 top-1"/>
-                <h1 className='text-2xl font-bold mb-0 text-gray-50'>Al-Fatiha</h1>
-                <span className='text-sm block'>Pembuka</span>
+                <h1 className='text-2xl font-bold mb-0 text-gray-50'>{chapterData.name_simple}</h1>
+                <span className='text-sm block'>{chapterData.translated_name.name}</span>
                 <hr  className='my-3'/>
-                <span className='text-sm'>Mekkah - 7 Ayah</span>
+                <span className='text-sm'>{chapterData.revelation_place} - {chapterData.verses_count} Ayah</span>
             </div>
         )
     } else {

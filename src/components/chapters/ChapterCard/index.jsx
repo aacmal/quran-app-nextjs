@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import Star from '../../icons/star'
 
@@ -15,7 +16,9 @@ const ChapterCard = ({id, translated_name, name_arabic, name_simple, bismillah_p
             </div>
         </div>
         <div>
-            <span className='text-3xl'>{name_arabic}</span>
+            <Link href={`/${id}`}>
+                <span className='text-3xl'>{name_arabic}</span>
+            </Link>
         </div>
 
     </div>

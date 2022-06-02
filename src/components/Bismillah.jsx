@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Bismillah = () => {
+const Bismillah = ({className}) => {
     return (
-        <img className='w-2/3 max-w-2xl mx-auto text-white my-3' src="/bismillah.svg" alt="" />
+        <img className={'w-2/3 max-w-2xl mx-auto text-white my-5 ' + className} src="/bismillah.svg" alt="" />
     )
 }
 
