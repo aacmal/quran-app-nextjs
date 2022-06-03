@@ -20,7 +20,7 @@ const Chapter = ({className}) => {
     return (
         <>
             <Switch/>
-            <div className='grid gap-2 mt-3'>
+            <div className='grid gap-2 lg:gap-3 mt-3 lg:grid-cols-3 md:grid-cols-2'>
                 {
                     isLoading ?
                     <div>Loading</div>:
