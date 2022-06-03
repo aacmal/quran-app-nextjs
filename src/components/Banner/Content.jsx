@@ -10,7 +10,7 @@ const Content = ({isInSurah, chapterData}) => {
                 <h1 className='text-2xl font-bold mb-0 text-gray-50'>{chapterData.name_simple}</h1>
                 <span className='text-sm block'>{chapterData.translated_name.name}</span>
                 <hr  className='my-3'/>
-                <span className='text-sm'>{chapterData.revelation_place} - {chapterData.verses_count} Ayah</span>
+                <span className='text-sm'><span className='capitalize'>{chapterData.revelation_place}</span> - {chapterData.verses_count} Ayah</span>
             </div>
         )
     } else {
