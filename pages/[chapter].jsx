@@ -20,6 +20,14 @@ export default function Surah(){
             })
         }
 
+        function getSurahInfo(chapterId){
+            fetch(`https://api.quran.com//api/v4/chapters/${chapterId}/info?language=id`)
+            .then((res) => res.json())
+            .then((data) => {
+                setData((datas) => {return {...datas, ...data}})
+            })
+        }
+
         function getVersesOfChapter(chapterId){
             fetch(`https://api.quran.com/api/v4/verses/by_chapter/${chapterId}?language=id&fields=text_uthmani&translation_fields=resource_name,language_id&translations=33&per_page=220`)
             .then((res) => res.json())
@@ -31,9 +39,8 @@ export default function Surah(){
 
         if(router.isReady){
             getChapterData(router.query.chapter)
+            getSurahInfo(router.query.chapter)
             getVersesOfChapter(router.query.chapter)
- 
-            
         }
     }, [router.isReady])
     
@@ -41,7 +48,7 @@ export default function Surah(){
 
     return (
         <Wrapper>
-            <Banner chapterData={datas.chapter} isInSurah={true} isLoading={isLoading}/>
+            <Banner chapterData={datas.chapter} chapterInfo={datas.chapter_info} isInSurah={true} isLoading={isLoading}/>
             <QuranReader bismillahPre={datas.chapter?.bismillah_pre} versesData={datas.verses} isLoading={isLoading}/>
         </Wrapper>
     )

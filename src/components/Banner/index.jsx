@@ -2,12 +2,12 @@ import Image from 'next/image'
 import History from '../icons/history';
 import Content from './Content';
 
-const Banner = ({isInSurah, chapterData, isLoading}) => {
+const Banner = ({isInSurah, chapterData, isLoading, chapterInfo}) => {
   return (
-        <div className='rounded-2xl p-4 w-full bg-gradient-to-tr overflow-hidden from-emerald-300 to-emerald-700 relative shadow-lg shadow-emerald-200'>
+        <div className='rounded-2xl p-4 w-full bg-gradient-to-tr overflow-hidden from-emerald-300 to-emerald-700 relative shadow-lg shadow-emerald-200 transition-all'>
           {
             isLoading ? <span>Loading</span>:
-            <Content isInSurah={isInSurah} chapterData={chapterData}/>
+            <Content isInSurah={isInSurah} chapterData={chapterData} chapterInfo={chapterInfo}/>
           }
             <img
                 src='/quran.png'
