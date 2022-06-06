@@ -4,9 +4,9 @@ import Bookmark from '../icons/bookmark'
 import History from '../icons/history'
 import Info from '../icons/info'
 
-const SurahInfo = ({verses_count, revelation_place, short_text}) => {
+const SurahInfo = ({verses_count, revelation_place, short_text, className}) => {
     return (
-        <div className='text-left text-sm'>
+        <div className={'text-left text-sm transition-all ' + className}>
             <div className='mb-3'>
                 <span><span className='font-bold'>Jumlah Ayah :  </span>{verses_count}</span>
                 <br />
@@ -37,15 +37,13 @@ const Content = ({isInSurah, chapterData, chapterInfo}) => {
                 <h1 className='text-2xl font-bold mb-0 text-gray-50'>{chapterData.name_simple}</h1>
                 <span className='text-sm block'>{chapterData.translated_name.name}</span>
                 <hr  className='my-3'/>
-                {
-                    isInfoOpen ?
-                    <SurahInfo
-                        verses_count={chapterData.verses_count}
-                        revelation_place={chapterData.revelation_place}
-                        short_text={chapterInfo.short_text}
-                    />:
-                    <span className='text-sm'><span className='capitalize'>{chapterData.revelation_place}</span> - {chapterData.verses_count} Ayah</span>
-                }
+                <SurahInfo
+                    verses_count={chapterData.verses_count}
+                    revelation_place={chapterData.revelation_place}
+                    short_text={chapterInfo.short_text}
+                    className={`${isInfoOpen ? 'max-h-96 visible opacity-100':'max-h-0 invisible opacity-0'}`}
+                />
+                <span className={`text-sm transition-all ${isInfoOpen ? 'invisible opacity-0':'visible opacity-100'}`}><span className='capitalize'>{chapterData.revelation_place}</span> - {chapterData.verses_count} Ayah</span>
             </div>
         )
     } else {
