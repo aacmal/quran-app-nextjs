@@ -4,7 +4,8 @@ import Bookmark from '../icons/bookmark'
 import History from '../icons/history'
 import Info from '../icons/info'
 
-const SurahInfo = ({verses_count, revelation_place, short_text, className}) => {
+const SurahInfo = ({verses_count, revelation_place, short_text, chapterId, className}) => {
+
     return (
         <div className={'text-left text-sm transition-all ' + className}>
             <div className='mb-3'>
@@ -15,7 +16,7 @@ const SurahInfo = ({verses_count, revelation_place, short_text, className}) => {
             </div>
             <p>{short_text}</p>
             <br />
-            <Link href='/'>
+            <Link href={`/surah/${chapterId}/info`}>
                 <span className='text-blue-600'>Tampilkan lebih lengkap</span>
             </Link>
         </div>
@@ -42,6 +43,7 @@ const Content = ({isInSurah, chapterData, chapterInfo}) => {
                     revelation_place={chapterData.revelation_place}
                     short_text={chapterInfo.short_text}
                     className={`${isInfoOpen ? 'max-h-96 visible opacity-100':'max-h-0 invisible opacity-0'}`}
+                    chapterId={chapterData.id}
                 />
                 <span className={`text-sm transition-all ${isInfoOpen ? 'invisible opacity-0':'visible opacity-100'}`}><span className='capitalize'>{chapterData.revelation_place}</span> - {chapterData.verses_count} Ayah</span>
             </div>

@@ -28,7 +28,7 @@ const Chapter = ({className}) => {
                         return (
                             <ChapterCard
                                 key={e.id}
-                                id={e.id}
+                                chapterId={e.id}
                                 name_simple={e.name_simple}
                                 translated_name={e.translated_name.name}
                                 name_arabic={e.name_arabic}
