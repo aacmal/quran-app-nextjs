@@ -4,7 +4,7 @@ import Star from '../../icons/star'
 
 const ChapterCard = ({chapterId, translated_name, name_arabic, name_simple, revelation_place}) => {
     return (
-        <Link href={`/surah/${chapterId}}`}>
+        <Link href={`/surah/${chapterId}`}>
             <div className='p-3 py-4 h-fit md:h-28 bg-white rounded-xl flex justify-between items-center border lg:border-2 border-transparent hover:border-emerald-500 group transition-all cursor-pointer hover:shadow-emerald-100 shadow-lg shadow-transparent'>
                 <div className='flex items-center'>
                     <div className='relative grid place-items-center h-11 w-11 mr-3'>
