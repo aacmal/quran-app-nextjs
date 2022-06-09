@@ -1,6 +1,4 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Banner from '../src/components/Banner'
+import HomeBanner from '../src/components/Banner/HomeBanner'
 import Chapter from '../src/components/chapters/Chapter'
 import Header from '../src/components/Header'
 import Search from '../src/components/Search'
@@ -10,7 +8,7 @@ export default function Home() {
   return (
     <Wrapper>
       <Header className="mb-3">Quran App</Header>
-      <Banner/>
+      <HomeBanner/>
       <Search/>
       <Chapter/>
     </Wrapper> 
