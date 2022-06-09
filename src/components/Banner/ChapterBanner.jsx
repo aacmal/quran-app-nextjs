@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { Bookmark } from '../icons'
+import { Bookmark, Info } from '../icons'
 import BannerWrapper from './BannerWrapper'
 import SurahInfo from './SurahInfo'
 
@@ -8,13 +8,13 @@ const ChapterBanner = ({chapterData, chapterInfo, isLoading}) => {
     const [isInfoOpen, setInfoOpen] = useState(false)
 
     return (
-        <BannerWrapper>
+        <BannerWrapper imageOpacity={0.2} imageScale={1.2}>
             {
                 isLoading ? 
                 <div>Loading</div>
                 :
                 <div className={`text-center z-20 relative text-gray-50 duration-150 transition-all ${isInfoOpen ? 'max-h-96':'max-h-32'}`}>
-                    <Info 
+                    <Info
                         className="h-5 w-5 absolute left-0 top-0"
                         onClick={() => setInfoOpen(!isInfoOpen)}
                     />

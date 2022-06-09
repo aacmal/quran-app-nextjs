@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Banner from "../../../src/components/Banner";
+import ChapterBanner from "../../../src/components/Banner/ChapterBanner";
 import QuranReader from "../../../src/components/quranReader/QuranReader";
 import Wrapper from "../../../src/components/Wrapper";
 
@@ -36,7 +36,7 @@ export default function Surah(){
 
     return (
         <Wrapper>
-            <Banner chapterData={datas.chapter} chapterInfo={datas.chapter_info} isInSurah={true} isLoading={isLoading}/>
+            <ChapterBanner chapterData={datas.chapter} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
             <QuranReader bismillahPre={datas.chapter?.bismillah_pre} versesData={datas.verses} isLoading={isLoading}/>
         </Wrapper>
     )

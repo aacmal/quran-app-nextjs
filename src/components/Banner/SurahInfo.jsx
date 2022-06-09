@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const SurahInfo = ({verses_count, revelation_place, short_text, chapterId, className}) => {
     return (
         <div className={'text-left text-sm transition-all ' + className}>
@@ -15,3 +17,5 @@ const SurahInfo = ({verses_count, revelation_place, short_text, chapterId, class
         </div>
     )
 }
+
+export default SurahInfo
