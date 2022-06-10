@@ -2,21 +2,9 @@ import { useState, useEffect } from 'react'
 import Switch from '../Switch'
 import ChapterCard from './ChapterCard'
 
-const Chapter = ({className}) => {
+const Chapter = ({className, chapterLists, isLoading}) => {
 
-    const [data, setData] = useState([])
-    const [isLoading, setLoading] = useState(true)
-
-    useEffect(() => {
-        setLoading(true)
-        fetch('https://api.quran.com/api/v4/chapters?language=id')
-        .then((res) => res.json())
-        .then((data) => {
-            setData(data)
-            console.log(data);
-            setLoading(false)
-        })
-    }, [])
+   
     return (
         <>
             <Switch/>
@@ -24,7 +12,7 @@ const Chapter = ({className}) => {
                 {
                     isLoading ?
                     <div>Loading</div>:
-                    data.chapters.map(e => {
+                    chapterLists.chapters.map(e => {
                         return (
                             <ChapterCard
                                 key={e.id}
