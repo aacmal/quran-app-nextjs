@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import ChapterCard from './Card/ChapterCard'
-import JuzCard from './Card/JuzCard'
 import JuzWrapper from './Card/JuzWrapper'
 
 const JuzsView = ({chapterData}) => {
@@ -28,13 +27,17 @@ const JuzsView = ({chapterData}) => {
     <div>Loading</div>:
     juzsData.juzs.map((e) => {
       return (
-        <JuzWrapper juz_number={e.juz_number}>
+        <JuzWrapper 
+          key={e.id}
+          juz_number={e.juz_number}
+        >
           <>
             {
               Object.keys(e.verse_mapping).map((key, index) => {
                 let {id, translated_name, name_arabic, name_simple} = chapterData[parseInt(key)-1]
                 return (
                   <ChapterCard
+                    key={index}
                     showAyah
                     chapterId={id}
                     translated_name={translated_name.name}

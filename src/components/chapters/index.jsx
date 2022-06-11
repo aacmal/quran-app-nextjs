@@ -1,4 +1,3 @@
-import Switch from '../Switch'
 import ChaptersView from './ChaptersView'
 import JuzsView from './JuzsView'
 
