@@ -4,6 +4,7 @@ import Info from './info'
 import Star from './star'
 import Dots_vertical from './dots_vertical'
 import Bookmark from './bookmark'
+import ChevronIcon from './chevron_down'
 
 
 
@@ -13,5 +14,6 @@ export {
     Info,
     Star, 
     Dots_vertical, 
-    Bookmark
+    Bookmark,
+    ChevronIcon
 }

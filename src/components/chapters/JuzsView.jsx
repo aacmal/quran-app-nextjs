@@ -30,6 +30,7 @@ const JuzsView = ({chapterData}) => {
         <JuzWrapper 
           key={e.id}
           juz_number={e.juz_number}
+          verse_mapping={Object.keys(e.verse_mapping)}
         >
           <>
             {
