@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <Wrapper>
       <Header className="mb-3">Quran App</Header>
-      <HomeBanner/>
+      {/* <HomeBanner/> */}
       <Switch setView={setView} view={view}/>
       <Chapter isLoading={isLoading} chapterLists={data.chapters} view={view}/>
     </Wrapper> 

@@ -5,7 +5,7 @@ const Switch = ({setView, view}) => {
     const [active, setActive] = useState(1)
 
     return (
-        <div className='flex relative w-40'>
+        <div className='flex relative w-40 cursor-pointer'>
             <div 
                 className={'px-2 py-1 w-20 text-center text-sm rounded-md mr-2 font-semibold z-10'}
                 onClick={() => setView('chapter')}
