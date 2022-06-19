@@ -4,7 +4,7 @@ import JuzWrapper from './Card/JuzWrapper'
 
 const JuzsView = ({chapterData}) => {
   const [isLoading, setLoading] = useState(true)
-  const [juzsData, setJuzsData] = useState({})
+  const [juzsData, setJuzsData] = useState(null)
   
   useEffect(() => {
     const getJuzData = () => {
@@ -16,7 +16,9 @@ const JuzsView = ({chapterData}) => {
       })
     }
 
-    getJuzData()
+    if(!juzsData){
+      getJuzData()
+    }
 
   }, [])
 
