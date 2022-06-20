@@ -19,6 +19,7 @@ const DropdownSurahLists = ({chapterLists, chapterData}) => {
                 {
                     chapterLists?.map(e => (
                         <li
+                            key={e.id}
                             onClick={() => setChapterId(e.id)}
                             className="px-2 py-1 cursor-pointer hover:bg-emerald-100 hover:text-emerald-500 rounded">
                             {e.name_simple}
