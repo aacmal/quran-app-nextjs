@@ -12,18 +12,18 @@ export default function Surah(){
     const router = useRouter();
     const [datas, setData] = useState({})
     const [isLoading, setLoading] = useState(true)
-    const [chapterId, setChapterId] = useState(router.query.chapter)
+    // const [chapterId, setChapterId] = useState(router.query.chapter)
 
     useEffect(() => {
-        setLoading(true)
-
+        
         async function fetchData(url){
             const data = await fetch(url)
             const result = await data.json();
             return result;
         }
-
+        
         async function getData(id){
+            setLoading(true)
             const all_chapter = await fetchData(`https://api.quran.com/api/v4/chapters`)
             const chapter_data = await fetchData(`https://api.quran.com/api/v4/chapters/${id}`)
             const surah_info = await fetchData(`https://api.quran.com//api/v4/chapters/${id}/info?language=id`)
@@ -34,18 +34,20 @@ export default function Surah(){
 
 
         if(router.isReady){
-            getData(chapterId)
+            getData(router.query.chapter)
         }
-    }, [router.isReady, chapterId])
+
+    }, [router.isReady, router.query.chapter])
+
+    useEffect(() => {
+        
+    })
     
     console.log(datas);
 
     return (
         <Wrapper>
-            {
-                !isLoading &&
-                <DropdownSurahLists chapterData={datas.chapter} chapterLists={datas.chapters}/>
-            }
+            <DropdownSurahLists chapterId={router?.query.chapter} chapterLists={datas.chapters} isLoading/>
             <ChapterBanner chapterData={datas.chapter} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
             <QuranReader bismillahPre={datas.chapter?.bismillah_pre} versesData={datas.verses} isLoading={isLoading}/>
         </Wrapper>
