@@ -6,6 +6,7 @@ import ChapterBanner from "../../../src/components/Banner/ChapterBanner";
 import ChevronIcon from "../../../src/components/icons/chevron";
 import QuranReader from "../../../src/components/quranReader/QuranReader";
 import Wrapper from "../../../src/components/Wrapper";
+import DropdownSurahLists from "../../../src/components/DropdownSurahLists/DropdownSurahLists";
 
 export default function Surah(){
     const router = useRouter();
@@ -43,23 +44,7 @@ export default function Surah(){
         <Wrapper>
             {
                 !isLoading &&
-                <div>
-                    <div className="group p-2 bg-white w-fit rounded-md shadow-lg shadow-emerald-500/10 mb-4 flex items-center relative">
-                        <span className="font-bold text-sm text-emerald-500">{datas.chapter.name_simple}</span>
-                        <ChevronIcon className="h-5 ml-2 text-emerald-500 transform group-hover:rotate-180 transition-transform delay-300"/>
-                        <ul className="invisible opacity-0 top-[10px] transition-all ease-in delay-300 group-hover:visible group-hover:top-[50px] group-hover:opacity-100 absolute bg-white  z-50 p-2 w-36 rounded-md h-72 overflow-auto scrollbar-hide">
-                            {
-                                datas.chapters.map(e => (
-                                    <li
-                                        onClick={() => setChapterId(e.id)}
-                                        className="px-2 py-1 cursor-pointer hover:bg-emerald-100 hover:text-emerald-500 rounded">
-                                        {e.name_simple}
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    </div>
-                </div>
+                <DropdownSurahLists chapterData={datas.chapter} chapterLists={datas.chapters}/>
             }
             <ChapterBanner chapterData={datas.chapter} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
             <QuranReader bismillahPre={datas.chapter?.bismillah_pre} versesData={datas.verses} isLoading={isLoading}/>
