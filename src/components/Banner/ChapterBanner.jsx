@@ -7,7 +7,6 @@ import SurahInfo from './SurahInfo'
 const ChapterBanner = ({chapterData, chapterInfo, isLoading}) => {
     const [isInfoOpen, setInfoOpen] = useState(false)
 
-    console.log(isLoading);
     return (
         <BannerWrapper imageOpacity={0.2} imageScale={1.2}>
             {

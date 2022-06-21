@@ -19,6 +19,7 @@ const QuranReader = ({versesData, isLoading, bismillahPre}) => {
                             verse_number={e.verse_number}
                             translations={e.translations}
                             text_uthmani={e.text_uthmani}
+                            verse_key={e.verse_key}
                         />
                     ))
                 }

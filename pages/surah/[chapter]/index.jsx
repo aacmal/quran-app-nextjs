@@ -12,7 +12,7 @@ export default function Surah(){
     const router = useRouter();
     const [datas, setData] = useState({})
     const [isLoading, setLoading] = useState(true)
-    // const [chapterId, setChapterId] = useState(router.query.chapter)
+    const [showHeader, setShowHeader] = useState(true)
 
     useEffect(() => {
         
@@ -37,17 +37,31 @@ export default function Surah(){
             getData(router.query.chapter)
         }
 
-    }, [router.isReady, router.query.chapter])
+        const _showHeader = () => {
+                let prevScrollpos = window.pageYOffset+1;
+                window.onscroll = function() {
+                    let currentScrollPos = window.pageYOffset ?? 0;
+                    if(window.scrollY > 1000){
+                        if (prevScrollpos > currentScrollPos) {
+                            setShowHeader(true)
+                        } else {
+                            setShowHeader(false)
+                        }
+                    }
+                    prevScrollpos = currentScrollPos;
+                }
+        }
 
-    useEffect(() => {
+        _showHeader()
+        console.log(datas);
         
-    })
+    }, [router.isReady, router.query.chapter])
     
-    console.log(datas);
-
+    
     return (
         <Wrapper>
-            <DropdownSurahLists chapterId={router?.query.chapter} chapterLists={datas.chapters} isLoading/>
+            <DropdownSurahLists chapterId={router?.query.chapter} chapterLists={datas.chapters} showHeader={showHeader}/>
+            <hr className="md:my-10 my-8 border-none"/>
             <ChapterBanner chapterData={datas.chapter} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
             <QuranReader bismillahPre={datas.chapter?.bismillah_pre} versesData={datas.verses} isLoading={isLoading}/>
         </Wrapper>

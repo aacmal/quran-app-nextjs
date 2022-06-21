@@ -3,15 +3,17 @@ import Bookmark from '../icons/bookmark'
 import Copy from '../icons/copy'
 
 
-const Verses = ({verse_number, translations, text_uthmani}) => {
+const Verses = ({verse_number, translations, text_uthmani, verse_key}) => {
 
     function copyToClipboard(text){
         navigator.clipboard.writeText(text)
     }
 
+    const verseId = verse_key.split(':')
+
     return (
         <> 
-            <div className='flex justify-between py-3 md:flex-row flex-col'>
+            <div id={verseId[1]} className='flex justify-between py-3 md:flex-row flex-col'>
                 <div className='flex md:flex-col flex-row items-center mb-4'>
                     <div className='relative grid place-items-center h-9 w-9 md:h-12 md:w-12'>
                         <span className='text-xs font-semibold md:text-lg'>{verse_number}</span>
