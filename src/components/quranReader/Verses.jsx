@@ -1,11 +1,14 @@
-import {useState, useEffect} from 'react'
 import Star from '../icons/star'
 import Bookmark from '../icons/bookmark'
 import Copy from '../icons/copy'
-import Dots_vertical from '../icons/dots_vertical'
 
 
 const Verses = ({verse_number, translations, text_uthmani}) => {
+
+    function copyToClipboard(text){
+        navigator.clipboard.writeText(text)
+    }
+
     return (
         <> 
             <div className='flex justify-between py-3 md:flex-row flex-col'>
@@ -16,10 +19,9 @@ const Verses = ({verse_number, translations, text_uthmani}) => {
                     </div>
                     <div className='md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-32 w-full md:w-fit'>
                         <div className='flex md:flex-col'>
-                            <Bookmark className="md:h-7 h-6  text-gray-500 md:mb-2 md:mr-0 mr-2"/>
-                            <Copy className="md:h-7 h-6 text-gray-500"/>
+                            <Bookmark className="md:h-6 h-5  text-gray-500 md:mb-2 md:mr-0 mr-2"/>
+                            <Copy onClick={() => copyToClipboard(text_uthmani)} className="md:h-6 h-5 text-gray-500 active:text-emerald-500 cursor-pointer"/>
                         </div>
-                        <Dots_vertical className="md:h-7 h-6 text-gray-500"/>
                     </div>
                 </div>
                 <div className='w-full md:w-[95%] flex flex-col '>
