@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
+html{
+  @apply scroll-smooth;
+  -webkit-tap-highlight-color: transparent;
+}
 
 html,
 * {
