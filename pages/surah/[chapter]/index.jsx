@@ -15,7 +15,7 @@ export default function Surah(){
     const [showHeader, setShowHeader] = useState(true)
 
     useEffect(() => {
-        
+        setShowHeader(true)
         async function fetchData(url){
             const data = await fetch(url)
             const result = await data.json();
