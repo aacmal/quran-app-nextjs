@@ -1,12 +1,12 @@
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import ChevronIcon from '../icons/chevron'
 import Link from 'next/link'
+import ChapterLists from './ChapterLists'
+import IndexOfChapterLists from './IndexOfChapterLists'
 
 const DropdownSurahLists = ({chapterLists, chapterId, showHeader}) => {
     const [open, setOpen] = useState(false)
-    const router = useRouter()
 
     if (chapterLists){
         return (
@@ -27,37 +27,8 @@ const DropdownSurahLists = ({chapterLists, chapterId, showHeader}) => {
                         )
                     }
                     >
-                        {/* Lists Chapters */}
-                        <ul className={classNames("p-2 pl-1 w-44 round h-72 overflow-auto scrollbar-hide",
-
-                        )}>
-                            {
-                                chapterLists?.map(e => (
-                                    <li
-                                        key={e.id}
-                                        onClick={() => router.push(`/surah/${e.id}`, undefined, {shallow: true})}
-                                        className="px-2 py-1 cursor-pointer hover:bg-emerald-100 hover:text-emerald-500 rounded flex items-center">
-                                        <span className='w-6 text-right block text-xs text-emerald-500 font-bold mr-2'>{e.id}</span>
-                                        <span className='block'>{e.name_simple}</span>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-
-                        {/* Index of ayah */}
-                        <ul className={classNames("p-2 border-l border-emerald-300 w-16 h-72 overflow-auto scrollbar-hide")}>
-                            {
-                                new Array(parseInt(chapterLists[parseInt(chapterId)-1].verses_count)).fill(0).map((key, index) => (
-                                    <Link key={index} href={`#${index+1}`}>
-                                        <a>
-                                            <li className="p-1 cursor-pointer hover:bg-emerald-100 hover:text-emerald-500 rounded flex items-center">
-                                                {index+1}
-                                            </li>
-                                        </a>
-                                    </Link>
-                                ))
-                            }
-                        </ul>
+                        <ChapterLists chapterLists={chapterLists}/>
+                        <IndexOfChapterLists chapterLists={chapterLists} chapterId={chapterId}/>
                     </div>
                 </div>
             </div>

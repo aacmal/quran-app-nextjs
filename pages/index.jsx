@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import HomeBanner from '../src/components/Banner/HomeBanner'
 import Chapter from '../src/components/chapters'
@@ -22,6 +23,9 @@ export default function Home() {
   }, [])
   return (
     <Wrapper>
+      <Head>
+        <title>Quran App</title>
+      </Head>
       <Header className="mb-3">Quran App</Header>
       {/* <HomeBanner/> */}
       <Switch setView={setView} view={view}/>
