@@ -3,12 +3,10 @@ import { useEffect, useState } from "react";
 import Link from 'next/link'
 
 import ChapterBanner from "../../../src/components/Banner/ChapterBanner";
-import ChevronIcon from "../../../src/components/icons/chevron";
 import QuranReader from "../../../src/components/quranReader/QuranReader";
 import Wrapper from "../../../src/components/Wrapper";
 import DropdownSurahLists from "../../../src/components/DropdownSurahLists/DropdownSurahLists";
 import Head from "next/head";
-import { data } from "autoprefixer";
 
 export default function Surah(){
     const router = useRouter();
@@ -55,7 +53,6 @@ export default function Surah(){
         }
 
         _showHeader()
-        console.log(datas);
         
     }, [router.isReady, router.query.chapter])
     

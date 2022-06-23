@@ -1,6 +1,15 @@
 import Star from '../icons/star'
 import Bookmark from '../icons/bookmark'
 import Copy from '../icons/copy'
+import classNames from 'classnames'
+
+
+
+const IconWrapper = ({children, className}) => (
+    <div className={classNames('p-1 rounded hover:text-white hover:bg-emerald-200', className)}>
+        {children}
+    </div>
+)
 
 
 const Verses = ({verse_number, translations, text_uthmani, verse_key}) => {
@@ -21,8 +30,12 @@ const Verses = ({verse_number, translations, text_uthmani, verse_key}) => {
                     </div>
                     <div className='md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-32 w-full md:w-fit'>
                         <div className='flex md:flex-col'>
-                            <Bookmark className="md:h-6 h-5  text-gray-500 md:mb-2 md:mr-0 mr-2"/>
-                            <Copy onClick={() => copyToClipboard(text_uthmani)} className="md:h-6 h-5 text-gray-500 active:text-emerald-500 cursor-pointer"/>
+                            <IconWrapper className="">
+                                <Bookmark className="md:h-6 h-5  text-gray-500 md:mb-2 md:mr-0 mr-2"/>
+                            </IconWrapper>
+                            <IconWrapper>
+                                <Copy onClick={() => copyToClipboard(text_uthmani)} className="md:h-6 h-5 text-gray-500 active:text-emerald-500 cursor-pointer"/>
+                            </IconWrapper>
                         </div>
                     </div>
                 </div>

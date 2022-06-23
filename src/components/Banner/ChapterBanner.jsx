@@ -18,7 +18,6 @@ const ChapterBanner = ({chapterData, chapterInfo, isLoading}) => {
                         className="h-5 lg:h-8 cursor-pointer absolute left-0 top-0 text-gray-50"
                         onClick={() => setInfoOpen(!isInfoOpen)}
                     />
-                    <Bookmark className="h-5 cursor-pointer lg:h-8 absolute right-0 top-0 text-gray-50"/>
                     <h1 className='text-2xl lg:text-3xl font-bold mb-0 text-gray-50'>{chapterData.name_simple}</h1>
                     <span className='text-sm block lg:text-xl text-gray-50'>{chapterData.translated_name.name}</span>
                     <hr  className={`my-3 mx-auto lg:my-5 md:transition-all ${isInfoOpen ? 'max-w-full':'max-w-md'}`}/>
