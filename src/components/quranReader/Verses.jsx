@@ -2,14 +2,7 @@ import Star from '../icons/star'
 import Bookmark from '../icons/bookmark'
 import Copy from '../icons/copy'
 import classNames from 'classnames'
-
-
-
-const IconWrapper = ({children, className}) => (
-    <div className={classNames('p-1 rounded hover:text-white hover:bg-emerald-200', className)}>
-        {children}
-    </div>
-)
+import IconWrapper from '../icons/IconWrapper'
 
 
 const Verses = ({verse_number, translations, text_uthmani, verse_key}) => {

@@ -1,8 +1,11 @@
 import classNames from 'classnames'
 import React, { useState } from 'react'
+import ArrowIcon from '../icons/ArrowIcon'
 import ChevronIcon from '../icons/chevron'
 import ChapterLists from './ChapterLists'
 import IndexOfChapterLists from './IndexOfChapterLists'
+import IconWrapper from '../icons/IconWrapper'
+import Link from 'next/link'
 
 const DropdownSurahLists = ({chapterLists, chapterId, showHeader}) => {
     const [open, setOpen] = useState(false)
@@ -13,12 +16,22 @@ const DropdownSurahLists = ({chapterLists, chapterId, showHeader}) => {
                 {"top-0" : showHeader},
                 {"-top-24" : !showHeader}
             )}>
-                {/* Dropdown Toggle */}
-                <div 
-                onClick={() => setOpen(!open)}
-                className={classNames("p-2 cursor-pointer border border-transparent bg-white w-fit rounded-md  flex items-center relative", {"border-emerald-500 shadow-lg shadow-emerald-500/10": open})}>
-                    <span className="font-bold text-sm text-emerald-500">{chapterLists[parseInt(chapterId)-1].name_simple}</span>
-                    <ChevronIcon className={classNames("h-5 ml-2 transition-all text-emerald-500 transform", {"rotate-180": open})}/>
+                
+                <div className='flex items-center gap-3'>
+                    <Link href="/">
+                        <a>
+                            <IconWrapper onHover={false} className="bg-emerald-400 text-white p-2">
+                                <ArrowIcon className="h-5 w-5"/>
+                            </IconWrapper>
+                        </a>
+                    </Link>
+                    {/* Dropdown Toggle */}
+                    <div 
+                    onClick={() => setOpen(!open)}
+                    className={classNames("p-2 cursor-pointer border border-transparent bg-white w-fit rounded-md  flex items-center relative", {"border-emerald-500 shadow-lg shadow-emerald-500/10": open})}>
+                        <span className="font-bold text-sm text-emerald-500">{chapterLists[parseInt(chapterId)-1].name_simple}</span>
+                        <ChevronIcon className={classNames("h-5 ml-2 transition-all text-emerald-500 transform", {"rotate-180": open})}/>
+                    </div>
                 </div>
                 {/* Dropdown Menu */}
                 <div
