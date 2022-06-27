@@ -3,12 +3,13 @@ import Bookmark from '../icons/bookmark'
 import Copy from '../icons/copy'
 import classNames from 'classnames'
 import IconWrapper from '../icons/IconWrapper'
+import TafsirIcon from '../icons/TafsirIcon'
 
 
-const Verses = ({verse_number, translations, text_uthmani, verse_key}) => {
+const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirData}) => {
 
-    function copyToClipboard(text){
-        navigator.clipboard.writeText(text)
+    function copyToClipboard(content){
+        navigator.clipboard.writeText(content)
     }
 
     const verseId = verse_key.split(':')
@@ -29,10 +30,13 @@ const Verses = ({verse_number, translations, text_uthmani, verse_key}) => {
                             <IconWrapper>
                                 <Copy onClick={() => copyToClipboard(text_uthmani)} className="md:h-6 h-5 text-gray-500 active:text-emerald-500 cursor-pointer"/>
                             </IconWrapper>
+                            <IconWrapper onClick={() => setTafsirData({isOpen: true, verseKey: verse_key})}>
+                                <TafsirIcon className="md:h-6 h-5  text-gray-500 md:mb-2 md:mr-0 mr-2"/>
+                            </IconWrapper>
                         </div>
                     </div>
                 </div>
-                <div className='w-full md:w-[95%] flex flex-col '>
+                <div className='w-full md:w-[92%] flex flex-col '>
                     <p id='arab' className='font-serif text-right inline-block text-3xl md:text-4xl lg:text-5xl transition-all lg:leading-loose md:leading-loose leading-relaxed'>{text_uthmani}</p>
                     <p dangerouslySetInnerHTML={{__html:translations[0].text}} className=' text-base md:text-xl transition-all mt-5 inline-block'></p>
                 </div>

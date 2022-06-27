@@ -30,9 +30,11 @@ a {
   font-style: normal;
 }
 
-#arab{
+#arab, .arabic.uthmani{
   font-family: 'Al Qalam Quran';
 }
+
+
 
 h2{
   font-weight: bold;

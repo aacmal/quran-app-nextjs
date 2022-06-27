@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Verses from './Verses'
 import Bismillah from "../Bismillah";
+import TafsirModal from '../Tafsir/Tafsir';
 
 
 const QuranReader = ({versesData, isLoading, bismillahPre}) => {
+    const [tafsirData, setTafsirData] = useState({
+        isOpen: false,
+        verseKey: null
+    })
+
+    
+    console.log(tafsirData);
+
     return (
         <div className='mt-3'>
+            
+            <TafsirModal 
+                isOpen={tafsirData.isOpen}
+                verseKey={tafsirData.verseKey} 
+                closeModal={() => setTafsirData(false)}
+            />
             {
                 isLoading ?
                 <div>Loading...</div>
@@ -20,6 +35,7 @@ const QuranReader = ({versesData, isLoading, bismillahPre}) => {
                             translations={e.translations}
                             text_uthmani={e.text_uthmani}
                             verse_key={e.verse_key}
+                            setTafsirData={setTafsirData}
                         />
                     ))
                 }
