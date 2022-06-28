@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Bookmark, Info } from '../icons'
 import BannerWrapper from './BannerWrapper'
+import ChapterBannerSkeleton from './ChapterBannerSkeleton'
 import SurahInfo from './SurahInfo'
 
 const ChapterBanner = ({chapterData, chapterInfo, isLoading}) => {
@@ -11,7 +12,7 @@ const ChapterBanner = ({chapterData, chapterInfo, isLoading}) => {
         <BannerWrapper imageOpacity={0.2} imageScale={1.2}>
             {
                 isLoading ? 
-                <div>Loading</div>
+                <ChapterBannerSkeleton/>
                 :
                 <div className={`text-center z-20 relative text-gray-50 duration-150 ${isInfoOpen ? 'max-h-96':'max-h-32'}`}>
                     <Info

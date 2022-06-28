@@ -29,7 +29,9 @@ export default function Surah(){
             const surah_info = await fetchData(`https://api.quran.com//api/v4/chapters/${id}/info?language=id`)
             const verses = await fetchData(`https://api.quran.com/api/v4/verses/by_chapter/${id}?language=id&fields=text_uthmani&translation_fields=resource_name,language_id&translations=33&per_page=220`)
             setData({...chapter_data, ...surah_info, ...verses, ...all_chapter})
-            setLoading(false)
+            setTimeout(() => {
+                setLoading(false)
+            }, 500)
         }
 
 

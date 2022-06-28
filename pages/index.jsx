@@ -17,9 +17,10 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
           setData(data)
-          setLoading(false)
+          setTimeout(() => {
+            setLoading(false)
+          }, 500)
         })
-      console.log(data);
   }, [])
   return (
     <Wrapper>

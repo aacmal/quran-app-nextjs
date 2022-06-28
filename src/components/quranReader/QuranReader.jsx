@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Verses from './Verses'
 import Bismillah from "../Bismillah";
 import TafsirModal from '../Tafsir/Tafsir';
+import Skeleton from '../Skeleton/Skeleton';
+import ChapterCardSkeleton from '../chapters/Card/ChapterCardSkeleton';
+import VerseSkeleton from './VerseSkeleton';
 
 
 const QuranReader = ({versesData, isLoading, bismillahPre}) => {
@@ -23,7 +26,13 @@ const QuranReader = ({versesData, isLoading, bismillahPre}) => {
             />
             {
                 isLoading ?
-                <div>Loading...</div>
+                <div>
+                    {
+                        new Array(3).fill().map((e) => (
+                            <VerseSkeleton/>
+                        ))
+                    }
+                </div>
                 :
                 <>
                     <Bismillah className={!bismillahPre && "hidden"}/>

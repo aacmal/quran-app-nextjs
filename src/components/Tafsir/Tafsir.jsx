@@ -2,12 +2,13 @@ import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 import IconWrapper from '../icons/IconWrapper'
 import XIcons from '../icons/XIcons'
+import TafsirSkeleton from './TafsirSkeleton'
 
 import tafsirStyle from './tafsirText.module.css'
 
 const TafsirModal = ({isOpen, verseKey, closeModal}) => {
 
-    const [tafsirData, setTafsirData] = useState({})
+    const [tafsirData, setTafsirData] = useState(null)
 
     useEffect(() => {
         async function getTafsirByVerse(verseKey){
@@ -19,7 +20,7 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
         if (isOpen === true) {
             getTafsirByVerse(verseKey)
         } else {
-            setTafsirData({})
+            setTafsirData(null)
         }
         
         document.body.style.overflow = isOpen ? 'hidden' : 'auto'
@@ -48,7 +49,11 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
                     <IconWrapper className="absolute group top-3 right-3 border-2 border-transparent" onHover='hover:border-emerald-500' onClick={closeModal}>
                         <XIcons className="h-7 group-hover:text-emerald-500"/>
                     </IconWrapper>
-                    <div className={tafsirStyle.tafsir_text} dangerouslySetInnerHTML={{__html:tafsirData.tafsir?.text}}></div>
+                    {
+                        tafsirData ?
+                        <div className={tafsirStyle.tafsir_text} dangerouslySetInnerHTML={{__html:tafsirData.tafsir?.text}}></div>
+                        : <TafsirSkeleton/>
+                    }
                 </div>
             </div>
         </div>

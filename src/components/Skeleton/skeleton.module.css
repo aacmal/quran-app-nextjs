@@ -1,0 +1,70 @@
+.skeleton{
+    border-radius: 5px;
+}
+
+.skeleton{
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    /* background-color: red; */
+    background-color: rgba(255, 255, 255, 0.411);
+    /* filter: blur(10px); */
+    animation: wave;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+
+}
+
+.skeleton.delay::after{
+    animation-delay: 200ms;
+}
+
+@keyframes wave{
+    /* 0% {
+        left: -10%;
+        opacity: 1;
+    }
+    70% {
+        left: 100%;
+        opacity: 1;
+    }
+    71% {
+        left: 100%;
+        opacity: 0;
+    }
+    72% {
+        opacity: 1;
+        left: -10%;
+    }
+
+    100% {
+        left: 100%;
+    } */
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 100%;
+    }
+    51% {
+        transform: translateX(0%);
+        width: 100%;
+    }
+    70% {
+        transform: translateX(0%);
+        width: 100%;
+    }
+    100% {
+        transform: translateX(100%);
+        width: 100%;
+    }
+
+}

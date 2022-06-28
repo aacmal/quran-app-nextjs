@@ -22,7 +22,7 @@ const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirD
                         <span className='text-xs font-semibold md:text-lg'>{verse_number}</span>
                         <Star className="absolute h-8 w-8 md:h-12 md:w-12 left-0"/>
                     </div>
-                    <div className='md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-32 w-full md:w-fit'>
+                    <div className='md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-28 w-full md:w-fit'>
                         <div className='flex md:flex-col'>
                             <IconWrapper className="">
                                 <Bookmark className="md:h-6 h-5  text-gray-500"/>
