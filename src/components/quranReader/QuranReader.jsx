@@ -19,7 +19,7 @@ const QuranReader = ({versesData, isLoading, bismillahPre}) => {
             <TafsirModal 
                 isOpen={tafsirData.isOpen}
                 verseKey={tafsirData.verseKey} 
-                closeModal={() => setTafsirData(false)}
+                closeModal={() => setTafsirData({...tafsirData, isOpen:false})}
             />
             {
                 isLoading ?

@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
+import IconWrapper from '../icons/IconWrapper'
+import XIcons from '../icons/XIcons'
 
 import tafsirStyle from './tafsirText.module.css'
 
@@ -43,7 +45,9 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
                     {"translate-y-0 opacity-100": isOpen},
                     {"translate-y-52 opacity-0": !isOpen}
                 )}>
-                    <span onClick={closeModal} className='absolute right-5 cursor-pointer top-5'>X</span>
+                    <IconWrapper className="absolute group top-3 right-3 border-2 border-transparent" onHover='hover:border-emerald-500' onClick={closeModal}>
+                        <XIcons className="h-7 group-hover:text-emerald-500"/>
+                    </IconWrapper>
                     <div className={tafsirStyle.tafsir_text} dangerouslySetInnerHTML={{__html:tafsirData.tafsir?.text}}></div>
                 </div>
             </div>
