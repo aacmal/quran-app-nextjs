@@ -5,8 +5,8 @@ import Link from 'next/link'
 import ChapterBanner from "../../../src/components/Banner/ChapterBanner";
 import QuranReader from "../../../src/components/quranReader/QuranReader";
 import Wrapper from "../../../src/components/Wrapper";
-import DropdownSurahLists from "../../../src/components/DropdownSurahLists/DropdownSurahLists";
 import Head from "next/head";
+import TopBar from "../../../src/components/TopBar/TopBar";
 
 export default function Surah(){
     const router = useRouter();
@@ -64,7 +64,7 @@ export default function Surah(){
             <Head>
                 <title>{datas.chapter?.name_simple} ({datas.chapter?.translated_name.name})</title>
             </Head>
-            <DropdownSurahLists chapterId={router?.query.chapter} chapterLists={datas.chapters} showHeader={showHeader}/>
+            <TopBar chapterId={router?.query.chapter} chapterLists={datas.chapters} showHeader={showHeader}/>
             <hr className="md:my-10 my-8 border-none"/>
             <ChapterBanner chapterData={datas.chapter} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
             <QuranReader bismillahPre={datas.chapter?.bismillah_pre} versesData={datas.verses} isLoading={isLoading}/>
