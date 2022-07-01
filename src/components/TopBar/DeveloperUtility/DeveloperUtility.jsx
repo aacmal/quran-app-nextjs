@@ -21,7 +21,7 @@ const DeveloperUtility = () => {
                 <AdjustmentIcon className="w-5 transform rotate-90 text-white"/>
             </IconWrapper>
             <div className={classNames(
-                'fixed md:absolute bottom-0 left-0 md:-translate-x-80 md:-bottom-6 w-full md:w-96 h-fit pb-24 pt-12 rounded-t-lg md:rounded-lg px-5 md:pb-6 md:pt-6 md:p-6 bg-white shadow-2xl gap-2 flex flex-col transform transition-all',
+                'fixed md:absolute bottom-0 left-0 md:-translate-x-80 md:-bottom-6 w-full md:w-96 h-fit pb-12 pt-8 rounded-t-lg md:rounded-lg px-5 md:pb-6 md:pt-6 md:p-6 bg-white gap-2 flex flex-col transform transition-all shadow-[0_0px_30px_-15px_rgba(0,0,0,0.3)] shadow-emerald-400 border-emerald-500 border',
                 {"translate-y-0 md:opacity-100 md:translate-y-72 visible": isExpanded},
                 {"translate-y-full md:opacity-0 md:translate-y-64 invisible": !isExpanded}
             )}>

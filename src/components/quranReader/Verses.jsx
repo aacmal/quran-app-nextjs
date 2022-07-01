@@ -4,9 +4,13 @@ import Copy from '../icons/copy'
 import classNames from 'classnames'
 import IconWrapper from '../icons/IconWrapper'
 import TafsirIcon from '../icons/TafsirIcon'
+import { useContext } from 'react'
+import { StyleContext } from '../../context/StyleContext'
 
 
 const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirData}) => {
+
+    const { currentFontSize } = useContext(StyleContext)
 
     function copyToClipboard(content){
         navigator.clipboard.writeText(content)
@@ -37,8 +41,8 @@ const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirD
                     </div>
                 </div>
                 <div className='w-full md:w-[92%] flex flex-col '>
-                    <p id='arab' className='font-serif text-right inline-block text-3xl md:text-4xl lg:text-5xl transition-all lg:leading-loose md:leading-loose leading-relaxed'>{text_uthmani}</p>
-                    <p dangerouslySetInnerHTML={{__html:translations[0].text}} className=' text-base md:text-xl transition-all mt-5 inline-block'></p>
+                    <div style={{fontSize: currentFontSize}} id='arab' className='font-serif text-right inline-block text-3xl md:text-4xl lg:text-5xl transition-all lg:leading-loose md:leading-loose leading-relaxed'>{text_uthmani}</div>
+                    <span dangerouslySetInnerHTML={{__html:translations[0].text}} className=' text-base md:text-xl transition-all mt-5 inline-block'></span>
                 </div>
             </div>
             <hr  className='border-none my-3 lg:my-5 h-[1px] bg-emerald-500'/>

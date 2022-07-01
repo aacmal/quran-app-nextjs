@@ -1,5 +1,6 @@
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { StyleContext } from '../../../context/StyleContext'
 import ChevronIcon from '../../icons/chevron'
 import AdjustmentWrapper from './AdjustmentWrapper'
 
@@ -31,22 +32,21 @@ const FontAdjustment = () => {
 
 
 const FontSizeAdjustment = () => {
-    const [size, setSize] = useState(12)
+    const { increaseFontSize, decreaseFontSize, currentFontSize } = useContext(StyleContext)
+    const [fontSize, setFontSize] = useState(null)
 
-    function increase(){
-        if (size < 24) setSize((currentSize) => currentSize+1)
-    }
+    useEffect(() => {
+      setFontSize(currentFontSize)
+    }, [currentFontSize])
+    
 
-    function decrease(){
-        if (size > 8) setSize((currentSize) => currentSize-1)
-    }
 
     return (
         <AdjustmentWrapper title="Ukuran Font">
             <div className='py-2 px-2 group text-black bg-gray-100 rounded w-32 flex justify-between items-center'>
-                <button onClick={() => decrease()} className='w-5 h-5 flex items-center justify-center font-bold rounded bg-white'>-</button>
-                <span className='text-sm'>{size}</span>
-                <button onClick={() => increase()} className='w-5 h-5  flex items-center justify-center font-bold rounded bg-white'>+</button>
+                <button onClick={() => decreaseFontSize()} className='w-5 h-5 flex items-center justify-center font-bold rounded bg-white'>-</button>
+                <div className='text-sm'>{fontSize}</div>
+                <button onClick={() => increaseFontSize()} className='w-5 h-5  flex items-center justify-center font-bold rounded bg-white'>+</button>
             </div>
         </AdjustmentWrapper>   
     )
