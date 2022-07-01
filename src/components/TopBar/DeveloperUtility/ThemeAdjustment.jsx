@@ -1,9 +1,28 @@
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { StyleContext } from '../../../context/StyleContext'
 import AdjustmentWrapper from './AdjustmentWrapper'
 
 const ThemeAdjustment = () => {
-    const [themeId, setThemeId] = useState(0)
+    const { updateTheme } = useContext(StyleContext)
+
+    const theme = ['light', 'dark']
+    const [themeId, setThemeId] = useState()
+
+    useEffect(() => {
+        setThemeId(() => {
+            if (window.document.documentElement.classList.contains('dark')) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+    }, [])
+
+    function selectTheme(themeId){
+        setThemeId(themeId)
+        updateTheme(theme[themeId])
+    }
 
     return (
         <AdjustmentWrapper title="Theme">
@@ -15,13 +34,13 @@ const ThemeAdjustment = () => {
                         {"translate-x-full": themeId === 1},
                     )}></div>
                     <div className={classNames(
-                        'text-sm p-1 z-10 w-16 text-center cursor-pointer',
+                        'text-sm p-1 z-10 w-16 text-center cursor-pointer capitalize',
                         {"text-emerald-500 font-bold": themeId === 0}
-                    )} onClick={() => setThemeId(0)}>Terang</div>
+                    )} onClick={() => selectTheme(0)}>{theme[0]}</div>
                     <div className={classNames(
-                        'text-sm p-1 z-10 w-16 text-center cursor-pointer',
+                        'text-sm p-1 z-10 w-16 text-center cursor-pointer capitalize',
                         {"text-emerald-500 font-bold": themeId === 1}
-                    )} onClick={() => setThemeId(1)}>Gelap</div>
+                    )} onClick={() => selectTheme(1)}>{theme[1]}</div>
                 </div>
             </div>
         </AdjustmentWrapper>

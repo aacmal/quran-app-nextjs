@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import setTheme from "../utils/theme";
 
 export const StyleContext = createContext()
 
@@ -22,12 +23,21 @@ export default function StyleProvider({children}){
         }
     }
 
+    function updateTheme(theme){
+        setStyle((currentStyle) => ({...currentStyle, theme: theme}))
+    }
+
+    useEffect(() => {
+        setTheme(style?.theme)
+    }, [style?.theme])
+
     return (
         <StyleContext.Provider
             value={{
                 increaseFontSize,
                 decreaseFontSize,
-                currentFontSize: style?.fontSize
+                currentFontSize: style?.fontSize,
+                updateTheme
             }}
         >
             {children}
