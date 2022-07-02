@@ -11,11 +11,11 @@ const Skeleton = ({className, color}) => {
       break;
       
     case 'emerald':
-      colors = 'bg-emerald-200'
+      colors = 'bg-emerald-200 dark:bg-emerald-600'
       break;
 
     default:
-      colors = 'bg-emerald-200'
+      colors = 'bg-emerald-200 dark:bg-emerald-600'
       break;
   }
 

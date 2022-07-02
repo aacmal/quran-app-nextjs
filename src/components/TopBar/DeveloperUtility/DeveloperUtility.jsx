@@ -7,7 +7,7 @@ import { FontAdjustment, FontSizeAdjustment } from './FontAdjustment'
 import LanguageAdjustment from './LanguageAdjustment'
 import ThemeAdjustment from './ThemeAdjustment'
 
-const DeveloperUtility = () => {
+const DeveloperUtility = ({isInSurah}) => {
     const [isExpanded, setExpanded] = useState(false)
     const router = useRouter()
 
@@ -21,14 +21,14 @@ const DeveloperUtility = () => {
                 <AdjustmentIcon className="w-5 transform rotate-90 text-white"/>
             </IconWrapper>
             <div className={classNames(
-                'fixed md:absolute bottom-0 left-0 md:-translate-x-80 md:-bottom-6 w-full md:w-96 h-fit pb-12 pt-8 rounded-t-lg md:rounded-lg px-5 md:pb-6 md:pt-6 md:p-6 bg-white gap-2 flex flex-col transform transition-all shadow-[0_0px_30px_-15px_rgba(0,0,0,0.3)] shadow-emerald-400 border-emerald-500 border',
-                {"translate-y-0 md:opacity-100 md:translate-y-72 visible": isExpanded},
-                {"translate-y-full md:opacity-0 md:translate-y-64 invisible": !isExpanded}
+                'fixed md:absolute bottom-0 left-0 md:-left-1 md:-translate-x-80 md:bottom-auto md:top-0 w-full md:w-96 h-fit pb-12 pt-8 rounded-t-lg md:rounded-lg px-5 md:pb-6 md:pt-6 md:p-6 bg-white dark:bg-slate-600 gap-2 flex flex-col transform transition-all shadow-[0_0px_30px_-15px_rgba(0,0,0,0.3)] shadow-emerald-400 dark:shadow-emerald-500 border border-emerald-400',
+                {"translate-y-0 md:opacity-100 md:translate-y-16 visible z-50": isExpanded},
+                {"translate-y-full md:opacity-0 md:translate-y-10 invisible": !isExpanded}
             )}>
                 <ThemeAdjustment/>
                 <LanguageAdjustment/>
                 <FontAdjustment/>
-                <FontSizeAdjustment/>
+                {isInSurah && <FontSizeAdjustment/>}
             </div>
         </div>
     )

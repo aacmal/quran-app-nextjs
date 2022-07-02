@@ -26,10 +26,10 @@ const ThemeAdjustment = () => {
 
     return (
         <AdjustmentWrapper title="Theme">
-            <div className='bg-gray-100 p-1 rounded text-black w-32'>
+            <div className='bg-gray-100 dark:bg-slate-500 dark:text-slate-200 p-1 rounded text-black w-32'>
                 <div className='flex items-center relative'>
                     <div className={classNames(
-                        'bg-white absolute w-1/2 h-full z-auto rounded-md transition-transform transform',
+                        'bg-white dark:bg-slate-400 absolute w-1/2 h-full z-auto rounded-md transition-transform transform',
                         {"translate-x-0": themeId === 0},
                         {"translate-x-full": themeId === 1},
                     )}></div>
@@ -39,7 +39,7 @@ const ThemeAdjustment = () => {
                     )} onClick={() => selectTheme(0)}>{theme[0]}</div>
                     <div className={classNames(
                         'text-sm p-1 z-10 w-16 text-center cursor-pointer capitalize',
-                        {"text-emerald-500 font-bold": themeId === 1}
+                        {"text-emerald-200 font-bold": themeId === 1}
                     )} onClick={() => selectTheme(1)}>{theme[1]}</div>
                 </div>
             </div>

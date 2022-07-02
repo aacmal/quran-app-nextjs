@@ -30,7 +30,7 @@ export default function Home() {
       </Head>
       <Header className="mb-3">Quran App</Header>
       {/* <HomeBanner/> */}
-      <div className={classNames('px-5 py-5 lg:p-12 bg-gray-100 min-h-screen rounded-t-2xl')}>
+      <div className={classNames('px-5 py-5 lg:p-12 bg-gray-100 dark:bg-slate-700 min-h-screen rounded-t-2xl')}>
         <Switch setView={setView} view={view}/>
         <Chapter isLoading={isLoading} chapterLists={data.chapters} view={view}/>
       </div>

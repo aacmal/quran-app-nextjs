@@ -11,13 +11,13 @@ const FontAdjustment = () => {
 
     return (
         <AdjustmentWrapper title="Jenis Font">
-            <div onClick={() => setExpanded(!isExpanded)} className='text-center py-2 px-2 group text-black bg-gray-100 rounded w-32 flex justify-between relative cursor-pointer'>
-                <span className='font-bold text-sm text-gray-800'>{font}</span>
+            <div onClick={() => setExpanded(!isExpanded)} className='text-center py-2 px-2 group text-black dark:text-slate-100 bg-gray-100 dark:bg-slate-500 rounded w-32 flex justify-between relative cursor-pointer'>
+                <span className='font-bold text-sm'>{font}</span>
                 <ChevronIcon className={classNames("h-5 transform transition-transform", {"rotate-180": isExpanded})}/>
 
                 {/* Lists Language */}
                 <ul className={classNames(
-                    'absolute p-2 z-40 bg-white w-full left-0 transform transition-all rounded text-left shadow-lg',
+                    'absolute p-2 z-40 bg-white dark:bg-slate-400 w-full left-0 transform transition-all rounded text-left shadow-lg',
                     {"visible opacity-100 translate-y-7": isExpanded},
                     {"invisible opacity-0 translate-y-4": !isExpanded}
                 )}>
@@ -43,10 +43,10 @@ const FontSizeAdjustment = () => {
 
     return (
         <AdjustmentWrapper title="Ukuran Font">
-            <div className='py-2 px-2 group text-black bg-gray-100 rounded w-32 flex justify-between items-center'>
-                <button onClick={() => decreaseFontSize()} className='w-5 h-5 flex items-center justify-center font-bold rounded bg-white'>-</button>
+            <div className='py-2 px-2 group text-black dark:text-slate-100 bg-gray-100 dark:bg-slate-500 rounded w-32 flex justify-between items-center'>
+                <button onClick={() => decreaseFontSize()} className='w-5 h-5 flex items-center justify-center font-bold rounded bg-white dark:bg-slate-400'>-</button>
                 <div className='text-sm'>{fontSize}</div>
-                <button onClick={() => increaseFontSize()} className='w-5 h-5  flex items-center justify-center font-bold rounded bg-white'>+</button>
+                <button onClick={() => increaseFontSize()} className='w-5 h-5  flex items-center justify-center font-bold rounded bg-white dark:bg-slate-400'>+</button>
             </div>
         </AdjustmentWrapper>   
     )

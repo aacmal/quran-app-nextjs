@@ -11,7 +11,7 @@ const TopBar = ({showHeader, chapterId, chapterLists}) => {
         {"-top-24" : !showHeader}
     )}>
         <DropdownSurahLists chapterLists={chapterLists} chapterActive={chapterId}/>
-        <DeveloperUtility/>
+        <DeveloperUtility isInSurah={true}/>
     </div>
   )
 }
