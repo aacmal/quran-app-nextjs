@@ -25,7 +25,7 @@ const JuzPage = () => {
 
     }, [router.isReady])
     return (
-        <Wrapper>
+        <Wrapper className="px-5">
             <QuranReader isLoading={isLoading} versesData={data.verses}/>
         </Wrapper>
     )

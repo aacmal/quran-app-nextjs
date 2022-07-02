@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import HomeBanner from '../src/components/Banner/HomeBanner'
@@ -29,8 +30,10 @@ export default function Home() {
       </Head>
       <Header className="mb-3">Quran App</Header>
       {/* <HomeBanner/> */}
-      <Switch setView={setView} view={view}/>
-      <Chapter isLoading={isLoading} chapterLists={data.chapters} view={view}/>
+      <div className={classNames('px-5 py-5 lg:p-12 bg-gray-100 min-h-screen rounded-t-2xl')}>
+        <Switch setView={setView} view={view}/>
+        <Chapter isLoading={isLoading} chapterLists={data.chapters} view={view}/>
+      </div>
     </Wrapper> 
   )
 }

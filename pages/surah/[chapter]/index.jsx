@@ -60,7 +60,7 @@ export default function Surah(){
     
     
     return (
-        <Wrapper>
+        <Wrapper className="px-5">
             <Head>
                 <title>{datas.chapter?.name_simple} ({datas.chapter?.translated_name.name})</title>
             </Head>
