@@ -24,7 +24,7 @@ const DropdownSurahLists = ({chapterLists, chapterActive}) => {
                     {/* Dropdown Toggle */}
                     <div 
                     onClick={() => setOpen(!open)}
-                    className={classNames("p-2 cursor-pointer border border-transparent bg-white w-fit rounded-md  flex items-center relative", {"border-emerald-500 shadow-lg shadow-emerald-500/10": open})}>
+                    className={classNames("p-2 cursor-pointer border border-transparent bg-white dark:bg-slate-600 w-fit rounded-md  flex items-center relative", {"border-emerald-500 shadow-lg shadow-emerald-500/10": open})}>
                         <span className="font-bold text-sm text-emerald-500">{chapterLists[parseInt(chapterActive)-1].name_simple}</span>
                         <ChevronIcon className={classNames("h-5 ml-2 transition-all text-emerald-500 transform", {"rotate-180": open})}/>
                     </div>
@@ -32,9 +32,9 @@ const DropdownSurahLists = ({chapterLists, chapterActive}) => {
                 {/* Dropdown Menu */}
                 <div
                     className={classNames(
-                    "absolute z-50 transition-all flex bg-white rounded-md shadow-lg shadow-emerald-700/20",
-                    {"visible top-[70px] opacity-100" : open},
-                    {"invisible opacity-0 top-[50px]" : !open}
+                    "absolute z-50 transition-all flex bg-white dark:bg-slate-700 dark:text-slate-100 rounded-md shadow-lg shadow-emerald-700/20",
+                    {"visible top-[80px] opacity-100" : open},
+                    {"invisible top-[60px] opacity-0" : !open}
                     )
                 }
                 >

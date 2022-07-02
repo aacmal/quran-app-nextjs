@@ -7,7 +7,7 @@ const Skeleton = ({className, color}) => {
 
   switch (color) {
     case 'gray':
-      colors = 'bg-gray-300'
+      colors = 'bg-gray-300 dark:bg-slate-700'
       break;
       
     case 'emerald':

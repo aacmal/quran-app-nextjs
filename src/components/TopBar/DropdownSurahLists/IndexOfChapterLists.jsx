@@ -8,7 +8,7 @@ const IndexOfChapterLists = ({chapterLists, chapterId}) => {
         new Array(parseInt(chapterLists[parseInt(chapterId)-1].verses_count)).fill(0).map((key, index) => (
             <Link key={index} href={`#${index+1}`}>
                 <a>
-                    <li className="p-1 cursor-pointer hover:bg-emerald-100 hover:text-emerald-500 rounded flex items-center">
+                    <li className="p-1 cursor-pointer hover:bg-emerald-100 dark:hover:bg-emerald-400 dark:hover:text-slate-100 hover:text-emerald-500 rounded flex items-center">
                         {index+1}
                     </li>
                 </a>
