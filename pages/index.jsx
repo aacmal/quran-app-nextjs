@@ -6,6 +6,7 @@ import Chapter from '../src/components/chapters'
 import Header from '../src/components/Header'
 import Switch from '../src/components/Switch'
 import Wrapper from '../src/components/Wrapper'
+import { getAllChaptersData } from '../src/utils/chapter'
 
 export default function Home() {
   const [data, setData] = useState([])
@@ -14,8 +15,7 @@ export default function Home() {
 
   useEffect(() => {
       setLoading(true)
-      fetch('https://api.quran.com/api/v4/chapters?language=id')
-      .then((res) => res.json())
+      getAllChaptersData('en')
       .then((data) => {
           setData(data)
           setTimeout(() => {
