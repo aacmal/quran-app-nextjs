@@ -32,8 +32,8 @@ const DetailInfoSurah = () => {
     }, [router.isReady])
     const {chapter, chapter_info} = data
     return (
-        <div className='w-full min-h-screen bg-gradient-to-br from-emerald-300 to-emerald-700'>
-            <Wrapper>
+        <div className='w-full min-h-screen bg-gradient-to-br from-emerald-300 dark:from-slate-600 to-emerald-700 dark:to-slate-800'>
+            <Wrapper className="px-5">
                 {
                     loading ?
                     <div>Loading</div>
