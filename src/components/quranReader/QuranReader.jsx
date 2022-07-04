@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Verses from './Verses'
 import Bismillah from "../Bismillah";
 import TafsirModal from '../Tafsir/Tafsir';
-import Skeleton from '../Skeleton/Skeleton';
-import ChapterCardSkeleton from '../chapters/Card/ChapterCardSkeleton';
 import VerseSkeleton from './VerseSkeleton';
 
 
@@ -26,29 +24,41 @@ const QuranReader = ({versesData, isLoading, bismillahPre}) => {
             />
             {
                 isLoading ?
-                <div>
+                    <>
+                        
+                        {
+                            Array.isArray(versesData) ?
+                                new Array(3).fill().map((e) => (
+                                    <VerseSkeleton/>
+                                )) :
+                                <VerseSkeleton/>
+                        }
+                    </>
+                    :
+                    <>
+                        <Bismillah className={!bismillahPre && "hidden"}/>
                     {
-                        new Array(3).fill().map((e) => (
-                            <VerseSkeleton/>
-                        ))
+                        Array.isArray(versesData) ?
+                            versesData.map(e => (
+                                <Verses
+                                    key={e.verse_number}
+                                    verse_number={e.verse_number}
+                                    translations={e.translations}
+                                    text_uthmani={e.text_uthmani}
+                                    verse_key={e.verse_key}
+                                    setTafsirData={setTafsirData}
+                                    />
+                                )) :
+                                <Verses
+                                        key={versesData.verse_number}
+                                        verse_number={versesData.verse_number}
+                                        translations={versesData.translations}
+                                        text_uthmani={versesData.text_uthmani}
+                                        verse_key={versesData.verse_key}
+                                        setTafsirData={setTafsirData}
+                                />
                     }
-                </div>
-                :
-                <>
-                    <Bismillah className={!bismillahPre && "hidden"}/>
-                {
-                    versesData.map(e => (
-                        <Verses
-                            key={e.verse_number}
-                            verse_number={e.verse_number}
-                            translations={e.translations}
-                            text_uthmani={e.text_uthmani}
-                            verse_key={e.verse_key}
-                            setTafsirData={setTafsirData}
-                        />
-                    ))
-                }
-                </>
+                    </>
 
             }
         </div>

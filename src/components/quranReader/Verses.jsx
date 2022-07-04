@@ -4,11 +4,15 @@ import Copy from '../icons/copy'
 import classNames from 'classnames'
 import IconWrapper from '../icons/IconWrapper'
 import TafsirIcon from '../icons/TafsirIcon'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { StyleContext } from '../../context/StyleContext'
+import { RootContext } from '../../context/RootContext'
 
 
 const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirData}) => {
+
+    const { bookmarkData, toggleBookmarkVerse } = useContext(RootContext)
+    const [isBookmarked, setBookmark] = useState(bookmarkData.includes(verse_key))
 
     const { currentFontSize } = useContext(StyleContext)
 
@@ -17,6 +21,11 @@ const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirD
     }
 
     const verseId = verse_key.split(':')
+
+    function handleBookmarkClick(verseKey){
+        toggleBookmarkVerse(verseKey)
+        setBookmark(!isBookmarked)
+    }
 
     return (
         <> 
@@ -28,8 +37,8 @@ const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirD
                     </div>
                     <div className='md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-28 w-full md:w-fit'>
                         <div className='flex md:flex-col'>
-                            <IconWrapper>
-                                <Bookmark className="md:h-6 h-5  text-gray-500"/>
+                            <IconWrapper onClick={() => handleBookmarkClick(verse_key)}>
+                                <Bookmark fill={isBookmarked} className={`md:h-6 h-5 ${isBookmarked ? "text-emerald-500":"text-gray-500"}`}/>
                             </IconWrapper>
                             <IconWrapper>
                                 <Copy onClick={() => copyToClipboard(text_uthmani)} className="md:h-6 h-5 text-gray-500 active:text-emerald-500 cursor-pointer"/>
