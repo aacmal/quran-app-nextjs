@@ -7,6 +7,15 @@ html{
   -webkit-tap-highlight-color: transparent;
 }
 
+body{
+  @apply bg-gray-100
+}
+
+body.white{
+  @apply bg-white
+}
+
+
 html,
 * {
   padding: 0px;

@@ -5,14 +5,11 @@ import TafsirModal from '../Tafsir/Tafsir';
 import VerseSkeleton from './VerseSkeleton';
 
 
-const QuranReader = ({versesData, isLoading, bismillahPre}) => {
+const QuranReader = ({versesData, isLoading, bismillahPre, skeletonLoadingCount}) => {
     const [tafsirData, setTafsirData] = useState({
         isOpen: false,
         verseKey: null
     })
-
-    
-    console.log(tafsirData);
 
     return (
         <div className='mt-3'>
@@ -24,24 +21,18 @@ const QuranReader = ({versesData, isLoading, bismillahPre}) => {
             />
             {
                 isLoading ?
-                    <>
                         
-                        {
-                            Array.isArray(versesData) ?
-                                new Array(3).fill().map((e) => (
-                                    <VerseSkeleton/>
-                                )) :
-                                <VerseSkeleton/>
-                        }
-                    </>
+                    new Array(skeletonLoadingCount).fill().map((e, index) => (
+                        <VerseSkeleton key={index}/>
+                    )) 
                     :
                     <>
                         <Bismillah className={!bismillahPre && "hidden"}/>
                     {
                         Array.isArray(versesData) ?
-                            versesData.map(e => (
+                            versesData.map((e, index) => (
                                 <Verses
-                                    key={e.verse_number}
+                                    key={index}
                                     verse_number={e.verse_number}
                                     translations={e.translations}
                                     text_uthmani={e.text_uthmani}

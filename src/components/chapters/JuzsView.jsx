@@ -22,8 +22,6 @@ const JuzsView = ({chapterData}) => {
 
   }, [])
 
-  console.log(juzsData);
-
   return (
     isLoading ?
     <div>Loading</div>:

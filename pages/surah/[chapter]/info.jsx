@@ -33,7 +33,7 @@ const DetailInfoSurah = () => {
     const {chapter, chapter_info} = data
     return (
         <div className='w-full min-h-screen bg-gradient-to-br from-emerald-300 dark:from-slate-600 to-emerald-700 dark:to-slate-800'>
-            <Wrapper className="px-5">
+            <Wrapper className="px-5 mt-16">
                 {
                     loading ?
                     <div>Loading</div>
@@ -46,7 +46,7 @@ const DetailInfoSurah = () => {
                             <span>Diturunkan di <span className='capitalize'>{chapter.revelation_place}</span></span>
                         </div>
                         <hr className='my-5'/>
-                        <p className='text-white' dangerouslySetInnerHTML={{__html:chapter_info.text}}></p>
+                        <section className='text-white' dangerouslySetInnerHTML={{__html:chapter_info.text}}></section>
                     </div>
                 }
             </Wrapper>

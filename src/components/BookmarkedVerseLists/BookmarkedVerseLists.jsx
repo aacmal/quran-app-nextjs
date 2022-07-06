@@ -17,10 +17,11 @@ const BookmarkedVerseLists = ({chapterLists}) => {
                     </div>
                     <div className='flex gap-2 flex-wrap'>
                         {
-                            bookmarkData.map(e => {
+                            bookmarkData.map((e, index) => {
                                 const chapterId = e.split(":")
                                 return (
                                     <BookmarkedItem
+                                        key={index}
                                         name_simple={chapterLists[chapterId[0]-1].name_simple}
                                         verse_key={e}
                                     />

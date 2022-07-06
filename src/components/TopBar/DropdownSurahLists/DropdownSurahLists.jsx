@@ -25,7 +25,7 @@ const DropdownSurahLists = ({chapterLists, chapterActive}) => {
                     <div 
                     onClick={() => setOpen(!open)}
                     className={classNames("p-2 cursor-pointer border border-transparent bg-white dark:bg-slate-600 w-fit rounded-md  flex items-center relative", {"border-emerald-500 shadow-lg shadow-emerald-500/10": open})}>
-                        <span className="font-bold text-sm text-emerald-500">{chapterLists[parseInt(chapterActive)-1].name_simple}</span>
+                        <span className="font-bold text-sm text-emerald-500">{chapterLists[chapterActive].name_simple}</span>
                         <ChevronIcon className={classNames("h-5 ml-2 transition-all text-emerald-500 transform", {"rotate-180": open})}/>
                     </div>
                 </div>
