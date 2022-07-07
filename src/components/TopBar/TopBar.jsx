@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 import React, { useContext, useEffect } from 'react'
+import { useRouter } from 'next/router'
+
 import { RootContext } from '../../context/RootContext'
 import { TopbarContext } from '../../context/TopbarContext'
 import { getAllChaptersData } from '../../utils/chapter'
@@ -9,17 +11,18 @@ import DropdownSurahLists from './DropdownSurahLists/DropdownSurahLists'
 const TopBar = () => {
 	const { initAllChapters, allChapters, isLoading, currentChapter } = useContext(RootContext)
 	const { showTopbar } = useContext(TopbarContext)
+	const { locale } = useRouter()
 
 	// TODO make Topbar hidden when Scrolling down and display when scrolling up
 	useEffect(() => {
-		getAllChaptersData('id')
+		getAllChaptersData(locale)
 		.then((data) => {
 			initAllChapters(data.chapters)
 		})
 		
 		// 
 
-	}, [])
+	}, [locale])
 
 	if(!isLoading && showTopbar){
 		return (

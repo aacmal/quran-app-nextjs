@@ -19,17 +19,12 @@ export default function Surah(){
     const { allChapters, setCurrentChapterId, currentChapter } = useContext(RootContext)
 
     useEffect(() => {
+        setLoading(true)
         setShowTopbar(true)
-        async function fetchData(url){
-            const data = await fetch(url)
-            const result = await data.json();
-            return result;
-        }
         
         async function getData(chapterId){
-            setLoading(true)
-            const surah_info = await getChapterInfo(chapterId, 'en')
-            const verses = await getAllVerseByChapter(chapterId, 'id')
+            const surah_info = await getChapterInfo(chapterId, router.locale)
+            const verses = await getAllVerseByChapter(chapterId, router.locale)
             setData({ ...surah_info, ...verses })
             setTimeout(() => {
                 setLoading(false)
@@ -41,7 +36,7 @@ export default function Surah(){
             setCurrentChapterId(router.query.chapter)
         }
 
-    }, [router.isReady, router.query.chapter])
+    }, [router.isReady, router.query.chapter, router.locale])
     
     
     return (

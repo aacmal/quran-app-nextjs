@@ -17,10 +17,10 @@ const SpecificVerse = () => {
 	const { allChapters, setCurrentChapterId, currentChapter } = useContext(RootContext)
 
     useEffect(() => {
+		setLoading(true)
 		setShowTopbar(true)
         function getData(verseKey){
-            setLoading(true)
-            getSpecificVerse(verseKey)
+            getSpecificVerse(verseKey, router.locale)
             .then((data) => {
 				setData(data)
 				setTimeout(() => {
@@ -35,7 +35,7 @@ const SpecificVerse = () => {
 			setCurrentChapterId(router.query.chapter)
         }
 
-    }, [router.isReady])
+    }, [router.isReady, router.locale])
 
 	return (
 		<Wrapper className="px-5 lg:mt-24 mt-16">

@@ -1,16 +1,28 @@
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import ChevronIcon from '../../icons/chevron'
 import AdjustmentWrapper from './AdjustmentWrapper'
 
 const LanguageAdjustment = () => {
     const [isExpanded, setExpanded] = useState(false)
 
+    const router = useRouter()
+
     const lang = {
         'id': 'Indonesia',
         'en': 'English'
     }
-    const [langId, setLang] = useState('id')
+    const [langId, setLang] = useState(null)
+
+    function setLocale(lang){
+        router.push(router.asPath, router.asPath, {locale: lang})
+        setLang(lang)
+    }
+
+    useEffect(() => {
+        setLang(router.locale)
+    }, [])
 
     return (
         <AdjustmentWrapper title="Bahasa">
@@ -24,8 +36,8 @@ const LanguageAdjustment = () => {
                     {"visible opacity-100 translate-y-7": isExpanded},
                     {"invisible opacity-0 translate-y-4": !isExpanded}
                 )}>
-                    <li onClick={() => setLang('id')} className='p-1 px-2 rounded hover:bg-emerald-200 text-sm'>Indonesia</li>
-                    <li onClick={() => setLang('en')} className='p-1 px-2 rounded hover:bg-emerald-200 text-sm'>English</li>
+                    <li onClick={() => setLocale('id')} className='p-1 px-2 rounded hover:bg-emerald-200 text-sm'>Indonesia</li>
+                    <li onClick={() => setLocale('en')} className='p-1 px-2 rounded hover:bg-emerald-200 text-sm'>English</li>
                 </ul>
             </div>
         </AdjustmentWrapper>   

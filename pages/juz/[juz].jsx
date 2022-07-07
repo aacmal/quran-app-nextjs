@@ -14,10 +14,10 @@ const JuzPage = () => {
     const { setShowTopbar } = useContext(TopbarContext)
 
     useEffect(() => {
+        setLoading(true)
         setShowTopbar(true)
         const getVerses = (juzId) => {
-            setLoading(true)
-            getVersesByJuz(juzId, 'id')
+            getVersesByJuz(juzId, router.locale)
             .then((data) => {
                 setData(data)
                 setLoading(false)
@@ -28,7 +28,7 @@ const JuzPage = () => {
             getVerses(router.query.juz)
         }
 
-    }, [router.isReady])
+    }, [router.isReady, router.locale])
     return (
         <Wrapper className="px-5 mt-16">
             <Head>

@@ -16,7 +16,7 @@ const DetailInfoSurah = () => {
 
     useEffect(() => {
         async function getData(chapterId){
-            getChapterInfo(chapterId, 'id')
+            getChapterInfo(chapterId, router.locale)
             .then((data) => {
                 setChapterInfo(data.chapter_info)
                 setLoading(false)
@@ -27,10 +27,10 @@ const DetailInfoSurah = () => {
             getData(router.query.chapter)
         }
 
-    }, [router.isReady])
+    }, [router.isReady, router.locale])
     return (
         <div className='w-full min-h-screen bg-gradient-to-br from-emerald-300 dark:from-slate-600 to-emerald-700 dark:to-slate-800'>
-            <Wrapper className="px-5 pt-20">
+            <Wrapper className="px-5 pt-16 lg:pt-20 mt-12">
                 {
                     loading ?
                     <div>Loading</div>
