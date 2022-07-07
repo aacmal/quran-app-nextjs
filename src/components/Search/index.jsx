@@ -35,7 +35,13 @@ const Search = ({className}) => {
   function handleBlur(){
     setTimeout(() => {
       setExpanded(false)
-    }, 50);
+    }, 200);
+  }
+
+  function onFliteredClick(id){
+    if (typeof id != 'undefined') {
+      router.push(`/surah/${id}`)
+    }
   }
   
   return (
@@ -47,7 +53,7 @@ const Search = ({className}) => {
           {
             (filteredChapters.length > 0) &&
             filteredChapters.map((e) => (
-              <div onClick={() => router.push(`/surah/${e.id}`)} key={e.id} className='py-1 px-2 hover:bg-emerald-200 dark:hover:bg-emerald-600 rounded cursor-pointer'>{e.name_simple}</div>
+              <div onClick={() => onFliteredClick(e.id)} key={e.id} className='py-1 px-2 hover:bg-emerald-200 dark:hover:bg-emerald-600 rounded cursor-pointer'>{e.name_simple}</div>
             ))
           }
         </div>
