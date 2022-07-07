@@ -49,7 +49,7 @@ export default function Surah(){
             </Head>
             <hr className="md:my-10 my-8 border-none"/>
             <ChapterBanner chapterData={allChapters[currentChapter]} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
-            <QuranReader bismillahPre={datas.chapter?.bismillah_pre} versesData={datas.verses} isLoading={isLoading} skeletonLoadingCount={3}/>
+            <QuranReader bismillahPre={allChapters[currentChapter].bismillah_pre} versesData={datas.verses} isLoading={isLoading} skeletonLoadingCount={3}/>
         </Wrapper>
     )
 }
