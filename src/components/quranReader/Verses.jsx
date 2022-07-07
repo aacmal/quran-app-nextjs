@@ -11,7 +11,7 @@ import { RootContext } from '../../context/RootContext'
 
 const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirData}) => {
 
-    const { bookmarkData, toggleBookmarkVerse } = useContext(RootContext)
+    const { bookmarkData, toggleBookmarkVerse, addBookmark, deleteBookmark } = useContext(RootContext)
     const [isBookmarked, setBookmark] = useState(bookmarkData.includes(verse_key))
 
     const { currentFontSize } = useContext(StyleContext)
@@ -23,7 +23,12 @@ const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirD
     const verseId = verse_key.split(':')
 
     function handleBookmarkClick(verseKey){
-        toggleBookmarkVerse(verseKey)
+        if(isBookmarked){
+            deleteBookmark(verseKey)
+        } else {
+            addBookmark(verseKey)
+        }
+        // toggleBookmarkVerse(verseKey)
         setBookmark(!isBookmarked)
     }
 

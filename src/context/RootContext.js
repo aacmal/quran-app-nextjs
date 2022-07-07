@@ -5,7 +5,7 @@ import { getAllChaptersData } from "../utils/chapter";
 export const  RootContext = createContext()
 
 export default function RootContextProvider({children}){
-    const [bookmarkData, setBookmarkData] = useLocalStorage('bookmarked-verse', [])
+    const [bookmarkData, setBookmarkData] = useLocalStorage('bookmark', [])
     const [chapterData, setChapterData] = useState({
         allChapters: {},
         initialLoading: true
@@ -14,18 +14,31 @@ export default function RootContextProvider({children}){
     const [currentChapter, setCurrentChapter] = useState(1)
 
     // if the verse data is not in the list of markers, then add it, if there is then delete it
-    function toggleBookmarkVerse(verseKey){
-        if(bookmarkData.includes(verseKey)){
+    function deleteBookmark(verseKey){
+        if(verseKey){
             setBookmarkData((currentData) => {
-                const newData = currentData.splice(currentData.indexOf(verseKey), 1)
-                return newData
+                for (let i = currentData.length-1; i>=0; i--) {
+                    if (currentData[i] === verseKey) {
+                        currentData.splice(i, 1);
+                        break;       
+                    }
+                }
+                return [...currentData]
             })
         } else {
-            setBookmarkData((currentData) => {
-                return [verseKey, ...currentData]
+            setBookmarkData(() => {
+                return []
             })
         }
+
     }
+
+    function addBookmark(verseKey){
+        setBookmarkData((currentData) => {
+            return [verseKey, ...currentData]
+        })
+    }
+
 
     const initAllChapters = useCallback(
         function (chapters) {
@@ -39,12 +52,14 @@ export default function RootContextProvider({children}){
         setCurrentChapter(parseInt(chapterId)-1)
     }
 
+    console.log(bookmarkData);
 
     return (
         <RootContext.Provider
             value={{
                 bookmarkData,
-                toggleBookmarkVerse,
+                addBookmark,
+                deleteBookmark,
 
                 initAllChapters,
                 setCurrentChapterId,
