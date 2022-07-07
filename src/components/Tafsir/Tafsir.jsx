@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
+import { getSingleTafsir } from '../../utils/tafsir'
 import IconWrapper from '../icons/IconWrapper'
 import XIcons from '../icons/XIcons'
 import TafsirSkeleton from './TafsirSkeleton'
@@ -12,11 +13,12 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
 
     useEffect(() => {
         async function getTafsirByVerse(verseKey){
-            const response = await fetch(`https://api.qurancdn.com/api/qdc/tafsirs/en-tafisr-ibn-kathir/by_ayah/${verseKey}?locale=en&mushaf=7`)
-            const result = await response.json()
-            setTafsirData(result)
-            console.log(result);
+            getSingleTafsir(verseKey)
+            .then((data) => {
+                setTafsirData(data)
+            })
         }
+
         if (isOpen === true) {
             getTafsirByVerse(verseKey)
         } else {

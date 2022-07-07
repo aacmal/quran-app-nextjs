@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import QuranReader from '../../src/components/quranReader/QuranReader'
 import Wrapper from '../../src/components/Wrapper'
 import { TopbarContext } from '../../src/context/TopbarContext'
+import { getVersesByJuz } from '../../src/utils/verse'
 
 const JuzPage = () => {
     const [data, setData] = useState({})
@@ -14,18 +15,17 @@ const JuzPage = () => {
 
     useEffect(() => {
         setShowTopbar(true)
-        setLoading(true)
-        const getVersesByChapter = (juzId) => {
-            fetch(`https://api.quran.com/api/v4/verses/by_juz/${juzId}?language=en&per_page=220&fields=text_uthmani&translations=131`)
-            .then((res) => res.json())
-            .then((res) => {
-                setData(res)
+        const getVerses = (juzId) => {
+            setLoading(true)
+            getVersesByJuz(juzId, 'id')
+            .then((data) => {
+                setData(data)
                 setLoading(false)
             })
         }
 
         if(router.isReady){
-            getVersesByChapter(router.query.juz)
+            getVerses(router.query.juz)
         }
 
     }, [router.isReady])
@@ -34,7 +34,7 @@ const JuzPage = () => {
             <Head>
                 <title>Juz {router.query.juz}</title>
             </Head>
-            <QuranReader isLoading={isLoading} versesData={data.verses}/>
+            <QuranReader isLoading={isLoading} versesData={data.verses} skeletonLoadingCount={3}/>
         </Wrapper>
     )
 }

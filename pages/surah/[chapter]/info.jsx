@@ -1,52 +1,49 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useEffect } from 'react'
 import Wrapper from '../../../src/components/Wrapper'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { getChapterInfo } from '../../../src/utils/chapter'
+import { RootContext } from '../../../src/context/RootContext'
 
 const DetailInfoSurah = () => {
     const router = useRouter()
-    const [data, setData] = useState({})
+    const [chapterInfo, setChapterInfo] = useState({})
     const [loading, setLoading] = useState(true)
+
+    const { allChapters } = useContext(RootContext)
 
 
     useEffect(() => {
-        async function fetchData(url){
-            const data = await fetch(url)
-            const result = await data.json();
-            return result;
-        }
-
         async function getData(chapterId){
-            const chapterData = await fetchData(`https://api.quran.com/api/v4/chapters/${chapterId}`)
-            const chapterInfo = await fetchData(`https://api.quran.com/api/v4/chapters/${chapterId}/info?language=id`)
-            setData({...chapterData, ...chapterInfo})
-            setLoading(false)
+            getChapterInfo(chapterId, 'id')
+            .then((data) => {
+                setChapterInfo(data.chapter_info)
+                setLoading(false)
+            })
         }
 
         if(router.isReady){
             getData(router.query.chapter)
         }
 
-        console.log(data);
     }, [router.isReady])
-    const {chapter, chapter_info} = data
     return (
         <div className='w-full min-h-screen bg-gradient-to-br from-emerald-300 dark:from-slate-600 to-emerald-700 dark:to-slate-800'>
-            <Wrapper className="px-5 mt-16">
+            <Wrapper className="px-5 pt-20">
                 {
                     loading ?
                     <div>Loading</div>
                     :
                     <div>
                         <div className='text-center text-white'>
-                            <h1 className='text-xl font-bold'>{chapter.name_complex}</h1>
-                            <span>{chapter.verses_count} Ayah</span>
+                            <h1 className='text-xl font-bold'>{allChapters[parseInt(chapterInfo.chapter_id)-1].name_complex}</h1>
+                            <span>{allChapters[parseInt(chapterInfo.chapter_id)-1].verses_count} Ayah</span>
                             <br />
-                            <span>Diturunkan di <span className='capitalize'>{chapter.revelation_place}</span></span>
+                            <span>Diturunkan di <span className='capitalize'>{allChapters[parseInt(chapterInfo.chapter_id)-1].revelation_place}</span></span>
                         </div>
                         <hr className='my-5'/>
-                        <section className='text-white' dangerouslySetInnerHTML={{__html:chapter_info.text}}></section>
+                        <section className='text-white' dangerouslySetInnerHTML={{__html:chapterInfo.text}}></section>
                     </div>
                 }
             </Wrapper>

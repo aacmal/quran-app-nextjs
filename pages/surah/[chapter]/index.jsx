@@ -7,6 +7,8 @@ import Wrapper from "../../../src/components/Wrapper";
 import Head from "next/head";
 import { TopbarContext } from "../../../src/context/TopbarContext";
 import { RootContext } from "../../../src/context/RootContext";
+import { getAllVerseByChapter } from "../../../src/utils/verse";
+import { getChapterInfo } from "../../../src/utils/chapter";
 
 export default function Surah(){
     const router = useRouter();
@@ -24,10 +26,10 @@ export default function Surah(){
             return result;
         }
         
-        async function getData(id){
+        async function getData(chapterId){
             setLoading(true)
-            const surah_info = await fetchData(`https://api.quran.com//api/v4/chapters/${id}/info?language=id`)
-            const verses = await fetchData(`https://api.quran.com/api/v4/verses/by_chapter/${id}?language=id&fields=text_uthmani&translation_fields=resource_name,language_id&translations=33&per_page=220`)
+            const surah_info = await getChapterInfo(chapterId, 'en')
+            const verses = await getAllVerseByChapter(chapterId, 'id')
             setData({ ...surah_info, ...verses })
             setTimeout(() => {
                 setLoading(false)
@@ -49,7 +51,7 @@ export default function Surah(){
             </Head>
             <hr className="md:my-10 my-8 border-none"/>
             <ChapterBanner chapterData={allChapters[currentChapter]} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
-            <QuranReader bismillahPre={allChapters[currentChapter].bismillah_pre} versesData={datas.verses} isLoading={isLoading} skeletonLoadingCount={3}/>
+            <QuranReader bismillahPre={allChapters[currentChapter]?.bismillah_pre} versesData={datas.verses} isLoading={isLoading} skeletonLoadingCount={3}/>
         </Wrapper>
     )
 }
