@@ -48,7 +48,7 @@ export const getVersesByJuz = async (juzId, lang='id') => {
         fields: 'text_uthmani',
         translation_fields: ['resource_name', 'language_id'],
         translations: (lang==='id') ? translations_lists[1].id : translations_lists[0].id,
-        per_page: 220, // Maximum ayah of surah al - baqarah
+        per_page: 286, // Maximum ayah of surah al - baqarah
     }
 
     const response = await fetch(makeUrl(`/verses/by_juz/${juzId}`, queryString.stringify(params)))
