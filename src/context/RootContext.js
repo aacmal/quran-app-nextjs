@@ -12,6 +12,7 @@ export default function RootContextProvider({children}){
     })
 
     const [currentChapter, setCurrentChapter] = useState(1)
+    const [audioData, setAudioData] = useState(1)
 
     // if the verse data is not in the list of markers, then add it, if there is then delete it
     function deleteBookmark(verseKey){
@@ -66,7 +67,10 @@ export default function RootContextProvider({children}){
 
                 currentChapter,
                 allChapters: chapterData.allChapters,
-                isLoading: chapterData.initialLoading
+                isLoading: chapterData.initialLoading,
+
+                audioData,
+                setAudioData
             }}
         >
             {children}
