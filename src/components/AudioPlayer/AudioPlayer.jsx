@@ -71,8 +71,9 @@ const AudioPlayer = () => {
 	}
 
 	return (
-		<div className={classNames('fixed bottom-0 dark:bg-slate-600 bg-white shadow-lg shadow-black w-full', {"hidden": audioId == null})}>
-			<div className="py-2 max-w-screen-2xl mx-auto">
+		<div className={classNames('fixed bottom-0 dark:bg-slate-600 bg-white shadow-lg w-full', {"hidden": audioId == null})}>
+			<div className="py-3 max-w-screen-2xl mx-auto relative">
+				<div className='absolute -top-6 left-2 bg-white dark:bg-slate-600 dark:text-slate-100 py-1 px-2 rounded text-emerald-500 font-bold text-sm md:text-base'>{audioId && allChapters[audioId-1].name_simple}</div>
 				<audio 
 					style={{display: 'none'}} 
 					onLoadedMetadata={(e) => handleOnLoad(e.target.duration)} 
@@ -98,23 +99,20 @@ const AudioPlayer = () => {
 						/>
 						<span className='dark:text-slate-100 md:text-base text-sm'>{calculateTime(maxTime)}</span>
 					</div>
-					<div className='grid grid-cols-3 items-center'>
-						<div className='ml-3 text-emerald-500 font-bold'>{audioId && allChapters[audioId-1].name_simple}</div>
-						<div className='flex items-center justify-self-center'>
-							<RewindIcon 
-								onClick={() => setAudioId(current => current-1)}
-								className="h-6 text-slate-600 dark:text-slate-100 mr-6 cursor-pointer"
-							/>
-							{
-								isPlaying ?
-									<PauseIcon onClick={() => setIsPlaying(false)} className="h-8 cursor-pointer text-slate-600 dark:text-slate-100"/>:
-									<PlayIcon onClick={() => setIsPlaying(true)} className="h-8 cursor-pointer text-slate-600 dark:text-slate-100"/> 
-							}
-							<RewindIcon 
-								onClick={() => setAudioId(current => current+1)}
-								className="h-6 transform rotate-180 text-slate-600 dark:text-slate-100 ml-6 cursor-pointer"
-							/>
-						</div>
+					<div className='flex items-center justify-center'>
+						<RewindIcon 
+							onClick={() => setAudioId(current => current-1)}
+							className="h-6 text-slate-600 dark:text-slate-100 mr-6 cursor-pointer"
+						/>
+						{
+							isPlaying ?
+								<PauseIcon onClick={() => setIsPlaying(false)} className="h-8 cursor-pointer text-slate-600 dark:text-slate-100"/>:
+								<PlayIcon onClick={() => setIsPlaying(true)} className="h-8 cursor-pointer text-slate-600 dark:text-slate-100"/> 
+						}
+						<RewindIcon 
+							onClick={() => setAudioId(current => current+1)}
+							className="h-6 transform rotate-180 text-slate-600 dark:text-slate-100 ml-6 cursor-pointer"
+						/>
 					</div>
 				</div>
 

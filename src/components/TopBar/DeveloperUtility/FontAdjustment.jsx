@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { StyleContext } from '../../../context/StyleContext'
 import ChevronIcon from '../../icons/chevron'
 import AdjustmentWrapper from './AdjustmentWrapper'
+import OptionList from './OptionList'
 
 const FontAdjustment = () => {
     const [isExpanded, setExpanded] = useState(false)
@@ -21,8 +22,8 @@ const FontAdjustment = () => {
                     {"visible opacity-100 translate-y-7": isExpanded},
                     {"invisible opacity-0 translate-y-4": !isExpanded}
                 )}>
-                    <li onClick={() => setFont('Lato')} className='p-1 px-2 rounded hover:bg-emerald-200 text-sm'>Lato</li>
-                    <li onClick={() => setFont('Poppins')} className='p-1 px-2 rounded hover:bg-emerald-200 text-sm'>Poppins</li>
+                    <OptionList onClick={() => setFont('Lato')}>Lato</OptionList>
+                    <OptionList onClick={() => setFont('Poppins')}>Poppins</OptionList>
                 </ul>
             </div>
         </AdjustmentWrapper>   

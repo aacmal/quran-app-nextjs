@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Bookmark, Info } from '../icons'
+import IconWrapper from '../icons/IconWrapper'
 import BannerWrapper from './BannerWrapper'
 import ChapterBannerSkeleton from './ChapterBannerSkeleton'
 import SurahInfo from './SurahInfo'
@@ -15,10 +16,13 @@ const ChapterBanner = ({chapterData, chapterInfo, isLoading}) => {
                 <ChapterBannerSkeleton/>
                 :
                 <div className={`text-center z-20 relative text-gray-50 duration-150 ${isInfoOpen ? 'max-h-96':'max-h-32'}`}>
-                    <Info
-                        className="h-5 lg:h-8 cursor-pointer absolute left-0 top-0 text-gray-50"
+                    <IconWrapper
+                        className="cursor-pointer absolute left-0 top-0 text-gray-50"
                         onClick={() => setInfoOpen(!isInfoOpen)}
-                    />
+                        onHover='none'
+                    >
+                        <Info className="h-5 lg:h-8 "/>
+                    </IconWrapper>
                     <h1 className='text-2xl lg:text-3xl font-bold mb-0 text-gray-50'>{chapterData.name_simple}</h1>
                     <span className='text-sm block lg:text-xl text-gray-50'>{chapterData.translated_name.name}</span>
                     <hr  className={`my-3 mx-auto lg:my-5 md:transition-all ${isInfoOpen ? 'max-w-full':'max-w-md'}`}/>

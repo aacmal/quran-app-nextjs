@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import ChevronIcon from '../../icons/chevron'
 import AdjustmentWrapper from './AdjustmentWrapper'
+import OptionList from './OptionList'
 
 const LanguageAdjustment = () => {
     const [isExpanded, setExpanded] = useState(false)
@@ -36,8 +37,8 @@ const LanguageAdjustment = () => {
                     {"visible opacity-100 translate-y-7": isExpanded},
                     {"invisible opacity-0 translate-y-4": !isExpanded}
                 )}>
-                    <li onClick={() => setLocale('id')} className='p-1 px-2 rounded hover:bg-emerald-200 text-sm'>Indonesia</li>
-                    <li onClick={() => setLocale('en')} className='p-1 px-2 rounded hover:bg-emerald-200 text-sm'>English</li>
+                    <OptionList onClick={() => setLocale('id')}>Indonesia</OptionList>
+                    <OptionList onClick={() => setLocale('en')}>English</OptionList>
                 </ul>
             </div>
         </AdjustmentWrapper>   
