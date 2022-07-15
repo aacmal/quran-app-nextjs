@@ -9,6 +9,8 @@ import { TopbarContext } from "../../../src/context/TopbarContext";
 import { RootContext } from "../../../src/context/RootContext";
 import { getAllVerseByChapter } from "../../../src/utils/verse";
 import { getChapterInfo } from "../../../src/utils/chapter";
+import PlayIcon from "../../../src/components/icons/PlayIcon";
+import { data } from "autoprefixer";
 
 export default function Surah(){
     const router = useRouter();
@@ -46,7 +48,12 @@ export default function Surah(){
             </Head>
             <hr className="md:my-10 my-8 border-none"/>
             <ChapterBanner chapterData={allChapters[currentChapter]} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
-            <span onClick={() => setAudioId(currentChapter+1)}>play</span>
+            <div className="flex items-center justify-end my-8">
+                <button
+                    className="bg-emerald-500 text-slate-50 py-1 px-2 text-sm lg:py-2 lg:px-3 lg:text-base font-bold rounded flex items-center"
+                    onClick={() => setAudioId(currentChapter+1)}
+                >Putar Audio <PlayIcon className="h-6 ml-3"/></button>
+            </div>
             <QuranReader bismillahPre={allChapters[currentChapter]?.bismillah_pre} versesData={datas.verses} isLoading={isLoading} skeletonLoadingCount={3}/>
         </Wrapper>
     )

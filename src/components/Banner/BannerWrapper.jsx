@@ -12,6 +12,7 @@ const BannerWrapper = ({children, imageOpacity, imageScale}) => {
                 src='/quran.png'
                 layout='fill'
                 objectFit='contain'
+                alt='Quran illustrator'
             />
         </div>
     </div>
