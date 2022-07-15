@@ -1,0 +1,110 @@
+
+input.audioSlider[type="range"] {
+    --border-color: rgb(0, 196, 127);
+    -webkit-appearance: none;
+    margin: 0;
+    padding: 0;
+    height: 4px;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    touch-action: none;
+    @apply bg-emerald-200/50 relative
+}
+
+input.audioSlider[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+    background: linear-gradient(to right, rgba(0, 125, 181, 0.6) var(--buffered-width), rgba(0, 125, 181, 0.2) var(--buffered-width));
+}
+
+input.audioSlider[type="range"]::before {
+    background-color: rgba(0, 196, 127, 0.921);
+    position: absolute;
+    content: "";
+    left: 0;
+    width: var(--seek-before-width);
+    height: 4px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+input.audioSlider[type="range"]::-webkit-slider-thumb {
+    position: relative;
+    -webkit-appearance: none;
+    box-sizing: content-box;
+    border: 1px solid var(--border-color);
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    margin: -7px 0 0 0;
+}
+
+input.audioSlider[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+    background: var(--border-color);
+}
+
+input.audioSlider[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+    background: linear-gradient(to right, rgba(0, 125, 181, 0.6) var(--buffered-width), rgba(0, 125, 181, 0.2) var(--buffered-width));
+}
+input.audioSlider[type="range"]::-moz-range-progress {
+    background-color: var(--border-color);
+}
+
+input.audioSlider[type="range"]::-moz-focus-outer {
+    border: 0;
+}
+
+input.audioSlider[type="range"]::-moz-range-thumb {
+    box-sizing: content-box;
+    border: 1px solid var(--border-color);
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+input.audioSlider[type="range"]:active::-moz-range-thumb {
+    transform: scale(1.2);
+    background: var(--border-color);
+}
+
+input.audioSlider[type="range"]::-ms-track {
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+    background: transparent;
+    border: solid transparent;
+    color: transparent;
+}
+
+input.audioSlider[type="range"]::-ms-fill-lower {
+    background-color: var(--border-color);
+}
+
+input.audioSlider[type="range"]::-ms-fill-upper {
+    background: linear-gradient(to right, rgba(0, 125, 181, 0.6) var(--buffered-width), rgba(0, 125, 181, 0.2) var(--buffered-width));
+}
+
+input.audioSlider[type="range"]::-ms-thumb {
+    box-sizing: content-box;
+    border: 1px solid var(--border-color);
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+input.audioSlider[type="range"]:active::-ms-thumb {
+    transform: scale(1.2);
+    background: var(--border-color);
+}

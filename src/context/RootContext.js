@@ -12,7 +12,7 @@ export default function RootContextProvider({children}){
     })
 
     const [currentChapter, setCurrentChapter] = useState(1)
-    const [audioData, setAudioData] = useState(1)
+    const [audioId, setAudioId] = useState(null)
 
     // if the verse data is not in the list of markers, then add it, if there is then delete it
     function deleteBookmark(verseKey){
@@ -53,7 +53,6 @@ export default function RootContextProvider({children}){
         setCurrentChapter(parseInt(chapterId)-1)
     }
 
-    console.log(bookmarkData);
 
     return (
         <RootContext.Provider
@@ -69,8 +68,8 @@ export default function RootContextProvider({children}){
                 allChapters: chapterData.allChapters,
                 isLoading: chapterData.initialLoading,
 
-                audioData,
-                setAudioData
+                audioId,
+                setAudioId
             }}
         >
             {children}

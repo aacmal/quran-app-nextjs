@@ -1,21 +1,26 @@
+import classNames from 'classnames';
 import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { RootContext } from '../../context/RootContext';
 import PauseIcon from '../icons/PauseIcon';
 import PlayIcon from '../icons/PlayIcon';
-import Wrapper from '../Wrapper'
+import RewindIcon from '../icons/RewindIcon';
+
+import style from './AudioPlayer.module.css'
 
 const AudioPlayer = () => {
 	// Context
-	const { audioData } = useContext(RootContext)
+	const { audioId, setAudioId, allChapters } = useContext(RootContext)
 
 	// Refs
 	const audioRef = useRef()
 	const intervalRef = useRef()
+	const sliderRef= useRef()
 
 	// Control State
 	const [value, setValue] = useState(0);
 	const [trackProgress, setTrackProgress] = useState(0);
-	const [isPlaying, setIsPlaying] = useState(true);
+	const [isPlaying, setIsPlaying] = useState(false);
+	const [isOnSeek, setOnSeek] = useState(false)
 
 	// Time State
 	const [maxTime, setMaxtime] = useState(0)
@@ -35,74 +40,88 @@ const AudioPlayer = () => {
 	}
 
 	function startTimer(){
-		clearInterval(intervalRef.current)
-
 		intervalRef.current = setInterval(() => {
 			setCurrentTime(calculateTime(Math.floor(audioRef.current.currentTime)+1))
 			setTrackProgress(Math.floor(audioRef.current.currentTime)+1)
+			sliderRef.current.style.setProperty('--seek-before-width', `${(Math.floor(audioRef.current.currentTime)+1) / maxTime * 100}%`)
 		}, [1000])
 	}	
-
-	useEffect(() => {
-		console.log(audioRef.current.duration);
-		setMaxtime(audioRef.current.duration)
-	}, [])
 
 	useEffect(() => {
 		if(isPlaying){
 			audioRef.current.play()
 			startTimer()
-			console.log(isPlaying);
 		} else {
-			clearInterval(intervalRef.current)
 			audioRef.current.pause()
 		}
 	}, [isPlaying])
 
 	function handleOnLoad(value){
+		clearInterval(intervalRef.current)
 		setTrackProgress(0)
 		updateCurrentTime(0)
+		setMaxtime(Math.floor(value))
 		setIsPlaying(false)
-		setMaxtime(value)
-		console.log(maxTime);
+		sliderRef.current.style.setProperty('--seek-before-width', `0%`)
 	}
 
-	function handleUpdate(){
+	function handlePointerUp(){
+		setOnSeek(false)
 		audioRef.current.currentTime = value
 	}
 
 	return (
-		<div className='fixed bottom-0 py-2 dark:bg-slate-600 bg-white shadow-lg shadow-black w-full'>
-			<Wrapper className="py-0 pt-0 m-0">
+		<div className={classNames('fixed bottom-0 dark:bg-slate-600 bg-white shadow-lg shadow-black w-full', {"hidden": audioId == null})}>
+			<div className="py-2 max-w-screen-2xl mx-auto">
 				<audio 
 					style={{display: 'none'}} 
 					onLoadedMetadata={(e) => handleOnLoad(e.target.duration)} 
 					ref={audioRef} 
-					src={`https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/${audioData}.mp3`} 
+					src={audioId && `https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/${audioId}.mp3`} 
 					preload='metadata' 
 					loop={true}
 				/>
 
-				<div className='flex'>
-					<PlayIcon onClick={() => setIsPlaying(!isPlaying)} className="h-10 cursor-pointer"/>
+				<div className='flex flex-col'>
 					{/* <PauseIcon className="h-10 bg-blue-400"/> */}
-					<div className='flex justify-around w-full items-center px-3'>
-						<span>{currentTime}</span>
+					<div className='flex justify-between w-full items-center px-3'>
+						<span className='dark:text-slate-100 md:text-base text-sm'>{currentTime}</span>
 						<input
-						 	type="range" 
-							className='w-[90%]'
+							ref={sliderRef}
+							type="range" 
+							className={classNames(style.audioSlider, 'w-[75%] md:w-[90%]')}
 							onChange={(e) => updateCurrentTime(e.target.value)}
 							max={maxTime}
-							value={trackProgress}
-							onPointerUp={handleUpdate}
+							value={isOnSeek ? null : trackProgress}
+							onPointerUp={handlePointerUp}
+							onPointerDown={() => setOnSeek(true)}
 						/>
-						<span>{calculateTime(maxTime)}</span>
+						<span className='dark:text-slate-100 md:text-base text-sm'>{calculateTime(maxTime)}</span>
+					</div>
+					<div className='grid grid-cols-3 items-center'>
+						<div className='ml-3 text-emerald-500 font-bold'>{audioId && allChapters[audioId-1].name_simple}</div>
+						<div className='flex items-center justify-self-center'>
+							<RewindIcon 
+								onClick={() => setAudioId(current => current-1)}
+								className="h-6 text-slate-600 dark:text-slate-100 mr-6 cursor-pointer"
+							/>
+							{
+								isPlaying ?
+									<PauseIcon onClick={() => setIsPlaying(false)} className="h-8 cursor-pointer text-slate-600 dark:text-slate-100"/>:
+									<PlayIcon onClick={() => setIsPlaying(true)} className="h-8 cursor-pointer text-slate-600 dark:text-slate-100"/> 
+							}
+							<RewindIcon 
+								onClick={() => setAudioId(current => current+1)}
+								className="h-6 transform rotate-180 text-slate-600 dark:text-slate-100 ml-6 cursor-pointer"
+							/>
+						</div>
 					</div>
 				</div>
 
-			</Wrapper>
+			</div>
 		</div>
 	)
+
 }
 
 export default AudioPlayer

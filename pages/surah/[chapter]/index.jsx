@@ -16,7 +16,7 @@ export default function Surah(){
     const [isLoading, setLoading] = useState(true)
 
     const { setShowTopbar } = useContext(TopbarContext)
-    const { allChapters, setCurrentChapterId, currentChapter, setAudioData } = useContext(RootContext)
+    const { allChapters, setCurrentChapterId, currentChapter, setAudioId } = useContext(RootContext)
 
     useEffect(() => {
         setLoading(true)
@@ -46,7 +46,7 @@ export default function Surah(){
             </Head>
             <hr className="md:my-10 my-8 border-none"/>
             <ChapterBanner chapterData={allChapters[currentChapter]} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
-            <span onClick={() => setAudioData(currentChapter+1)}>play</span>
+            <span onClick={() => setAudioId(currentChapter+1)}>play</span>
             <QuranReader bismillahPre={allChapters[currentChapter]?.bismillah_pre} versesData={datas.verses} isLoading={isLoading} skeletonLoadingCount={3}/>
         </Wrapper>
     )
