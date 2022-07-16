@@ -41,27 +41,36 @@ const AudioPlayer = () => {
 
 	function startTimer(){
 		intervalRef.current = setInterval(() => {
+			console.log("relog");
 			setCurrentTime(calculateTime(Math.floor(audioRef.current.currentTime)+1))
 			setTrackProgress(Math.floor(audioRef.current.currentTime)+1)
 			sliderRef.current.style.setProperty('--seek-before-width', `${(Math.floor(audioRef.current.currentTime)+1) / maxTime * 100}%`)
-		}, [1000])
+		}, 1000)
 	}	
 
 	useEffect(() => {
 		if(isPlaying){
+			clearInterval(intervalRef.current)
 			audioRef.current.play()
 			startTimer()
 		} else {
+			clearInterval(intervalRef.current)
 			audioRef.current.pause()
 		}
 	}, [isPlaying])
 
+	useEffect(() => {
+		setTimeout(() => {
+			setIsPlaying(true)
+		}, 500)
+	}, [maxTime])
+
 	function handleOnLoad(value){
-		clearInterval(intervalRef.current)
 		setTrackProgress(0)
 		updateCurrentTime(0)
 		setMaxtime(Math.floor(value))
 		setIsPlaying(false)
+		clearInterval(intervalRef.current)
 		sliderRef.current.style.setProperty('--seek-before-width', `0%`)
 	}
 
@@ -71,9 +80,9 @@ const AudioPlayer = () => {
 	}
 
 	return (
-		<div className={classNames('fixed bottom-0 dark:bg-slate-600 bg-white shadow-lg w-full', {"hidden": audioId == null})}>
+		<div className={classNames('fixed bottom-0 dark:bg-slate-600 bg-white border-t border-emerald-500 lg:shadow-2xl shadow-gray-500/50 w-full ', {"hidden": audioId == null})}>
 			<div className="py-3 max-w-screen-2xl mx-auto relative">
-				<div className='absolute -top-6 left-2 bg-white dark:bg-slate-600 dark:text-slate-100 py-1 px-2 rounded text-emerald-500 font-bold text-sm md:text-base'>{audioId && allChapters[audioId-1].name_simple}</div>
+				<div className='absolute -top-6 left-2 border border-emerald-500 bg-white dark:bg-slate-600 dark:text-slate-100 py-1 px-2 rounded text-emerald-500 font-bold text-sm md:text-base'>{audioId && allChapters[audioId-1].name_simple}</div>
 				<audio 
 					style={{display: 'none'}} 
 					onLoadedMetadata={(e) => handleOnLoad(e.target.duration)} 
