@@ -4,6 +4,7 @@ import { RootContext } from '../../context/RootContext';
 import PauseIcon from '../icons/PauseIcon';
 import PlayIcon from '../icons/PlayIcon';
 import RewindIcon from '../icons/RewindIcon';
+import AudioController from './AudioController/AudioController';
 
 import style from './AudioPlayer.module.css'
 
@@ -19,7 +20,7 @@ const AudioPlayer = () => {
 	// Control State
 	const [value, setValue] = useState(0);
 	const [trackProgress, setTrackProgress] = useState(0);
-	const [isPlaying, setIsPlaying] = useState(false);
+	const [isPlaying, setPlaying] = useState(false);
 	const [isOnSeek, setOnSeek] = useState(false)
 
 	// Time State
@@ -61,7 +62,7 @@ const AudioPlayer = () => {
 
 	useEffect(() => {
 		setTimeout(() => {
-			setIsPlaying(true)
+			setPlaying(true)
 		}, 500)
 	}, [maxTime])
 
@@ -69,7 +70,7 @@ const AudioPlayer = () => {
 		setTrackProgress(0)
 		updateCurrentTime(0)
 		setMaxtime(Math.floor(value))
-		setIsPlaying(false)
+		setPlaying(false)
 		clearInterval(intervalRef.current)
 		sliderRef.current.style.setProperty('--seek-before-width', `0%`)
 	}
@@ -108,21 +109,10 @@ const AudioPlayer = () => {
 						/>
 						<span className='dark:text-slate-100 md:text-base text-sm'>{calculateTime(maxTime)}</span>
 					</div>
-					<div className='flex items-center justify-center'>
-						<RewindIcon 
-							onClick={() => setAudioId(current => current-1)}
-							className="h-6 text-slate-600 dark:text-slate-100 mr-6 cursor-pointer"
-						/>
-						{
-							isPlaying ?
-								<PauseIcon onClick={() => setIsPlaying(false)} className="h-8 cursor-pointer text-slate-600 dark:text-slate-100"/>:
-								<PlayIcon onClick={() => setIsPlaying(true)} className="h-8 cursor-pointer text-slate-600 dark:text-slate-100"/> 
-						}
-						<RewindIcon 
-							onClick={() => setAudioId(current => current+1)}
-							className="h-6 transform rotate-180 text-slate-600 dark:text-slate-100 ml-6 cursor-pointer"
-						/>
-					</div>
+					<AudioController
+						isPlay={isPlaying}
+						setPlay={setPlaying}
+					/>
 				</div>
 
 			</div>
