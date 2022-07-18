@@ -40,7 +40,9 @@ export default function StyleProvider({children}){
                 updateTheme
             }}
         >
-            {children}
+            <div className="pb-20">
+                {children}
+            </div>
         </StyleContext.Provider>
     )
 

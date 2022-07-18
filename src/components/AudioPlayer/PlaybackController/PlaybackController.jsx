@@ -15,9 +15,25 @@ export const ButtonSmall = ({className, onClick, children}) => (
     </button>
 )
 
-const PlaybackController = ({ isPlay, setPlay, state, dispatch }) => {
-	const { setAudioId } = useContext(RootContext)
+const PlaybackController = ({ state, dispatch, reset }) => {
+	const { audioId, setAudioId } = useContext(RootContext)
     // console.log(state);
+
+    function goToPrevSurah(){
+        if(audioId > 1){
+            setAudioId(current => current-1)
+        } else {
+            setAudioId(114)
+        }
+    }
+
+    function goToNextSurah(){
+        if(audioId < 114){
+            setAudioId(current => current+1)
+        } else {
+            setAudioId(1)
+        }
+    }
 
     return (
         <>
@@ -27,7 +43,7 @@ const PlaybackController = ({ isPlay, setPlay, state, dispatch }) => {
                         <RepeatIcon className={classNames("h-6", {"text-emerald-500": state.isRepeat})}/>
                     </ButtonSmall>
                     <ButtonSmall 
-                        onClick={() => setAudioId(current => current-1)}
+                        onClick={goToPrevSurah}
                         className=""
                     >
                         <RewindIcon className="h-6" />
@@ -42,12 +58,14 @@ const PlaybackController = ({ isPlay, setPlay, state, dispatch }) => {
                             </ButtonSmall>
                     }
                     <ButtonSmall 
-                        onClick={() => setAudioId(current => current+1)}
+                        onClick={goToNextSurah}
                         className='transform rotate-180'
                     >
                         <RewindIcon className="h-6" />
                     </ButtonSmall>
-                    <PlaybackOption/>
+                    <PlaybackOption
+                        onClickReset={() => reset()}
+                    />
                 </div>
             </div>
         </>
