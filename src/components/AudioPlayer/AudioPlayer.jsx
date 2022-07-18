@@ -1,12 +1,27 @@
 import classNames from 'classnames';
-import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useRef, useState } from 'react'
 import { RootContext } from '../../context/RootContext';
-import PauseIcon from '../icons/PauseIcon';
-import PlayIcon from '../icons/PlayIcon';
-import RewindIcon from '../icons/RewindIcon';
-import AudioController from './AudioController/AudioController';
+import PlaybackController from './PlaybackController/PlaybackController';
 
 import style from './AudioPlayer.module.css'
+
+const initialState = {
+	isPlaying: false,
+	isRepeat: false
+}
+
+function reducer(state, action){
+	switch (action.type){
+		case 'play':
+			return {...state, isPlaying: true}
+		case 'pause':
+			return { ...state, isPlaying: false}
+		case 'repeat':
+			return {  ...state, isRepeat: !state.isRepeat}
+		default:
+			throw new Error("dispatch not found")
+	}
+}
 
 const AudioPlayer = () => {
 	// Context
@@ -17,10 +32,13 @@ const AudioPlayer = () => {
 	const intervalRef = useRef()
 	const sliderRef= useRef()
 
+	// Playback Control
+	const [playbackState, dispatch] = useReducer(reducer, initialState)
+
 	// Control State
 	const [value, setValue] = useState(0);
 	const [trackProgress, setTrackProgress] = useState(0);
-	const [isPlaying, setPlaying] = useState(false);
+	// const [isPlaying, setPlaying] = useState(false);
 	const [isOnSeek, setOnSeek] = useState(false)
 
 	// Time State
@@ -50,7 +68,8 @@ const AudioPlayer = () => {
 	}	
 
 	useEffect(() => {
-		if(isPlaying){
+		console.log(playbackState);
+		if(playbackState.isPlaying){
 			clearInterval(intervalRef.current)
 			audioRef.current.play()
 			startTimer()
@@ -58,19 +77,21 @@ const AudioPlayer = () => {
 			clearInterval(intervalRef.current)
 			audioRef.current.pause()
 		}
-	}, [isPlaying])
+	}, [playbackState.isPlaying])
 
 	useEffect(() => {
 		setTimeout(() => {
-			setPlaying(true)
+			dispatch({type: 'play'})
 		}, 500)
 	}, [maxTime])
+
 
 	function handleOnLoad(value){
 		setTrackProgress(0)
 		updateCurrentTime(0)
 		setMaxtime(Math.floor(value))
-		setPlaying(false)
+		dispatch({type: 'pause'})
+		// setPlaying(false)
 		clearInterval(intervalRef.current)
 		sliderRef.current.style.setProperty('--seek-before-width', `0%`)
 	}
@@ -78,6 +99,16 @@ const AudioPlayer = () => {
 	function handlePointerUp(){
 		setOnSeek(false)
 		audioRef.current.currentTime = value
+	}
+
+	function handleOnEnded(){
+		console.log("Ended");
+		// If no repeat, change to next surah
+		if(!playbackState.isRepeat){
+			console.log(playbackState.isRepeat);
+			clearInterval(intervalRef.current)
+			setAudioId(current => current+1)			
+		}
 	}
 
 	return (
@@ -89,8 +120,9 @@ const AudioPlayer = () => {
 					onLoadedMetadata={(e) => handleOnLoad(e.target.duration)} 
 					ref={audioRef} 
 					src={audioId && `https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/${audioId}.mp3`} 
+					loop={playbackState.isRepeat}
 					preload='metadata' 
-					loop={true}
+					onEnded={handleOnEnded}
 				/>
 
 				<div className='flex flex-col'>
@@ -109,9 +141,10 @@ const AudioPlayer = () => {
 						/>
 						<span className='dark:text-slate-100 md:text-base text-sm'>{calculateTime(maxTime)}</span>
 					</div>
-					<AudioController
-						isPlay={isPlaying}
-						setPlay={setPlaying}
+					<PlaybackController
+						state={playbackState}
+						dispatch={dispatch}
+
 					/>
 				</div>
 
