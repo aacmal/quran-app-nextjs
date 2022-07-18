@@ -4,6 +4,10 @@
     @apply text-2xl py-2
 }
 
+.tafsir_text p{
+    @apply lg:text-lg
+}
+
 .tafsir_text div{
     @apply lg:text-4xl text-right lg:py-5 text-4xl py-3 lg:leading-relaxed
 }

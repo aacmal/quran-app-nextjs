@@ -30,9 +30,10 @@ const QuranReader = ({versesData, isLoading, bismillahPre, skeletonLoadingCount}
                         <Bismillah className={!bismillahPre && "hidden"}/>
                     {
                         Array.isArray(versesData) ?
-                            versesData.map((e, index) => (
+                            versesData.map((e) => (
                                 <Verses
-                                    key={index}
+                                    key={e.id}
+                                    id={e.id}
                                     verse_number={e.verse_number}
                                     translations={e.translations}
                                     text_uthmani={e.text_uthmani}
@@ -41,12 +42,13 @@ const QuranReader = ({versesData, isLoading, bismillahPre, skeletonLoadingCount}
                                     />
                                 )) :
                                 <Verses
-                                        key={versesData.verse_number}
-                                        verse_number={versesData.verse_number}
-                                        translations={versesData.translations}
-                                        text_uthmani={versesData.text_uthmani}
-                                        verse_key={versesData.verse_key}
-                                        setTafsirData={setTafsirData}
+                                    key={versesData.id}
+                                    id={versesData.id}
+                                    verse_number={versesData.verse_number}
+                                    translations={versesData.translations}
+                                    text_uthmani={versesData.text_uthmani}
+                                    verse_key={versesData.verse_key}
+                                    setTafsirData={setTafsirData}
                                 />
                     }
                     </>

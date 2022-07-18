@@ -43,6 +43,11 @@ a {
   font-family: 'Al Qalam Quran';
 }
 
+.arabic.uthmani{
+  font-family: 'Al Qalam Quran';
+  @apply text-4xl lg:text-5xl
+}
+
 
 
 h2{

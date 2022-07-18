@@ -7,12 +7,15 @@ import TafsirIcon from '../icons/TafsirIcon'
 import { useContext, useState } from 'react'
 import { StyleContext } from '../../context/StyleContext'
 import { RootContext } from '../../context/RootContext'
+import { useRouter } from 'next/router'
 
 
-const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirData}) => {
+const Verses = ({id, verse_number, translations, text_uthmani, verse_key, setTafsirData}) => {
 
     const { bookmarkData, toggleBookmarkVerse, addBookmark, deleteBookmark } = useContext(RootContext)
     const [isBookmarked, setBookmark] = useState(bookmarkData.includes(verse_key))
+
+    const router = useRouter()
 
     const { currentFontSize } = useContext(StyleContext)
 
@@ -20,21 +23,18 @@ const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirD
         navigator.clipboard.writeText(content)
     }
 
-    const verseId = verse_key.split(':')
-
     function handleBookmarkClick(verseKey){
         if(isBookmarked){
             deleteBookmark(verseKey)
         } else {
             addBookmark(verseKey)
         }
-        // toggleBookmarkVerse(verseKey)
         setBookmark(!isBookmarked)
     }
 
     return (
         <> 
-            <div id={verseId[1]} className='flex justify-between py-3 md:flex-row flex-col'>
+            <div id={verse_number} className='flex justify-between py-3 md:flex-row flex-col'>
                 <div className='flex md:flex-col flex-row items-center mb-4'>
                     <div className='relative grid place-items-center h-9 w-9 md:h-12 md:w-12'>
                         <span className='text-xs font-semibold md:text-lg text-gray-900 dark:text-slate-100'>{verse_number}</span>
@@ -42,14 +42,21 @@ const Verses = ({verse_number, translations, text_uthmani, verse_key, setTafsirD
                     </div>
                     <div className='md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-28 w-full md:w-fit'>
                         <div className='flex md:flex-col'>
-                            <IconWrapper onClick={() => handleBookmarkClick(verse_key)}>
-                                <Bookmark fill={isBookmarked} className={`md:h-6 h-5 ${isBookmarked ? "text-emerald-500":"text-gray-500"}`}/>
+                            <IconWrapper 
+                                onClick={() => handleBookmarkClick(verse_key)}
+                            >
+                                <Bookmark fill={isBookmarked} className={`md:h-6 h-5 ${isBookmarked ? "text-emerald-500":"text-gray-500 dark:hover:text-gray-50"}`}/>
                             </IconWrapper>
-                            <IconWrapper>
-                                <Copy onClick={() => copyToClipboard(text_uthmani)} className="md:h-6 h-5 text-gray-500 active:text-emerald-500 cursor-pointer"/>
+                            <IconWrapper className="text-gray-500 dark:hover:text-gray-50 group cursor-pointer">
+                                <Copy onClick={() => copyToClipboard(text_uthmani)} className="md:h-6 h-5 group-active:text-emerald-500"/>
                             </IconWrapper>
-                            <IconWrapper onClick={() => setTafsirData({isOpen: true, verseKey: verse_key})}>
-                                <TafsirIcon className="md:h-6 h-5  text-gray-500"/>
+                            <IconWrapper 
+                                onClick={() => setTafsirData({
+                                    isOpen: true, verseKey: (router.locale === 'id') ? id : verse_key
+                                })}
+                                className="text-gray-500 dark:hover:text-gray-50"
+                            >
+                                <TafsirIcon className="md:h-6 h-5"/>
                             </IconWrapper>
                         </div>
                     </div>

@@ -17,7 +17,7 @@ const LanguageAdjustment = () => {
     const [langId, setLang] = useState(null)
 
     function setLocale(lang){
-        router.push(router.asPath, router.asPath, {locale: lang})
+        router.push(router.asPath, router.asPath, {locale: lang, scroll: false})
         setLang(lang)
     }
 
