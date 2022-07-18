@@ -49,7 +49,7 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
             )}>
                 <div className={classNames('left-0 top-0 h-screen w-screen', {"fixed": isOpen}, {"hidden": !isOpen})} onClick={closeModal}></div>
                 <div className={classNames(
-                    'z-[70] h-min min-h-[80%] w-[97%] max-w-7xl bg-gray-100 dark:bg-slate-600 dark:text-slate-100  p-8 xl:p-12 relative rounded-md transform transition-all',
+                    'z-[70] h-min min-h-[80%] w-[94%] max-w-7xl bg-gray-100 dark:bg-slate-600 dark:text-slate-100  p-6 xl:p-12 relative rounded-md transform transition-all',
                     {"translate-y-0 opacity-100": isOpen},
                     {"translate-y-52 opacity-0": !isOpen}
                 )}>
