@@ -4,6 +4,7 @@ import { RootContext } from '../../context/RootContext';
 import PlaybackController from './PlaybackController/PlaybackController';
 
 import style from './AudioPlayer.module.css'
+import { useRouter } from 'next/router';
 
 const initialState = {
 	isPlaying: false,
@@ -24,6 +25,8 @@ function reducer(state, action){
 }
 
 const AudioPlayer = () => {
+	const router = useRouter()
+
 	// Context
 	const { audioId, setAudioId, allChapters } = useContext(RootContext)
 	
@@ -127,7 +130,7 @@ const AudioPlayer = () => {
 				!isHidden &&  
 				<div className={classNames('fixed bottom-0 dark:bg-slate-600 bg-white border-t border-emerald-500 lg:shadow-2xl shadow-gray-500/50 w-full ', {"hidden": audioId == null})}>
 					<div className="py-3 max-w-screen-2xl mx-auto relative">
-						<div className='absolute -top-6 left-2 border border-emerald-500 bg-white dark:bg-slate-600 dark:text-slate-100 py-1 px-2 rounded text-emerald-500 font-bold text-sm md:text-base'>{audioId && allChapters[audioId-1].name_simple}</div>
+						<div onClick={() => router.push(`/surah/${audioId}`, undefined, {scroll: false})} className='cursor-pointer absolute -top-6 left-2 border border-emerald-500 bg-white dark:bg-slate-600 dark:text-slate-100 py-1 px-2 rounded text-emerald-500 font-bold text-sm md:text-base'>{audioId && allChapters[audioId-1].name_simple}</div>
 						<div className='flex flex-col'>
 							{/* <PauseIcon className="h-10 bg-blue-400"/> */}
 							<div className='flex justify-between w-full items-center px-3'>
