@@ -1,5 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects(){
+    return [
+      {
+        source: '/surah',
+        destination: '/',
+        permanent: true
+      },
+      {
+        source: '/juz',
+        destination: '/',
+        permanent: true
+      }
+    ]
+  },
+
   reactStrictMode: true,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
