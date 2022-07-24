@@ -8,7 +8,8 @@ export default function StyleProvider({children}){
     const [style, setStyle] = useLocalStorage('style', {
         fontSize: 32,
         fontFace: 'Lato',
-        theme: 'default'
+        theme: 'default',
+        readMode: 'translated'
     })
 
     function increaseFontSize(){
@@ -27,6 +28,10 @@ export default function StyleProvider({children}){
         setStyle((currentStyle) => ({...currentStyle, theme: theme}))
     }
 
+    function setReadMode(mode){
+        setStyle((currentStyle) => ({...currentStyle, readMode: mode}))
+    }
+
     useEffect(() => {
         setTheme(style?.theme)
     }, [style?.theme])
@@ -37,7 +42,10 @@ export default function StyleProvider({children}){
                 increaseFontSize,
                 decreaseFontSize,
                 currentFontSize: style?.fontSize,
-                updateTheme
+                updateTheme,
+
+                setReadMode,
+                readMode: style?.readMode
             }}
         >
             <div className="pb-20">

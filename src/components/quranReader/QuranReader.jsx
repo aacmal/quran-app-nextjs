@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Verses from './Verses'
 import Bismillah from "../Bismillah";
 import TafsirModal from '../Tafsir/Tafsir';
 import VerseSkeleton from './VerseSkeleton';
+import { StyleContext } from '../../context/StyleContext';
 
 
 const QuranReader = ({versesData, isLoading, bismillahPre, skeletonLoadingCount}) => {
+
+    const { readMode } = useContext(StyleContext)
+
     const [tafsirData, setTafsirData] = useState({
         isOpen: false,
         verseKey: null
@@ -18,7 +22,7 @@ const QuranReader = ({versesData, isLoading, bismillahPre, skeletonLoadingCount}
                 isOpen={tafsirData.isOpen}
                 verseKey={tafsirData.verseKey} 
                 closeModal={() => setTafsirData({...tafsirData, isOpen:false})}
-            />
+            />  
             {
                 isLoading ?
                         
@@ -28,29 +32,38 @@ const QuranReader = ({versesData, isLoading, bismillahPre, skeletonLoadingCount}
                     :
                     <>
                         <Bismillah className={!bismillahPre && "hidden"}/>
-                    {
-                        Array.isArray(versesData) ?
-                            versesData.map((e) => (
-                                <Verses
-                                    key={e.id}
-                                    id={e.id}
-                                    verse_number={e.verse_number}
-                                    translations={e.translations}
-                                    text_uthmani={e.text_uthmani}
-                                    verse_key={e.verse_key}
-                                    setTafsirData={setTafsirData}
-                                    />
-                                )) :
-                                <Verses
-                                    key={versesData.id}
-                                    id={versesData.id}
-                                    verse_number={versesData.verse_number}
-                                    translations={versesData.translations}
-                                    text_uthmani={versesData.text_uthmani}
-                                    verse_key={versesData.verse_key}
-                                    setTafsirData={setTafsirData}
-                                />
-                    }
+                        <div 
+                            dir={
+                                readMode==='translated'
+                                ? 'ltr'
+                                : 'rtl'
+                            } 
+                            className='text-justify mt-12'
+                        >
+                            {
+                                Array.isArray(versesData) ?
+                                    versesData.map((e) => (
+                                        <Verses
+                                            key={e.id}
+                                            id={e.id}
+                                            verse_number={e.verse_number}
+                                            translations={e.translations}
+                                            text_uthmani={e.text_uthmani}
+                                            verse_key={e.verse_key}
+                                            setTafsirData={setTafsirData}
+                                            />
+                                        )) :
+                                        <Verses
+                                            key={versesData.id}
+                                            id={versesData.id}
+                                            verse_number={versesData.verse_number}
+                                            translations={versesData.translations}
+                                            text_uthmani={versesData.text_uthmani}
+                                            verse_key={versesData.verse_key}
+                                            setTafsirData={setTafsirData}
+                                        />
+                            }
+                        </div>
                     </>
 
             }
