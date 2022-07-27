@@ -4,7 +4,6 @@ import { StyleContext } from '../../context/StyleContext'
 
 const Switcher = () => {
     const { setReadMode, readMode } = useContext(StyleContext)
-    console.log(readMode);
     return (
         <div className="bg-emerald-500 text-white p-1 flex h-fit rounded relative">
             <div onClick={() => setReadMode('translated')} className={classNames("px-3 rounded z-20 cursor-pointer text-sm lg:text-base", {"bg-emerald-200/40": readMode == 'translated'})}>Terjemah</div>

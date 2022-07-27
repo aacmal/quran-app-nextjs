@@ -66,6 +66,7 @@ const Verses = ({id, verse_number, translations, text_uthmani, verse_key, setTaf
                         <ArabicText
                             textUthmani={text_uthmani}
                             verseNumber={verse_number}
+                            verseKey={verse_key}
                         />
                         <span dangerouslySetInnerHTML={{__html:translations[0].text}} className='text-base md:text-xl transition-all mt-5 inline-block'></span>
                     </div>
@@ -79,6 +80,7 @@ const Verses = ({id, verse_number, translations, text_uthmani, verse_key, setTaf
             <ArabicText
                 textUthmani={text_uthmani}
                 verseNumber={verse_number}
+                verseKey={verse_key}
             />
         )
     }

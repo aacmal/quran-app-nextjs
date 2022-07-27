@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useContext, useEffect, useReducer, useRef, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useReducer, useRef, useState } from 'react'
 import { RootContext } from '../../context/RootContext';
 import PlaybackController from './PlaybackController/PlaybackController';
 
@@ -28,7 +28,7 @@ const AudioPlayer = () => {
 	const router = useRouter()
 
 	// Context
-	const { audioId, setAudioId, allChapters } = useContext(RootContext)
+	const { audioId, setAudioId, allChapters, currentChapter, highlightedVerse, setHighlightedVerse } = useContext(RootContext)
 	
 	// Refs
 	const audioRef = useRef()
@@ -42,6 +42,9 @@ const AudioPlayer = () => {
 	const [trackProgress, setTrackProgress] = useState(0);
 	const [isOnSeek, setOnSeek] = useState(false)
 	const isHidden = audioId == null
+
+	// Audio Data
+	const [audioData, setAudioData] = useState(null)
 
 	// Time State
 	const [maxTime, setMaxtime] = useState(0)
@@ -64,7 +67,15 @@ const AudioPlayer = () => {
 		setCurrentTime(calculateTime(Math.floor(audioRef.current.currentTime)+1))
 		setTrackProgress(Math.floor(audioRef.current.currentTime)+1)
 		sliderRef?.current?.style.setProperty('--seek-before-width', `${(Math.floor(audioRef.current.currentTime)+1) / maxTime * 100}%`)
-
+		
+		// handle highligthing verse
+		if(audioData){
+			const activeVerse = audioData[0].verse_timings.find((verse) => 
+				// Convert timestamp from miliseconds to seconds
+				audioRef.current.currentTime < Number(verse.timestamp_to / 1000)
+			)
+			setHighlightedVerse(activeVerse?.verse_key);
+		}
 	}	
 	
 	function handleOnLoad(value){
@@ -102,17 +113,38 @@ const AudioPlayer = () => {
 	useEffect(() => {
 		if(playbackState.isPlaying){
 			audioRef.current.play()
-			startTimer()	
 		} else {
 			audioRef.current.pause()
 		}
 	}, [playbackState.isPlaying])
 
 	useEffect(() => {
+		async function getAudioData(audioId) {
+			const result = await fetch(`https://api.qurancdn.com/api/qdc/audio/reciters/7/audio_files?chapter=${audioId}&segments=true`)
+			const data = await result.json()
+			return data
+		}
+		if(audioId){
+			getAudioData(audioId)
+			.then(res => {
+				setAudioData(res.audio_files)
+			})
+		}
+
 		setTimeout(() => {
 			dispatch({type: 'play'})
-		}, 500)
+		}, 1000)
 	}, [maxTime])
+
+	useEffect(() => {
+		const highlightedElement = document.querySelector(`[data-verse="${highlightedVerse}"]`)
+		const verseYLocation = highlightedElement?.offsetTop
+		// Current chapter is index of allchapters
+		if(currentChapter+1 === audioId){
+			window.scrollTo(0, verseYLocation-80)
+		}
+
+	}, [highlightedVerse])
 	
 	return (
 		<>

@@ -1,7 +1,11 @@
+import classNames from 'classnames'
 import React, { useContext } from 'react'
+import { RootContext } from '../../context/RootContext'
 import { StyleContext } from '../../context/StyleContext'
 
-const ArabicText = ({ayahId, textUthmani, verseNumber}) => {
+const ArabicText = ({ayahId, textUthmani, verseNumber, verseKey}) => {
+    const { highlightedVerse } = useContext(RootContext)
+
     const { currentFontSize } = useContext(StyleContext)
 
     const arabicNumber = (value) => {
@@ -10,10 +14,14 @@ const ArabicText = ({ayahId, textUthmani, verseNumber}) => {
     }
 
     return (
-        <span dir='rtl' className='text-right dark:text-slate-100 transition-all lg:leading-[120px] md:leading-[80px] leading-[80px]'>
+        <span data-verse={verseKey} dir='rtl' className={classNames('text-right dark:text-slate-100 transition-all lg:leading-[120px] md:leading-[80px] leading-[80px]', {"text-emerald-500 dark:text-emerald-500": verseKey === highlightedVerse} )}>
             <span style={{fontSize: currentFontSize}} id='arab' className='arabic uthmani'>{textUthmani}</span>
             <div 
-                className='h-8 w-8 mx-3 inline-block text-xl font-bold text-center rounded-full border border-gray-900 dark:border-white'>{arabicNumber(verseNumber)}
+                className={classNames(
+                    'h-8 w-8 mx-3 inline-block text-xl font-bold text-center rounded-full border', 
+                    {"border-emerald-500":  verseKey === highlightedVerse}, 
+                    {"border-gray-900 dark:border-white": verseKey !== highlightedVerse})}
+                >{arabicNumber(verseNumber)}
             </div>
         </span>
     )
