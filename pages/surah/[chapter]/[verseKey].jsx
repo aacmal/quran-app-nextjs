@@ -33,8 +33,12 @@ const SpecificVerse = () => {
 
 
         if(router.isReady){
-            getData(`${router.query.chapter}:${router.query.verseKey}`)
-			setCurrentChapterId(router.query.chapter)
+			if(isNaN(router.query.chapter)){
+                router.push('/404')
+            } else {
+				getData(`${router.query.chapter}:${router.query.verseKey}`)
+                setCurrentChapterId(router.query.chapter)
+            }
         }
 
     }, [router.isReady, router.locale])

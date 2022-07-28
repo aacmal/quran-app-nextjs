@@ -25,7 +25,12 @@ const JuzPage = () => {
         }
 
         if(router.isReady){
-            getVerses(router.query.juz)
+            if(router.query.juz >= 30 || router.query.juz < 1 || isNaN(router.query.juz)){
+                router.push('/404')
+            } else {
+                getVerses(router.query.juz)
+                setCurrentChapterId(router.query.chapter)
+            }
         }
 
     }, [router.isReady, router.locale])

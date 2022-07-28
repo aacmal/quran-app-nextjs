@@ -11,7 +11,7 @@ const DetailInfoSurah = () => {
     const [chapterInfo, setChapterInfo] = useState({})
     const [loading, setLoading] = useState(true)
 
-    const { allChapters } = useContext(RootContext)
+    const { allChapters, setCurrentChapterId } = useContext(RootContext)
 
 
     useEffect(() => {
@@ -24,7 +24,12 @@ const DetailInfoSurah = () => {
         }
 
         if(router.isReady){
-            getData(router.query.chapter)
+            if(router.query.chapter >= 114 || router.query.chapter < 1 || isNaN(router.query.chapter)){
+                router.push('/404')
+            } else {
+                getData(router.query.chapter)
+                setCurrentChapterId(router.query.chapter)
+            }
         }
 
     }, [router.isReady, router.locale])
