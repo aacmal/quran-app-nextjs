@@ -5,7 +5,7 @@ const IndexOfChapterLists = ({chapterLists, chapterId}) => {
 
     const scrollToSpecificVerse = useCallback((verseKey) => {
         const verseYLocation = document.querySelector(`[data-verse="${verseKey}"]`).offsetTop
-        window.scrollTo(0, verseYLocation-80)
+        window.scrollTo(0, verseYLocation-120)
     })
 
     return (

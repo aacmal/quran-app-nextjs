@@ -71,7 +71,7 @@ const AudioPlayer = () => {
 		// handle highligthing verse
 		if(audioData){
 			const activeVerse = audioData[0].verse_timings.find((verse) => 
-				// Convert timestamp from miliseconds to seconds
+				// convert from milliseconds to seconds by dividing by 1000
 				audioRef.current.currentTime < Number(verse.timestamp_to / 1000)
 			)
 			setHighlightedVerse(activeVerse?.verse_key);
@@ -141,7 +141,7 @@ const AudioPlayer = () => {
 		const verseYLocation = highlightedElement?.offsetTop
 		// Current chapter is index of allchapters
 		if(currentChapter+1 === audioId){
-			window.scrollTo(0, verseYLocation-80)
+			window.scrollTo(0, verseYLocation-200)
 		}
 
 	}, [highlightedVerse])
