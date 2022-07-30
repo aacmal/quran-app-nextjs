@@ -2,11 +2,8 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React, { useContext, useState } from 'react'
 import { RootContext } from '../../../context/RootContext'
-import DotsIcon from '../../icons/DotsIcon'
-import DownloadIcon from '../../icons/DownloadIcon'
-import ViewListsIcon from '../../icons/ViewListsIcon'
-import XIcons from '../../icons/XIcons'
 import { ButtonSmall } from './PlaybackController'
+import { XIcon, ListsIcon, DownloadIcon, DotsIcon } from '../../icons'
 
 const PlaybackOption = ({onClickReset}) => {
     const { audioId, setAudioId } = useContext(RootContext)
@@ -25,7 +22,7 @@ const PlaybackOption = ({onClickReset}) => {
                         {"opacity-100 visible translate-y-0": !isHidden},
                     )}>
                 <div className='py-1 px-1 hover:bg-emerald-500 flex items-center rounded cursor-pointer'>
-                    <ViewListsIcon className="h-5 mr-2"/>
+                    <ListsIcon className="h-5 mr-2"/>
                     <span>Pilih Qari</span>
                 </div>
                 <Link download={true} target="_blank" href={`https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/${audioId}.mp3`}>
@@ -40,7 +37,7 @@ const PlaybackOption = ({onClickReset}) => {
                     className='py-1 px-1 hover:bg-emerald-500 flex items-center rounded cursor-pointer'
                     onClick={onClickReset}
                 >
-                    <XIcons className="h-5 mr-2"/>
+                    <XIcon className="h-5 mr-2"/>
                     <span>Tutup Pemutar Audio</span>
                 </div>  
             </div>

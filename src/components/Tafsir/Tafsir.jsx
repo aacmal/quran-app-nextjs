@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { getSingleTafsir } from '../../utils/tafsir'
 import IconWrapper from '../icons/IconWrapper'
-import XIcons from '../icons/XIcons'
+import { XIcon } from '../icons'
 import TafsirSkeleton from './TafsirSkeleton'
 
 import tafsirStyle from './tafsirText.module.css'
@@ -54,7 +54,7 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
                     {"translate-y-52 opacity-0": !isOpen}
                 )}>
                     <IconWrapper className="absolute group top-3 right-3 border-2 border-transparent" onHover='hover:border-emerald-500' onClick={closeModal}>
-                        <XIcons className="h-7 group-hover:text-emerald-500"/>
+                        <XIcon className="h-7 group-hover:text-emerald-500"/>
                     </IconWrapper>
                     {
                         tafsirData ?

@@ -1,4 +1,3 @@
-import Navbar from '../src/components/Navbar/Navbar'
 import TopBar from '../src/components/TopBar/TopBar'
 import RootContextProvider from '../src/context/RootContext'
 import { TopbarContextProvider } from '../src/context/TopbarContext'

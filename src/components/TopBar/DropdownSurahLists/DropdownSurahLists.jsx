@@ -1,11 +1,11 @@
 import classNames from 'classnames'
 import React, { useState } from 'react'
-import ArrowIcon from '../../icons/ArrowIcon'
-import ChevronIcon from '../../icons/chevron'
 import ChapterLists from './ChapterLists'
 import IconWrapper from '../../icons/IconWrapper'
 import IndexOfChapterLists from './IndexOfChapterLists'
 import Link from 'next/link'
+import { ChevronIcon, ArrowIcon } from '../../icons'
+
 
 const DropdownSurahLists = ({chapterLists, chapterActive}) => {
     const [open, setOpen] = useState(false)

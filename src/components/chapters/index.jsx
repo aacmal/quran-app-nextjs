@@ -4,7 +4,7 @@ import JuzsView from './JuzsView'
 
 
 
-const Chapter = ({className, chapterLists, isLoading, view}) => {
+const Chapters = ({className, chapterLists, isLoading, view}) => {
 
    
     return (
@@ -25,4 +25,4 @@ const Chapter = ({className, chapterLists, isLoading, view}) => {
     )
 }
 
-export default Chapter
+export default Chapters

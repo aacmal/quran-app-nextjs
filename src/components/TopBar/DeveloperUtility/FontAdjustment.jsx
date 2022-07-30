@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
 import { StyleContext } from '../../../context/StyleContext'
-import ChevronIcon from '../../icons/chevron'
 import AdjustmentWrapper from './AdjustmentWrapper'
 import OptionList from './OptionList'
+import { ChevronIcon } from '../../icons'
 
 const FontAdjustment = () => {
     const [isExpanded, setExpanded] = useState(false)

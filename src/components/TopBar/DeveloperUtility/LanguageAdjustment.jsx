@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import ChevronIcon from '../../icons/chevron'
+import { ChevronIcon } from '../../icons'
 import AdjustmentWrapper from './AdjustmentWrapper'
 import OptionList from './OptionList'
 

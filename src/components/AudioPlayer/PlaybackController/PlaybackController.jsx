@@ -1,12 +1,8 @@
 import classNames from 'classnames'
 import React, { useContext } from 'react'
 import { RootContext } from '../../../context/RootContext'
-import DotsIcon from '../../icons/DotsIcon'
-import PauseIcon from '../../icons/PauseIcon'
-import PlayIcon from '../../icons/PlayIcon'
-import RepeatIcon from '../../icons/RepeatIcon'
-import RewindIcon from '../../icons/RewindIcon'
 import PlaybackOption from './PlaybackOption'
+import { RewindIcon, PlayIcon, PauseIcon, RepeatIcon } from '../../icons'
 
 
 export const ButtonSmall = ({className, onClick, children}) => (

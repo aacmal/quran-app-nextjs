@@ -1,10 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
-import { Bookmark, Info } from '../icons'
 import IconWrapper from '../icons/IconWrapper'
 import BannerWrapper from './BannerWrapper'
 import ChapterBannerSkeleton from './ChapterBannerSkeleton'
 import SurahInfo from './SurahInfo'
+import { InfoIcon } from '../icons' 
 
 const ChapterBanner = ({chapterData, chapterInfo, isLoading}) => {
     const [isInfoOpen, setInfoOpen] = useState(false)
@@ -21,7 +21,7 @@ const ChapterBanner = ({chapterData, chapterInfo, isLoading}) => {
                         onClick={() => setInfoOpen(!isInfoOpen)}
                         onHover='none'
                     >
-                        <Info className="h-5 lg:h-8 "/>
+                        <InfoIcon className="h-5 lg:h-8 "/>
                     </IconWrapper>
                     <h1 className='text-2xl lg:text-3xl font-bold mb-0 text-gray-50'>{chapterData.name_simple}</h1>
                     <span className='text-sm block lg:text-xl text-gray-50'>{chapterData.translated_name.name}</span>

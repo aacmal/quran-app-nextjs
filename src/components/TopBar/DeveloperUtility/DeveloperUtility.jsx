@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import AdjustmentIcon from '../../icons/AdjustmentIcon'
+import { AdjustmentIcon } from '../../icons'
 import IconWrapper from '../../icons/IconWrapper'
 import { FontAdjustment, FontSizeAdjustment } from './FontAdjustment'
 import LanguageAdjustment from './LanguageAdjustment'

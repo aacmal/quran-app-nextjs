@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react'
 import BookmarkedItem from './BookmarkedItem'
 import { RootContext } from '../../context/RootContext'
-import { Bookmark } from '../icons'
+import { BookmarkIcon } from '../icons'
 import IconWrapper from '../icons/IconWrapper'
 import TrashIcon from '../icons/TrashIcon'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
@@ -15,7 +15,7 @@ const BookmarkedVerseLists = ({chapterLists}) => {
                 <div className='h-fit w-full bg-gradient-to-br from-emerald-300 to-emerald-600 rounded-lg lg:p-4 p-3'>
                     <div className='lg:mb-4 mb-2 flex justify-between items-center text-white'>
                         <div className='flex'>
-                            <Bookmark fill={true} className="h-6 mr-2"/>
+                            <BookmarkIcon fill={true} className="h-6 mr-2"/>
                             <span className='font-bold'>Bookmark</span>
                         </div>
                         <IconWrapper onHover="none" onClick={() => deleteBookmark(false)}>
