@@ -8,13 +8,23 @@ import { ChevronIcon } from '../../icons'
 const FontAdjustment = () => {
     const [isExpanded, setExpanded] = useState(false)
 
-    const [font, setFont] = useState('Lato')
+    const { setFontFace, fontFace } = useContext(StyleContext)
+
+    const fontFaces = [
+        'Al - Qalam',
+        'Me - Quran',
+        'Nastaleeq',
+        'Uthmanic Hafs'
+    ]
+
+
+    // const [font, setFont] = useState('Lato')
 
     return (
         <AdjustmentWrapper title="Jenis Font">
-            <div onClick={() => setExpanded(!isExpanded)} className='text-center py-2 px-2 group text-black dark:text-slate-100 bg-gray-100 dark:bg-slate-500 rounded w-32 flex justify-between relative cursor-pointer'>
-                <span className='font-bold text-sm'>{font}</span>
-                <ChevronIcon className={classNames("h-5 transform transition-transform", {"rotate-180": isExpanded})}/>
+            <div onClick={() => setExpanded(!isExpanded)} className='text-center py-2 px-2 group text-black dark:text-slate-100 bg-gray-100 dark:bg-slate-500 rounded w-36 flex justify-between relative cursor-pointer'>
+                <span className='font-bold text-sm'>{fontFace ? fontFaces[fontFace] : 'Al - Qalam'}</span>
+                <ChevronIcon className={classNames("h-5 transform ml-2 transition-transform", {"rotate-180": isExpanded})}/>
 
                 {/* Lists Language */}
                 <ul className={classNames(
@@ -22,8 +32,11 @@ const FontAdjustment = () => {
                     {"visible opacity-100 translate-y-7": isExpanded},
                     {"invisible opacity-0 translate-y-4": !isExpanded}
                 )}>
-                    <OptionList onClick={() => setFont('Lato')}>Lato</OptionList>
-                    <OptionList onClick={() => setFont('Poppins')}>Poppins</OptionList>
+                    {
+                        fontFaces.map((key, index) => (
+                            <OptionList onClick={() => setFontFace(index)}>{key}</OptionList>
+                        ))
+                    }
                 </ul>
             </div>
         </AdjustmentWrapper>   

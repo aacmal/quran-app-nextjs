@@ -7,7 +7,7 @@ export const StyleContext = createContext()
 export default function StyleProvider({children}){
     const [style, setStyle] = useLocalStorage('style', {
         fontSize: 32,
-        fontFace: 'Lato',
+        fontFace: 'Al Qalam',
         theme: 'default',
         readMode: 'translated'
     })
@@ -32,6 +32,10 @@ export default function StyleProvider({children}){
         setStyle((currentStyle) => ({...currentStyle, readMode: mode}))
     }
 
+    function setFontFace(fontFace){
+        setStyle((currentStyle) => ({...currentStyle, fontFace: fontFace}))
+    }
+
     useEffect(() => {
         setTheme(style?.theme)
     }, [style?.theme])
@@ -41,6 +45,8 @@ export default function StyleProvider({children}){
             value={{
                 increaseFontSize,
                 decreaseFontSize,
+                fontFace: style?.fontFace,
+                setFontFace,
                 currentFontSize: style?.fontSize,
                 updateTheme,
 
