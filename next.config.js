@@ -1,19 +1,21 @@
 /** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa')
+
 const nextConfig = {
-  async redirects(){
-    return [
-      {
-        source: '/surah',
-        destination: '/',
-        permanent: true
-      },
-      {
-        source: '/juz',
-        destination: '/',
-        permanent: true
-      }
-    ]
-  },
+  // async redirects(){
+  //   return [
+  //     {
+  //       source: '/surah',
+  //       destination: '/',
+  //       permanent: true
+  //     },
+  //     {
+  //       source: '/juz',
+  //       destination: '/',
+  //       permanent: true
+  //     }
+  //   ]
+  // },
 
   reactStrictMode: true,
   eslint: {
@@ -32,4 +34,12 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withPWA({
+  ...nextConfig,
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  }
+})
+
