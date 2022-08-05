@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { AdjustmentIcon } from '../../icons'
 import IconWrapper from '../../icons/IconWrapper'
+import AutoScroll from './AutoScroll'
 import { FontAdjustment, FontSizeAdjustment } from './FontAdjustment'
 import LanguageAdjustment from './LanguageAdjustment'
 import ThemeAdjustment from './ThemeAdjustment'
@@ -30,6 +31,7 @@ const DeveloperUtility = ({isInSurah}) => {
                 {isInSurah && <>
                     <FontAdjustment/>
                     <FontSizeAdjustment/>
+                    <AutoScroll/>
                     </>
                 }
             </div>

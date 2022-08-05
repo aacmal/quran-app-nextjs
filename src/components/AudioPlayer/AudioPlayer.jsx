@@ -5,6 +5,7 @@ import PlaybackController from './PlaybackController/PlaybackController';
 
 import style from './AudioPlayer.module.css'
 import { useRouter } from 'next/router';
+import { StyleContext } from '../../context/StyleContext';
 
 const initialState = {
 	isPlaying: false,
@@ -29,6 +30,7 @@ const AudioPlayer = () => {
 
 	// Context
 	const { audioId, setAudioId, allChapters, currentChapter, highlightedVerse, setHighlightedVerse } = useContext(RootContext)
+	const { autoScroll } = useContext(StyleContext)
 	
 	// Refs
 	const audioRef = useRef()
@@ -140,7 +142,7 @@ const AudioPlayer = () => {
 		const highlightedElement = document.querySelector(`[data-verse="${highlightedVerse}"]`)
 		const verseYLocation = highlightedElement?.offsetTop
 		// Current chapter is index of allchapters
-		if(currentChapter+1 === audioId){
+		if(currentChapter+1 === audioId && autoScroll){
 			window.scrollTo(0, verseYLocation-200)
 		}
 

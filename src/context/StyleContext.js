@@ -9,7 +9,8 @@ export default function StyleProvider({children}){
         fontSize: 32,
         fontFace: 'Al Qalam',
         theme: 'default',
-        readMode: 'translated'
+        readMode: 'translated',
+        autoScroll: true
     })
 
     function increaseFontSize(){
@@ -36,6 +37,10 @@ export default function StyleProvider({children}){
         setStyle((currentStyle) => ({...currentStyle, fontFace: fontFace}))
     }
 
+    function setAutoScroll(value){
+        setStyle((currentStyle) => ({...currentStyle, autoScroll: value}))
+    }
+
     useEffect(() => {
         setTheme(style?.theme)
     }, [style?.theme])
@@ -49,6 +54,8 @@ export default function StyleProvider({children}){
                 setFontFace,
                 currentFontSize: style?.fontSize,
                 updateTheme,
+                autoScroll: style?.autoScroll,
+                setAutoScroll,
 
                 setReadMode,
                 readMode: style?.readMode
