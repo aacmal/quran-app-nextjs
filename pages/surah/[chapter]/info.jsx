@@ -11,7 +11,7 @@ const DetailInfoSurah = () => {
     const [chapterInfo, setChapterInfo] = useState({})
     const [loading, setLoading] = useState(true)
 
-    const { allChapters, setCurrentChapterId } = useContext(RootContext)
+    const { allChapters, setCurrentChapterId, currentChapter } = useContext(RootContext)
 
 
     useEffect(() => {

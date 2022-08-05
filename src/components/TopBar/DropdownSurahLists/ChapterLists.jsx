@@ -11,7 +11,7 @@ const ChapterLists = ({chapterLists, chapterActive}) => {
             chapterLists?.map(e => (
                 <li
                     key={e.id}
-                    onClick={() => router.push(`/surah/${e.id}`, undefined, {shallow: true})}
+                    onClick={() => router.push(`/surah/${e.id}`, undefined, {shallow: true, scroll: true})}
                     className={classNames(
                       "px-2 py-1 cursor-pointer hover:bg-emerald-100/50 dark:hover:bg-emerald-400/30 dark:hover:text-slate-100 hover:text-emerald-500 rounded flex items-center",
                       {"dark:bg-emerald-400 bg-emerald-200": chapterActive+1 === e.id}
