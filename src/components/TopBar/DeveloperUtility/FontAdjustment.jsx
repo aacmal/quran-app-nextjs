@@ -34,7 +34,7 @@ const FontAdjustment = () => {
                 )}>
                     {
                         fontFaces.map((key, index) => (
-                            <OptionList onClick={() => setFontFace(index)}>{key}</OptionList>
+                            <OptionList key={index} onClick={() => setFontFace(index)}>{key}</OptionList>
                         ))
                     }
                 </ul>

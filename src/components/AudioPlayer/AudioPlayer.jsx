@@ -1,15 +1,23 @@
 import classNames from 'classnames';
-import React, { useCallback, useContext, useEffect, useReducer, useRef, useState } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from 'react'
 import { RootContext } from '../../context/RootContext';
 import PlaybackController from './PlaybackController/PlaybackController';
 
 import style from './AudioPlayer.module.css'
 import { useRouter } from 'next/router';
 import { StyleContext } from '../../context/StyleContext';
+import { getAudioFile } from '../../utils/audio';
 
+
+
+// Context
+export const AudioContext = createContext()
+
+// Reducer
 const initialState = {
 	isPlaying: false,
-	isRepeat: false
+	isRepeat: false,
+	reciterId: 7
 }
 
 function reducer(state, action){
@@ -20,6 +28,8 @@ function reducer(state, action){
 			return { ...state, isPlaying: false}
 		case 'repeat':
 			return {  ...state, isRepeat: !state.isRepeat}
+		case 'changeReciterId':
+			return { ...state, reciterId: action.payload }
 		default:
 			throw new Error("dispatch not found")
 	}
@@ -37,7 +47,7 @@ const AudioPlayer = () => {
 	const sliderRef= useRef()
 
 	// Playback Control
-	const [playbackState, dispatch] = useReducer(reducer, initialState)
+	const [audioState, dispatch] = useReducer(reducer, initialState)
 
 	// Control State
 	const [value, setValue] = useState(0);
@@ -72,7 +82,7 @@ const AudioPlayer = () => {
 		
 		// handle highligthing verse
 		if(audioData){
-			const activeVerse = audioData[0].verse_timings.find((verse) => 
+			const activeVerse = audioData.timestamps.find((verse) => 
 				// convert from milliseconds to seconds by dividing by 1000
 				audioRef.current.currentTime < Number(verse.timestamp_to / 1000)
 			)
@@ -96,12 +106,18 @@ const AudioPlayer = () => {
 	
 	function handleOnEnded(){
 		// If no repeat, change to next surah
-		if(!playbackState.isRepeat){
+		if(!audioState.isRepeat){
 			if(audioId < 114){
 				setAudioId(current => current+1)
 			} else {
 				setAudioId(1)
 			}
+		}
+	}
+
+	function handleOnCanPlayThrough(e){
+		if(e.eventPhase > 1){
+			dispatch({type: 'play'})
 		}
 	}
 	
@@ -110,33 +126,26 @@ const AudioPlayer = () => {
 		setAudioId(null)
 		setTrackProgress(0)
 		updateCurrentTime(0)
+		setTimeout(() => {
+			setHighlightedVerse(null)
+		}, 200)
 	}
 
 	useEffect(() => {
-		if(playbackState.isPlaying){
+		if(audioState.isPlaying){
 			audioRef.current.play()
 		} else {
 			audioRef.current.pause()
 		}
-	}, [playbackState.isPlaying])
+	}, [audioState.isPlaying])
 
 	useEffect(() => {
-		async function getAudioData(audioId) {
-			const result = await fetch(`https://api.qurancdn.com/api/qdc/audio/reciters/7/audio_files?chapter=${audioId}&segments=true`)
-			const data = await result.json()
-			return data
-		}
-		if(audioId){
-			getAudioData(audioId)
-			.then(res => {
-				setAudioData(res.audio_files)
-			})
-		}
+		
+		getAudioFile(audioState.reciterId, audioId)
+		.then((res) => setAudioData(res.audio_file))
+		.then(dispatch({type: 'pause'}))
 
-		setTimeout(() => {
-			dispatch({type: 'play'})
-		}, 1000)
-	}, [maxTime])
+	}, [audioId, audioState.reciterId])
 
 	useEffect(() => {
 		const highlightedElement = document.querySelector(`[data-verse="${highlightedVerse}"]`)
@@ -147,17 +156,24 @@ const AudioPlayer = () => {
 		}
 
 	}, [highlightedVerse])
+
 	
 	return (
-		<>
+		<AudioContext.Provider
+			value={{
+				audioState,
+				dispatch
+			}}
+		>
 			<audio 
 				style={{display: 'none'}} 
 				onLoadedMetadata={(e) => handleOnLoad(e.target.duration)} 
 				ref={audioRef} 
-				src={audioId && `https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/${audioId}.mp3`} 
-				loop={playbackState.isRepeat}
+				src={audioData && audioData.audio_url} 
+				loop={audioState.isRepeat}
 				preload='metadata' 
 				onEnded={handleOnEnded}
+				onCanPlayThrough={e => handleOnCanPlayThrough(e)}
 				onTimeUpdate={startTimer}
 			/>
 			{
@@ -182,7 +198,7 @@ const AudioPlayer = () => {
 								<span className='dark:text-slate-100 md:text-base text-sm'>{calculateTime(maxTime)}</span>
 							</div>
 							<PlaybackController
-								state={playbackState}
+								state={audioState}
 								dispatch={dispatch}
 								reset={reset}
 							/>
@@ -192,7 +208,7 @@ const AudioPlayer = () => {
 				</div>
 			}
 		
-		</>
+		</AudioContext.Provider>
 	)
 
 }
