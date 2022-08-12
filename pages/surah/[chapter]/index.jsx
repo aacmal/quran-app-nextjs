@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import dynamic from 'next/dynamic'
 
 import ChapterBanner from "../../../src/components/Banner/ChapterBanner";
 import QuranReader from "../../../src/components/quranReader/QuranReader";
@@ -10,9 +11,10 @@ import { RootContext } from "../../../src/context/RootContext";
 import { getAllVerseByChapter } from "../../../src/utils/verse";
 import { getChapterInfo } from "../../../src/utils/chapter";
 import PlayIcon from "../../../src/components/icons/PlayIcon";
-import { data } from "autoprefixer";
-import { StyleContext } from "../../../src/context/StyleContext";
-import Switcher from "../../../src/components/quranReader/Switcher";
+const Switcher = dynamic(
+    () => import('../../../src/components/quranReader/Switcher'),
+    { ssr: false }
+)
 
 export default function Surah(){
     const router = useRouter();
@@ -20,7 +22,6 @@ export default function Surah(){
     const [isLoading, setLoading] = useState(true)
 
     const { setShowTopbar } = useContext(TopbarContext)
-    const { setReadMode, readMode } = useContext(StyleContext)
     const { allChapters, setCurrentChapterId, currentChapter, setAudioId } = useContext(RootContext)
 
     useEffect(() => {
@@ -47,9 +48,8 @@ export default function Surah(){
 
     }, [router.isReady, router.query.chapter, router.locale])
     
-    
     return (
-        <Wrapper className="px-5">
+        <Wrapper className="px-5 pb-20">
             <Head>
                 <title>{allChapters[currentChapter]?.name_simple} ({allChapters[currentChapter]?.translated_name.name})</title>
             </Head>

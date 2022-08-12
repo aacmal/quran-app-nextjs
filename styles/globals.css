@@ -99,6 +99,20 @@ p{
   font-size: 1rem;
 }
 
+.surah-info h2{
+  @apply text-2xl  lg:text-3xl font-bold text-emerald-100 dark:text-emerald-500
+}
+
+.surah-info p {
+  @apply  text-lg md:text-xl text-justify
+}
+
+.surah-info ol{
+  list-style: square;
+  @apply text-lg md:text-xl text-justify pl-5
+}
+
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none; /* Firefox */

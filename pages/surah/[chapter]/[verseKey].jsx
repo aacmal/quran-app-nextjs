@@ -44,7 +44,7 @@ const SpecificVerse = () => {
     }, [router.isReady, router.locale])
 
 	return (
-		<Wrapper className="px-5 lg:mt-24 mt-16">
+		<Wrapper className="px-5 lg:mt-24 mt-16 pb-20">
 			<Head>
 				<title>{allChapters[currentChapter]?.name_simple} : {router.query?.verseKey}</title>
 			</Head>

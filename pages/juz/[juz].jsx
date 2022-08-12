@@ -35,7 +35,7 @@ const JuzPage = () => {
 
     }, [router.isReady, router.locale])
     return (
-        <Wrapper className="px-5 mt-16">
+        <Wrapper className="px-5 mt-16 pb-20">
             <Head>
                 <title>Juz {router.query.juz}</title>
             </Head>

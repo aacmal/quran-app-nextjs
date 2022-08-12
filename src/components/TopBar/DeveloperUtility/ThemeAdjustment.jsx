@@ -25,7 +25,7 @@ const ThemeAdjustment = () => {
     }
 
     return (
-        <AdjustmentWrapper title="Theme">
+        <AdjustmentWrapper title="Tema">
             <div className='bg-gray-100 dark:bg-slate-500 dark:text-slate-200 p-1 rounded text-black w-32'>
                 <div className='flex items-center relative'>
                     <div className={classNames(

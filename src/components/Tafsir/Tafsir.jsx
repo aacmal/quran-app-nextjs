@@ -30,7 +30,6 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
         
         document.body.style.overflow = isOpen ? 'hidden' : 'auto'
 
-        console.log(tafsirData);
         
     }, [isOpen])
     

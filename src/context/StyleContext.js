@@ -61,7 +61,7 @@ export default function StyleProvider({children}){
                 readMode: style?.readMode
             }}
         >
-            <div className="pb-20">
+            <div>
                 {children}
             </div>
         </StyleContext.Provider>

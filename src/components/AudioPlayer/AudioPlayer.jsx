@@ -140,10 +140,11 @@ const AudioPlayer = () => {
 	}, [audioState.isPlaying])
 
 	useEffect(() => {
-		
-		getAudioFile(audioState.reciterId, audioId)
-		.then((res) => setAudioData(res.audio_file))
-		.then(dispatch({type: 'pause'}))
+		if(audioId){
+			getAudioFile(audioState.reciterId, audioId)
+			.then((res) => setAudioData(res.audio_file))
+			.then(dispatch({type: 'pause'}))
+		}
 
 	}, [audioId, audioState.reciterId])
 
@@ -151,7 +152,7 @@ const AudioPlayer = () => {
 		const highlightedElement = document.querySelector(`[data-verse="${highlightedVerse}"]`)
 		const verseYLocation = highlightedElement?.offsetTop
 		// Current chapter is index of allchapters
-		if(currentChapter+1 === audioId && autoScroll){
+		if(currentChapter+1 === audioId && autoScroll && (router.pathname === "/surah/[chapter]")){
 			window.scrollTo(0, verseYLocation-200)
 		}
 
