@@ -34,7 +34,7 @@ export default function Home() {
 				<BookmarkedVerseLists chapterLists={allChapters}/>
 			}
 			{/* <HomeBanner/> */}
-			<div className={classNames('px-5 py-5 lg:p-12 bg-gray-100 dark:bg-slate-700 min-h-screen rounded-t-2xl pb-20')}>
+			<div className={classNames(' px-5 py-5 lg:p-12 lg:pb-32 pb-32 bg-gray-100 dark:bg-slate-700 min-h-screen rounded-t-2xl ')}>
 				<Switch setView={setView} view={view}/>
 				<Chapters isLoading={isLoading} chapterLists={allChapters} view={view}/>
 			</div>

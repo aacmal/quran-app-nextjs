@@ -29,7 +29,6 @@ const JuzPage = () => {
                 router.push('/404')
             } else {
                 getVerses(router.query.juz)
-                setCurrentChapterId(router.query.chapter)
             }
         }
 
