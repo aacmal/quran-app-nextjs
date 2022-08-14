@@ -49,7 +49,9 @@ const Verses = ({id, verse_number, translations, text_uthmani, verse_key, setTaf
                                 </IconWrapper>
                                 <IconWrapper 
                                     onClick={() => setTafsirData({
-                                        isOpen: true, verseKey: (router.locale === 'id') ? id : verse_key
+                                        isOpen: true,
+                                        verseKey: verse_key,
+                                        verseId: id
                                     })}
                                     className="text-gray-500 dark:hover:text-gray-50"
                                 >

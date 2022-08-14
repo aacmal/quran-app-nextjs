@@ -7,23 +7,40 @@ import { XIcon } from '../icons'
 import TafsirSkeleton from './TafsirSkeleton'
 
 import tafsirStyle from './tafsirText.module.css'
+import { getSpecificVerse } from '../../utils/verse'
+import { data } from 'autoprefixer'
+import ArabicText from '../quranReader/ArabicText'
 
-const TafsirModal = ({isOpen, verseKey, closeModal}) => {
+const TafsirModal = ({isOpen, verseKey, verseId, closeModal}) => {
 
     const [tafsirData, setTafsirData] = useState(null)
+    const [verse, setDataVerse] = useState(null)
+    const [isLoading, setLoading] = useState(true)
     
     const router = useRouter()
 
     useEffect(() => {
-        async function getTafsirByVerse(verseKey){
-            getSingleTafsir(verseKey, router.locale)
-            .then((data) => {
-                setTafsirData(data)
+        const localeKeyCheck = () => (router.locale === 'id') ? verseId : verseKey
+
+        function getTafsirByVerse(verseKey, verseId){
+            getSingleTafsir(verseId, router.locale)
+            .then((dataTafsir) => {
+                setTafsirData(dataTafsir)
             })
+            .then(
+                getSpecificVerse(verseKey, router.locale)
+                .then(dataVerse => setDataVerse(dataVerse.verse))
+            )
+            .then(
+                () => {
+                    setLoading(false)
+                }
+            )
         }
 
+
         if (isOpen === true) {
-            getTafsirByVerse(verseKey)
+            getTafsirByVerse(verseKey, localeKeyCheck())
         } else {
             setTafsirData(null)
         }
@@ -48,7 +65,7 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
             )}>
                 <div className={classNames('left-0 top-0 h-screen w-screen', {"fixed": isOpen}, {"hidden": !isOpen})} onClick={closeModal}></div>
                 <div className={classNames(
-                    'z-[70] h-min min-h-[80%] w-[94%] max-w-7xl bg-gray-100 dark:bg-slate-600 dark:text-slate-100  p-6 xl:p-12 relative rounded-md transform transition-all',
+                    'z-[70] h-min min-h-[80%] w-[94%] max-w-7xl bg-gray-100 dark:bg-slate-600 dark:text-slate-100  p-6 xl:p-12 pt-16 relative rounded-md transform transition-all',
                     {"translate-y-0 opacity-100": isOpen},
                     {"translate-y-52 opacity-0": !isOpen}
                 )}>
@@ -56,9 +73,20 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
                         <XIcon className="h-7 group-hover:text-emerald-500"/>
                     </IconWrapper>
                     {
-                        tafsirData ?
-                           (router.locale === "id") ? 
-                                <div>
+                        !isLoading && tafsirData
+                        ? <>
+                            <div className='w-full flex flex-col dark:text-slate-100'>
+                                <ArabicText
+                                    textUthmani={verse.text_uthmani}
+                                    verseNumber={verse.verse_number}
+                                    verseKey={verse.verse_key}
+                                />
+                                <span dangerouslySetInnerHTML={{__html:verse.translations[0].text}} className='text-base md:text-xl transition-all mt-5 inline-block'></span>
+                            </div>
+                            <div className="h-px w-full bg-emerald-500  my-6"></div>
+                            {
+                                (router.locale === "id")
+                                ? <div>
                                     <div className='mb-3'>
                                         <h3 className='font-bold text-lg mb-1'>Tafsir Wajiz</h3>
                                         <p className='lg:text-lg'>
@@ -77,6 +105,8 @@ const TafsirModal = ({isOpen, verseKey, closeModal}) => {
                                     <div className={tafsirStyle.tafsir_text} dangerouslySetInnerHTML={{__html:tafsirData.tafsir?.text}}></div>
                                     <span className='mt-3 block'>Sumber : https://quran.com</span>
                                 </div>
+                            }
+                        </> 
                         : <TafsirSkeleton/>
                     }
                 </div>

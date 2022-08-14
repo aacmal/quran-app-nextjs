@@ -12,7 +12,8 @@ const QuranReader = ({versesData, isLoading, bismillahPre, skeletonLoadingCount}
 
     const [tafsirData, setTafsirData] = useState({
         isOpen: false,
-        verseKey: null
+        verseKey: null,
+        verseId: null,
     })
 
     return (
@@ -21,6 +22,7 @@ const QuranReader = ({versesData, isLoading, bismillahPre, skeletonLoadingCount}
             <TafsirModal 
                 isOpen={tafsirData.isOpen}
                 verseKey={tafsirData.verseKey} 
+                verseId={tafsirData.verseId}
                 closeModal={() => setTafsirData({...tafsirData, isOpen:false})}
             />  
             {
