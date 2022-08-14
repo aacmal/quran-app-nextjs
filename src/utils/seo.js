@@ -3,7 +3,7 @@ import { getBasePath } from './url';
 
 export const config = {
     siteName: 'Quran App',
-    websiteLogo: `${getBasePath()}/quran.png`,
+    websiteLogo: `${getBasePath()}/quranapp.jpg`,
     twitterHandle: '@quran_app',
     twitterCardType: 'summary_large_image',
     facebookApp: '5277775832307938',
@@ -37,7 +37,7 @@ export function createSEOConfig({
         {
           url: config.websiteLogo,
           width: 2026,
-          height: 588,
+          height: 875,
           alt: config.siteName,
         },
       ],
