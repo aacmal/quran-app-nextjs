@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { getSingleTafsir } from '../../utils/tafsir'
 import IconWrapper from '../icons/IconWrapper'
 import { XIcon } from '../icons'
@@ -8,10 +8,12 @@ import TafsirSkeleton from './TafsirSkeleton'
 
 import tafsirStyle from './tafsirText.module.css'
 import { getSpecificVerse } from '../../utils/verse'
-import { data } from 'autoprefixer'
 import ArabicText from '../quranReader/ArabicText'
+import { RootContext } from '../../context/RootContext'
 
 const TafsirModal = ({isOpen, verseKey, verseId, closeModal}) => {
+
+    const { allChapters, currentChapter } = useContext(RootContext)
 
     const [tafsirData, setTafsirData] = useState(null)
     const [verse, setVerseData] = useState(null)
@@ -68,6 +70,9 @@ const TafsirModal = ({isOpen, verseKey, verseId, closeModal}) => {
                     {
                         !isLoading
                         ? <>
+                            <div className="bg-emerald-500 w-fit py-2 px-3 font-bold text-white rounded-md">
+                                {allChapters[currentChapter].name_simple}<span className="font-normal ml-3">({verseKey})</span> 
+                            </div>
                             <div className='w-full flex flex-col dark:text-slate-100'>
                                 <ArabicText
                                     textUthmani={verse.text_uthmani}
