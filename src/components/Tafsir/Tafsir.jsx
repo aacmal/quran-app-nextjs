@@ -14,7 +14,7 @@ import ArabicText from '../quranReader/ArabicText'
 const TafsirModal = ({isOpen, verseKey, verseId, closeModal}) => {
 
     const [tafsirData, setTafsirData] = useState(null)
-    const [verse, setDataVerse] = useState(null)
+    const [verse, setVerseData] = useState(null)
     const [isLoading, setLoading] = useState(true)
     
     const router = useRouter()
@@ -23,26 +23,19 @@ const TafsirModal = ({isOpen, verseKey, verseId, closeModal}) => {
         const localeKeyCheck = () => (router.locale === 'id') ? verseId : verseKey
 
         function getTafsirByVerse(verseKey, verseId){
-            getSingleTafsir(verseId, router.locale)
-            .then((dataTafsir) => {
-                setTafsirData(dataTafsir)
+            Promise.all([getSingleTafsir(verseId, router.locale), getSpecificVerse(verseKey, router.locale)])
+            .then(([tafsirData, verseData]) => {
+                setTafsirData(tafsirData)
+                setVerseData(verseData.verse)
+                setLoading(false)
             })
-            .then(
-                getSpecificVerse(verseKey, router.locale)
-                .then(dataVerse => setDataVerse(dataVerse.verse))
-            )
-            .then(
-                () => {
-                    setLoading(false)
-                }
-            )
         }
 
 
         if (isOpen === true) {
             getTafsirByVerse(verseKey, localeKeyCheck())
         } else {
-            setTafsirData(null)
+            setLoading(true)
         }
         
         document.body.style.overflow = isOpen ? 'hidden' : 'auto'
@@ -73,7 +66,7 @@ const TafsirModal = ({isOpen, verseKey, verseId, closeModal}) => {
                         <XIcon className="h-7 group-hover:text-emerald-500"/>
                     </IconWrapper>
                     {
-                        !isLoading && tafsirData
+                        !isLoading
                         ? <>
                             <div className='w-full flex flex-col dark:text-slate-100'>
                                 <ArabicText
