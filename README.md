@@ -1,4 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://quranapp.acmal.me">
+    <img src="public/quranapp.jpg" alt="Logo"  style="border-radius: 10px">
+  </a>
+
+  <p align="center">
+    <a href="https://quranapp.acmal.me">Visit QuranApp</a>
+  </p>
+</p>
+
+
+<h2 id="about">About QuranApp</h2>
+WEB-based reading application, the purpose of this application is so that Muslim people can read and listen to Murottal anywhere and anytime without having to download the application as long as the device remains connected to the internet.
+
+<br/>
+
+<h2 id="features">Features</h2>
+- Dark Theme
+<br/>
+- Auto Highlight Verse When Playing Audio
+<br/>
+- Mark Verse
+<br/>
+- PWA (Progressive Web Apps)
+
+<br/>
+
+<h2 id="credits">Credits</h2>
+- API Data Source <a href="https://quran.api-docs.io/v4/getting-started/introduction">Quran.com</a>
+
+<br/>
+
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and using [`tailwind`](https://tailwindcss.com/) for styling
+
+<br/>
+<hr/>
+<br/>
+
+
 
 ## Getting Started
 
