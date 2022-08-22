@@ -7,6 +7,7 @@ import AudioPlayer from '../src/components/AudioPlayer/AudioPlayer'
 import { DefaultSeo } from 'next-seo';
 import { createSEOConfig } from '../src/utils/seo'
 import Head from 'next/head'
+import GoogleAnalytics from '../src/components/GoogleAnalytics/GoogleAnalytics'
 
 
 function MyApp({ Component, pageProps }) {
@@ -25,6 +26,8 @@ function MyApp({ Component, pageProps }) {
           <AudioPlayer/>
         </StyleProvider>
       </RootContextProvider>
+
+      <GoogleAnalytics/>
     </>
   )
 }
