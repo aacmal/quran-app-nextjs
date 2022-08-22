@@ -12,8 +12,9 @@ const GoogleAnalytics = () => {
   return (
     <>
         <Script
+            async
             src='https://www.googletagmanager.com/gtag/js?id=G-XXBD1VHL22'
-            strategy='lazyOnLoad'
+            strategy='afterInteractive'
         />
         <Script>
             {`
