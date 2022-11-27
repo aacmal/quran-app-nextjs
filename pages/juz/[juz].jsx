@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import QuranReader from '../../src/components/quranReader/QuranReader'
+import TransitionWrapper from '../../src/components/TransitionWrapper/TransitionWrapper'
 import Wrapper from '../../src/components/Wrapper'
 import { TopbarContext } from '../../src/context/TopbarContext'
 import { getVersesByJuz } from '../../src/utils/verse'
@@ -34,12 +35,14 @@ const JuzPage = () => {
 
     }, [router.isReady, router.locale])
     return (
-        <Wrapper className="px-5 mt-16 pb-20">
-            <Head>
-                <title>Juz {router.query.juz}</title>
-            </Head>
-            <QuranReader isLoading={isLoading} versesData={data.verses} skeletonLoadingCount={3}/>
-        </Wrapper>
+        <TransitionWrapper type='toRight'>
+            <Wrapper className="px-5 mt-16 pb-20">
+                <Head>
+                    <title>Juz {router.query.juz}</title>
+                </Head>
+                <QuranReader isLoading={isLoading} versesData={data.verses} skeletonLoadingCount={3}/>
+            </Wrapper>
+        </TransitionWrapper>
     )
 }
 

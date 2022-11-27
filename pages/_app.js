@@ -8,9 +8,10 @@ import { DefaultSeo } from 'next-seo';
 import { createSEOConfig } from '../src/utils/seo'
 import Head from 'next/head'
 import GoogleAnalytics from '../src/components/GoogleAnalytics/GoogleAnalytics'
+import { AnimatePresence } from 'framer-motion'
 
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, url }) {
   return (
     <>
       <Head>
@@ -21,7 +22,13 @@ function MyApp({ Component, pageProps }) {
           <DefaultSeo {...createSEOConfig({ locale: 'id', description: "Aplikasi Quran Sederhana" })}/>
           <TopbarContextProvider>
             <TopBar/>
-            <Component {...pageProps} />
+            <AnimatePresence
+              mode="wait"
+              initial={false}
+              onExitComplete={() => window.scrollTo(0, 0)}
+            >
+              <Component {...pageProps} key={url}/>
+            </AnimatePresence>
           </TopbarContextProvider>
           <AudioPlayer/>
         </StyleProvider>

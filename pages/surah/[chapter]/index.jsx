@@ -11,6 +11,7 @@ import { RootContext } from "../../../src/context/RootContext";
 import { getAllVerseByChapter } from "../../../src/utils/verse";
 import { getChapterInfo } from "../../../src/utils/chapter";
 import PlayIcon from "../../../src/components/icons/PlayIcon";
+import TransitionWrapper from "../../../src/components/TransitionWrapper/TransitionWrapper";
 const Switcher = dynamic(
     () => import('../../../src/components/quranReader/Switcher'),
     { ssr: false }
@@ -49,20 +50,22 @@ export default function Surah(){
     }, [router.isReady, router.query.chapter, router.locale])
     
     return (
-        <Wrapper className="px-5 pb-20">
-            <Head>
-                <title>{allChapters[currentChapter]?.name_simple} ({allChapters[currentChapter]?.translated_name.name})</title>
-            </Head>
-            <hr className="md:my-10 my-8 border-none"/>
-            <ChapterBanner chapterData={allChapters[currentChapter]} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
-            <div className="flex items-center justify-between my-8">
-                <Switcher/>
-                <button
-                    className="bg-emerald-500 text-slate-50 py-1 px-2 text-sm lg:py-2 lg:px-3 lg:text-base font-bold rounded flex items-center"
-                    onClick={() => setAudioId(currentChapter+1)}
-                >Putar Audio <PlayIcon className="h-5 ml-3"/></button>
-            </div>
-            <QuranReader bismillahPre={allChapters[currentChapter]?.bismillah_pre} versesData={datas.verses} isLoading={isLoading} skeletonLoadingCount={3}/>
-        </Wrapper>
+        <TransitionWrapper type="toRight" opacity={false}>
+            <Wrapper className="px-5 pb-20">
+                <Head>
+                    <title>{allChapters[currentChapter]?.name_simple} ({allChapters[currentChapter]?.translated_name.name})</title>
+                </Head>
+                <hr className="md:my-10 my-8 border-none"/>
+                <ChapterBanner chapterData={allChapters[currentChapter]} chapterInfo={datas.chapter_info} isLoading={isLoading}/>
+                <div className="flex items-center justify-between my-8">
+                    <Switcher/>
+                    <button
+                        className="bg-emerald-500 text-slate-50 py-1 px-2 text-sm lg:py-2 lg:px-3 lg:text-base font-bold rounded flex items-center"
+                        onClick={() => setAudioId(currentChapter+1)}
+                    >Putar Audio <PlayIcon className="h-5 ml-3"/></button>
+                </div>
+                <QuranReader bismillahPre={allChapters[currentChapter]?.bismillah_pre} versesData={datas.verses} isLoading={isLoading} skeletonLoadingCount={3}/>
+            </Wrapper>
+        </TransitionWrapper>
     )
 }
