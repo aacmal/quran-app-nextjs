@@ -8,6 +8,8 @@ html{
 }
 
 body{
+  width: 100%;
+  overflow-x: hidden !important;
   @apply bg-gray-100
 }
 
