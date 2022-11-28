@@ -25,7 +25,7 @@ export default function Home() {
 	}, [])
 
 	return (
-		<TransitionWrapper withOpactity={false} type='toLeft'>
+		<TransitionWrapper withOpactity={true} type='toLeft'>
 			<Wrapper>
 				<Head>
 					<title>Quran App</title>

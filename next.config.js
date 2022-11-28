@@ -16,7 +16,9 @@ const nextConfig = {
   //     }
   //   ]
   // },
-
+  experimental: {
+    scrollRestoration: true,
+  },
   reactStrictMode: true,
   eslint: {
     // Warning: This allows production builds to successfully complete even if

@@ -5,7 +5,7 @@ import ChapterWrapper from './ChapterWrapper'
 
 const ChapterCard = ({chapterId, translated_name, name_arabic, name_simple, verses_count, showAyah}) => {
     return (
-        <Link href={`/surah/${chapterId}`}>
+        <Link scroll={false} href={`/surah/${chapterId}`}>
             <a>
                 <ChapterWrapper>
                     <div className='flex items-center'>
