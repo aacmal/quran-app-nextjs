@@ -25,7 +25,7 @@ const TafsirModal = ({isOpen, verseKey, verseId, closeModal}) => {
         const localeKeyCheck = () => (router.locale === 'id') ? verseId : verseKey
 
         function getTafsirByVerse(verseKey, verseId){
-            Promise.all([getSingleTafsir(verseId, router.locale), getSpecificVerse(verseKey, router.locale)])
+            Promise.all([getSingleTafsir(verseId, "en"), getSpecificVerse(verseKey, router.locale)])
             .then(([tafsirData, verseData]) => {
                 setTafsirData(tafsirData)
                 setVerseData(verseData.verse)
@@ -82,28 +82,10 @@ const TafsirModal = ({isOpen, verseKey, verseId, closeModal}) => {
                                 <span dangerouslySetInnerHTML={{__html:verse.translations[0].text}} className='text-base md:text-xl transition-all mt-5 inline-block'></span>
                             </div>
                             <div className="h-px w-full bg-emerald-500  my-6"></div>
-                            {
-                                (router.locale === "id")
-                                ? <div>
-                                    <div className='mb-3'>
-                                        <h3 className='font-bold text-lg mb-1'>Tafsir Wajiz</h3>
-                                        <p className='lg:text-lg'>
-                                            {tafsirData.tafsir[0].tafsir_wajiz}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <h3  className='font-bold text-lg mb-1'>Tafsir Tahlili</h3>
-                                        <p className='lg:text-lg'>
-                                            {tafsirData.tafsir[0].tafsir_tahlili}
-                                        </p>
-                                    </div>
-                                    <span className='mt-3 block'>Sumber : https://quran.kemenag.go.id</span>
-                                </div>
-                                : <div>
-                                    <div className={tafsirStyle.tafsir_text} dangerouslySetInnerHTML={{__html:tafsirData.tafsir?.text}}></div>
-                                    <span className='mt-3 block'>Sumber : https://quran.com</span>
-                                </div>
-                            }
+                            <div>
+                                <div className={tafsirStyle.tafsir_text} dangerouslySetInnerHTML={{__html:tafsirData.tafsir?.text}}></div>
+                                <span className='mt-3 block'>Source : https://quran.com</span>
+                            </div>
                         </> 
                         : <TafsirSkeleton/>
                     }
