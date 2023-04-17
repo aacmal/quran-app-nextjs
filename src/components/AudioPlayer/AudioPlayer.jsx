@@ -109,8 +109,14 @@ const AudioPlayer = () => {
 		if(!audioState.isRepeat){
 			if(audioId < 114){
 				setAudioId(current => current+1)
+				if (autoScroll){
+					router.push(`/surah/${currentChapter+2}`) // currentChapter is index of allChapters
+				}
 			} else {
 				setAudioId(1)
+				if (autoScroll){
+					router.push('/surah/1') // back to first surah
+				}
 			}
 		}
 	}
