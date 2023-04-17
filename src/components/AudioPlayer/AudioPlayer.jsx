@@ -107,17 +107,20 @@ const AudioPlayer = () => {
 	function handleOnEnded(){
 		// If no repeat, change to next surah
 		if(!audioState.isRepeat){
-			if(audioId < 114){
-				setAudioId(current => current+1)
-				if (autoScroll){
-					router.push(`/surah/${currentChapter+2}`) // currentChapter is index of allChapters
+			setAudioId(current => {
+				const isOnCurrentChapter = router.asPath === `/surah/${current}`;
+				if(current < 114){
+					if (autoScroll && isOnCurrentChapter){
+						router.push(`/surah/${current+1}`)
+					}
+					return current+1
+				} else {
+					if (autoScroll && isOnCurrentChapter){
+						router.push('/surah/1')
+					}
+					return 1
 				}
-			} else {
-				setAudioId(1)
-				if (autoScroll){
-					router.push('/surah/1') // back to first surah
-				}
-			}
+			})
 		}
 	}
 
