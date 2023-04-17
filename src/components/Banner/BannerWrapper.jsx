@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 const BannerWrapper = ({children, imageOpacity, imageScale}) => {
   return (
@@ -7,14 +7,14 @@ const BannerWrapper = ({children, imageOpacity, imageScale}) => {
       <div className='z-20 relative'>
         {children}
       </div>
-        <div style={{opacity: imageOpacity, transform: `scale(${imageScale})`}} className='absolute top-2 right-0 w-44 h-32 z-10'>
+        {/* <div style={{opacity: imageOpacity, transform: `scale(${imageScale})`}} className='absolute top-2 right-0 w-44 h-32 z-10'>
             <Image
                 src='/quran.png'
                 layout='fill'
                 objectFit='contain'
                 alt='Quran illustration'
             />
-        </div>
+        </div> */}
     </div>
   )
 }
