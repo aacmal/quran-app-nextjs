@@ -36,12 +36,7 @@ const nextConfig = {
   },
 }
 
-module.exports = withPWA({
+module.exports = {
   ...nextConfig,
-  pwa: {
-    dest: "public",
-    register: true,
-    skipWaiting: true,
-  }
-})
+}
 

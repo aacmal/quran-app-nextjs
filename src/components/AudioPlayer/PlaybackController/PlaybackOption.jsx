@@ -46,12 +46,10 @@ const PlaybackOption = ({onClickReset}) => {
                                 </div>
                             </div>
                             <Link download={true} target="_blank" href={`https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/${audioId}.mp3`}>
-                                <a>
                                     <div className='py-1 px-1 hover:bg-emerald-500 flex items-center rounded cursor-pointer'>
                                         <DownloadIcon className="h-5 mr-2"/>
                                         <span>Unduh file Audio</span>
                                     </div>
-                                </a>
                             </Link>
                             <div  
                                 className='py-1 px-1 hover:bg-emerald-500 flex items-center rounded cursor-pointer'
