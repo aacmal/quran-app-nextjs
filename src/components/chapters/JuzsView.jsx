@@ -31,7 +31,6 @@ const JuzsView = ({chapterData}) => {
           key={e.id}
           juz_number={e.juz_number}
         >
-          <>
             {
               Object.keys(e.verse_mapping).map((key, index) => {
                 let {id, translated_name, name_arabic, name_simple} = chapterData[parseInt(key)-1]
@@ -48,7 +47,6 @@ const JuzsView = ({chapterData}) => {
                 )
               })
             }
-          </>
         </JuzWrapper>
       )
     })
