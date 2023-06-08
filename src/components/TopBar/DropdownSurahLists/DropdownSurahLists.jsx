@@ -31,7 +31,7 @@ const DropdownSurahLists = ({ chapterLists, chapterActive }) => {
     return (
       <div>
         <div className="flex items-center gap-3">
-          <Link href="/">
+          <Link href="/quran/surah">
             <IconWrapper
               onHover="none"
               className="bg-emerald-400 text-white p-2"

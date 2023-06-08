@@ -12,11 +12,6 @@ import ThemeAdjustment from './ThemeAdjustment';
 
 const DeveloperUtility = ({ isInSurah }) => {
   const [isExpanded, setExpanded] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (isExpanded) setExpanded(false);
-  }, [router.asPath]);
 
   return (
     <div className="md:relative">

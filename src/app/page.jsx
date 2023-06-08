@@ -11,7 +11,6 @@ async function getChapterData() {
 
 export default async function HomePage() {
   const allChapters = await getChapterData();
-  console.log(allChapters[0]);
   return (
     <>
       <Header>Quran App</Header>

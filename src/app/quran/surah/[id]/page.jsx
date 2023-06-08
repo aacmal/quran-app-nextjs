@@ -28,7 +28,7 @@ export default async function SurahPage({ params }) {
   const chapterData = await getChapter(id);
 
   return (
-    <div className='my-12'>
+    <div className='my-14'>
       <ChapterBanner chapterData={chapterData} chapterInfo={chapterInfo.chapter_info} />
       <QuranReader
         bismillahPre={chapterData.bismillah_pre}

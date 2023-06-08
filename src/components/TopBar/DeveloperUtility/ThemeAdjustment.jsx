@@ -1,11 +1,12 @@
+"use client"
+
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { StyleContext } from '../../../context/StyleContext';
 import AdjustmentWrapper from './AdjustmentWrapper';
-import useStore from '../../../store/surahStore';
+import useSettings from '../../../store/settingsStore';
 
 const ThemeAdjustment = () => {
-  const { setTheme } = useStore((state) => ({
+  const { setTheme } = useSettings((state) => ({
     setTheme: state.setTheme,
   }));
 

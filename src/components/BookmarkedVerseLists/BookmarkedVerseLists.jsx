@@ -4,13 +4,28 @@ import BookmarkedItem from './BookmarkedItem';
 import { BookmarkIcon } from '../icons';
 import IconWrapper from '../icons/IconWrapper';
 import TrashIcon from '../icons/TrashIcon';
-import useStore from '../../store/surahStore';
+import useSurah from '../../store/surahStore';
+import { getLocalChapter } from '../../utils/chapter';
+import { useEffect } from 'react';
 
-const BookmarkedVerseLists = ({ chapterLists }) => {
-  const { bookmarkData, deleteBookmark } = useStore((state) => ({
-    bookmarkData: state.bookmarked,
-    deleteBookmark: state.deleteBookmark,
-  }));
+const BookmarkedVerseLists = () => {
+  const { bookmarkData, deleteBookmark, chapterData, setChapterData, _hasHydrated } =
+    useSurah((state) => ({
+      bookmarkData: state.bookmarked,
+      deleteBookmark: state.deleteBookmark,
+      chapterData: state.chapterData,
+      setChapterData: state.setChapterData,
+      _hasHydrated: state._hasHydrated,
+    }));
+
+  useEffect(() => {
+    if (chapterData.length > 0) return;
+
+    getLocalChapter().then((res) => {
+      setChapterData(res);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="px-5 xl:px-0 mb-5">
@@ -41,7 +56,7 @@ const BookmarkedVerseLists = ({ chapterLists }) => {
               return (
                 <BookmarkedItem
                   key={index}
-                  name_simple={chapterLists[chapterId[0] - 1].name_simple}
+                  name_simple={chapterData[chapterId[0] - 1].name_simple}
                   verse_key={e}
                 />
               );

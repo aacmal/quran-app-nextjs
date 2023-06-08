@@ -2,7 +2,6 @@ import React from 'react';
 import ChapterCard from './Card/ChapterCard';
 
 const ChaptersView = ({ chapterData }) => {
-  console.log(chapterData[0]);
   return chapterData.map((e) => {
     return (
       <ChapterCard

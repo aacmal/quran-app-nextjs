@@ -22,13 +22,12 @@ const TopBar = () => {
     if(chapterData.length > 0) return;
 
     getLocalChapter().then((res) => {
-      console.log(res)
       setChapterData(res);
     })
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(chapterData, setChapterData, currentChapter)
 
   if (chapterData.length === 0) return <></>;
   return (
@@ -41,7 +40,7 @@ const TopBar = () => {
         chapterLists={chapterData}
         chapterActive={currentChapter}
       />
-      {/* <DeveloperUtility isInSurah={true} /> */}
+      <DeveloperUtility isInSurah={true} />
     </div>
   );
 };
