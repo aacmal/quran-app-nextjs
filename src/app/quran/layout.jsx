@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import { getAllChaptersData } from '../../utils/chapter';
 import BookmarkedVerseLists from '../../components/BookmarkedVerseLists/BookmarkedVerseLists';
 import { usePathname, useSelectedLayoutSegments } from 'next/navigation';
+import QuranSwitch from '../../components/Switch';
 
 
 export default function HomePage({ children }) {
@@ -15,6 +16,7 @@ export default function HomePage({ children }) {
     return children;
   }
 
+
   return (
     <>
       <Header>Quran App</Header>
@@ -24,6 +26,7 @@ export default function HomePage({ children }) {
           ' px-5 py-5 lg:p-12 lg:pb-32 pb-32 bg-gray-100 dark:bg-slate-700 min-h-screen rounded-t-2xl '
         )}
       >
+        <QuranSwitch active={layoutSegments[0]} />
         {children}
       </div>
     </>

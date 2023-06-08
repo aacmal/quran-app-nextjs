@@ -1,30 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ChapterCard from './Card/ChapterCard'
 import JuzWrapper from './Card/JuzWrapper'
 
-const JuzsView = ({chapterData}) => {
-  const [isLoading, setLoading] = useState(true)
-  const [juzsData, setJuzsData] = useState(null)
-  
-  useEffect(() => {
-    const getJuzData = () => {
-      fetch('https://api.quran.com/api/v4/juzs')
-      .then((res) => res.json())
-      .then((data) => {
-        setJuzsData(data)
-        setLoading(false)
-      })
-    }
-
-    if(!juzsData){
-      getJuzData()
-    }
-
-  }, [])
-
+const JuzsView = ({chapterData, juzsData}) => {
   return (
-    isLoading ?
-    <div>Loading</div>:
     juzsData.juzs.map((e) => {
       return (
         <JuzWrapper 
