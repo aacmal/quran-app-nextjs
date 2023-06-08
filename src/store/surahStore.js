@@ -12,8 +12,8 @@ const useSurah = create(persist((set) => ({
   currentChapter: 0,
   setCurrentChapter: (currentChapter) => set({ currentChapter }),
 
-  audioId: 0,
-  setAudioId: (audioId) => set({ audioId }),
+  audioId: null,
+  setAudioId: (audioId) => set({ audioId: parseInt(audioId) }),
 
   highlightedVerse: 0,
   setHighlightedVerse: (highlightedVerse) => set({ highlightedVerse }),

@@ -3,6 +3,7 @@ import QuranReader from "../../../../components/quranReader/QuranReader";
 import { getAllChaptersData, getChapter, getChapterInfo } from '../../../../utils/chapter';
 import { getAllVerseByChapter } from '../../../../utils/verse';
 import ChapterBanner from '../../../../components/Banner/ChapterBanner';
+import PlayAudioButton from '../../../../components/AudioPlayer/PlayAudioButton';
 
 export async function generateStaticParams() {
   const res = await getAllChaptersData();
@@ -30,6 +31,7 @@ export default async function SurahPage({ params }) {
   return (
     <div className='my-14'>
       <ChapterBanner chapterData={chapterData} chapterInfo={chapterInfo.chapter_info} />
+      <PlayAudioButton surahId={id}/>
       <QuranReader
         bismillahPre={chapterData.bismillah_pre}
         versesData={chapterVerses.verses}

@@ -1,14 +1,17 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
-import { RootContext } from '../../../context/RootContext'
 import { ButtonSmall } from './PlaybackController'
 import { XIcon, ListsIcon, DownloadIcon, DotsIcon, ChevronIcon } from '../../icons'
 import { getAllRecitations } from '../../../utils/audio'
 import { AudioContext } from '../AudioPlayer'
+import useSurah from '../../../store/surahStore'
 
 const PlaybackOption = ({onClickReset}) => {
-    const { audioId, setAudioId } = useContext(RootContext)
+    const { audioId, setAudioId } = useSurah((state) => ({
+        audioId: state.audioId,
+        setAudioId: state.setAudioId,
+    }))
     const { audioState, dispatch } = useContext(AudioContext)
 
     const [isHidden, setHidden] = useState(true)

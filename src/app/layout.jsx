@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import Wrapper from '../components/Wrapper';
 import './globals.css';
 import { Lato } from 'next/font/google';
+import AudioPlayer from '../components/AudioPlayer/AudioPlayer';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
         )}
       >
         <Wrapper>{children}</Wrapper>
+        <AudioPlayer />
       </body>
     </html>
   );
