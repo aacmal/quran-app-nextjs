@@ -1,7 +1,8 @@
 import React from 'react';
-import QuranReader from '../../../../components/quranReader/QuranReader';
-import { getAllChaptersData } from '../../../../utils/chapter';
+import QuranReader from "../../../../components/quranReader/QuranReader";
+import { getAllChaptersData, getChapter, getChapterInfo } from '../../../../utils/chapter';
 import { getAllVerseByChapter } from '../../../../utils/verse';
+import ChapterBanner from '../../../../components/Banner/ChapterBanner';
 
 export async function generateStaticParams() {
   const res = await getAllChaptersData();
@@ -12,18 +13,27 @@ export async function generateStaticParams() {
   return paths;
 }
 
+export async function generateMetadata({ params }){
+  const chapterData = await getChapter(params.id);
+
+  return {
+    title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
+  }
+}
+
 export default async function SurahPage({ params }) {
   const { id } = params;
-  const chapter = await getAllVerseByChapter(id);
+  const chapterVerses = await getAllVerseByChapter(id);
+  const chapterInfo = await getChapterInfo(id);
+  const chapterData = await getChapter(id);
 
   return (
-    <>
-      <h1>HEllow</h1>
+    <div className='my-12'>
+      <ChapterBanner chapterData={chapterData} chapterInfo={chapterInfo.chapter_info} />
       <QuranReader
-        // bismillahPre={allChapters[currentChapter]?.bismillah_pre}
-        bismillahPre={true}
-        versesData={chapter.verses}
+        bismillahPre={chapterData.bismillah_pre}
+        versesData={chapterVerses.verses}
       />
-    </>
+    </div>
   );
 }

@@ -39,8 +39,6 @@ const Verses = ({
     setBookmark(!isBookmarked);
   }
 
-  console.log('translations', translations);
-
   if (true) {
     return (
       <>
@@ -48,14 +46,14 @@ const Verses = ({
           id={verse_number}
           className="flex justify-between py-3 md:flex-row flex-col"
         >
-          {/* <div className="flex md:flex-col flex-row items-center mb-4">
+          <div className="flex md:flex-col flex-row items-center mb-4">
             <div className="relative grid place-items-center h-9 w-9 md:h-12 md:w-12">
               <span className="text-xs font-semibold md:text-lg text-gray-900 dark:text-slate-100">
                 {verse_number}
               </span>
               <StarIcon className="absolute h-8 w-8 md:h-12 md:w-12 left-0" />
             </div>
-            <div className="md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-28 w-full md:w-fit">
+            {/* <div className="md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-28 w-full md:w-fit">
               <div className="flex md:flex-col">
                 <IconWrapper onClick={() => handleBookmarkClick(verse_key)}>
                   <BookmarkIcon
@@ -86,8 +84,8 @@ const Verses = ({
                   <TafsirIcon className="md:h-6 h-5" />
                 </IconWrapper>
               </div>
-            </div>
-          </div> */}
+            </div> */}
+          </div>
           <div className="w-full md:w-[92%] flex flex-col dark:text-slate-100">
             <ArabicText
               textUthmani={text_uthmani}

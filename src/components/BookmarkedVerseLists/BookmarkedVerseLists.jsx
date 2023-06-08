@@ -4,7 +4,7 @@ import BookmarkedItem from './BookmarkedItem';
 import { BookmarkIcon } from '../icons';
 import IconWrapper from '../icons/IconWrapper';
 import TrashIcon from '../icons/TrashIcon';
-import useStore from '../../store/store';
+import useStore from '../../store/surahStore';
 
 const BookmarkedVerseLists = ({ chapterLists }) => {
   const { bookmarkData, deleteBookmark } = useStore((state) => ({

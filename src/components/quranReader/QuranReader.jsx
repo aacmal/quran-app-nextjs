@@ -8,35 +8,29 @@ const QuranReader = ({
   bismillahPre,
   skeletonLoadingCount,
 }) => {
-  return versesData.map((e) => (
-    <Verses
-      key={e.id}
-      id={e.id}
-      verse_number={e.verse_number}
-      translations={e.translations}
-      text_uthmani={e.text_uthmani}
-      verse_key={e.verse_key}
-      // setTafsirData={setTafsirData}
-    />
-  ));
+  // return versesData.map((e) => (
+  //   <Verses
+  //     key={e.id}
+  //     id={e.id}
+  //     verse_number={e.verse_number}
+  //     translations={e.translations}
+  //     text_uthmani={e.text_uthmani}
+  //     verse_key={e.verse_key}
+  //     // setTafsirData={setTafsirData}
+  //   />
+  // ));
 
   return (
     <div className="mt-3">
-      <TafsirModal
+      {/* <TafsirModal
         isOpen={tafsirData.isOpen}
         verseKey={tafsirData.verseKey}
         verseId={tafsirData.verseId}
         closeModal={() => setTafsirData({ ...tafsirData, isOpen: false })}
-      />
-      {isLoading ? (
-        new Array(skeletonLoadingCount)
-          .fill()
-          .map((e, index) => <VerseSkeleton key={index} />)
-      ) : (
+      /> */}
         <>
           <Bismillah className={!bismillahPre && 'hidden'} />
           <div
-            dir={readMode === 'translated' ? 'ltr' : 'rtl'}
             className="text-justify mt-12"
           >
             {Array.isArray(versesData) ? (
@@ -48,7 +42,6 @@ const QuranReader = ({
                   translations={e.translations}
                   text_uthmani={e.text_uthmani}
                   verse_key={e.verse_key}
-                  setTafsirData={setTafsirData}
                 />
               ))
             ) : (
@@ -59,12 +52,10 @@ const QuranReader = ({
                 translations={versesData.translations}
                 text_uthmani={versesData.text_uthmani}
                 verse_key={versesData.verse_key}
-                setTafsirData={setTafsirData}
               />
             )}
           </div>
         </>
-      )}
     </div>
   );
 };

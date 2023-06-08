@@ -1,9 +1,15 @@
 'use client';
 
 import classNames from 'classnames';
-import React, { useContext } from 'react';
+import React from 'react';
+import useSettings from "../../store/settingsStore"
 
 const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey, highlightedVerse=true }) => {
+  const { fontFace, currentFontSize } = useSettings((state) => ({
+    fontFace: state.fontFace,
+    currentFontSize: state.fontSize,
+  }));
+
   const arabicNumber = (value) => {
     const arabicNumbers =
       '\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669';

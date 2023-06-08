@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useContext, useState } from 'react';
-import useStore from '../../store/store';
+import useStore from '../../store/surahStore';
 
 const Search = ({ className }) => {
   const allChapters = useStore((state) => state.chapterData);
