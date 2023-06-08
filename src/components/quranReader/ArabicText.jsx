@@ -1,14 +1,9 @@
+'use client';
+
 import classNames from 'classnames';
 import React, { useContext } from 'react';
-import { RootContext } from '../../context/RootContext';
-import { StyleContext } from '../../context/StyleContext';
 
-const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
-  const { highlightedVerse } = useContext(RootContext);
-  console.log(highlightedVerse === verseKey);
-
-  const { currentFontSize, fontFace } = useContext(StyleContext);
-
+const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey, highlightedVerse=true }) => {
   const arabicNumber = (value) => {
     const arabicNumbers =
       '\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669';

@@ -3,6 +3,7 @@ import { create } from 'zustand';
 const useStore = create((set) => ({
   bookmarked: [],
   setBookmarked: (bookmarked) => set({ bookmarked }),
+  deleteBookmarked: (verseKey) => set((state) => ({ bookmarked: state.bookmarked.filter((verse) => verse !== verseKey) })),
 
   chapterData: [],
   setChapterData: (chapterData) => set({ chapterData }),
