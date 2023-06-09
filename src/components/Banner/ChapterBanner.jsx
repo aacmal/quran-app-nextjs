@@ -15,7 +15,6 @@ const ChapterBanner = ({ chapterData, chapterInfo }) => {
   }), shallow)
   const [isInfoOpen, setInfoOpen] = useState(false);
 
-  console.log("re-render")
   useEffect(() => {
     setCurrentChapter(chapterData.id)
   // eslint-disable-next-line react-hooks/exhaustive-deps

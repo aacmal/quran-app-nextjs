@@ -16,7 +16,6 @@ const PlaybackController = ({ state, dispatch, reset }) => {
         audioId: state.audioId,
         setAudioId: state.setAudioId,
     }))
-    // console.log(state);
 
     function goToPrevSurah(){
         if(audioId > 1){

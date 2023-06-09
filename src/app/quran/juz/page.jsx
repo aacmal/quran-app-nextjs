@@ -6,7 +6,6 @@ import { getAllChaptersData } from '../../../utils/chapter';
 const JuzList = async () => {
   const juzsData = await getJuzs()
   const chapterData = await getAllChaptersData()
-  console.log(juzsData)
 
   return (
     <div className="grid gap-2 lg:gap-3 mt-3 lg:grid-cols-3 md:grid-cols-2">

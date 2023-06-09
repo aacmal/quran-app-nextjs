@@ -22,7 +22,6 @@ const Search = ({ className }) => {
           .toLowerCase()
           .includes(keyword.toLowerCase());
       });
-      console.log(result);
       setFilteredChapters(() => {
         if (result.length > 0) {
           return result;

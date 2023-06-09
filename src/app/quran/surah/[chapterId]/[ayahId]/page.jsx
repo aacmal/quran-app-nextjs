@@ -24,7 +24,6 @@ const SingleAyahPage = () => {
       getSpecificVerse(verseKey).then((res) => {
         setData(res);
         setCurrentChapter(params.chapterId);
-        console.log(res)
         setTimeout(() => {
           setLoading(false);
         }, 500);
