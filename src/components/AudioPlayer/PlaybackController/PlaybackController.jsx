@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import React, { useContext } from 'react'
-import { RootContext } from '../../../context/RootContext'
 import PlaybackOption from './PlaybackOption'
 import { RewindIcon, PlayIcon, PauseIcon, RepeatIcon } from '../../icons'
+import useSurah from '../../../store/surahStore'
 
 
 export const ButtonSmall = ({className, onClick, children}) => (
@@ -12,12 +12,14 @@ export const ButtonSmall = ({className, onClick, children}) => (
 )
 
 const PlaybackController = ({ state, dispatch, reset }) => {
-	const { audioId, setAudioId } = useContext(RootContext)
-    // console.log(state);
+	const { audioId, setAudioId } = useSurah((state) => ({
+        audioId: state.audioId,
+        setAudioId: state.setAudioId,
+    }))
 
     function goToPrevSurah(){
         if(audioId > 1){
-            setAudioId(current => current-1)
+            setAudioId(audioId - 1)
         } else {
             setAudioId(114)
         }
@@ -25,7 +27,7 @@ const PlaybackController = ({ state, dispatch, reset }) => {
 
     function goToNextSurah(){
         if(audioId < 114){
-            setAudioId(current => current+1)
+            setAudioId(audioId + 1)
         } else {
             setAudioId(1)
         }

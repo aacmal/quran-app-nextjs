@@ -1,12 +1,15 @@
+"use client";
+
 import classNames from 'classnames';
 import React, { createContext, useCallback, useContext, useEffect, useReducer, useRef, useState } from 'react'
-import { RootContext } from '../../context/RootContext';
 import PlaybackController from './PlaybackController/PlaybackController';
 
 import style from './AudioPlayer.module.css'
-import { useRouter } from 'next/router';
-import { StyleContext } from '../../context/StyleContext';
+import { useSelectedLayoutSegment, useRouter } from 'next/navigation';
 import { getAudioFile } from '../../utils/audio';
+import useSurah from '../../store/surahStore';
+import useSettings from '../../store/settingsStore';
+import { shallow } from 'zustand/shallow';
 
 
 
@@ -37,10 +40,21 @@ function reducer(state, action){
 
 const AudioPlayer = () => {
 	const router = useRouter()
+	const layoutSegment = useSelectedLayoutSegment()
 
 	// Context
-	const { audioId, setAudioId, allChapters, currentChapter, highlightedVerse, setHighlightedVerse } = useContext(RootContext)
-	const { autoScroll } = useContext(StyleContext)
+	const { audioId, setAudioId, allChapters, currentChapter, highlightedVerse, setHighlightedVerse } = useSurah((state) => ({
+		audioId: state.audioId,
+		setAudioId: state.setAudioId,
+		allChapters: state.chapterData,
+		currentChapter: state.currentChapter,
+		highlightedVerse: state.highlightedVerse,
+		setHighlightedVerse: state.setHighlightedVerse,
+	}), shallow)
+
+	const { autoScroll } = useSettings((state) => ({
+		autoScroll: state.autoScroll
+	}))
 	
 	// Refs
 	const audioRef = useRef()
@@ -150,6 +164,7 @@ const AudioPlayer = () => {
 
 	useEffect(() => {
 		if(audioId){
+			console.log('fetching audio data', audioId);
 			getAudioFile(audioState.reciterId, audioId)
 			.then((res) => setAudioData(res.audio_file))
 			.then(dispatch({type: 'pause'}))
@@ -160,11 +175,11 @@ const AudioPlayer = () => {
 	useEffect(() => {
 		const highlightedElement = document.querySelector(`[data-verse="${highlightedVerse}"]`)
 		const verseYLocation = highlightedElement?.offsetTop
-		// Current chapter is index of allchapters
-		if(currentChapter+1 === audioId && autoScroll && (router.pathname === "/surah/[chapter]")){
+		if(currentChapter === audioId && autoScroll && (layoutSegment === "quran")){
 			window.scrollTo(0, verseYLocation-200)
 		}
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [highlightedVerse])
 
 	
@@ -190,7 +205,7 @@ const AudioPlayer = () => {
 				!isHidden &&  
 				<div className={classNames('fixed bottom-0 dark:bg-slate-600 bg-white border-t border-emerald-500 lg:shadow-2xl shadow-gray-500/50 w-full ', {"hidden": audioId == null})}>
 					<div className="py-3 max-w-screen-2xl mx-auto relative">
-						<div onClick={() => router.push(`/surah/${audioId}`, undefined, {scroll: false})} className='cursor-pointer absolute -top-6 left-2 border border-emerald-500 bg-white dark:bg-slate-600 dark:text-slate-100 py-1 px-2 rounded text-emerald-500 font-bold text-sm md:text-base'>{audioId && allChapters[audioId-1].name_simple}</div>
+						<div onClick={() => router.push(`/quran/surah/${audioId}`)} className='cursor-pointer absolute -top-6 left-2 border border-emerald-500 bg-white dark:bg-slate-600 dark:text-slate-100 py-1 px-2 rounded text-emerald-500 font-bold text-sm md:text-base'>{audioId && allChapters[audioId-1].name_simple}</div>
 						<div className='flex flex-col'>
 							{/* <PauseIcon className="h-10 bg-blue-400"/> */}
 							<div className='flex justify-between w-full items-center px-3'>
@@ -213,7 +228,6 @@ const AudioPlayer = () => {
 								reset={reset}
 							/>
 						</div>
-
 					</div>
 				</div>
 			}

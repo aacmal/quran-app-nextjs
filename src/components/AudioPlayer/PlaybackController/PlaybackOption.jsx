@@ -1,14 +1,18 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
-import { RootContext } from '../../../context/RootContext'
 import { ButtonSmall } from './PlaybackController'
 import { XIcon, ListsIcon, DownloadIcon, DotsIcon, ChevronIcon } from '../../icons'
 import { getAllRecitations } from '../../../utils/audio'
 import { AudioContext } from '../AudioPlayer'
+import useSurah from '../../../store/surahStore'
+import { shallow } from 'zustand/shallow'
 
 const PlaybackOption = ({onClickReset}) => {
-    const { audioId, setAudioId } = useContext(RootContext)
+    const { audioId, setAudioId } = useSurah((state) => ({
+        audioId: state.audioId,
+        setAudioId: state.setAudioId,
+    }), shallow)
     const { audioState, dispatch } = useContext(AudioContext)
 
     const [isHidden, setHidden] = useState(true)
@@ -46,12 +50,10 @@ const PlaybackOption = ({onClickReset}) => {
                                 </div>
                             </div>
                             <Link download={true} target="_blank" href={`https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/${audioId}.mp3`}>
-                                <a>
                                     <div className='py-1 px-1 hover:bg-emerald-500 flex items-center rounded cursor-pointer'>
                                         <DownloadIcon className="h-5 mr-2"/>
                                         <span>Unduh file Audio</span>
                                     </div>
-                                </a>
                             </Link>
                             <div  
                                 className='py-1 px-1 hover:bg-emerald-500 flex items-center rounded cursor-pointer'

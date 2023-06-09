@@ -1,12 +1,16 @@
-import classNames from 'classnames'
-import React from 'react'
+import classNames from 'classnames';
 
-const Wrapper = ({children, className}) => {
+const Wrapper = ({ children, className }) => {
   return (
-    <div className={classNames('pt-5 max-w-screen-2xl mx-auto relative', className)}>
-		{children}
-    </div>
-  )
-}
+    <main
+      className={classNames(
+        'pt-5 max-w-screen-2xl mx-auto relative',
+        className
+      )}
+    >
+      {children}
+    </main>
+  );
+};
 
-export default Wrapper
+export default Wrapper;

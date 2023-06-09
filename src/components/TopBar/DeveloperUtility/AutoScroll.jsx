@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StyleContext } from '../../../context/StyleContext'
 import AdjustmentWrapper from './AdjustmentWrapper'
+import useSettings from '../../../store/settingsStore'
 
 const AutoScroll = () => {
-    const { autoScroll, setAutoScroll } = useContext(StyleContext)
-
+    const { autoScroll, setAutoScroll } = useSettings((state) => ({
+        autoScroll: state.autoScroll,
+        setAutoScroll: state.setAutoScroll
+    }))
     const [isChecked, setChecked] = useState(false)
 
     useEffect(() => {
