@@ -50,7 +50,7 @@ const DropdownSurahLists = ({ chapterLists, chapterActive }) => {
             )}
           >
             <button className="font-bold text-sm text-emerald-500">
-              {chapterLists[chapterActive].name_simple}
+              {chapterLists[chapterActive-1].name_simple}
             </button>
             <ChevronIcon
               className={classNames(
@@ -84,7 +84,7 @@ const DropdownSurahLists = ({ chapterLists, chapterActive }) => {
           />
           <IndexOfChapterLists
             chapterLists={chapterLists}
-            chapterId={chapterActive}
+            chapterId={chapterActive-1}
           />
         </div>
       </div>

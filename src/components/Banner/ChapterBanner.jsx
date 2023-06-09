@@ -7,13 +7,15 @@ import BannerWrapper from './BannerWrapper';
 import SurahInfo from './SurahInfo';
 import { InfoIcon } from '../icons';
 import useSurah from '../../store/surahStore';
+import { shallow } from 'zustand/shallow';
 
 const ChapterBanner = ({ chapterData, chapterInfo }) => {
   const { setCurrentChapter } = useSurah((state) => ({
     setCurrentChapter: state.setCurrentChapter,
-  }))
+  }), shallow)
   const [isInfoOpen, setInfoOpen] = useState(false);
 
+  console.log("re-render")
   useEffect(() => {
     setCurrentChapter(chapterData.id)
   }, [])

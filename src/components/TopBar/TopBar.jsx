@@ -10,13 +10,14 @@ import { getAllChaptersData, getLocalChapter } from '../../utils/chapter';
 import DeveloperUtility from './DeveloperUtility/DeveloperUtility';
 import DropdownSurahLists from './DropdownSurahLists/DropdownSurahLists';
 import useSurah from '../../store/surahStore';
+import { shallow } from 'zustand/shallow';
 
 const TopBar = () => {
   const { chapterData, setChapterData, currentChapter } = useSurah((state) => ({
     chapterData: state.chapterData,
     setChapterData: state.setChapterData,
     currentChapter: state.currentChapter,
-  }));
+  }), shallow);
 
   useEffect(() => {
     if(chapterData.length > 0) return;

@@ -7,6 +7,7 @@ import TrashIcon from '../icons/TrashIcon';
 import useSurah from '../../store/surahStore';
 import { getLocalChapter } from '../../utils/chapter';
 import { useEffect } from 'react';
+import { shallow } from 'zustand/shallow';
 
 const BookmarkedVerseLists = () => {
   const { bookmarkData, deleteBookmark, chapterData, setChapterData, _hasHydrated } =
@@ -16,7 +17,7 @@ const BookmarkedVerseLists = () => {
       chapterData: state.chapterData,
       setChapterData: state.setChapterData,
       _hasHydrated: state._hasHydrated,
-    }));
+    }), shallow);
 
   useEffect(() => {
     if (chapterData.length > 0) return;

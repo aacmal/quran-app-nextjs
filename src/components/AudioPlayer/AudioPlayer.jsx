@@ -5,10 +5,11 @@ import React, { createContext, useCallback, useContext, useEffect, useReducer, u
 import PlaybackController from './PlaybackController/PlaybackController';
 
 import style from './AudioPlayer.module.css'
-import { useRouter } from 'next/navigation';
+import { useSelectedLayoutSegment, useRouter } from 'next/navigation';
 import { getAudioFile } from '../../utils/audio';
 import useSurah from '../../store/surahStore';
 import useSettings from '../../store/settingsStore';
+import { shallow } from 'zustand/shallow';
 
 
 
@@ -39,6 +40,7 @@ function reducer(state, action){
 
 const AudioPlayer = () => {
 	const router = useRouter()
+	const layoutSegment = useSelectedLayoutSegment()
 
 	// Context
 	const { audioId, setAudioId, allChapters, currentChapter, highlightedVerse, setHighlightedVerse } = useSurah((state) => ({
@@ -48,7 +50,7 @@ const AudioPlayer = () => {
 		currentChapter: state.currentChapter,
 		highlightedVerse: state.highlightedVerse,
 		setHighlightedVerse: state.setHighlightedVerse,
-	}))
+	}), shallow)
 
 	const { autoScroll } = useSettings((state) => ({
 		autoScroll: state.autoScroll
@@ -173,11 +175,11 @@ const AudioPlayer = () => {
 	useEffect(() => {
 		const highlightedElement = document.querySelector(`[data-verse="${highlightedVerse}"]`)
 		const verseYLocation = highlightedElement?.offsetTop
-		// Current chapter is index of allchapters
-		if(currentChapter+1 === audioId && autoScroll && (router.pathname === "/surah/[chapter]")){
+		if(currentChapter === audioId && autoScroll && (layoutSegment === "quran")){
 			window.scrollTo(0, verseYLocation-200)
 		}
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [highlightedVerse])
 
 	
@@ -226,7 +228,6 @@ const AudioPlayer = () => {
 								reset={reset}
 							/>
 						</div>
-
 					</div>
 				</div>
 			}

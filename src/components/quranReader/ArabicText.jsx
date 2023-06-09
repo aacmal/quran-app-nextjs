@@ -3,12 +3,18 @@
 import classNames from 'classnames';
 import React from 'react';
 import useSettings from "../../store/settingsStore"
+import useSurah from '../../store/surahStore';
+import { shallow } from "zustand/shallow"
 
-const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey, highlightedVerse=true }) => {
+const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
   const { fontFace, currentFontSize } = useSettings((state) => ({
     fontFace: state.fontFace,
     currentFontSize: state.fontSize,
   }));
+
+  const { highlightedVerse } = useSurah((state) => ({
+    highlightedVerse: state.highlightedVerse,
+  }), shallow)
 
   const arabicNumber = (value) => {
     const arabicNumbers =

@@ -6,12 +6,13 @@ import { XIcon, ListsIcon, DownloadIcon, DotsIcon, ChevronIcon } from '../../ico
 import { getAllRecitations } from '../../../utils/audio'
 import { AudioContext } from '../AudioPlayer'
 import useSurah from '../../../store/surahStore'
+import { shallow } from 'zustand/shallow'
 
 const PlaybackOption = ({onClickReset}) => {
     const { audioId, setAudioId } = useSurah((state) => ({
         audioId: state.audioId,
         setAudioId: state.setAudioId,
-    }))
+    }), shallow)
     const { audioState, dispatch } = useContext(AudioContext)
 
     const [isHidden, setHidden] = useState(true)
