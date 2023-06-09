@@ -4,6 +4,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 const useSurah = create(persist((set) => ({
   bookmarked: [],
   setBookmarked: (bookmarked) => set({ bookmarked }),
+  addBookmark: (verseKey) => set((state) => ({ bookmarked: [...state.bookmarked, verseKey] })),
   deleteBookmarked: (verseKey) => set((state) => ({ bookmarked: state.bookmarked.filter((verse) => verse !== verseKey) })),
 
   chapterData: [],

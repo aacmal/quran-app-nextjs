@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }){
-  const chapterData = await getChapter(params.id);
+  const chapterData = await getChapter(params.chapterId);
 
   return {
     title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }){
 }
 
 export default async function SurahPage({ params }) {
-  const { id } = params;
+  const { chapterId: id } = params;
   const chapterVerses = await getAllVerseByChapter(id);
   const chapterInfo = await getChapterInfo(id);
   const chapterData = await getChapter(id);

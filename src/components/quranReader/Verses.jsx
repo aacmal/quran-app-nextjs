@@ -1,12 +1,10 @@
 'use client';
 
-import { useContext, useState } from 'react';
-// import { StyleContext } from '../../context/StyleContext';
-// import { RootContext } from '../../context/RootContext';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ArabicText from './ArabicText';
 import { BookmarkIcon, CopyIcon, TafsirIcon, StarIcon } from '../icons';
-import IconWrapper from '../icons/IconWrapper';
+import HandleBookmark from './action/HandleBookmark';
 
 const Verses = ({
   id,
@@ -14,11 +12,7 @@ const Verses = ({
   translations,
   text_uthmani,
   verse_key,
-  setTafsirData,
-  mode = 'translated',
 }) => {
-  //   const { readMode } = useContext(StyleContext);
-  //   const { bookmarkData, addBookmark, deleteBookmark } = useContext(RootContext);
   const [isBookmarked, setBookmark] = useState(
     // bookmarkData.includes(verse_key)
     true
@@ -53,19 +47,10 @@ const Verses = ({
               </span>
               <StarIcon className="absolute h-8 w-8 md:h-12 md:w-12 left-0" />
             </div>
-            {/* <div className="md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-28 w-full md:w-fit">
+            <div className="md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-28 w-full md:w-fit">
               <div className="flex md:flex-col">
-                <IconWrapper onClick={() => handleBookmarkClick(verse_key)}>
-                  <BookmarkIcon
-                    fill={isBookmarked}
-                    className={`md:h-6 h-5 ${
-                      isBookmarked
-                        ? 'text-emerald-500'
-                        : 'text-gray-500 dark:hover:text-gray-50'
-                    }`}
-                  />
-                </IconWrapper>
-                <IconWrapper className="text-gray-500 dark:hover:text-gray-50 group cursor-pointer">
+                <HandleBookmark verseKey={verse_key} />
+                {/* <IconWrapper className="text-gray-500 dark:hover:text-gray-50 group cursor-pointer">
                   <CopyIcon
                     onClick={() => copyToClipboard(text_uthmani)}
                     className="md:h-6 h-5 group-active:text-emerald-500"
@@ -82,9 +67,9 @@ const Verses = ({
                   className="text-gray-500 dark:hover:text-gray-50"
                 >
                   <TafsirIcon className="md:h-6 h-5" />
-                </IconWrapper>
+                </IconWrapper> */}
               </div>
-            </div> */}
+            </div>
           </div>
           <div className="w-full md:w-[92%] flex flex-col dark:text-slate-100">
             <ArabicText

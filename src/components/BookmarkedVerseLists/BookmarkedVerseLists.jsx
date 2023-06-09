@@ -10,14 +10,24 @@ import { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
 
 const BookmarkedVerseLists = () => {
-  const { bookmarkData, deleteBookmark, chapterData, setChapterData, _hasHydrated } =
-    useSurah((state) => ({
+  const {
+    bookmarkData,
+    deleteBookmark,
+    chapterData,
+    setChapterData,
+    _hasHydrated,
+    setBookmarked,
+  } = useSurah(
+    (state) => ({
       bookmarkData: state.bookmarked,
       deleteBookmark: state.deleteBookmark,
       chapterData: state.chapterData,
       setChapterData: state.setChapterData,
+      setBookmarked: state.setBookmarked,
       _hasHydrated: state._hasHydrated,
-    }), shallow);
+    }),
+    shallow
+  );
 
   useEffect(() => {
     if (chapterData.length > 0) return;
@@ -25,8 +35,10 @@ const BookmarkedVerseLists = () => {
     getLocalChapter().then((res) => {
       setChapterData(res);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (chapterData.length === 0) return <></>;
 
   return (
     <div className="px-5 xl:px-0 mb-5">
@@ -39,7 +51,7 @@ const BookmarkedVerseLists = () => {
           <IconWrapper
             className={bookmarkData.length < 1 && 'invisible'}
             onHover="none"
-            onClick={() => deleteBookmark(false)}
+            onClick={() => setBookmarked([])}
           >
             <TrashIcon className="h-6 text-white" />
           </IconWrapper>
@@ -57,7 +69,7 @@ const BookmarkedVerseLists = () => {
               return (
                 <BookmarkedItem
                   key={index}
-                  name_simple={chapterData[chapterId[0] - 1].name_simple}
+                  name_simple={chapterData[parseInt(chapterId[0])-1].name_simple}
                   verse_key={e}
                 />
               );
