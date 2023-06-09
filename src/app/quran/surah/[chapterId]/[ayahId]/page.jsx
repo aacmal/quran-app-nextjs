@@ -9,6 +9,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import useSurah from '../../../../../store/surahStore';
 import { shallow } from 'zustand/shallow';
+import VerseSkeleton from '../../../../../components/quranReader/VerseSkeleton';
 
 const SingleAyahPage = () => {
   const params = useParams();
@@ -41,7 +42,7 @@ const SingleAyahPage = () => {
           <span>Kembali ke surah</span>
         </Link>
       </div>
-      {!isLoading && <QuranReader versesData={data.verse} />}
+      {!isLoading ? <QuranReader versesData={data.verse} /> : <VerseSkeleton/>}
     </Wrapper>
   );
 };
