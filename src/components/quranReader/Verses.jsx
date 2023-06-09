@@ -1,10 +1,8 @@
-'use client';
-
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import ArabicText from './ArabicText';
-import { BookmarkIcon, CopyIcon, TafsirIcon, StarIcon } from '../icons';
+import { StarIcon } from '../icons';
 import HandleBookmark from './action/HandleBookmark';
+import CopyToClipboard from './action/CopyToClipboard';
+import HandleTafsir from './action/HandleTafsir';
 
 const Verses = ({
   id,
@@ -13,26 +11,6 @@ const Verses = ({
   text_uthmani,
   verse_key,
 }) => {
-  const [isBookmarked, setBookmark] = useState(
-    // bookmarkData.includes(verse_key)
-    true
-  );
-
-  const router = useRouter();
-
-  function copyToClipboard(content) {
-    navigator.clipboard.writeText(content);
-  }
-
-  function handleBookmarkClick(verseKey) {
-    if (isBookmarked) {
-      deleteBookmark(verseKey);
-    } else {
-      addBookmark(verseKey);
-    }
-    setBookmark(!isBookmarked);
-  }
-
   if (true) {
     return (
       <>
@@ -50,13 +28,9 @@ const Verses = ({
             <div className="md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-28 w-full md:w-fit">
               <div className="flex md:flex-col">
                 <HandleBookmark verseKey={verse_key} />
-                {/* <IconWrapper className="text-gray-500 dark:hover:text-gray-50 group cursor-pointer">
-                  <CopyIcon
-                    onClick={() => copyToClipboard(text_uthmani)}
-                    className="md:h-6 h-5 group-active:text-emerald-500"
-                  />
-                </IconWrapper>
-                <IconWrapper
+                <CopyToClipboard text_uthmani={text_uthmani} />
+                <HandleTafsir id={id} />
+                {/* <IconWrapper
                   onClick={() =>
                     setTafsirData({
                       isOpen: true,
