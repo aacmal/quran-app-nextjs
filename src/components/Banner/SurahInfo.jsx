@@ -11,7 +11,7 @@ const SurahInfo = ({verses_count, revelation_place, short_text, chapterId, class
             </div>
             <p className='text-sm lg:text-xl'>{short_text}</p>
             <br />
-            <Link href={`/surah/${chapterId}/info`}>
+            <Link href={`/quran/surah/${chapterId}/info`}>
                 <span className='text-blue-600 cursor-pointer decoration-blue-600 hover:underline absolute bottom-0'>Tampilkan lebih lengkap</span>
             </Link>
         </div>

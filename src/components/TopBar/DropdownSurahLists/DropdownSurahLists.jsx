@@ -25,7 +25,8 @@ const DropdownSurahLists = ({ chapterLists, chapterActive }) => {
         return [{ name_simple: 'Tidak ditemukan' }];
       }
     });
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (chapterLists) {
     return (

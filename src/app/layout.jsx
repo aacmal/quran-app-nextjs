@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
           'dark:bg-slate-800 bg-white min-h-screen'
         )}
       >
-        <Wrapper>{children}</Wrapper>
+        {children}
         <AudioPlayer />
       </body>
     </html>

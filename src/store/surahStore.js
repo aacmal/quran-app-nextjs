@@ -9,7 +9,7 @@ const useSurah = create(persist((set) => ({
   chapterData: [],
   setChapterData: (chapterData) => set({ chapterData }),
 
-  currentChapter: 0,
+  currentChapter: 1,
   setCurrentChapter: (currentChapter) => set({ currentChapter }),
 
   audioId: null,

@@ -4,6 +4,7 @@ import { getAllChaptersData, getChapter, getChapterInfo } from '../../../../util
 import { getAllVerseByChapter } from '../../../../utils/verse';
 import ChapterBanner from '../../../../components/Banner/ChapterBanner';
 import PlayAudioButton from '../../../../components/AudioPlayer/PlayAudioButton';
+import Wrapper from '../../../../components/Wrapper';
 
 export async function generateStaticParams() {
   const res = await getAllChaptersData();
@@ -29,13 +30,13 @@ export default async function SurahPage({ params }) {
   const chapterData = await getChapter(id);
 
   return (
-    <div className='my-14'>
+    <Wrapper className='my-14 px-5 2xl:px-0 pb-20'>
       <ChapterBanner chapterData={chapterData} chapterInfo={chapterInfo.chapter_info} />
       <PlayAudioButton surahId={id}/>
       <QuranReader
         bismillahPre={chapterData.bismillah_pre}
         versesData={chapterVerses.verses}
       />
-    </div>
+    </Wrapper>
   );
 }
