@@ -24,13 +24,10 @@ const TafsirModal = () => {
   const [tafsirData, setTafsirData] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
-  console.log(tafsirState);
-
   useEffect(() => {
     function getData(verseId) {
       getTafsirByVerseId(verseId).then((res) => {
         setTafsirData(res);
-        console.log(res);
         setLoading(false);
       });
     }
