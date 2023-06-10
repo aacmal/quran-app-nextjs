@@ -591,6 +591,9 @@ module.exports = {
         '50%': {
           opacity: '.5',
         },
+        '100%': {
+          opacity: '1',
+        }
       },
       bounce: {
         '0%, 100%': {

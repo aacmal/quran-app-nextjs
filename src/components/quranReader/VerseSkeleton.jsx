@@ -1,10 +1,14 @@
 import React from 'react'
 import Skeleton from '../Skeleton/Skeleton'
+import classNames from 'classnames'
 
-const VerseSkeleton = () => {
+const VerseSkeleton = ({ className, animateDelay }) => {
   return (
     <>
-        <div className='flex justify-between py-3 md:flex-row flex-col'>
+        <div style={{
+            animationDelay: `${animateDelay}s`,
+            animationDuration: '1s',
+        }} className={classNames('flex justify-between py-3 md:flex-row flex-col', className)}>
             <div className='flex md:flex-col flex-row items-center mb-4'>
                 <div className='relative grid place-items-center h-9 w-9 md:h-12 md:w-12'>
                     <Skeleton color='gray' className="h-8 w-8"/>

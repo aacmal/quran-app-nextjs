@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import React from 'react'
-import style from './skeleton.module.css'
 
 const Skeleton = ({className, color}) => {
   let colors;
@@ -20,7 +19,7 @@ const Skeleton = ({className, color}) => {
   }
 
   return (
-    <div className={classNames(style.skeleton, className, colors)}></div>
+    <div className={classNames("rounded-lg animate-pulse bg-gray-300 dark:bg-slate-600", className)}></div>
   )
 }
 
