@@ -10,6 +10,7 @@ const Verses = ({
   translations,
   text_uthmani,
   verse_key,
+  words,
 }) => {
   if (true) {
     return (
@@ -35,6 +36,7 @@ const Verses = ({
           </div>
           <div className="w-full md:w-[92%] flex flex-col dark:text-slate-100">
             <ArabicText
+              words={words}
               textUthmani={text_uthmani}
               verseNumber={verse_number}
               verseKey={verse_key}

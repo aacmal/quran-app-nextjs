@@ -6,8 +6,9 @@ import useSettings from '../../store/settingsStore';
 import useSurah from '../../store/surahStore';
 import { shallow } from 'zustand/shallow';
 import arabicFontStyle from '../../utils/fonts';
+import Word from './Arabic/Word';
 
-const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
+const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey, words }) => {
   const { fontFace, currentFontSize } = useSettings((state) => ({
     fontFace: state.fontFace,
     currentFontSize: state.fontSize,
@@ -33,11 +34,11 @@ const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
       data-verse={verseKey}
       dir="rtl"
       className={classNames(
-        'text-right dark:text-slate-100 transition-all lg:leading-[120px] md:leading-[80px] leading-[80px] inline',
-        {
-          '!text-emerald-500 !dark:text-emerald-500':
-            verseKey === highlightedVerse,
-        }
+        'text-right dark:text-slate-100 transition-all lg:leading-[120px] md:leading-[80px] leading-[80px] inline'
+        // {
+        //   '!text-emerald-500 !dark:text-emerald-500':
+        //     verseKey === highlightedVerse,
+        // }
       )}
     >
       <span
@@ -49,17 +50,34 @@ const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
           { uthmanic: fontFace === 3 }
         )}
       >
-        {textUthmani}
+        {words
+          ? words.map((word) => (
+              <Word
+                position={word.position}
+                location={word.location}
+                key={word.id}
+                isHighlighted={(word.position == words.length) && (verseKey === highlightedVerse)}
+              >
+                {word.text}
+              </Word>
+            ))
+          : textUthmani}
       </span>
-      <div
-        className={classNames(
-          'h-8 w-8 mx-3 inline-block text-xl font-bold text-center rounded-full border',
-          { 'border-emerald-500': verseKey === highlightedVerse },
-          { 'border-gray-900 dark:border-white': verseKey !== highlightedVerse }
-        )}
-      >
-        {arabicNumber(verseNumber)}
-      </div>
+      {
+        !(fontFace === 3) &&
+        <div
+          className={classNames(
+            'h-8 w-8 mx-3 inline-block text-xl font-bold text-center rounded-full border',
+            {
+              'border-emerald-500 !text-emerald-500':
+                verseKey === highlightedVerse,
+            },
+            { 'border-gray-900 dark:border-white': verseKey !== highlightedVerse }
+          )}
+        >
+          {arabicNumber(verseNumber)}
+        </div>
+      }
     </div>
   );
 };

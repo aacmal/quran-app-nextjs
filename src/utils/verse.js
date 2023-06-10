@@ -12,13 +12,13 @@ const translations_lists = [
     }
 ]
 
-export const getSpecificVerse = async (verseKey, lang='id') => {
+export const getSpecificVerse = async (verseKey, lang = 'id') => {
     const params = {
         language: lang,
         fields: 'text_uthmani',
         translation_fields: ['resource_name', 'language_id'],
-        translations: (lang==='id') ? translations_lists[1].id : translations_lists[0].id,
-        per_page: 1
+        translations: (lang === 'id') ? translations_lists[1].id : translations_lists[0].id,
+        per_page: 1,
     }
 
     const response = await fetch(makeUrl(`/verses/by_key/${verseKey}`, queryString.stringify(params)))
@@ -26,28 +26,29 @@ export const getSpecificVerse = async (verseKey, lang='id') => {
     return data
 }
 
-export const getAllVerseByChapter = async (chapterId, lang='id') => {
+export const getAllVerseByChapter = async (chapterId, lang = 'id') => {
     // const params = 'language=id&fields=text_uthmani&translation_fields=resource_name,language_id&translations=33&per_page=220'
     const params = {
+        words: 'true',
         language: lang,
         fields: 'text_uthmani',
         translation_fields: ['resource_name', 'language_id'],
-        translations: (lang==='id') ? translations_lists[1].id : translations_lists[0].id,
+        translations: (lang === 'id') ? translations_lists[1].id : translations_lists[0].id,
         per_page: 286, // Maximum ayah of surah al - baqarah
+        word_fields: 'text_uthmani, location'
     }
-
     const response = await fetch(makeUrl(`/verses/by_chapter/${chapterId}`, queryString.stringify(params)))
     const data = response.json()
     return data
 }
 
-export const getVersesByJuz = async (juzId, lang='id') => {
+export const getVersesByJuz = async (juzId, lang = 'id') => {
 
     const params = {
         language: lang,
         fields: 'text_uthmani',
         translation_fields: ['resource_name', 'language_id'],
-        translations: (lang==='id') ? translations_lists[1].id : translations_lists[0].id,
+        translations: (lang === 'id') ? translations_lists[1].id : translations_lists[0].id,
         per_page: 286, // Maximum ayah of surah al - baqarah
     }
 

@@ -19,6 +19,9 @@ const useSurah = create(persist((set) => ({
   highlightedVerse: null,
   setHighlightedVerse: (highlightedVerse) => set({ highlightedVerse }),
 
+  highlightedWord: null,
+  setHighlightedWord: (highlightedWord) => set({ highlightedWord }),
+
   tafsirState: null,
   setTafsirState: (tafsirState) => set({ tafsirState }),
 

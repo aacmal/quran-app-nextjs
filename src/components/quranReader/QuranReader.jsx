@@ -39,6 +39,7 @@ const QuranReader = ({
                   translations={e.translations}
                   text_uthmani={e.text_uthmani}
                   verse_key={e.verse_key}
+                  words={e.words}
                 />
               ))
             ) : (
