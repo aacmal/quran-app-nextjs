@@ -32,64 +32,6 @@ a {
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: 'Al Qalam Quran';
-  src: url('../../public/fonts/alqalam.ttf');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Me Quran';
-  src: url('../../public/fonts/me_quran/me_quran-2.woff2') format('woff'),
-    url('../../public/fonts/me_quran/me_quran-2.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Nastaleeq';
-  src: url('../../public/fonts/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.ttf')
-      format('truetype'),
-    url('../../public/fonts/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff')
-      format('woff'),
-    url('../../public/fonts/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2')
-      format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Uthmanic Hafs';
-  src: url('../../public/fonts/uthmanic_hafs/UthmanicHafs1Ver18.ttf')
-      format('truetype'),
-    url('../../public/fonts/uthmanic_hafs/UthmanicHafs1Ver18.woff2')
-      format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
-#arab.alqalam-font {
-  font-family: 'Al Qalam Quran';
-}
-
-#arab.mequran-font {
-  font-family: 'Me Quran';
-}
-
-#arab.nastaleeq-font {
-  font-family: 'Nastaleeq';
-}
-
-#arab.uthmanic-font {
-  font-family: 'Uthmanic Hafs';
-}
-
-.arabic.uthmani {
-  font-family: 'Uthmanic Hafs';
-  @apply text-4xl lg:text-5xl leading-normal;
-}
-
 h2 {
   font-weight: bold;
   font-size: 1.1rem;

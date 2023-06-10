@@ -2,9 +2,10 @@
 
 import classNames from 'classnames';
 import React from 'react';
-import useSettings from "../../store/settingsStore"
+import useSettings from '../../store/settingsStore';
 import useSurah from '../../store/surahStore';
-import { shallow } from "zustand/shallow"
+import { shallow } from 'zustand/shallow';
+import arabicFontStyle from '../../utils/fonts';
 
 const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
   const { fontFace, currentFontSize } = useSettings((state) => ({
@@ -12,9 +13,12 @@ const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
     currentFontSize: state.fontSize,
   }));
 
-  const { highlightedVerse } = useSurah((state) => ({
-    highlightedVerse: state.highlightedVerse,
-  }), shallow)
+  const { highlightedVerse } = useSurah(
+    (state) => ({
+      highlightedVerse: state.highlightedVerse,
+    }),
+    shallow
+  );
 
   const arabicNumber = (value) => {
     const arabicNumbers =
@@ -25,11 +29,11 @@ const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
   };
 
   return (
-    <span
+    <div
       data-verse={verseKey}
       dir="rtl"
       className={classNames(
-        'text-right dark:text-slate-100 transition-all lg:leading-[120px] md:leading-[80px] leading-[80px]',
+        'text-right dark:text-slate-100 transition-all lg:leading-[120px] md:leading-[80px] leading-[80px] inline',
         {
           '!text-emerald-500 !dark:text-emerald-500':
             verseKey === highlightedVerse,
@@ -38,12 +42,11 @@ const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
     >
       <span
         style={{ fontSize: currentFontSize }}
-        id="arab"
-        className={classNames(
-          { 'alqalam-font': fontFace === 0 },
-          { 'mequran-font': fontFace === 1 },
-          { 'nastaleeq-font': fontFace === 2 },
-          { 'uthmanic-font': fontFace === 3 }
+        className={arabicFontStyle(
+          { alQalam: fontFace === 0 },
+          { meQuran: fontFace === 1 },
+          { nastaleeq: fontFace === 2 },
+          { uthmanic: fontFace === 3 }
         )}
       >
         {textUthmani}
@@ -57,7 +60,7 @@ const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey }) => {
       >
         {arabicNumber(verseNumber)}
       </div>
-    </span>
+    </div>
   );
 };
 

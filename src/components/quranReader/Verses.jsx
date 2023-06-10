@@ -30,18 +30,6 @@ const Verses = ({
                 <HandleBookmark verseKey={verse_key} />
                 <CopyToClipboard text_uthmani={text_uthmani} />
                 <HandleTafsir id={id} />
-                {/* <IconWrapper
-                  onClick={() =>
-                    setTafsirData({
-                      isOpen: true,
-                      verseKey: verse_key,
-                      verseId: id,
-                    })
-                  }
-                  className="text-gray-500 dark:hover:text-gray-50"
-                >
-                  <TafsirIcon className="md:h-6 h-5" />
-                </IconWrapper> */}
               </div>
             </div>
           </div>
@@ -53,7 +41,7 @@ const Verses = ({
             />
             <span
               dangerouslySetInnerHTML={{ __html: translations[0].text }}
-              className="text-base md:text-xl transition-all mt-5 inline-block"
+              className="text-base md:text-xl mt-5 inline-block"
             ></span>
           </div>
         </div>

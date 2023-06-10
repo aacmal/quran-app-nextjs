@@ -1,12 +1,9 @@
 import Verses from './Verses';
-import Bismillah from '../Bismillah';
-import VerseSkeleton from './VerseSkeleton';
+import Bismillah from './Bismillah';
 
 const QuranReader = ({
   versesData,
-  isLoading,
   bismillahPre,
-  skeletonLoadingCount,
 }) => {
   // return versesData.map((e) => (
   //   <Verses
