@@ -62,7 +62,7 @@ const PlaybackController = ({ state, dispatch, reset }) => {
                         <RewindIcon className="h-6" />
                     </ButtonSmall>
                     <PlaybackOption
-                        onClickReset={() => reset()}
+                        onClickReset={reset}
                     />
                 </div>
             </div>

@@ -90,40 +90,40 @@ const AudioPlayer = () => {
   const [value, setValue] = useState(0);
   const [trackProgress, setTrackProgress] = useState(0);
   const [isOnSeek, setOnSeek] = useState(false);
-  const isHidden = audioId == null;
-
+  const isHidden = audioId === null;
+  
   // Audio Data
   const [audioData, setAudioData] = useState(null);
-
+  
   // Time State
   const [maxTime, setMaxtime] = useState(0);
   const [currentTime, setCurrentTime] = useState('0:0');
-
+  
   function calculateTime(secs) {
     const minutes = Math.floor(secs / 60);
     const seconds = Math.floor(secs % 60);
     const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
     return `${minutes}:${returnedSeconds}`;
   }
-
+  
   function updateCurrentTime(value) {
     setTrackProgress(Math.floor(value));
     setCurrentTime(calculateTime(value));
     setValue(value);
   }
-
+  
   function startTimer() {
     setCurrentTime(calculateTime(Math.floor(audioRef.current.currentTime) + 1));
     setTrackProgress(Math.floor(audioRef.current.currentTime) + 1);
     sliderRef?.current?.style.setProperty(
       '--seek-before-width',
       `${((Math.floor(audioRef.current.currentTime) + 1) / maxTime) * 100}%`
-    );
-
-    // handle highligthing verse
-    if (audioData) {
-      const activeVerse = audioData.timestamps.find(
-        (verse) =>
+      );
+      
+      // handle highligthing verse
+      if (audioData) {
+        const activeVerse = audioData.timestamps.find(
+          (verse) =>
           // convert from milliseconds to seconds by dividing by 1000
           audioRef.current.currentTime < Number(verse.timestamp_to / 1000)
       );
@@ -132,13 +132,13 @@ const AudioPlayer = () => {
           const startTime = Number(segment[1] / 1000);
           const endTime = Number(segment[2] / 1000);
           const word = segment[0];
-
+          
           if (
             audioRef.current.currentTime >= startTime &&
             audioRef.current.currentTime < endTime
-          ) {
-            setHighlightedWord(activeVerse.verse_key + ':' + word);
-          }
+            ) {
+              setHighlightedWord(activeVerse.verse_key + ':' + word);
+            }
         });
       }
       setHighlightedVerse(activeVerse?.verse_key);
@@ -158,7 +158,7 @@ const AudioPlayer = () => {
     setOnSeek(false);
     audioRef.current.currentTime = value;
   }
-
+  
   function handleOnEnded() {
     // If no repeat, change to next surah
     if (!audioState.isRepeat) {
@@ -176,20 +176,23 @@ const AudioPlayer = () => {
       }
     }
   }
-
+  
   function handleOnCanPlayThrough(e) {
     if (e.eventPhase > 1) {
       dispatch({ type: 'play' });
+    } else {
+      dispatch({ type: 'pause' });
     }
   }
 
   function reset() {
     dispatch({ type: 'pause' });
     setAudioId(null);
-    setTrackProgress(0);
-    updateCurrentTime(0);
     setTimeout(() => {
+      setTrackProgress(0);
+      updateCurrentTime(0);
       setHighlightedVerse(null);
+      setHighlightedWord(null);
     }, 200);
   }
 
