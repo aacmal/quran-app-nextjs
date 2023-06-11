@@ -9,6 +9,7 @@ const QuranSwitch = ({ active }) => {
           'px-2 py-1 w-20 text-center dark:text-gray-50 text-sm rounded-md mr-2 z-10'
         }
         href="/quran/surah"
+        replace
       >
         Chapters
       </Link>
@@ -17,6 +18,7 @@ const QuranSwitch = ({ active }) => {
           'px-2 py-1 w-20 text-center dark:text-gray-50 text-sm rounded-md z-10'
         }
         href="/quran/juz"
+        replace
       >
         Juzs
       </Link>
