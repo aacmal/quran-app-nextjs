@@ -56,15 +56,16 @@ const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey, words }) => {
                 position={word.position}
                 location={word.location}
                 key={word.id}
-                isHighlighted={(word.position == words.length) && (verseKey === highlightedVerse)}
+                isHighlighted={
+                  word.position == words.length && verseKey === highlightedVerse
+                }
               >
                 {word.text}
               </Word>
             ))
           : textUthmani}
       </span>
-      {
-        !(fontFace === 3) &&
+      {!(fontFace === 3) && (
         <div
           className={classNames(
             'h-8 w-8 mx-3 inline-block text-xl font-bold text-center rounded-full border',
@@ -72,12 +73,15 @@ const ArabicText = ({ ayahId, textUthmani, verseNumber, verseKey, words }) => {
               'border-emerald-500 !text-emerald-500':
                 verseKey === highlightedVerse,
             },
-            { 'border-gray-900 dark:border-white': verseKey !== highlightedVerse }
+            {
+              'border-gray-900 dark:border-white':
+                verseKey !== highlightedVerse,
+            }
           )}
         >
           {arabicNumber(verseNumber)}
         </div>
-      }
+      )}
     </div>
   );
 };

@@ -1,0 +1,4 @@
+.highlighted {
+  filter: drop-shadow(0 4px 5px rgba(35, 215, 155, 0.3))
+    drop-shadow(0 2px 2px rgba(33, 218, 157, 0.3));
+}
