@@ -12,6 +12,7 @@ const HandleTafsir = ({ id }) => {
 
   return (
     <IconWrapper
+      aria-label="Lihat tafsir"
       onClick={() =>
         setTafsirState({
           verseId: id,

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import IconWrapper from '../../icons/IconWrapper';
@@ -23,7 +23,7 @@ const HandleBookmark = ({ verseKey }) => {
   }
 
   return (
-    <IconWrapper onClick={() => handleBookmarkClick(verseKey)}>
+    <IconWrapper aria-label="Bookmark ayat ini" onClick={() => handleBookmarkClick(verseKey)}>
       <BookmarkIcon
         fill={isBookmarked}
         className={`md:h-6 h-5 ${

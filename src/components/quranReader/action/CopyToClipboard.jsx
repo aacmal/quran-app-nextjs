@@ -10,7 +10,7 @@ const CopyToClipboard = ({ text_uthmani }) => {
   }
 
   return (
-    <IconWrapper className="text-gray-500 dark:hover:text-gray-50 group cursor-pointer">
+    <IconWrapper aria-label="Salin ayat ini ke clipboard" className="text-gray-500 dark:hover:text-gray-50 group cursor-pointer">
       <CopyIcon
         onClick={() => copyToClipboard(text_uthmani)}
         className="md:h-6 h-5 group-active:text-emerald-500"

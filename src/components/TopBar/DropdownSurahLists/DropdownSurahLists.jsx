@@ -32,13 +32,8 @@ const DropdownSurahLists = ({ chapterLists, chapterActive }) => {
     return (
       <div>
         <div className="flex items-center gap-3">
-          <Link href="/quran/surah">
-            <IconWrapper
-              onHover="none"
-              className="bg-emerald-400 text-white p-2"
-            >
-              <ArrowIcon className="h-5 w-5" />
-            </IconWrapper>
+          <Link aria-label='Kembali ke halaman daftar surah' className='h-10 w-10 grid place-items-center rounded bg-emerald-400 text-white p-2' href="/quran/surah">
+            <ArrowIcon className="h-5 w-5" />
           </Link>
           {/* Dropdown Toggle */}
           <div

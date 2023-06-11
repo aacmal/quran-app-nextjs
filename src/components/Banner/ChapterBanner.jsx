@@ -28,6 +28,7 @@ const ChapterBanner = ({ chapterData, chapterInfo }) => {
         }`}
       >
         <IconWrapper
+          aria-label="Info singkat surah"
           className="cursor-pointer absolute left-0 top-0 text-gray-50"
           onClick={() => setInfoOpen(!isInfoOpen)}
           onHover="none"

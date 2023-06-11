@@ -1,13 +1,11 @@
 'use client';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { AdjustmentIcon } from '../../icons';
 import IconWrapper from '../../icons/IconWrapper';
 import AutoScroll from './AutoScroll';
 import { FontAdjustment, FontSizeAdjustment } from './FontAdjustment';
-import LanguageAdjustment from './LanguageAdjustment';
 import ThemeAdjustment from './ThemeAdjustment';
 
 const DeveloperUtility = ({ isInSurah }) => {
@@ -16,6 +14,7 @@ const DeveloperUtility = ({ isInSurah }) => {
   return (
     <div className="md:relative">
       <IconWrapper
+        aria-label="Pengaturan"
         onClick={() => setExpanded(!isExpanded)}
         onHover="none"
         className="bg-emerald-400"
