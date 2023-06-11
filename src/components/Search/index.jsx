@@ -1,12 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import useStore from '../../store/surahStore';
+import Link from 'next/link';
 
 const Search = ({ className }) => {
   const allChapters = useStore((state) => state.chapterData);
-  const router = useRouter();
 
   const [filteredChapters, setFilteredChapters] = useState([
     { name_simple: 'Ketik untuk mencari' },
@@ -32,18 +31,13 @@ const Search = ({ className }) => {
     } else {
       setFilteredChapters([{ name_simple: 'Ketik untuk mencari' }]);
     }
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allChapters]);
 
   function handleBlur() {
     setTimeout(() => {
       setExpanded(false);
     }, 200);
-  }
-
-  function onFliteredClick(id) {
-    if (typeof id != 'undefined') {
-      router.push(`/surah/${id}`);
-    }
   }
 
   return (
@@ -63,13 +57,13 @@ const Search = ({ className }) => {
         <div className="absolute z-50 lg:w-72 w-full max-h-96 overflow-auto border border-emerald-300/50 rounded shadow-lg dark:bg-slate-600 bg-white dark:text-slate-100 right-0 p-2">
           {filteredChapters.length > 0 &&
             filteredChapters.map((e) => (
-              <div
-                onClick={() => onFliteredClick(e.id)}
+              <Link
+                href={`/quran/surah/${e.id}`}
                 key={e.id}
-                className="py-1 px-2 hover:bg-emerald-200 dark:hover:bg-emerald-600 rounded cursor-pointer"
+                className="py-1 px-2 hover:bg-emerald-200 dark:hover:bg-emerald-600 rounded cursor-pointer block"
               >
                 {e.name_simple}
-              </div>
+              </Link>
             ))}
         </div>
       )}
