@@ -3,8 +3,6 @@
 import classNames from 'classnames';
 import React, {
   createContext,
-  useCallback,
-  useContext,
   useEffect,
   useReducer,
   useRef,
@@ -13,7 +11,11 @@ import React, {
 import PlaybackController from './PlaybackController/PlaybackController';
 
 import style from './AudioPlayer.module.css';
-import { useSelectedLayoutSegment, useRouter } from 'next/navigation';
+import {
+  useSelectedLayoutSegment,
+  useRouter,
+  useParams,
+} from 'next/navigation';
 import { getAudioFile } from '../../utils/audio';
 import useSurah from '../../store/surahStore';
 import useSettings from '../../store/settingsStore';
@@ -46,7 +48,8 @@ function reducer(state, action) {
 
 const AudioPlayer = () => {
   const router = useRouter();
-  const layoutSegment = useSelectedLayoutSegment();
+  // const layoutSegment = useSelectedLayoutSegment();
+  const params = useParams();
 
   // Context
   const {
@@ -124,20 +127,20 @@ const AudioPlayer = () => {
           // convert from milliseconds to seconds by dividing by 1000
           audioRef.current.currentTime < Number(verse.timestamp_to / 1000)
       );
-			if (activeVerse) {
-				activeVerse.segments.forEach((segment) => {
-					const startTime = Number(segment[1] / 1000);
-					const endTime = Number(segment[2] / 1000);
-					const word = segment[0];
+      if (activeVerse) {
+        activeVerse.segments.forEach((segment) => {
+          const startTime = Number(segment[1] / 1000);
+          const endTime = Number(segment[2] / 1000);
+          const word = segment[0];
 
-					if (
-						audioRef.current.currentTime >= startTime &&
-						audioRef.current.currentTime < endTime
-					) {
-						setHighlightedWord(activeVerse.verse_key + ':' + word);
-					}
-				});
-			}
+          if (
+            audioRef.current.currentTime >= startTime &&
+            audioRef.current.currentTime < endTime
+          ) {
+            setHighlightedWord(activeVerse.verse_key + ':' + word);
+          }
+        });
+      }
       setHighlightedVerse(activeVerse?.verse_key);
     }
   }
@@ -159,7 +162,7 @@ const AudioPlayer = () => {
   function handleOnEnded() {
     // If no repeat, change to next surah
     if (!audioState.isRepeat) {
-      const isOnCurrentChapter = (currentChapter === audioId) && (layoutSegment === 'quran');
+      const isOnCurrentChapter = parseInt(params?.chapterId) === audioId;
       if (currentChapter < 114) {
         if (autoScroll && isOnCurrentChapter) {
           router.push(`/quran/surah/${currentChapter + 1}`);
@@ -200,40 +203,35 @@ const AudioPlayer = () => {
 
   useEffect(() => {
     if (audioId) {
-      console.log('fetching audio data', audioId);
       getAudioFile(audioState.reciterId, audioId)
         .then((res) => setAudioData(res.audio_file))
         .then(dispatch({ type: 'pause' }));
     }
   }, [audioId, audioState.reciterId]);
 
+  // useEffect(() => {
+  //   const highlightedElement = document.querySelector(
+  //     `[data-verse="${highlightedVerse}"]`
+  //   );
+  //   const verseYLocation = highlightedElement?.offsetTop;
+  //   // if (currentChapter === audioId && autoScroll && layoutSegment === 'quran') {
+  //   //   window.scrollTo(0, verseYLocation - 200);
+  //   // }
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [highlightedVerse]);
+
   useEffect(() => {
-    const highlightedElement = document.querySelector(
-      `[data-verse="${highlightedVerse}"]`
-    );
-    const verseYLocation = highlightedElement?.offsetTop;
-    // if (currentChapter === audioId && autoScroll && layoutSegment === 'quran') {
-    //   window.scrollTo(0, verseYLocation - 200);
-    // }
+    if (parseInt(params?.chapterId) === audioId && autoScroll) {
+      const highlightedElement = document.querySelector(
+        `[data-word="${highlightedWord}"]`
+      );
+      const wordYLocation = highlightedElement?.offsetTop;
+      window.scrollTo(0, wordYLocation - 200);
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [highlightedVerse]);
-
-	useEffect(() => {
-		const highlightedElement = document.querySelector(
-			`[data-word="${highlightedWord}"]`
-		);
-		const wordYLocation = highlightedElement?.offsetTop;
-		if (
-			currentChapter === audioId &&
-			autoScroll &&
-			layoutSegment === 'quran'
-		) {
-			window.scrollTo(0, wordYLocation - 200);
-		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [highlightedWord])
+  }, [highlightedWord]);
 
   return (
     <AudioContext.Provider
