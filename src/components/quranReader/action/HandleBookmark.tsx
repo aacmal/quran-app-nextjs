@@ -12,8 +12,8 @@ type HandleBookmarkProps = {
 const HandleBookmark = ({ verseKey }: HandleBookmarkProps) => {
   const { bookmarked, addBookmark, deleteBookmarked } = useSurah((state) => ({
     bookmarked: state.bookmarked,
-    addBookmark: state.addBookmark,
-    deleteBookmarked: state.deleteBookmarked,
+    addBookmark: state.addBookmarkData,
+    deleteBookmarked: state.deleteBookmarkData,
   }));
 
   const isBookmarked = bookmarked.includes(verseKey);

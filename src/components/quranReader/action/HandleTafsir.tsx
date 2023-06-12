@@ -3,14 +3,14 @@
 import React from 'react';
 import { TafsirIcon } from '../../icons';
 import IconWrapper from '../../icons/IconWrapper';
-import useSurah from '../../../store/surahStore';
+import useQuranReader from '@hooks/useQuranReader';
 
 type HandleTafsirProps = {
   id: number;
 };
 
 const HandleTafsir = ({ id }: HandleTafsirProps) => {
-  const { setTafsirState } = useSurah((state) => ({
+  const { setTafsirState } = useQuranReader((state) => ({
     setTafsirState: state.setTafsirState,
   }));
 
