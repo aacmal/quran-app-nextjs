@@ -3,12 +3,21 @@
 import React, { useCallback, useState } from 'react';
 import useStore from '../../store/surahStore';
 import Link from 'next/link';
+import { LocalChapter } from 'data/chapter/type';
 
 const Search = ({ className }) => {
   const allChapters = useStore((state) => state.chapterData);
+  const notFound = {
+    id: 0,
+    name_simple: 'Ketik untuk mencari',
+    verses_count: 0,
+    revelation_place: '',
+  };
 
-  const [filteredChapters, setFilteredChapters] = useState([
-    { name_simple: 'Ketik untuk mencari' },
+  const [filteredChapters, setFilteredChapters] = useState<LocalChapter[]>([
+    {
+      ...notFound,
+    },
   ]);
   const [isExpanded, setExpanded] = useState(false);
 
@@ -26,14 +35,18 @@ const Search = ({ className }) => {
           if (result.length > 0) {
             return result;
           } else {
-            return [{ name_simple: 'Tidak ditemukan' }];
+            return [{ ...notFound }];
           }
         });
       } else {
-        setFilteredChapters([{ name_simple: 'Ketik untuk mencari' }]);
+        setFilteredChapters([
+          {
+            ...notFound,
+          },
+        ]);
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [allChapters]
   );
 
