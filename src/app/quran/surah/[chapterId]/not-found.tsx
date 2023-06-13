@@ -1,6 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowIcon } from '@components/icons';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Data tidak ditemukan',
+  description: 'Data tidak ditemukan',
+  robots: 'noindex, nofollow',
+};
 
 const NotFound = () => {
   return (

@@ -28,7 +28,7 @@ const QuranSwitch = ({ active }: QuranSwitchProps) => {
       </Link>
       <div
         className={`h-full w-20 bg-white dark:bg-slate-600 absolute rounded-md z-0 transition-all ${
-          active === 'surah' ? 'left-0' : 'left-1/2'
+          active === 'juz' ? 'left-1/2' : 'left-0'
         }`}
       ></div>
     </div>

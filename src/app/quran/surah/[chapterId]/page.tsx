@@ -8,6 +8,9 @@ import Wrapper from '@components/Wrapper';
 import ChapterBanner from '@components/Banner/ChapterBanner';
 import QuranReader from '@components/quranReader/QuranReader';
 import PlayAudioButton from '@components/AudioPlayer/PlayAudioButton';
+import { defaultOpenGraph, defaultTwitter } from '@utils/seo';
+
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 export async function generateStaticParams() {
   const res = await getAllChaptersData();
@@ -20,15 +23,27 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }): Promise<Metadata> {
   const chapterData = await getChapter(params.chapterId);
-  const chapterInfo = await getChapterInfo(params.chapterId);
 
   if (!chapterData) {
     return;
   }
 
+  const description = `Baca Surah ${chapterData.name_simple} (${chapterData.translated_name.name}) dengan jumlah ${chapterData.verses_count} ayat, surah ini diturunkan ke ${chapterData.revelation_order} di ${chapterData.revelation_place}. Halaman ini berisi bacaan surah ${chapterData.name_simple} dengan terjemahan bahasa Indonesia, tafsir, dan audio dengan qori yang berbeda.`;
+
   return {
     title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
-    description: chapterInfo.chapter_info.short_text,
+    description: description,
+    robots: IS_PRODUCTION ? 'index, follow' : 'noindex, nofollow',
+    openGraph: {
+      ...defaultOpenGraph,
+      title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
+      description: description,
+    },
+    twitter: {
+      ...defaultTwitter,
+      title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
+      description: description,
+    },
   };
 }
 

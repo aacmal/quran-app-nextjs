@@ -3,6 +3,8 @@ import './globals.css';
 import { Lato } from 'next/font/google';
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+import GoogleAnalytics from '@components/GoogleAnalytics/GoogleAnalytics';
+import { canonicalUrl } from '@utils/seo';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -10,9 +12,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: 'Aplikasi Quran Digital',
-  description:
-    'Aplikasi Quran Digital dengan berbagai fitur menarik, seperti: terjemahan, tafsir, audio, dan lain-lain.',
+  metadataBase: canonicalUrl,
 };
 
 const AudioPlayer = dynamic(
@@ -25,6 +25,7 @@ const AudioPlayer = dynamic(
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
+      <GoogleAnalytics />
       <body
         className={classNames(
           lato.className,

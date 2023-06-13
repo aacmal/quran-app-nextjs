@@ -149,7 +149,6 @@ const AudioPlayer = () => {
   }
 
   function handleOnLoad(value: number) {
-    console.log('loaded', value);
     setTrackProgress(0);
     updateCurrentTime(0);
     setMaxtime(Math.floor(value));

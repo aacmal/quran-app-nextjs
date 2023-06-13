@@ -1,6 +1,11 @@
 import Chapters from '@components/chapters';
 import { getAllChaptersData } from '@utils/chapter';
-import { websiteDescription } from '@utils/seo';
+import {
+  defaultOpenGraph,
+  defaultTwitter,
+  staticDescription,
+  staticTitle,
+} from '@utils/seo';
 import { Metadata } from 'next';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
@@ -11,14 +16,18 @@ async function getChapterData() {
 }
 
 export const metadata: Metadata = {
-  title: 'Quran',
-  description: websiteDescription,
+  title: 'Baca Quran',
+  description: staticDescription['/quran/surah'],
   robots: IS_PRODUCTION ? 'index, follow' : 'noindex, nofollow',
   openGraph: {
-    type: 'website',
-    locale: 'id',
-    title: 'Baca Quran',
-    description: websiteDescription,
+    ...defaultOpenGraph,
+    title: staticTitle['/quran/surah'],
+    description: staticDescription['/quran/surah'],
+  },
+  twitter: {
+    ...defaultTwitter,
+    title: staticTitle['/quran/surah'],
+    description: staticDescription['/quran/surah'],
   },
 };
 
