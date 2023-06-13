@@ -216,17 +216,16 @@ const AudioPlayer = () => {
     }
   }, [audioId, audioState.reciterId]);
 
-  // useEffect(() => {
-  //   const highlightedElement = document.querySelector(
-  //     `[data-verse="${highlightedVerse}"]`
-  //   );
-  //   const verseYLocation = highlightedElement?.offsetTop;
-  //   // if (currentChapter === audioId && autoScroll && layoutSegment === 'quran') {
-  //   //   window.scrollTo(0, verseYLocation - 200);
-  //   // }
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [highlightedVerse]);
+  useEffect(() => {
+    if (parseInt(params?.chapterId) === audioId && autoScroll === 'verse') {
+      const highlightedElement = document.querySelector(
+        `[data-verse="${highlightedVerse}"]`
+      ) as HTMLElement;
+      const verseYLocation = highlightedElement?.offsetTop;
+      window.scrollTo(0, verseYLocation - 200);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [highlightedVerse]);
 
   useEffect(() => {
     if (parseInt(params?.chapterId) === audioId && autoScroll === 'word') {

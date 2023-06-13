@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import AdjustmentWrapper from './AdjustmentWrapper';
 import useSettings from '../../../store/settingsStore';
+import classNames from 'classnames';
+import { OptionButton } from './OptionList';
 
 const AutoScroll = () => {
   const { autoScroll, setAutoScroll } = useSettings((state) => ({
@@ -17,22 +19,31 @@ const AutoScroll = () => {
 
   return (
     <AdjustmentWrapper title="Scroll Otomatis">
-      <label
-        htmlFor="default-toggle"
-        className="inline-flex relative items-center cursor-pointer"
-      >
-        <input
-          defaultChecked={!!autoScroll}
-          type="checkbox"
-          value=""
-          id="default-toggle"
-          className="sr-only peer"
-        />
-        <div
-          onClick={() => setAutoScroll(autoScroll === 'word' ? false : 'word')}
-          className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-slate-500/50 rounded-full peer dark:bg-slate-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-emerald-500 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-white dark:peer-checked:bg-emerald-100"
-        ></div>
-      </label>
+      <div className="bg-gray-100 dark:bg-slate-500 dark:text-slate-200 p-1 rounded text-black">
+        <div className="flex items-center relative">
+          <OptionButton
+            onClick={() => setAutoScroll(false)}
+            label="Matikan scroll otomatis"
+            active={autoScroll === false}
+          >
+            Mati
+          </OptionButton>
+          <OptionButton
+            onClick={() => setAutoScroll('word')}
+            label="scroll otomatis per kata"
+            active={autoScroll === 'word'}
+          >
+            Kata
+          </OptionButton>
+          <OptionButton
+            onClick={() => setAutoScroll('verse')}
+            label="scroll otomatis per ayah"
+            active={autoScroll === 'verse'}
+          >
+            Ayah
+          </OptionButton>
+        </div>
+      </div>
     </AdjustmentWrapper>
   );
 };

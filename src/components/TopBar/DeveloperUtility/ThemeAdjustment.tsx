@@ -29,7 +29,7 @@ const ThemeAdjustment = () => {
             )}
             onClick={() => setTheme('light')}
           >
-            {theme[0]}
+            Terang
           </div>
           <div
             className={classNames(
@@ -38,7 +38,7 @@ const ThemeAdjustment = () => {
             )}
             onClick={() => setTheme('dark')}
           >
-            {theme[1]}
+            Gelap
           </div>
         </div>
       </div>

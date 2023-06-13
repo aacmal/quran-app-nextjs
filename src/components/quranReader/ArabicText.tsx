@@ -23,10 +23,14 @@ const ArabicText = ({
   verseKey,
   words,
 }: ArabicTextProps) => {
-  const { fontFace, currentFontSize } = useSettings((state) => ({
-    fontFace: state.fontFace,
-    currentFontSize: state.fontSize,
-  }));
+  const { fontFace, currentFontSize, autoScroll } = useSettings(
+    (state) => ({
+      fontFace: state.fontFace,
+      currentFontSize: state.fontSize,
+      autoScroll: state.autoScroll,
+    }),
+    shallow
+  );
 
   const { highlightedVerse } = useQuranReader(
     (state) => ({
@@ -34,6 +38,8 @@ const ArabicText = ({
     }),
     shallow
   );
+
+  console.log(autoScroll, highlightedVerse);
 
   const arabicNumber = (value) => {
     const arabicNumbers =
@@ -48,11 +54,11 @@ const ArabicText = ({
       data-verse={verseKey}
       dir="rtl"
       className={classNames(
-        'text-right dark:text-slate-100 transition-all lg:leading-[120px] md:leading-[80px] leading-[80px] inline'
-        // {
-        //   '!text-emerald-500 !dark:text-emerald-500':
-        //     verseKey === highlightedVerse,
-        // }
+        'text-right dark:text-slate-100 transition-all lg:leading-[120px] md:leading-[80px] leading-[80px] inline',
+        {
+          '!text-emerald-500 !dark:text-emerald-500':
+            verseKey === highlightedVerse && autoScroll === 'verse',
+        }
       )}
     >
       <span
