@@ -1,6 +1,9 @@
 import { NextSeoProps } from 'next-seo';
 import { getBasePath } from './url';
 
+export const websiteDescription =
+  'Baca Quran adalah aplikasi web interaktif yang memungkinkan pengguna untuk membaca, mencari, dan menjelajahi teks suci Al-Quran secara digital. Aplikasi ini dilengkapi dengan berbagai fitur yang memudahkan pengguna dalam mempelajari dan meresapi ayat-ayat Al-Quran, seperti terjemahan, tafsir, dan audio.';
+
 export const config = {
   siteName: 'Quran App',
   websiteLogo: `${getBasePath()}/quranapp.jpg`,
