@@ -1,7 +1,8 @@
 'use client';
 
-import BookmarkedVerseLists from '@components/BookmarkedVerseLists/BookmarkedVerseLists';
+import BookmarkedVerseLists from '@components/Bookmark/BookmarkedVerseLists';
 import Header from '@components/Header';
+import ReadQuranHeader from '@components/Header/ReadQuranHeader';
 import QuranSwitch from '@components/Switch';
 import Wrapper from '@components/Wrapper';
 import classNames from 'classnames';
@@ -17,7 +18,7 @@ export default function HomePage({ children }) {
 
   return (
     <Wrapper>
-      <Header>Quran App</Header>
+      <ReadQuranHeader />
       <BookmarkedVerseLists />
       <div
         className={classNames(

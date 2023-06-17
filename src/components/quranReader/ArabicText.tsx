@@ -15,6 +15,7 @@ type ArabicTextProps = {
   verseNumber: number;
   verseKey?: string;
   words?: VerseWord[];
+  leading?: 'normal' | 'medium' | 'tight';
 };
 
 const ArabicText = ({
@@ -22,6 +23,7 @@ const ArabicText = ({
   verseNumber,
   verseKey,
   words,
+  leading = 'medium',
 }: ArabicTextProps) => {
   const { fontFace, currentFontSize, autoScroll } = useSettings(
     (state) => ({
@@ -52,7 +54,13 @@ const ArabicText = ({
       data-verse={verseKey}
       dir="rtl"
       className={classNames(
-        'text-right dark:text-slate-100 transition-all lg:leading-[120px] md:leading-[80px] leading-[80px] inline',
+        'text-right dark:text-slate-100 transition-all inline',
+        {
+          'lg:leading-[120px] leading-[80px]': leading === 'medium',
+        },
+        {
+          'leading-[70px]': leading === 'normal',
+        },
         {
           '!text-emerald-500 !dark:text-emerald-500':
             verseKey === highlightedVerse && autoScroll === 'verse',

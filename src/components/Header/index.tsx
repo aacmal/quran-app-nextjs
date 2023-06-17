@@ -1,13 +1,15 @@
 import classNames from 'classnames';
 import DeveloperUtility from '@components/TopBar/DeveloperUtility/DeveloperUtility';
 import Search from '@components/Search';
+import React from 'react';
 
 type HeaderProps = {
   className?: string;
   children: React.ReactNode;
+  search?: React.ReactNode;
 };
 
-const Header = ({ className, children }: HeaderProps) => {
+const Header = ({ className, children, search }: HeaderProps) => {
   return (
     <div className="flex lg:justify-between lg:items-center lg:flex-row flex-col px-5 xl:px-0">
       <div className="w-full flex justify-between lg:pr-5">
@@ -21,7 +23,7 @@ const Header = ({ className, children }: HeaderProps) => {
         </h1>
         <DeveloperUtility />
       </div>
-      <Search className=" max-w-3xl" />
+      {search}
     </div>
   );
 };

@@ -46,7 +46,7 @@ export default function HomePage() {
         </Link>
         <Link
           className="p-3 text-center w-fit bg-emerald-400/70 border-emerald-300 rounded-lg border-2 transition-all hover:border-emerald-100 hover:shadow-2xl hover:shadow-emerald-600"
-          href="/"
+          href="/hadits"
         >
           <Image
             src="/images/read_quran.png"
