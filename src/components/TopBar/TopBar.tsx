@@ -9,6 +9,7 @@ import useSurah from '../../store/surahStore';
 import { shallow } from 'zustand/shallow';
 import useQuranReader from '@hooks/useQuranReader';
 import { usePathname } from 'next/navigation';
+import DropdownHadithLists from './DropdownHadithLists/DropdownHadithLists';
 
 const TopBar = () => {
   const { chapterData, setChapterData } = useSurah(
@@ -48,6 +49,7 @@ const TopBar = () => {
           chapterActive={currentChapter}
         />
       )}
+      {pathname.includes('/hadits') && <DropdownHadithLists />}
       <DeveloperUtility isInSurah={true} />
     </div>
   );

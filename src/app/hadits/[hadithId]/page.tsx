@@ -3,6 +3,7 @@ import HadithVerse from '@components/Hadith/HadithVerse';
 import Wrapper from '@components/Wrapper';
 import { getHadithBooks, getHadithDetail } from '@utils/api/hadith';
 import React from 'react';
+import HadithHandleClient from './handleClient';
 
 type Props = {};
 
@@ -43,6 +44,7 @@ const HadithDetailPage = async ({
   console.log(data);
   return (
     <Wrapper className="px-5 my-14 2xl:px-0 pb-20">
+      <HadithHandleClient hadithId={data.id} />
       <HadithBanner name={data.name} available={data.available} />
       <div className="text-justify">
         {data.hadiths.map((item) => (

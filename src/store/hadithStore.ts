@@ -5,7 +5,9 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 interface HaditsStore {
   bookmarked: string[];
   hadithData: HadithBook[];
+  hadithActive: string;
 
+  setHadithActive: (hadithActive: string) => void;
   setHadithData: (hadithData: HadithBook[]) => void;
   setBookmarkData: (bookmarked: string[]) => void;
   addBookmarkData: (verseKey: string) => void;
@@ -17,7 +19,8 @@ const useHadith = create<HaditsStore>()(
     (set) => ({
       bookmarked: [],
       hadithData: [],
-
+      hadithActive: 'muslim',
+      setHadithActive: (hadithActive) => set({ hadithActive }),
       setHadithData: (hadithData) => set({ hadithData }),
       setBookmarkData: (bookmarked) => set({ bookmarked }),
       addBookmarkData: (verseKey) =>
