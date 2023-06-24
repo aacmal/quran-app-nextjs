@@ -39,7 +39,7 @@ export const defaultOpenGraph: Metadata['openGraph'] = {
   description: staticDescription['/'],
   images: '/quranapp.jpg',
   siteName: 'Pustaka Islam',
-  url: canonicalUrl.hostname,
+  url: canonicalUrl,
 };
 
 export const defaultTwitter: Metadata['twitter'] = {
