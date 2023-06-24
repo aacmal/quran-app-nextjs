@@ -4,6 +4,7 @@ import Wrapper from '@components/Wrapper';
 import { getHadithBooks, getHadithDetail } from '@utils/api/hadith';
 import React from 'react';
 import HadithHandleClient from './handleClient';
+import HadithReader from '@components/Hadith/HadithReader/HadithReader';
 
 type Props = {};
 
@@ -40,22 +41,16 @@ const HadithDetailPage = async ({
     hadithId: string;
   };
 }) => {
-  const data = await getHadithDetail({ id: params.hadithId });
-  console.log(data);
+  const data = await getHadithDetail({ id: params.hadithId, range: '1-30' });
   return (
     <Wrapper className="px-5 my-14 2xl:px-0 pb-20">
       <HadithHandleClient hadithId={data.id} />
       <HadithBanner name={data.name} available={data.available} />
-      <div className="text-justify">
-        {data.hadiths.map((item) => (
-          <HadithVerse
-            id={item.id}
-            key={item.number}
-            number={item.number}
-            arab={item.arab}
-          />
-        ))}
-      </div>
+      <HadithReader
+        id={data.id}
+        available={data.available}
+        hadiths={data.hadiths}
+      />
     </Wrapper>
   );
 };

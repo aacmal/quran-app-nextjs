@@ -19,12 +19,15 @@ export const staticDescription = {
   '/quran/surah':
     'Baca Quran secara online yang memungkinkan pengguna untuk membaca, mencari, dan menjelajahi teks suci Al-Quran secara digital. Aplikasi ini dilengkapi dengan berbagai fitur yang memudahkan pengguna dalam mempelajari dan meresapi ayat-ayat Al-Quran, seperti terjemahan, tafsir, dan audio dengan berbagai pilihan qori.',
   '/quran/juz': 'Baca Quran berdasarkan juz',
+  '/hadits':
+    'Baca Hadits secara online dengan berbagai pilihan kitab hadits dan di lengkapi dengan terjemahan',
 };
 
 export const staticTitle = {
   '/': 'Pustaka Islam - Baca Quran, Hadits, dan Doa',
   '/quran/surah': 'Baca Quran - Surah',
   '/quran/juz': 'Baca Quran - Juz',
+  '/hadits': 'Baca Hadits',
 };
 
 export const canonicalUrl = new URL(getBasePath());

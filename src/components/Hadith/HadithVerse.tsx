@@ -1,22 +1,33 @@
+'use client';
+
 import { StarIcon } from '@components/icons';
 import ArabicText from '@components/quranReader/ArabicText';
 import CopyToClipboard from '@components/quranReader/action/CopyToClipboard';
 import HandleBookmark from '@components/quranReader/action/HandleBookmark';
-import React from 'react';
+import React, { ForwardedRef, forwardRef, useEffect } from 'react';
 
 type Props = {
   number: number;
   arab: string;
-  id: string;
+  translation: string;
+  style?: any;
+  measure?: any;
 };
 
-const HadithVerse = ({ number, arab, id }: Props) => {
+const HadithVerse = forwardRef(function Verse(
+  { number, arab, translation, style, measure }: Props,
+  ref: ForwardedRef<HTMLDivElement>
+) {
+  useEffect(() => {
+    if (measure) {
+      measure();
+    }
+  }, []);
+
+  if (!number || !arab || !translation) return <div>Loading</div>;
   return (
-    <>
-      <div
-        id={id.toString()}
-        className="flex justify-between py-3 md:flex-row flex-col"
-      >
+    <div ref={ref} style={style}>
+      <div className="flex justify-between py-3 md:flex-row flex-col">
         <div className="flex md:flex-col flex-row items-center mb-4">
           <div className="relative grid place-items-center h-9 w-9 md:h-12 md:w-12">
             <span className="text-xs font-semibold md:text-lg text-gray-900 dark:text-slate-100">
@@ -39,13 +50,13 @@ const HadithVerse = ({ number, arab, id }: Props) => {
             leading="normal"
           />
           <span className="text-base md:text-xl mt-5 inline-block leading-loose">
-            {id}
+            {translation}
           </span>
         </div>
       </div>
       <hr className="border-none my-3 lg:my-5 h-[1px] bg-emerald-500" />
-    </>
+    </div>
   );
-};
+});
 
 export default HadithVerse;
