@@ -1,11 +1,11 @@
 {
-    "theme_color": "#f69435",
-    "background_color": "#f69435",
+    "theme_color": "#10b981",
+    "background_color": "#10b981",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "Quran App",
-    "short_name": "Quran App",
+    "name": "Pustaka Islam",
+    "short_name": "Pustaka Islam",
     "description": "Aplikasi sederhana yang dibuat menggunakan Framework NextJS",
     "icons": [
         {
