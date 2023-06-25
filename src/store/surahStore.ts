@@ -12,19 +12,30 @@ interface SurahStore {
   setChapterData: (chapterData: LocalChapter[]) => void;
 }
 
-const useSurah = create<SurahStore>()((set) => ({
-  bookmarked: [],
-  chapterData: [],
+const useSurah = create<SurahStore>()(
+  persist(
+    (set) => ({
+      bookmarked: [],
+      chapterData: [],
 
-  setBookmarkData: (bookmarked) => set({ bookmarked }),
-  addBookmarkData: (verseKey) =>
-    set((state) => ({ bookmarked: [...state.bookmarked, verseKey] })),
-  deleteBookmarkData: (verseKey) =>
-    set((state) => ({
-      bookmarked: state.bookmarked.filter((verse) => verse !== verseKey),
-    })),
-  setChapterData: (chapterData) => set({ chapterData }),
-}));
+      setBookmarkData: (bookmarked) => set({ bookmarked }),
+      addBookmarkData: (verseKey) =>
+        set((state) => ({ bookmarked: [...state.bookmarked, verseKey] })),
+      deleteBookmarkData: (verseKey) =>
+        set((state) => ({
+          bookmarked: state.bookmarked.filter((verse) => verse !== verseKey),
+        })),
+      setChapterData: (chapterData) => set({ chapterData }),
+    }),
+    {
+      name: 'surah',
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({
+        bookmarked: state.bookmarked,
+      }),
+    }
+  )
+);
 
 // const useSurah = create(
 //   persist(

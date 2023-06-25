@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { shallow } from 'zustand/shallow';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 import { Verse } from '@utils/types/Verse';
 import Wrapper from '@components/Wrapper';
 import { getSpecificVerse } from '@utils/verse';

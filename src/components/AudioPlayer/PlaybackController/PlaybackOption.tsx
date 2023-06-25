@@ -12,7 +12,7 @@ import {
 import { getAllRecitations } from '../../../utils/audio';
 import { AudioContext } from '../AudioPlayer';
 import { shallow } from 'zustand/shallow';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 
 const PlaybackOption = ({ onClickReset }) => {
   const { audioId, setAudioId } = useQuranReader(

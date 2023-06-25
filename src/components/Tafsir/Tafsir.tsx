@@ -9,7 +9,7 @@ import TafsirSkeleton from './TafsirSkeleton';
 import ArabicText from '../quranReader/ArabicText';
 import useSurah from '../../store/surahStore';
 import { shallow } from 'zustand/shallow';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 
 const TafsirModal = () => {
   const chapterData = useSurah((state) => state.chapterData);

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { useContext } from 'react';
 import PlaybackOption from './PlaybackOption';
 import { RewindIcon, PlayIcon, PauseIcon, RepeatIcon } from '../../icons';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 
 type ButtonSmallProps = {
   className?: string;

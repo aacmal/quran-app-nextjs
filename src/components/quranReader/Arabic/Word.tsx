@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import { shallow } from 'zustand/shallow';
 import styles from './Word.module.css';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 
 const cx = classNames.bind(styles);
 

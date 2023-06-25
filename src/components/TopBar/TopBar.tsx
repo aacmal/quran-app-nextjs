@@ -7,7 +7,7 @@ import DeveloperUtility from './DeveloperUtility/DeveloperUtility';
 import DropdownSurahLists from './DropdownSurahLists/DropdownSurahLists';
 import useSurah from '../../store/surahStore';
 import { shallow } from 'zustand/shallow';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 import { usePathname } from 'next/navigation';
 import DropdownHadithLists from './DropdownHadithLists/DropdownHadithLists';
 

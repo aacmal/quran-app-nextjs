@@ -3,7 +3,7 @@
 import React from 'react';
 import { PlayIcon } from '../icons';
 import useSurah from '../../store/surahStore';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 
 const PlayAudioButton = ({ surahId }: { surahId: string }) => {
   const { setAudioId } = useQuranReader((state) => ({

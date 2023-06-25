@@ -3,7 +3,7 @@
 import React from 'react';
 import { TafsirIcon } from '../../icons';
 import IconWrapper from '../../icons/IconWrapper';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 
 type HandleTafsirProps = {
   id: number;

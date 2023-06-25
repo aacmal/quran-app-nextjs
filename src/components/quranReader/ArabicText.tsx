@@ -8,7 +8,7 @@ import { shallow } from 'zustand/shallow';
 import arabicFontStyle from '../../utils/fonts';
 import Word from './Arabic/Word';
 import { VerseWord } from '@utils/types/Verse';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 
 type ArabicTextProps = {
   textUthmani: string;

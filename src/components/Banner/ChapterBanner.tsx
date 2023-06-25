@@ -7,7 +7,7 @@ import BannerWrapper from './BannerWrapper';
 import SurahInfo from './SurahInfo';
 import { InfoIcon } from '../icons';
 import { shallow } from 'zustand/shallow';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 import { Chapter, ChapterInfo } from '@utils/types/Chapter';
 
 type ChapterBannerProps = {

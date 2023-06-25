@@ -20,7 +20,7 @@ import { getAudioFile } from '../../utils/audio';
 import useSurah from '../../store/surahStore';
 import useSettings from '../../store/settingsStore';
 import { shallow } from 'zustand/shallow';
-import useQuranReader from '@hooks/useQuranReader';
+import useQuranReader from '@stores/quranReaderStore';
 
 // Context
 
