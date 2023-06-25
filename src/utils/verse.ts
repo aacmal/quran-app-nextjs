@@ -17,7 +17,7 @@ export const getSpecificVerse = async (
   verseKey: string,
   lang = 'id'
 ): Promise<{
-  verses: Verse;
+  verse: Verse;
 }> => {
   const params = {
     language: lang,
