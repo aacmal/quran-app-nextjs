@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import GoogleAnalytics from '@components/GoogleAnalytics/GoogleAnalytics';
 import { canonicalUrl } from '@utils/seo';
+import { Toaster } from 'react-hot-toast';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -34,6 +35,11 @@ export default function RootLayout({ children }) {
           'dark:bg-slate-800 bg-white min-h-screen'
         )}
       >
+        <Toaster
+          toastOptions={{
+            className: 'border border-emerald-500 text-slate-900 font-semibold',
+          }}
+        />
         {children}
         <AudioPlayer />
       </body>

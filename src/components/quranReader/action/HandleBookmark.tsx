@@ -4,6 +4,7 @@ import React from 'react';
 import IconWrapper from '../../icons/IconWrapper';
 import BookmarkIcon from '../../icons/BookmarkIcon';
 import useSurah from '../../../store/surahStore';
+import { toast } from 'react-hot-toast';
 
 type HandleBookmarkProps = {
   verseKey: string;
@@ -23,6 +24,7 @@ const HandleBookmark = ({ verseKey }: HandleBookmarkProps) => {
       deleteBookmarked(verseKey);
     } else {
       addBookmark(verseKey);
+      toast.success('Ayat berhasil ditandai');
     }
   }
 
@@ -30,14 +32,11 @@ const HandleBookmark = ({ verseKey }: HandleBookmarkProps) => {
     <IconWrapper
       aria-label="Bookmark ayat ini"
       onClick={() => handleBookmarkClick(verseKey)}
+      className="text-gray-500 dark:hover:text-gray-50 group cursor-pointer"
     >
       <BookmarkIcon
         fill={isBookmarked}
-        className={`md:h-6 h-5 ${
-          isBookmarked
-            ? 'text-emerald-500'
-            : 'text-gray-500 dark:hover:text-gray-50'
-        }`}
+        className={`md:h-6 h-5 ${isBookmarked && '!text-emerald-500'}`}
       />
     </IconWrapper>
   );

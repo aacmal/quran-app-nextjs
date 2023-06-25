@@ -23,7 +23,7 @@ const IconWrapper = ({
       className,
       onHover
         ? onHover
-        : 'md:hover:bg-emerald-200/60 md:dark:hover:bg-emerald-500/60'
+        : 'md:hover:bg-emerald-200/60 md:dark:hover:bg-emerald-500/60 md:dark:hover:text-white'
     )}
   >
     {children}

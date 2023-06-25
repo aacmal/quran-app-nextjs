@@ -28,9 +28,10 @@ export const OptionButton = ({
   <button
     aria-label={label}
     className={classNames(
-      'text-sm p-1  px-2 w-fit z-10 text-center cursor-pointer capitalize',
+      'text-sm p-1  px-2 w-fit z-10 text-center cursor-pointer capitalize rounded-md',
       {
-        'text-emerald-500 font-bold bg-white dark:bg-slate-400': active,
+        'text-emerald-500 font-bold bg-white dark:bg-slate-400 dark:text-emerald-200':
+          active,
       }
     )}
     onClick={onClick}
