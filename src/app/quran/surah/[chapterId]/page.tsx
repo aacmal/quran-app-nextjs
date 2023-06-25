@@ -2,7 +2,7 @@ import React from 'react';
 
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getAllVerseByChapter } from '@utils/verse';
+import { getVersesByChapter } from '@utils/verse';
 import { getAllChaptersData, getChapter, getChapterInfo } from '@utils/chapter';
 import Wrapper from '@components/Wrapper';
 import ChapterBanner from '@components/Banner/ChapterBanner';
@@ -49,7 +49,10 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 
 export default async function SurahPage({ params }) {
   const { chapterId: id } = params;
-  const chapterVerses = await getAllVerseByChapter({ chapterId: id });
+  const chapterVerses = await getVersesByChapter({
+    chapterId: id,
+    per_page: 20,
+  });
   const chapterInfo = await getChapterInfo(id);
   const chapterData = await getChapter(id);
 
@@ -67,6 +70,8 @@ export default async function SurahPage({ params }) {
       <QuranReader
         bismillahPre={chapterData.bismillah_pre}
         versesData={chapterVerses.verses}
+        versesCount={chapterData.verses_count}
+        chapterId={chapterData.id}
       />
     </Wrapper>
   );

@@ -50,7 +50,6 @@ const DynamicHadithsData = ({ totalData, id }: Props) => {
       (item) => item.number - LIMIT - 1 === index + 1
     );
 
-    console.log('dataIndex', dataIndex, index);
     if (!data[dataIndex]) {
       return <VerseSkeleton />;
     }

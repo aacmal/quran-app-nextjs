@@ -22,9 +22,12 @@ const TopBar = () => {
   const pathname = usePathname();
   console.log(pathname);
 
-  const { currentChapter } = useQuranReader((state) => ({
-    currentChapter: state.currentChapter,
-  }));
+  const { currentChapter } = useQuranReader(
+    (state) => ({
+      currentChapter: state.currentChapter,
+    }),
+    shallow
+  );
 
   useEffect(() => {
     if (chapterData.length > 0) return;

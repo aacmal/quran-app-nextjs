@@ -11,6 +11,7 @@ import { getSpecificVerse } from '@utils/verse';
 import { ArrowIcon } from '@components/icons';
 import QuranReader from '@components/quranReader/QuranReader';
 import VerseSkeleton from '@components/quranReader/VerseSkeleton';
+import Verses from '@components/quranReader/Verses';
 
 const SingleAyahPage = () => {
   const params = useParams();
@@ -49,7 +50,20 @@ const SingleAyahPage = () => {
           <span>Kembali ke surah</span>
         </Link>
       </div>
-      {!isLoading ? <QuranReader versesData={data} /> : <VerseSkeleton />}
+      {!isLoading ? (
+        <div className="mt-3 text-justify">
+          <Verses
+            key={data.id}
+            id={data.id}
+            verse_number={data.verse_number}
+            translations={data.translations}
+            text_uthmani={data.text_uthmani}
+            verse_key={data.verse_key}
+          />
+        </div>
+      ) : (
+        <VerseSkeleton />
+      )}
     </Wrapper>
   );
 };

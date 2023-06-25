@@ -220,21 +220,30 @@ const AudioPlayer = () => {
       const highlightedElement = document.querySelector(
         `[data-verse="${highlightedVerse}"]`
       ) as HTMLElement;
-      const verseYLocation = highlightedElement?.offsetTop;
-      window.scrollTo(0, verseYLocation - 200);
+
+      if (!highlightedElement) return;
+      highlightedElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highlightedVerse]);
 
   useEffect(() => {
+    if (parseInt(params?.chapterId) !== audioId && autoScroll !== 'word')
+      return;
     if (parseInt(params?.chapterId) === audioId && autoScroll === 'word') {
       const highlightedElement = document.querySelector(
         `[data-word="${highlightedWord}"]`
       ) as HTMLElement;
-      const wordYLocation = highlightedElement?.offsetTop;
-      window.scrollTo(0, wordYLocation - 200);
-    }
 
+      if (!highlightedElement) return;
+      highlightedElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highlightedWord]);
 
