@@ -30,7 +30,8 @@ export const getHadithDetail = async ({
   range = '1-50',
 }: HadithContentParams): Promise<HaditsDetail> => {
   const response = await fetch(
-    makeHaditsUrl(`books/${id}/`, queryString.stringify({ range }))
+    makeHaditsUrl(`books/${id}/`, queryString.stringify({ range })),
+    { cache: 'force-cache' }
   );
   const data = await response.json();
   return data.data;

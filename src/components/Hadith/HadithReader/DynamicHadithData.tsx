@@ -4,7 +4,7 @@ import { HadithContent, HaditsDetail } from '@utils/types/Hadith';
 import React, { useEffect, useState } from 'react';
 import HadithVerse from '../HadithVerse';
 import { getHadithDetail } from '@utils/api/hadith';
-import { Virtuoso } from 'react-virtuoso';
+import { ListRange, Virtuoso } from 'react-virtuoso';
 import VerseSkeleton from '@components/quranReader/VerseSkeleton';
 
 type Props = {
@@ -18,10 +18,23 @@ const LIMIT = 30;
 const DynamicHadithsData = ({ totalData, id }: Props) => {
   const [data, setData] = useState<HadithContent[]>([]);
 
-  const loadMoreData = async (index: number) => {
+  const loadMoreData = async (index: ListRange) => {
+    /*
+      round startRange to nearest LIMIT
+      example: if index.startRange 22 and LIMIT 30, then startRange will be 1 and endRange will be 30
+      startRange will start fetch data from number 31 because 1-30 already fetched in server
+    */
+    const startRange = Math.floor(index.startIndex / LIMIT) * LIMIT + LIMIT + 1;
+    const endRange =
+      startRange + LIMIT >= totalData ? totalData : startRange + LIMIT - 1;
+
+    if (!!data[startRange - LIMIT]) {
+      return;
+    }
+
     const res = await getHadithDetail({
       id,
-      range: `${index + 1 + LIMIT + 1}-${index + 1 + LIMIT * 2}`, // 61-90
+      range: `${startRange}-${endRange}`, // 31-60 to get 30 data
     });
     setData((prev) => {
       // remove duplicate data
@@ -32,30 +45,22 @@ const DynamicHadithsData = ({ totalData, id }: Props) => {
     });
   };
 
-  useEffect(() => {
-    function initData() {
-      getHadithDetail({
-        id,
-        range: `${START_RANGE}-${START_RANGE + LIMIT - 1}`, // 31-60
-      }).then((res) => {
-        setData(res.hadiths);
-      });
-    }
-
-    initData();
-  }, []);
-
   const renderVerse = (index: number) => {
-    if (!data[index]) {
+    const dataIndex = data.findIndex(
+      (item) => item.number - LIMIT - 1 === index + 1
+    );
+
+    console.log('dataIndex', dataIndex, index);
+    if (!data[dataIndex]) {
       return <VerseSkeleton />;
     }
 
     return (
       <HadithVerse
-        translation={data[index].id}
-        key={data[index].number}
-        number={data[index].number}
-        arab={data[index].arab}
+        translation={data[dataIndex].id}
+        key={data[dataIndex].number}
+        number={data[dataIndex].number}
+        arab={data[dataIndex].arab}
       />
     );
   };
@@ -63,13 +68,11 @@ const DynamicHadithsData = ({ totalData, id }: Props) => {
   return (
     <Virtuoso
       useWindowScroll
-      style={{ height: '100px' }}
-      data={data}
-      totalCount={totalData}
-      overscan={100}
-      endReached={loadMoreData}
-      // rangeChanged={loadMoreData}
-      itemContent={(index) => renderVerse(index)}
+      totalCount={totalData - LIMIT - 1}
+      initialItemCount={30}
+      // endReached={loadMoreData}
+      rangeChanged={loadMoreData}
+      itemContent={renderVerse}
     ></Virtuoso>
   );
 };
