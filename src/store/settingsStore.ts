@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { createJSONStorage } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import setTheme from '../utils/theme';
 
 export type Theme = 'default' | 'light' | 'dark';
@@ -18,29 +18,39 @@ interface SettingsStore {
   setAutoScroll: (value: AutoScroll) => void;
 }
 
-const useSettings = create<SettingsStore>()((set, get) => ({
-  fontSize: 42,
-  fontFace: 3,
-  theme: 'default',
-  autoScroll: 'word',
+const useSettings = create<SettingsStore>()(
+  persist(
+    (set, get) => ({
+      fontSize: 42,
+      fontFace: 3,
+      theme: 'default',
+      autoScroll: 'word',
 
-  setTheme: (theme) => {
-    setTheme(theme);
-    set({ theme: theme });
-  },
-  setFontFace: (fontFace) => set({ fontFace: fontFace }),
-  increaseFontSize: () => {
-    if (get().fontSize < 60) {
-      set({ fontSize: get().fontSize + 5 });
+      setTheme: (theme) => {
+        set({ theme: theme });
+      },
+      setFontFace: (fontFace) => set({ fontFace: fontFace }),
+      increaseFontSize: () => {
+        if (get().fontSize < 60) {
+          set({ fontSize: get().fontSize + 5 });
+        }
+      },
+      decreaseFontSize: () => {
+        if (get().fontSize > 28) {
+          set({ fontSize: get().fontSize - 5 });
+        }
+      },
+      setAutoScroll: (value) => set({ autoScroll: value }),
+    }),
+    {
+      name: 'settings', // name of the item in the storage (must be unique)
+      partialize: (state) => ({
+        theme: state.theme,
+      }),
+      getStorage: () => localStorage,
     }
-  },
-  decreaseFontSize: () => {
-    if (get().fontSize > 28) {
-      set({ fontSize: get().fontSize - 5 });
-    }
-  },
-  setAutoScroll: (value) => set({ autoScroll: value }),
-}));
+  )
+);
 
 // const useSettings = create(
 //   (set, get) => ({

@@ -7,7 +7,9 @@ export const getAllChaptersData = async (
 ): Promise<{
   chapters: Chapter[];
 }> => {
-  const response = await fetch(makeUrl(`/chapters`, `language=${lang}`));
+  const response = await fetch(makeUrl(`/chapters`, `language=${lang}`), {
+    cache: 'force-cache',
+  });
   const data = await response.json();
   return data;
 };

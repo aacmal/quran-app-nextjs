@@ -2,6 +2,8 @@ import Link from 'next/link';
 import React from 'react';
 import { StarIcon } from '../../icons';
 import ChapterWrapper from './ChapterWrapper';
+import classNames from 'classnames';
+import { nastaleeqClassName } from '@utils/fonts';
 
 type ChapterCardProps = {
   chapterId: number;
@@ -34,7 +36,12 @@ const ChapterCard = ({
           </div>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-3xl group-hover:text-emerald-500 block mb-1">
+          <span
+            className={classNames(
+              'text-3xl group-hover:text-emerald-500 block mb-1',
+              nastaleeqClassName
+            )}
+          >
             {name_arabic}
           </span>
           {verse_mapping && <span className="font-bold">{verse_mapping}</span>}

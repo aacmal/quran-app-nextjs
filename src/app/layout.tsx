@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import GoogleAnalytics from '@components/GoogleAnalytics/GoogleAnalytics';
 import { canonicalUrl } from '@utils/seo';
 import { Toaster } from 'react-hot-toast';
+import ThemeHandler from './ThemeHandler';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
             className: 'border border-emerald-500 text-slate-900 font-semibold',
           }}
         />
+        <ThemeHandler />
         {children}
         <AudioPlayer />
       </body>
