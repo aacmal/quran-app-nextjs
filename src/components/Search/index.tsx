@@ -5,7 +5,11 @@ import useStore from '../../store/surahStore';
 import Link from 'next/link';
 import { LocalChapter } from 'data/chapter/type';
 
-const Search = ({ className }) => {
+type SearchProps = {
+  className?: string;
+};
+
+const Search = ({ className }: SearchProps) => {
   const allChapters = useStore((state) => state.chapterData);
   const notFound = {
     id: null,

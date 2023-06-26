@@ -11,8 +11,8 @@ type HeaderProps = {
 
 const Header = ({ className, children, search }: HeaderProps) => {
   return (
-    <div className="flex lg:justify-between lg:items-center lg:flex-row flex-col px-5 xl:px-0">
-      <div className="w-full flex justify-between lg:pr-5">
+    <div className="flex md:justify-between md:items-center md:flex-row flex-col px-5 xl:px-0">
+      <div className="w-full flex justify-between md:pr-5">
         <h1
           className={classNames(
             'text-xl font-bold text-emerald-500',

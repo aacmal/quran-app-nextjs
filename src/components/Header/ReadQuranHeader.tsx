@@ -5,7 +5,7 @@ import Search from '@components/Search';
 type Props = {};
 
 const ReadQuranHeader = (props: Props) => {
-  return <Header search={<Search className="max-w-3xl" />}>Baca Quran</Header>;
+  return <Header search={<Search />}>Baca Quran</Header>;
 };
 
 export default ReadQuranHeader;

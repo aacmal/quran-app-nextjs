@@ -38,7 +38,8 @@ export default function RootLayout({ children }) {
       >
         <Toaster
           toastOptions={{
-            className: 'border border-emerald-500 text-slate-900 font-semibold',
+            className:
+              'border border-emerald-500 text-slate-900 font-semibold dark:bg-slate-700 dark:text-slate-100 text-sm',
           }}
         />
         <ThemeHandler />

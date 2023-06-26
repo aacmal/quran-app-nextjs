@@ -20,7 +20,6 @@ const TopBar = () => {
     shallow
   );
   const pathname = usePathname();
-  console.log(pathname);
 
   const { currentChapter } = useQuranReader(
     (state) => ({
