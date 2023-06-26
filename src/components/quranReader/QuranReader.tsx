@@ -1,8 +1,11 @@
-import Verses from './Verses';
 import Bismillah from './Bismillah';
 import { Verse } from '@utils/types/Verse';
 import InitialSurahVerse from './InitialSurahVerse';
-import DynamicSurahVerse from './DynamicSurahVerse';
+import dynamic from 'next/dynamic';
+
+const DynamicSurahVerse = dynamic(() => import('./DynamicSurahVerse'), {
+  ssr: false,
+});
 
 type QuranReaderProps = {
   versesData: Verse[];

@@ -57,6 +57,17 @@ const DynamicSurahVerse = ({ totalData, chapterId }: Props) => {
     });
   };
 
+  const initData = () => {
+    getVersesByChapter({
+      chapterId,
+      page: 2,
+      per_page: LIMIT,
+    }).then((res) => {
+      setPaginationData(res.pagination);
+      setData(res.verses);
+    });
+  };
+
   useEffect(() => {
     if (!highlightedVerse || !ref.current || !autoScroll) return;
     const idAndVerse = highlightedVerse.split(':');
@@ -73,21 +84,6 @@ const DynamicSurahVerse = ({ totalData, chapterId }: Props) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highlightedWord]);
-
-  useEffect(() => {
-    function getInitialData() {
-      getVersesByChapter({
-        chapterId,
-        page: 2,
-        per_page: LIMIT,
-      }).then((res) => {
-        setPaginationData(res.pagination);
-        setData(res.verses);
-      });
-    }
-
-    getInitialData();
-  }, []);
 
   const renderRow = (index: number) => {
     const dataIndex = data.findIndex(
@@ -112,12 +108,13 @@ const DynamicSurahVerse = ({ totalData, chapterId }: Props) => {
 
   return (
     <Virtuoso
-      totalCount={totalData - LIMIT}
+      totalCount={totalData > 20 ? totalData - LIMIT : 0}
       useWindowScroll
       itemContent={renderRow}
       rangeChanged={loadMoreData}
       itemsRendered={(items) => setItemsRendered(items)}
       ref={ref}
+      startReached={initData}
     />
   );
 };
