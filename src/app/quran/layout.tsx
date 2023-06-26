@@ -17,7 +17,7 @@ export default function HomePage({ children }) {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className="px-5 2xl:px-0">
       <ReadQuranHeader />
       <BookmarkedVerseLists />
       <div
