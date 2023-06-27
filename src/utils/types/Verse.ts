@@ -2,7 +2,7 @@ export type VerseWord = {
   id: string;
   text: string;
   location: string;
-  position: string;
+  position: number;
   translation: {
     text: string;
   };

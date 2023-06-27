@@ -1,9 +1,13 @@
+'use client';
+
 import ArabicText from './ArabicText';
 import { StarIcon } from '../icons';
 import HandleBookmark from './action/HandleBookmark';
 import CopyToClipboard from './action/CopyToClipboard';
 import HandleTafsir from './action/HandleTafsir';
 import { VerseWord } from '@utils/types/Verse';
+import useSettings from '@stores/settingsStore';
+import { shallow } from 'zustand/shallow';
 
 type VersesProps = {
   id: number;
@@ -22,6 +26,13 @@ const Verses = ({
   verse_key,
   words,
 }: VersesProps) => {
+  const { translationMode } = useSettings(
+    (state) => ({
+      translationMode: state.translationMode,
+    }),
+    shallow
+  );
+
   if (true) {
     return (
       <>
@@ -51,10 +62,12 @@ const Verses = ({
               verseNumber={verse_number}
               verseKey={verse_key}
             />
-            <span
-              dangerouslySetInnerHTML={{ __html: translations[0].text }}
-              className="text-base md:text-xl mt-5 inline-block"
-            ></span>
+            {translationMode === 'verse' && (
+              <span
+                dangerouslySetInnerHTML={{ __html: translations[0].text }}
+                className="text-base md:text-xl mt-5 inline-block"
+              ></span>
+            )}
           </div>
         </div>
         <hr className="border-none my-3 lg:my-5 h-[1px] bg-emerald-500" />

@@ -4,6 +4,7 @@ import setTheme from '../utils/theme';
 
 export type Theme = 'default' | 'light' | 'dark';
 export type AutoScroll = 'verse' | 'word' | false;
+export type translationMode = 'word' | 'verse';
 
 interface SettingsStore {
   fontSize: number;
@@ -11,6 +12,7 @@ interface SettingsStore {
   theme: Theme;
   autoScroll: AutoScroll;
   transliteration: boolean;
+  translationMode: translationMode;
 
   setTheme: (theme: Theme) => void;
   setFontFace: (fontFace: number) => void;
@@ -18,6 +20,7 @@ interface SettingsStore {
   decreaseFontSize: () => void;
   setAutoScroll: (value: AutoScroll) => void;
   setTransliteration: (value: boolean) => void;
+  setTranslationMode: (value: translationMode) => void;
 }
 
 const useSettings = create<SettingsStore>()(
@@ -28,6 +31,7 @@ const useSettings = create<SettingsStore>()(
       theme: 'default',
       autoScroll: 'word',
       transliteration: false,
+      translationMode: 'verse',
 
       setTheme: (theme) => {
         set({ theme: theme });
@@ -45,6 +49,7 @@ const useSettings = create<SettingsStore>()(
       },
       setAutoScroll: (value) => set({ autoScroll: value }),
       setTransliteration: (value) => set({ transliteration: value }),
+      setTranslationMode: (value) => set({ translationMode: value }),
     }),
     {
       name: 'settings', // name of the item in the storage (must be unique)

@@ -8,6 +8,7 @@ import AutoScroll from './AutoScroll';
 import { FontAdjustment, FontSizeAdjustment } from './FontAdjustment';
 import ThemeAdjustment from './ThemeAdjustment';
 import Transliteration from './Transliteration';
+import TranslationOption from './TranslationOption';
 
 type DeveloperUtilityProps = {
   isInSurah?: boolean;
@@ -43,10 +44,11 @@ const DeveloperUtility = ({ isInSurah }: DeveloperUtilityProps) => {
         {/* <LanguageAdjustment /> */}
         {isInSurah && (
           <>
+            <TranslationOption />
+            <Transliteration />
             <FontAdjustment />
             <FontSizeAdjustment />
             <AutoScroll />
-            <Transliteration />
           </>
         )}
       </div>

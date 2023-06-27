@@ -56,7 +56,7 @@ const ArabicText = ({
       className={classNames(
         'text-right dark:text-slate-100 transition-all inline',
         {
-          'lg:leading-[120px] leading-[80px]': leading === 'medium',
+          'lg:leading-[100px] leading-[80px]': leading === 'medium',
         },
         {
           'leading-[70px]': leading === 'normal',
@@ -73,21 +73,22 @@ const ArabicText = ({
           { alQalam: fontFace === 0 },
           { meQuran: fontFace === 1 },
           { nastaleeq: fontFace === 2 },
-          { uthmanic: fontFace === 3 },
-          'flex flex-wrap'
+          { uthmanic: fontFace === 3 }
         )}
       >
         {words
           ? words.map((word) => (
               <Word
+                isAyahNumber={word.position === words.length}
                 position={word.position}
                 location={word.location}
                 key={word.id}
                 isHighlighted={
-                  word.position === words.length.toString() &&
+                  word.position === words.length &&
                   verseKey === highlightedVerse
                 }
                 transliteration={word.transliteration.text}
+                transalation={word.translation.text}
               >
                 {word.text}
               </Word>
