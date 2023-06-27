@@ -16,7 +16,7 @@ const lato = Lato({
 export const metadata: Metadata = {
   metadataBase: canonicalUrl,
   manifest: '/manifest.json',
-  themeColor: '#ffffff',
+  themeColor: '#f1f5f9',
 };
 
 const AudioPlayer = dynamic(
