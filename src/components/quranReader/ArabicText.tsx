@@ -67,13 +67,14 @@ const ArabicText = ({
         }
       )}
     >
-      <span
+      <div
         style={{ fontSize: currentFontSize }}
         className={arabicFontStyle(
           { alQalam: fontFace === 0 },
           { meQuran: fontFace === 1 },
           { nastaleeq: fontFace === 2 },
-          { uthmanic: fontFace === 3 }
+          { uthmanic: fontFace === 3 },
+          'flex flex-wrap'
         )}
       >
         {words
@@ -86,12 +87,13 @@ const ArabicText = ({
                   word.position === words.length.toString() &&
                   verseKey === highlightedVerse
                 }
+                transliteration={word.transliteration.text}
               >
                 {word.text}
               </Word>
             ))
           : textUthmani}
-      </span>
+      </div>
       {!(fontFace === 3) && (
         <div
           className={classNames(

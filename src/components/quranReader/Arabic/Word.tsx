@@ -5,6 +5,7 @@ import React from 'react';
 import { shallow } from 'zustand/shallow';
 import styles from './Word.module.css';
 import useQuranReader from '@stores/quranReaderStore';
+import useSettings from '@stores/settingsStore';
 
 const cx = classNames.bind(styles);
 
@@ -34,21 +35,35 @@ const Word = ({
     shallow
   );
 
+  const { transliteration: shouldShowTransliteration } = useSettings(
+    (state) => ({
+      transliteration: state.transliteration,
+    })
+  );
+
   return (
-    <span
+    <div
       className={cx(
+        'text-center inline',
         {
           '!text-emerald-500 !dark:text-emerald-500':
             highlightedWord === location || isHighlighted,
         },
         {
           highlighted: highlightedWord === location || isHighlighted,
+        },
+        {
+          'mx-2': shouldShowTransliteration,
         }
       )}
-      data-word={location}
     >
-      {children}{' '}
-    </span>
+      <span data-word={location}>{children} </span>
+      {shouldShowTransliteration && (
+        <span className="text-sm lg:text-base italic block">
+          {transliteration}
+        </span>
+      )}
+    </div>
   );
 };
 

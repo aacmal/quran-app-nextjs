@@ -10,12 +10,14 @@ interface SettingsStore {
   fontFace: number;
   theme: Theme;
   autoScroll: AutoScroll;
+  transliteration: boolean;
 
   setTheme: (theme: Theme) => void;
   setFontFace: (fontFace: number) => void;
   increaseFontSize: () => void;
   decreaseFontSize: () => void;
   setAutoScroll: (value: AutoScroll) => void;
+  setTransliteration: (value: boolean) => void;
 }
 
 const useSettings = create<SettingsStore>()(
@@ -25,6 +27,7 @@ const useSettings = create<SettingsStore>()(
       fontFace: 3,
       theme: 'default',
       autoScroll: 'word',
+      transliteration: false,
 
       setTheme: (theme) => {
         set({ theme: theme });
@@ -41,6 +44,7 @@ const useSettings = create<SettingsStore>()(
         }
       },
       setAutoScroll: (value) => set({ autoScroll: value }),
+      setTransliteration: (value) => set({ transliteration: value }),
     }),
     {
       name: 'settings', // name of the item in the storage (must be unique)

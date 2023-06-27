@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import AdjustmentWrapper from './AdjustmentWrapper';
 import useSettings from '../../../store/settingsStore';
-import classNames from 'classnames';
 import { OptionButton } from './OptionList';
 
 const AutoScroll = () => {
@@ -11,11 +10,6 @@ const AutoScroll = () => {
     autoScroll: state.autoScroll,
     setAutoScroll: state.setAutoScroll,
   }));
-  const [isChecked, setChecked] = useState(false);
-
-  useEffect(() => {
-    setChecked(!!autoScroll);
-  }, [autoScroll]);
 
   return (
     <AdjustmentWrapper title="Scroll Otomatis">
