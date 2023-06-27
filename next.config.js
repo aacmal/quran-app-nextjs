@@ -6,20 +6,40 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 });
 
 const config = {
-  // async redirects(){
-  //   return [
-  //     {
-  //       source: '/surah',
-  //       destination: '/',
-  //       permanent: true
-  //     },
-  //     {
-  //       source: '/juz',
-  //       destination: '/',
-  //       permanent: true
-  //     }
-  //   ]
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/quran/surah',
+        permanent: true
+      },
+      {
+        source: '/juz',
+        destination: '/quran/juz',
+        permanent: true
+      },
+      {
+        source: '/surah',
+        destination: '/quran/surah',
+        permanent: true
+      },
+      {
+        source: '/surah/:id',
+        destination: '/quran/surah/:id',
+        permanent: true
+      },
+      {
+        source: '/surah/:id/:ayah',
+        destination: '/quran/surah/:id/:ayah',
+        permanent: true
+      },
+      {
+        source: '/juz/:id',
+        destination: '/quran/juz/:id',
+        permanent: true
+      }
+    ]
+  },
   experimental: {
     scrollRestoration: true,
   },
