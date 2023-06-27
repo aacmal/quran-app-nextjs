@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       <body
         className={classNames(
           lato.className,
-          'dark:bg-slate-800 bg-white min-h-screen'
+          'dark:bg-slate-800 bg-white min-h-screen selection:bg-emerald-500/30'
         )}
       >
         <Toaster

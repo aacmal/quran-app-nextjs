@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Link from 'next/link';
 
 type SurahInfoProps = {
@@ -16,7 +17,12 @@ const SurahInfo = ({
   className,
 }: SurahInfoProps) => {
   return (
-    <div className={'text-left text-sm lg:text-xl transition-all ' + className}>
+    <div
+      className={classNames(
+        'text-left text-sm lg:text-xl transition-all selection:bg-slate-100 selection:text-slate-700',
+        className
+      )}
+    >
       <div className="mb-3">
         <span>
           <span className="font-bold">Jumlah Ayah : </span>

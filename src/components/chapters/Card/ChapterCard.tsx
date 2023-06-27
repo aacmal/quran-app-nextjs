@@ -30,7 +30,7 @@ const ChapterCard = ({
           </div>
           <div>
             <span className="font-bold text-xl block mb-1">{name_simple}</span>
-            <span className="font-light text-sm block lg:text-base">
+            <span className="font-normal dark:text-slate-300 text-slate-500 text-sm block lg:text-base">
               {translated_name}
             </span>
           </div>

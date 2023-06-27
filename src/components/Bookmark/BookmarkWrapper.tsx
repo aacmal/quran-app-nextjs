@@ -29,9 +29,9 @@ const BookmarkWrapper = ({ isEmpty, children, onClickDelete }: Props) => {
         <div className="flex gap-2 flex-wrap">
           {isEmpty ? (
             <div className="flex justify-center w-full items-center text-white">
-              <span className="font-bold">Klik</span>
+              <span className="font-semibold">Klik</span>
               <BookmarkIcon fill={true} className="h-5 mx-4" />
-              <span className="font-bold">untuk menambahkan</span>
+              <span className="font-semibold">untuk menambahkan</span>
             </div>
           ) : (
             children

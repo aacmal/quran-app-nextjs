@@ -101,7 +101,7 @@ const PlaybackOption = ({ onClickReset }) => {
                   {e.reciter_name}
                   {'  '}
                   {e.style && (
-                    <span className="italic font-thin">({e.style})</span>
+                    <span className="italic font-light">({e.style})</span>
                   )}
                 </div>
                 <hr className="w-full opacity-40" />
