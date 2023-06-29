@@ -8,7 +8,7 @@ import Wrapper from '@components/Wrapper';
 import ChapterBanner from '@components/Banner/ChapterBanner';
 import QuranReader from '@components/quranReader/QuranReader';
 import PlayAudioButton from '@components/AudioPlayer/PlayAudioButton';
-import { defaultOpenGraph, defaultTwitter } from '@utils/seo';
+import { canonicalUrl, defaultOpenGraph, defaultTwitter } from '@utils/seo';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -37,6 +37,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
     openGraph: {
       ...defaultOpenGraph,
       title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
+      images: `${canonicalUrl}api/og?chapterId=${chapterData.id}`,
       description: description,
     },
     twitter: {

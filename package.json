@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^9.0.1",
+    "@vercel/og": "^0.5.8",
     "classnames": "^2.3.2",
     "framer-motion": "^10.12.10",
     "next": "13.4.4",
