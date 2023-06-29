@@ -1,70 +1,42 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
-import { shallow } from 'zustand/shallow';
-import useQuranReader from '@stores/quranReaderStore';
-import { Verse } from '@utils/types/Verse';
-import Wrapper from '@components/Wrapper';
+import React from 'react';
 import { getSpecificVerse } from '@utils/verse';
-import { ArrowIcon } from '@components/icons';
-import QuranReader from '@components/quranReader/QuranReader';
-import VerseSkeleton from '@components/quranReader/VerseSkeleton';
 import Verses from '@components/quranReader/Verses';
+import { Metadata } from 'next';
+import { getChapterInfo, getLocalChapter } from '@utils/chapter';
 
-const SingleAyahPage = () => {
-  const params = useParams();
-  const [data, setData] = useState<Verse>();
-  const [isLoading, setLoading] = useState(true);
-  const { setCurrentChapter } = useQuranReader(
-    (state) => ({
-      setCurrentChapter: state.setCurrentChapter,
-    }),
-    shallow
-  );
+type Props = {
+  params: {
+    chapterId: string;
+    ayahId: string;
+  };
+};
 
-  useEffect(() => {
-    setLoading(true);
-    function getData(verseKey: string) {
-      getSpecificVerse(verseKey).then((res) => {
-        setData(res.verse);
-        setCurrentChapter(parseInt(params.chapterId));
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      });
-    }
-    getData(`${params.chapterId}:${params.ayahId}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const chapterData = await getLocalChapter();
+
+  return {
+    title: `${chapterData[parseInt(params.chapterId) - 1].name_simple} : ${
+      params.ayahId
+    }`,
+  };
+}
+
+const SingleAyahPage = async ({ params }: Props) => {
+  const { chapterId, ayahId } = params;
+  const responseData = await getSpecificVerse(`${chapterId}:${ayahId}`);
 
   return (
-    <Wrapper className="px-5 lg:mt-24 mt-16 pb-20">
-      <div className="flex justify-between">
-        <Link
-          href={`/quran/surah/${params.chapterId}`}
-          className="bg-emerald-400 w-fit text-emerald-50 px-3 py-2 rounded-md mb-8 flex items-center"
-        >
-          <ArrowIcon className="h-5 mr-3" />
-          <span>Kembali ke surah</span>
-        </Link>
-      </div>
-      {!isLoading ? (
-        <div className="mt-3 text-justify">
-          <Verses
-            key={data.id}
-            id={data.id}
-            verse_number={data.verse_number}
-            translations={data.translations}
-            text_uthmani={data.text_uthmani}
-            verse_key={data.verse_key}
-          />
-        </div>
-      ) : (
-        <VerseSkeleton />
-      )}
-    </Wrapper>
+    <div className="mt-3 text-justify">
+      <Verses
+        key={responseData.verse.id}
+        id={responseData.verse.id}
+        verse_number={responseData.verse.verse_number}
+        translations={responseData.verse.translations}
+        text_uthmani={responseData.verse.text_uthmani}
+        words={responseData.verse.words}
+        verse_key={responseData.verse.verse_key}
+      />
+    </div>
   );
 };
 

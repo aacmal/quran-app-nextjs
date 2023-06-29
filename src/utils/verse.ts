@@ -26,10 +26,15 @@ export const getSpecificVerse = async (
     translations:
       lang === 'id' ? translations_lists[1].id : translations_lists[0].id,
     per_page: 1,
+    words: 'true',
+    word_fields: 'text_uthmani, location',
   };
 
   const response = await fetch(
-    makeUrl(`/verses/by_key/${verseKey}`, queryString.stringify(params))
+    makeUrl(`/verses/by_key/${verseKey}`, queryString.stringify(params)),
+    {
+      cache: 'no-cache',
+    }
   );
   const data = await response.json();
   return data;
