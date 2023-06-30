@@ -6,7 +6,9 @@ export const runtime = 'edge';
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
+    const url = new URL(req.url);
+    const baseUrl = url.origin;
+    const { searchParams } = url;
     const hasChapterId = searchParams.has('chapterId');
 
     if (!hasChapterId) {
@@ -64,11 +66,12 @@ export async function GET(req: NextRequest) {
             <span
               style={{
                 marginLeft: 8,
-                fontSize: 20,
+                fontSize: 30,
                 color: '#10b981',
+                fontWeight: 'bold',
               }}
             >
-              quran.acmal.me
+              {`${baseUrl}/quran/`}
             </span>
           </div>
           <div
@@ -76,10 +79,9 @@ export async function GET(req: NextRequest) {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              padding: '20px 20px',
+              padding: '60px 30px',
               fontSize: 32,
-              width: '100%',
-              maxWidth: 750,
+              width: '92%',
               textAlign: 'center',
               backgroundColor: '#10b981',
               color: 'white',
@@ -91,11 +93,28 @@ export async function GET(req: NextRequest) {
             <div
               style={{
                 whiteSpace: 'nowrap',
+                display: 'flex',
+                flexDirection: 'column',
+                fontSize: 50,
               }}
             >
-              {chapterData.name_complex}
+              {chapterData.name_simple}
+              <span
+                style={{
+                  fontWeight: 100,
+                }}
+              >
+                ({chapterData.translated_name.name})
+              </span>
             </div>
-            <div>{chapterData.name_arabic}</div>
+            <div
+              style={{
+                fontWeight: 'black',
+                fontSize: 70,
+              }}
+            >
+              {chapterData.name_arabic}
+            </div>
           </div>
         </div>
       )
