@@ -1,6 +1,11 @@
 import { makeUrl } from './api';
 import queryString from 'query-string';
-import { GetVerseParams, Verse, VersesByChapterResponse } from './types/Verse';
+import {
+  GetVerseByJuzParams,
+  GetVerseParams,
+  Verse,
+  VersesResponse,
+} from './types/Verse';
 
 const translations_lists = [
   {
@@ -40,12 +45,13 @@ export const getSpecificVerse = async (
   return data;
 };
 
-export const getVersesByChapter = async ({
-  chapterId,
+export const getVerses = async ({
+  id,
   lang = 'id',
   per_page = 20,
   page = 1,
-}: GetVerseParams): Promise<VersesByChapterResponse> => {
+  getBy,
+}: GetVerseParams): Promise<VersesResponse> => {
   // const params = 'language=id&fields=text_uthmani&translation_fields=resource_name,language_id&translations=33&per_page=220'
   const params = {
     words: 'true',
@@ -59,27 +65,10 @@ export const getVersesByChapter = async ({
     page,
   };
   const response = await fetch(
-    makeUrl(`/verses/by_chapter/${chapterId}`, queryString.stringify(params)),
+    makeUrl(`/verses/${getBy}/${id}`, queryString.stringify(params)),
     {
       cache: 'force-cache',
     }
-  );
-  const data = response.json();
-  return data;
-};
-
-export const getVersesByJuz = async (juzId, lang = 'id') => {
-  const params = {
-    language: lang,
-    fields: 'text_uthmani',
-    translation_fields: ['resource_name', 'language_id'],
-    translations:
-      lang === 'id' ? translations_lists[1].id : translations_lists[0].id,
-    per_page: 286, // Maximum ayah of surah al - baqarah
-  };
-
-  const response = await fetch(
-    makeUrl(`/verses/by_juz/${juzId}`, queryString.stringify(params))
   );
   const data = response.json();
   return data;

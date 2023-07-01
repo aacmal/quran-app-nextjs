@@ -7,6 +7,7 @@ import GoogleAnalytics from '@components/GoogleAnalytics/GoogleAnalytics';
 import { canonicalUrl } from '@utils/seo';
 import { Toaster } from 'react-hot-toast';
 import ThemeHandler from './ThemeHandler';
+import TafsirModal from '@components/Tafsir/Tafsir';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -29,7 +30,6 @@ const AudioPlayer = dynamic(
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
-      <GoogleAnalytics />
       <body
         className={classNames(
           lato.className,
@@ -45,6 +45,8 @@ export default function RootLayout({ children }) {
         <ThemeHandler />
         {children}
         <AudioPlayer />
+        <TafsirModal />
+        <GoogleAnalytics />
       </body>
     </html>
   );

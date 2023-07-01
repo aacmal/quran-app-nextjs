@@ -10,3 +10,9 @@ export const getJuzs = async (
   const data = await response.json();
   return data;
 };
+
+export const getJuzData = async (id: number): Promise<Juz> => {
+  const response = await fetch(makeUrl(`/juzs/${id}`));
+  const data = await response.json();
+  return data.juz;
+};

@@ -4,4 +4,7 @@ export type Juz = {
   verse_mapping: {
     [key: string]: string;
   };
+  first_verse_id: number;
+  last_verse_id: number;
+  verses_count: number;
 };

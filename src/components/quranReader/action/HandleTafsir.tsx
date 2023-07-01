@@ -4,15 +4,19 @@ import React from 'react';
 import { TafsirIcon } from '../../icons';
 import IconWrapper from '../../icons/IconWrapper';
 import useQuranReader from '@stores/quranReaderStore';
+import { shallow } from 'zustand/shallow';
 
 type HandleTafsirProps = {
   id: number;
 };
 
 const HandleTafsir = ({ id }: HandleTafsirProps) => {
-  const { setTafsirState } = useQuranReader((state) => ({
-    setTafsirState: state.setTafsirState,
-  }));
+  const { setTafsirState } = useQuranReader(
+    (state) => ({
+      setTafsirState: state.setTafsirState,
+    }),
+    shallow
+  );
 
   return (
     <IconWrapper

@@ -1,9 +1,11 @@
+'use client';
+
 import Bismillah from './Bismillah';
-import { Verse } from '@utils/types/Verse';
+import { GetVerseBy, Verse } from '@utils/types/Verse';
 import InitialSurahVerse from './InitialSurahVerse';
 import dynamic from 'next/dynamic';
 
-const DynamicSurahVerse = dynamic(() => import('./DynamicSurahVerse'), {
+const FetchInfiniteVerse = dynamic(() => import('./FetchInfiniteVerse'), {
   ssr: false,
 });
 
@@ -11,14 +13,16 @@ type QuranReaderProps = {
   versesData: Verse[];
   bismillahPre?: boolean;
   versesCount: number;
-  chapterId: number;
+  id: number;
+  type: 'chapter' | 'juz';
 };
 
 const QuranReader = ({
   versesData,
   bismillahPre,
   versesCount,
-  chapterId,
+  id,
+  type,
 }: QuranReaderProps) => {
   return (
     <div className="mt-3">
@@ -26,7 +30,13 @@ const QuranReader = ({
         <Bismillah className={!bismillahPre && 'hidden'} />
         <div className="text-justify mt-12">
           <InitialSurahVerse versesData={versesData} />
-          <DynamicSurahVerse totalData={versesCount} chapterId={chapterId} />
+          <FetchInfiniteVerse
+            getVerseBy={
+              type === 'chapter' ? GetVerseBy.Chapter : GetVerseBy.Juz
+            }
+            totalData={versesCount}
+            id={id}
+          />
         </div>
       </>
     </div>

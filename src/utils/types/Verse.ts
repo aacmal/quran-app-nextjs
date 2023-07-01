@@ -31,15 +31,29 @@ export type VersePagination = {
   total_count: number;
 };
 
+export enum GetVerseBy {
+  Chapter = 'by_chapter',
+  Juz = 'by_juz',
+}
+
 export type GetVerseParams = {
   lang?: string;
   words?: boolean;
   per_page?: number;
-  chapterId?: number;
+  id: number;
+  page?: number;
+  getBy: GetVerseBy;
+};
+
+export type GetVerseByJuzParams = {
+  lang?: string;
+  words?: boolean;
+  per_page?: number;
+  id: number;
   page?: number;
 };
 
-export type VersesByChapterResponse = {
+export type VersesResponse = {
   verses: Verse[];
   pagination: VersePagination;
 };

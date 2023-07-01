@@ -2,13 +2,14 @@ import React from 'react';
 
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getVersesByChapter } from '@utils/verse';
+import { getVerses } from '@utils/verse';
 import { getAllChaptersData, getChapter, getChapterInfo } from '@utils/chapter';
 import Wrapper from '@components/Wrapper';
 import ChapterBanner from '@components/Banner/ChapterBanner';
 import QuranReader from '@components/quranReader/QuranReader';
 import PlayAudioButton from '@components/AudioPlayer/PlayAudioButton';
 import { canonicalUrl, defaultOpenGraph, defaultTwitter } from '@utils/seo';
+import { GetVerseBy } from '@utils/types/Verse';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -52,9 +53,9 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 
 export default async function SurahPage({ params }) {
   const { chapterId: id } = params;
-  const chapterVerses = await getVersesByChapter({
-    chapterId: id,
-    per_page: 20,
+  const chapterVerses = await getVerses({
+    id,
+    getBy: GetVerseBy.Chapter,
   });
   const chapterInfo = await getChapterInfo(id);
   const chapterData = await getChapter(id);
@@ -71,10 +72,11 @@ export default async function SurahPage({ params }) {
       />
       <PlayAudioButton surahId={id} />
       <QuranReader
+        type="chapter"
         bismillahPre={chapterData.bismillah_pre}
         versesData={chapterVerses.verses}
         versesCount={chapterData.verses_count}
-        chapterId={chapterData.id}
+        id={chapterData.id}
       />
     </Wrapper>
   );

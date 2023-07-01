@@ -1,32 +1,33 @@
 'use client';
 
-import { Verse, VersePagination } from '@utils/types/Verse';
+import { GetVerseBy, Verse, VersePagination } from '@utils/types/Verse';
 import React, { useEffect, useRef, useState } from 'react';
 import { ListItem, ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import VerseSkeleton from './VerseSkeleton';
 import Verses from './Verses';
-import { getVersesByChapter } from '@utils/verse';
+import { getVerses } from '@utils/verse';
 import useQuranReader from '@stores/quranReaderStore';
 import { shallow } from 'zustand/shallow';
 import useSettings from '@stores/settingsStore';
 
 type Props = {
   totalData: number;
-  chapterId: number;
+  id: number;
+  getVerseBy: GetVerseBy;
 };
 
-const START_AYAH = 21;
 const LIMIT = 20;
-const DynamicSurahVerse = ({ totalData, chapterId }: Props) => {
+const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
   const [data, setData] = useState<Verse[]>([]);
   const [paginationData, setPaginationData] = useState<VersePagination>();
   const [itemsRendered, setItemsRendered] = useState<ListItem<any>[]>();
 
   const ref = useRef<VirtuosoHandle>(null);
-  const { highlightedWord, highlightedVerse } = useQuranReader(
+  const { highlightedWord, highlightedVerse, currentChapter } = useQuranReader(
     (state) => ({
       highlightedWord: state.highlightedWord,
       highlightedVerse: state.highlightedVerse,
+      currentChapter: state.currentChapter,
     }),
     shallow
   );
@@ -39,10 +40,11 @@ const DynamicSurahVerse = ({ totalData, chapterId }: Props) => {
       return;
     }
 
-    const res = await getVersesByChapter({
-      chapterId,
+    const res = await getVerses({
+      id: id,
       page,
       per_page: LIMIT,
+      getBy: getVerseBy,
     });
 
     setPaginationData(res.pagination);
@@ -58,10 +60,11 @@ const DynamicSurahVerse = ({ totalData, chapterId }: Props) => {
   };
 
   const initData = () => {
-    getVersesByChapter({
-      chapterId,
+    getVerses({
+      id,
       page: 2,
       per_page: LIMIT,
+      getBy: getVerseBy,
     }).then((res) => {
       setPaginationData(res.pagination);
       setData(res.verses);
@@ -73,7 +76,7 @@ const DynamicSurahVerse = ({ totalData, chapterId }: Props) => {
     const idAndVerse = highlightedVerse.split(':');
     const verseNumber = parseInt(idAndVerse[1]);
     const chapterNumber = parseInt(idAndVerse[0]);
-    if (chapterNumber !== chapterId) return;
+    if (chapterNumber !== currentChapter) return;
 
     const isVerseRendered = itemsRendered?.find(
       (item) => item.index === verseNumber - LIMIT - 1
@@ -86,10 +89,7 @@ const DynamicSurahVerse = ({ totalData, chapterId }: Props) => {
   }, [highlightedWord]);
 
   const renderRow = (index: number) => {
-    const dataIndex = data.findIndex(
-      (item) => item.verse_number - LIMIT - 1 === index
-    );
-
+    const dataIndex = index;
     if (!data[dataIndex]) {
       return <VerseSkeleton />;
     }
@@ -119,4 +119,4 @@ const DynamicSurahVerse = ({ totalData, chapterId }: Props) => {
   );
 };
 
-export default DynamicSurahVerse;
+export default FetchInfiniteVerse;
