@@ -2,12 +2,12 @@
 
 import useSettings from '@stores/settingsStore';
 import setTheme from '@utils/theme';
+import { usePathname } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
 
-type Props = {};
-
-const ThemeHandler = (props: Props) => {
+const ThemeHandler = () => {
+  const pathname = usePathname();
   const { theme } = useSettings(
     (state) => ({
       theme: state.theme,
@@ -19,7 +19,8 @@ const ThemeHandler = (props: Props) => {
     if (theme) {
       setTheme(theme);
     }
-  }, [theme]);
+    // update theme when pathname changes
+  }, [theme, pathname]);
 
   return <></>;
 };

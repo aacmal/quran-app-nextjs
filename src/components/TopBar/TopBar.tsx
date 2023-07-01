@@ -2,17 +2,12 @@
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
 
-import { getLocalChapter } from '../../utils/chapter';
 import DeveloperUtility from './DeveloperUtility/DeveloperUtility';
 import DropdownSurahLists from './DropdownSurahLists/DropdownSurahLists';
 import useSurah from '../../store/surahStore';
 import { shallow } from 'zustand/shallow';
 import useQuranReader from '@stores/quranReaderStore';
-import {
-  usePathname,
-  useSelectedLayoutSegment,
-  useSelectedLayoutSegments,
-} from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import DropdownHadithLists from './DropdownHadithLists/DropdownHadithLists';
 
 const TopBar = () => {
@@ -23,6 +18,7 @@ const TopBar = () => {
     shallow
   );
   const pathname = usePathname();
+  const params = useParams();
 
   const { currentChapter } = useQuranReader(
     (state) => ({
@@ -31,7 +27,10 @@ const TopBar = () => {
     shallow
   );
 
-  if (chapterData.length === 0 || !pathname.includes('/quran')) return <></>;
+  const showTopBar =
+    Object.hasOwn(params, 'chapterId') || Object.hasOwn(params, 'juzId');
+
+  if (chapterData.length === 0 || !showTopBar) return <></>;
   return (
     <div
       className={classNames(
