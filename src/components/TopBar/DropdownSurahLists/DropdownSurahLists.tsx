@@ -3,10 +3,10 @@
 import classNames from 'classnames';
 import React, { useState, useCallback } from 'react';
 import ChapterLists from './ChapterLists';
-import IndexOfChapterLists from './IndexOfChapterLists';
 import Link from 'next/link';
 import { ChevronIcon, ArrowIcon } from '../../icons';
 import { LocalChapter } from 'data/chapter/type';
+import VerseList from './VerseList';
 
 type DropdownSurahListsProps = {
   chapterLists: LocalChapter[];
@@ -90,7 +90,7 @@ const DropdownSurahLists = ({
             }
             chapterActive={chapterActive}
           />
-          <IndexOfChapterLists
+          <VerseList
             chapterLists={chapterLists}
             chapterId={chapterActive - 1} // -1 because array start from 0
           />

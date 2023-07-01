@@ -9,6 +9,7 @@ import { getVerses } from '@utils/verse';
 import useQuranReader from '@stores/quranReaderStore';
 import { shallow } from 'zustand/shallow';
 import useSettings from '@stores/settingsStore';
+import { useSearchParams } from 'next/navigation';
 
 type Props = {
   totalData: number;
@@ -21,6 +22,7 @@ const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
   const [data, setData] = useState<Verse[]>([]);
   const [paginationData, setPaginationData] = useState<VersePagination>();
   const [itemsRendered, setItemsRendered] = useState<ListItem<any>[]>();
+  const searchParams = useSearchParams();
 
   const ref = useRef<VirtuosoHandle>(null);
   const { highlightedWord, highlightedVerse, currentChapter } = useQuranReader(
@@ -85,6 +87,16 @@ const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highlightedWord]);
+
+  useEffect(() => {
+    if (!searchParams.get('ayah')) return;
+    const verseNumber = Number(searchParams.get('ayah'));
+    if (verseNumber <= LIMIT) return; // because the first verse is already rendered on the server
+    ref.current.scrollToIndex({
+      index: verseNumber - LIMIT - 1,
+      align: 'center',
+    });
+  }, [searchParams]);
 
   const renderRow = (index: number) => {
     const dataIndex = index;

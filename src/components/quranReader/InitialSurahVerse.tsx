@@ -1,6 +1,7 @@
 import { Verse } from '@utils/types/Verse';
 import React from 'react';
 import Verses from './Verses';
+import ScrollToAyah from './ScrollToAyah';
 
 type Props = {
   versesData: Verse[];
@@ -9,6 +10,7 @@ type Props = {
 const InitialSurahVerse = ({ versesData }: Props) => {
   return (
     <>
+      <ScrollToAyah />
       {versesData.map((verse) => (
         <Verses
           key={verse.id}

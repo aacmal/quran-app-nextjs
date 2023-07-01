@@ -37,7 +37,7 @@ const Verses = ({
     return (
       <>
         <div
-          id={verse_number.toString()}
+          id={id.toString()}
           className="flex justify-between py-3 md:flex-row flex-col"
         >
           <div className="flex md:flex-col flex-row items-center mb-4">
