@@ -12,7 +12,6 @@ type Props = {
 };
 
 const SpecificAyahLayout = ({ children, params }: Props) => {
-  console.log(params);
   return (
     <Wrapper className="px-5 lg:mt-24 mt-16 pb-20">
       <div className="flex justify-between">

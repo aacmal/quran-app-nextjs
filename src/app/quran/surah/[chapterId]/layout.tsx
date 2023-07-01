@@ -1,10 +1,9 @@
-import TopBar from '@components/TopBar/TopBar';
+import dynamic from 'next/dynamic';
 import React from 'react';
 
 const SurahLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <TopBar />
       {children}
       <noscript>
         <div className="text-center pb-4">

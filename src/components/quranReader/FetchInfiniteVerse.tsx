@@ -49,13 +49,11 @@ const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
 
     setPaginationData(res.pagination);
     setData((prev) => {
-      // remove duplicate data and sort by verse_number
+      // remove duplicate data and sort by id
       const newData = res.verses.filter(
         (item) => !prev.find((prevItem) => prevItem.id === item.id)
       );
-      return [...prev, ...newData].sort(
-        (a, b) => a.verse_number - b.verse_number
-      );
+      return [...prev, ...newData].sort((a, b) => a.id - b.id);
     });
   };
 

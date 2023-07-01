@@ -8,24 +8,14 @@ import { shallow } from 'zustand/shallow';
 import BookmarkWrapper from './BookmarkWrapper';
 
 const BookmarkedVerseLists = () => {
-  const { bookmarkData, chapterData, setChapterData, setBookmarked } = useSurah(
+  const { bookmarkData, chapterData, setBookmarked } = useSurah(
     (state) => ({
       bookmarkData: state.bookmarked,
       chapterData: state.chapterData,
-      setChapterData: state.setChapterData,
       setBookmarked: state.setBookmarkData,
     }),
     shallow
   );
-
-  useEffect(() => {
-    if (chapterData.length > 0) return;
-
-    getLocalChapter().then((res) => {
-      setChapterData(res);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   if (chapterData.length === 0) return <></>;
 

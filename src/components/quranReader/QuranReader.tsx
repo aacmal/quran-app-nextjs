@@ -1,5 +1,3 @@
-'use client';
-
 import Bismillah from './Bismillah';
 import { GetVerseBy, Verse } from '@utils/types/Verse';
 import InitialSurahVerse from './InitialSurahVerse';

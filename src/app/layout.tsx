@@ -8,6 +8,8 @@ import { canonicalUrl } from '@utils/seo';
 import { Toaster } from 'react-hot-toast';
 import ThemeHandler from './ThemeHandler';
 import TafsirModal from '@components/Tafsir/Tafsir';
+import InitChapterData from './quran/InitChapterData';
+import TopBar from '@components/TopBar/TopBar';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -43,6 +45,8 @@ export default function RootLayout({ children }) {
           }}
         />
         <ThemeHandler />
+        <InitChapterData />
+        <TopBar />
         {children}
         <AudioPlayer />
         <TafsirModal />

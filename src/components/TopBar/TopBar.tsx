@@ -8,14 +8,17 @@ import DropdownSurahLists from './DropdownSurahLists/DropdownSurahLists';
 import useSurah from '../../store/surahStore';
 import { shallow } from 'zustand/shallow';
 import useQuranReader from '@stores/quranReaderStore';
-import { usePathname } from 'next/navigation';
+import {
+  usePathname,
+  useSelectedLayoutSegment,
+  useSelectedLayoutSegments,
+} from 'next/navigation';
 import DropdownHadithLists from './DropdownHadithLists/DropdownHadithLists';
 
 const TopBar = () => {
-  const { chapterData, setChapterData } = useSurah(
+  const { chapterData } = useSurah(
     (state) => ({
       chapterData: state.chapterData,
-      setChapterData: state.setChapterData,
     }),
     shallow
   );
@@ -28,17 +31,7 @@ const TopBar = () => {
     shallow
   );
 
-  useEffect(() => {
-    if (chapterData.length > 0) return;
-
-    getLocalChapter().then((res) => {
-      setChapterData(res);
-    });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (chapterData.length === 0) return <></>;
+  if (chapterData.length === 0 || !pathname.includes('/quran')) return <></>;
   return (
     <div
       className={classNames(

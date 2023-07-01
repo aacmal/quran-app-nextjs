@@ -10,6 +10,7 @@ import ArabicText from '../quranReader/ArabicText';
 import useSurah from '../../store/surahStore';
 import { shallow } from 'zustand/shallow';
 import useQuranReader from '@stores/quranReaderStore';
+import { Tafsir } from '@utils/types/Tafsir';
 
 const TafsirModal = () => {
   const chapterData = useSurah((state) => state.chapterData);
@@ -22,7 +23,7 @@ const TafsirModal = () => {
     }),
     shallow
   );
-  const [tafsirData, setTafsirData] = useState(null);
+  const [tafsirData, setTafsirData] = useState<Tafsir>(null);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -89,7 +90,7 @@ const TafsirModal = () => {
           {!isLoading && !!tafsirState ? (
             <>
               <div className="bg-emerald-500 w-fit py-2 px-3 font-bold text-white rounded-md">
-                {chapterData[currentChapter - 1].name_simple} :{' '}
+                {chapterData[tafsirData.surah_id - 1].name_simple} :{' '}
                 {tafsirData.ayah}
               </div>
               <div className="w-full flex flex-col dark:text-slate-100">
@@ -109,13 +110,18 @@ const TafsirModal = () => {
                 <h1 className="text-lg font-semibold text-emerald-500">
                   Tafsir Wajiz
                 </h1>
-                <p>{tafsirData.tafsir.wajiz}</p>
+                <p className="text-base md:text-lg">
+                  {tafsirData.tafsir.wajiz}
+                </p>
               </section>
+              <hr className="my-4 opacity-30" />
               <section className="mb-4">
                 <h1 className="text-lg font-semibold text-emerald-500">
                   Tafsir Tahlili
                 </h1>
-                <p>{tafsirData.tafsir.tahlili}</p>
+                <p className="text-base md:text-lg">
+                  {tafsirData.tafsir.tahlili}
+                </p>
               </section>
               <span className="mt-3 block">
                 Source : https://quran.kemenag.go.id
