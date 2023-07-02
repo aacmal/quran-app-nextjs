@@ -21,7 +21,7 @@ const ChapterCard = ({
   verse_mapping,
 }: ChapterCardProps) => {
   return (
-    <Link scroll={false} href={`quran/surah/${chapterId}`}>
+    <Link scroll={false} href={`/quran/surah/${chapterId}`}>
       <ChapterWrapper>
         <div className="flex items-center">
           <div className="relative grid place-items-center h-11 w-11 mr-3">
