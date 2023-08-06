@@ -11,32 +11,32 @@ const config = {
       {
         source: '/',
         destination: '/quran/surah',
-        permanent: true
+        permanent: false
       },
       {
         source: '/juz',
         destination: '/quran/juz',
-        permanent: true
+        permanent: false
       },
       {
         source: '/surah',
         destination: '/quran/surah',
-        permanent: true
+        permanent: false
       },
       {
         source: '/surah/:id',
         destination: '/quran/surah/:id',
-        permanent: true
+        permanent: false
       },
       {
         source: '/surah/:id/:ayah',
         destination: '/quran/surah/:id/:ayah',
-        permanent: true
+        permanent: false
       },
       {
         source: '/juz/:id',
         destination: '/quran/juz/:id',
-        permanent: true
+        permanent: false
       }
     ]
   },
