@@ -4,8 +4,8 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "Pustaka Islam",
-    "short_name": "Pustaka Islam",
+    "name": "Baca Quran",
+    "short_name": "Baca Quran",
     "description": "Aplikasi sederhana yang dibuat menggunakan Framework NextJS",
     "icons": [
         {
