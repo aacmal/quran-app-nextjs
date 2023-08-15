@@ -6,7 +6,7 @@
     "start_url": "/",
     "name": "Baca Quran",
     "short_name": "Baca Quran",
-    "description": "Aplikasi sederhana yang dibuat menggunakan Framework NextJS",
+    "description": "Baca Quran adalah aplikasi web interaktif yang memungkinkan pengguna untuk membaca, mencari, dan menjelajahi teks suci Al-Quran secara digital. Aplikasi ini dilengkapi dengan berbagai fitur yang memudahkan pengguna dalam mempelajari dan meresapi ayat-ayat Al-Quran, seperti terjemahan, tafsir, dan audio.",
     "icons": [
         {
             "src": "/icon-192x192.png",
