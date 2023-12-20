@@ -126,21 +126,16 @@ const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
   };
 
   return (
-    <div className="min-h-screen">
-      <Virtuoso
-        style={{
-          height: "100%",
-        }}
-        totalCount={totalData > 20 ? totalData - LIMIT : 0}
-        useWindowScroll
-        increaseViewportBy={{ top: 300, bottom: 800 }}
-        itemContent={renderRow}
-        rangeChanged={loadMoreData}
-        itemsRendered={(items) => setItemsRendered(items)}
-        ref={ref}
-        startReached={initData}
-      />
-    </div>
+    <Virtuoso
+      totalCount={totalData > 20 ? totalData - LIMIT : 0}
+      useWindowScroll
+      increaseViewportBy={{ top: 10000, bottom: 1000 }}
+      itemContent={renderRow}
+      rangeChanged={loadMoreData}
+      itemsRendered={(items) => setItemsRendered(items)}
+      ref={ref}
+      startReached={initData}
+    />
   );
 };
 

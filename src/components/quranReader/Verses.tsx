@@ -34,7 +34,7 @@ const Verses = ({
   );
 
   return (
-    <div className="py-3 lg:py-5">
+    <div className="py-3 lg:py-5 my-0">
       <div
         id={id.toString()}
         className="flex justify-between pb-3 lg:pb-5 md:flex-row flex-col"
