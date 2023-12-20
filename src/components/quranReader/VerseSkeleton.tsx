@@ -1,6 +1,6 @@
-import React from 'react';
-import Skeleton from '../Skeleton/Skeleton';
-import classNames from 'classnames';
+import React from "react";
+import Skeleton from "../Skeleton/Skeleton";
+import classNames from "classnames";
 
 type VerseSkeletonProps = {
   className?: string;
@@ -9,14 +9,14 @@ type VerseSkeletonProps = {
 
 const VerseSkeleton = ({ className, animateDelay }: VerseSkeletonProps) => {
   return (
-    <>
+    <div className="py-3 lg:py-5">
       <div
         style={{
           animationDelay: `${animateDelay}s`,
-          animationDuration: '1s',
+          animationDuration: "1s",
         }}
         className={classNames(
-          'flex justify-between py-3 md:flex-row flex-col',
+          "flex justify-between py-3 md:flex-row flex-col",
           className
         )}
       >
@@ -37,8 +37,8 @@ const VerseSkeleton = ({ className, animateDelay }: VerseSkeletonProps) => {
           <Skeleton color="gray" className="h-7 w-3/4" />
         </div>
       </div>
-      <hr className="border-none my-3 lg:my-5 h-[1px] bg-emerald-500" />
-    </>
+      <hr className="border-none h-[1px] bg-emerald-500" />
+    </div>
   );
 };
 

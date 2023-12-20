@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { GetVerseBy, Verse, VersePagination } from '@utils/types/Verse';
-import React, { useEffect, useRef, useState } from 'react';
-import { ListItem, ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
-import VerseSkeleton from './VerseSkeleton';
-import Verses from './Verses';
-import { getVerses } from '@utils/verse';
-import useQuranReader from '@stores/quranReaderStore';
-import { shallow } from 'zustand/shallow';
-import useSettings from '@stores/settingsStore';
-import { useSearchParams } from 'next/navigation';
+import { GetVerseBy, Verse, VersePagination } from "@utils/types/Verse";
+import React, { useEffect, useRef, useState } from "react";
+import { ListItem, ListRange, Virtuoso, VirtuosoHandle } from "react-virtuoso";
+import VerseSkeleton from "./VerseSkeleton";
+import Verses from "./Verses";
+import { getVerses } from "@utils/verse";
+import useQuranReader from "@stores/quranReaderStore";
+import { shallow } from "zustand/shallow";
+import useSettings from "@stores/settingsStore";
+import { useSearchParams } from "next/navigation";
 
 type Props = {
   totalData: number;
@@ -73,7 +73,7 @@ const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
 
   useEffect(() => {
     if (!highlightedVerse || !ref.current || !autoScroll) return;
-    const idAndVerse = highlightedVerse.split(':');
+    const idAndVerse = highlightedVerse.split(":");
     const verseNumber = parseInt(idAndVerse[1]);
     const chapterNumber = parseInt(idAndVerse[0]);
     if (chapterNumber !== currentChapter) return;
@@ -89,12 +89,12 @@ const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
   }, [highlightedWord]);
 
   useEffect(() => {
-    if (!searchParams.get('ayah')) return;
-    const verseNumber = Number(searchParams.get('ayah'));
+    if (!searchParams.get("ayah")) return;
+    const verseNumber = Number(searchParams.get("ayah"));
     if (verseNumber <= LIMIT) return; // because the first verse is already rendered on the server
     ref.current.scrollToIndex({
       index: verseNumber - LIMIT - 1,
-      align: 'center',
+      align: "center",
     });
   }, [searchParams]);
 
