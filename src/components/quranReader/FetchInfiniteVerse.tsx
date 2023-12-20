@@ -21,6 +21,7 @@ const LIMIT = 20;
 const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
   const [data, setData] = useState<Verse[]>([]);
   const [paginationData, setPaginationData] = useState<VersePagination>();
+  const [currentPage, setCurrentPage] = useState<number>();
   const [itemsRendered, setItemsRendered] = useState<ListItem<any>[]>();
   const searchParams = useSearchParams();
 
@@ -42,21 +43,7 @@ const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
       return;
     }
 
-    const res = await getVerses({
-      id: id,
-      page,
-      per_page: LIMIT,
-      getBy: getVerseBy,
-    });
-
-    setPaginationData(res.pagination);
-    setData((prev) => {
-      // remove duplicate data and sort by id
-      const newData = res.verses.filter(
-        (item) => !prev.find((prevItem) => prevItem.id === item.id)
-      );
-      return [...prev, ...newData].sort((a, b) => a.id - b.id);
-    });
+    setCurrentPage(page);
   };
 
   const initData = () => {
@@ -70,6 +57,28 @@ const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
       setData(res.verses);
     });
   };
+
+  // fetch verses by page
+  useEffect(() => {
+    if (!currentPage) return;
+    getVerses({
+      id,
+      page: currentPage,
+      per_page: LIMIT,
+      getBy: getVerseBy,
+    }).then((res) => {
+      setPaginationData(res.pagination);
+      setData((prev) => {
+        // remove duplicate data and sort by id
+        const newData = res.verses.filter(
+          (item) => !prev.find((prevItem) => prevItem.id === item.id)
+        );
+        return [...prev, ...newData].sort((a, b) => a.id - b.id);
+      });
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   useEffect(() => {
     if (!highlightedVerse || !ref.current || !autoScroll) return;
@@ -117,15 +126,21 @@ const FetchInfiniteVerse = ({ totalData, id, getVerseBy }: Props) => {
   };
 
   return (
-    <Virtuoso
-      totalCount={totalData > 20 ? totalData - LIMIT : 0}
-      useWindowScroll
-      itemContent={renderRow}
-      rangeChanged={loadMoreData}
-      itemsRendered={(items) => setItemsRendered(items)}
-      ref={ref}
-      startReached={initData}
-    />
+    <div className="min-h-screen">
+      <Virtuoso
+        style={{
+          height: "100%",
+        }}
+        totalCount={totalData > 20 ? totalData - LIMIT : 0}
+        useWindowScroll
+        increaseViewportBy={{ top: 300, bottom: 800 }}
+        itemContent={renderRow}
+        rangeChanged={loadMoreData}
+        itemsRendered={(items) => setItemsRendered(items)}
+        ref={ref}
+        startReached={initData}
+      />
+    </div>
   );
 };
 
