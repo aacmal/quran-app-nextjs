@@ -33,9 +33,11 @@ export const metadata: Metadata = {
   robots: IS_PRODUCTION ? "index, follow" : "noindex, nofollow",
   openGraph: {
     ...defaultOpenGraph,
+    images: "/quranapp.jpg",
   },
   twitter: {
     ...defaultTwitter,
+    images: "/quranapp.jpg",
   },
 };
 

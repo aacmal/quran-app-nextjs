@@ -1,14 +1,14 @@
-import { LocalChapter } from 'data/chapter/type';
-import { makeUrl } from './api';
-import { Chapter, ChapterInfo } from './types/Chapter';
+import { LocalChapter } from "data/chapter/type";
+import { makeUrl } from "./api";
+import { Chapter, ChapterInfo } from "./types/Chapter";
 
 export const getAllChaptersData = async (
-  lang = 'id'
+  lang = "id"
 ): Promise<{
   chapters: Chapter[];
 }> => {
   const response = await fetch(makeUrl(`/chapters`, `language=${lang}`), {
-    cache: 'force-cache',
+    cache: "force-cache",
   });
   const data = await response.json();
   return data;
@@ -16,7 +16,7 @@ export const getAllChaptersData = async (
 
 export const getChapterInfo = async (
   chapterId: number,
-  lang = 'id'
+  lang = "id"
 ): Promise<{
   chapter_info: ChapterInfo;
 }> => {
@@ -29,7 +29,7 @@ export const getChapterInfo = async (
 
 export const getChapter = async (
   chapterId: number,
-  lang = 'id'
+  lang = "id"
 ): Promise<Chapter> => {
   const response = await fetch(
     makeUrl(`/chapters/${chapterId}`, `language=${lang}`)
@@ -38,7 +38,7 @@ export const getChapter = async (
   return data.chapter;
 };
 
-export const getLocalChapter = (lang = 'id'): Promise<LocalChapter[]> => {
+export const getLocalChapter = (lang = "id"): Promise<LocalChapter[]> => {
   return new Promise((resolve) => {
     import(`../../data/chapter/${lang}.json`).then((data) => {
       const array = Object.keys(data.default).map((key) => ({

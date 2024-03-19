@@ -30,7 +30,6 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   }
 
   const description = `Baca Surah ${chapterData.name_simple} (${chapterData.translated_name.name}) dengan jumlah ${chapterData.verses_count} ayat, surah ini diturunkan ke ${chapterData.revelation_order} di ${chapterData.revelation_place}. Halaman ini berisi bacaan surah ${chapterData.name_simple} dengan terjemahan bahasa Indonesia, tafsir, dan audio dengan qori yang berbeda.`;
-  const imageUrl = `${canonicalUrl}api/og?chapterId=${chapterData.id}`;
   return {
     title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
     description: description,
@@ -40,13 +39,11 @@ export async function generateMetadata({ params }): Promise<Metadata> {
       title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
       description: description,
       url: `${canonicalUrl}quran/surah/${chapterData.id}`,
-      images: imageUrl,
     },
     twitter: {
       ...defaultTwitter,
       title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
       description: description,
-      images: imageUrl,
     },
   };
 }

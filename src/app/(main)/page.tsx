@@ -23,11 +23,13 @@ export const metadata: Metadata = {
     ...defaultOpenGraph,
     title: staticTitle["/"],
     description: staticDescription["/"],
+    images: "/quranapp.jpg",
   },
   twitter: {
     ...defaultTwitter,
     title: staticTitle["/"],
     description: staticDescription["/"],
+    images: "/quranapp.jpg",
   },
 };
 

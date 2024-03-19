@@ -1,7 +1,5 @@
-import { NextSeoProps } from "next-seo";
 import { getBasePath } from "./url";
 import { Metadata } from "next";
-import { Twitter } from "next/dist/lib/metadata/types/twitter-types";
 
 export const websiteDescription =
   "Baca Quran adalah aplikasi web interaktif yang memungkinkan pengguna untuk membaca, mencari, dan menjelajahi teks suci Al-Quran secara digital. Aplikasi ini dilengkapi dengan berbagai fitur yang memudahkan pengguna dalam mempelajari dan meresapi ayat-ayat Al-Quran, seperti terjemahan, tafsir, dan audio.";
@@ -35,8 +33,7 @@ export const defaultOpenGraph: Metadata["openGraph"] = {
   type: "website",
   locale: "id",
   description: staticDescription["/"],
-  images: "/quranapp.jpg",
-  siteName: "Pustaka Islam",
+  siteName: "Quran App",
   url: canonicalUrl,
 };
 
@@ -44,7 +41,6 @@ export const defaultTwitter: Metadata["twitter"] = {
   title: staticTitle["/"],
   creator: "@acmaul",
   card: "summary_large_image",
-  images: "/quranapp.jpg",
   description: staticDescription["/"],
 };
 
