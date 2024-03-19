@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import "./globals.css";
 import { Lato } from "next/font/google";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import GoogleAnalytics from "@components/GoogleAnalytics/GoogleAnalytics";
 import { canonicalUrl } from "@utils/seo";
@@ -27,7 +27,6 @@ const lato = Lato({
 export const metadata: Metadata = {
   metadataBase: canonicalUrl,
   manifest: "/manifest.json",
-  themeColor: "#f1f5f9",
   title: staticTitle["/"],
   description: staticDescription["/"],
   robots: IS_PRODUCTION ? "index, follow" : "noindex, nofollow",
@@ -39,6 +38,11 @@ export const metadata: Metadata = {
     ...defaultTwitter,
     images: "/quranapp.jpg",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f1f5f9",
+  colorScheme: "dark light",
 };
 
 const AudioPlayer = dynamic(
