@@ -42,7 +42,6 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#f1f5f9",
-  colorScheme: "dark light",
 };
 
 const AudioPlayer = dynamic(
