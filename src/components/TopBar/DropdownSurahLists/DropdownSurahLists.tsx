@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import classNames from 'classnames';
-import React, { useState, useCallback } from 'react';
-import ChapterLists from './ChapterLists';
-import Link from 'next/link';
-import { ChevronIcon, ArrowIcon } from '../../icons';
-import { LocalChapter } from 'data/chapter/type';
-import VerseList from './VerseList';
+import classNames from "classnames";
+import React, { useState, useCallback } from "react";
+import ChapterLists from "./ChapterLists";
+import { ChevronIcon, ArrowIcon } from "../../icons";
+import { LocalChapter } from "data/chapter/type";
+import VerseList from "./VerseList";
+import { useRouter } from "next/navigation";
 
 type DropdownSurahListsProps = {
   chapterLists: LocalChapter[];
@@ -19,6 +19,7 @@ const DropdownSurahLists = ({
 }: DropdownSurahListsProps) => {
   const [open, setOpen] = useState(false);
   const [filteredChapterLists, setFilteredChapterLists] = useState(null);
+  const router = useRouter();
 
   const handleChange = useCallback((e) => {
     const keyword = e.target.value;
@@ -30,7 +31,7 @@ const DropdownSurahLists = ({
       if (result.length > 0) {
         return result;
       } else {
-        return [{ name_simple: 'Tidak ditemukan' }];
+        return [{ name_simple: "Tidak ditemukan" }];
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,20 +41,20 @@ const DropdownSurahLists = ({
     return (
       <div>
         <div className="flex items-center gap-3">
-          <Link
+          <button
             aria-label="Kembali ke halaman daftar surah"
             className="h-10 w-10 grid place-items-center rounded bg-emerald-400 text-white p-2"
-            href="/quran/surah"
+            onClick={() => router.back()}
           >
             <ArrowIcon className="h-5 w-5" />
-          </Link>
+          </button>
           {/* Dropdown Toggle */}
           <div
             onClick={() => setOpen(!open)}
             className={classNames(
-              'p-2 cursor-pointer border border-transparent bg-white dark:bg-slate-600 w-fit rounded-md  flex items-center relative',
+              "p-2 cursor-pointer border border-transparent bg-white dark:bg-slate-600 w-fit rounded-md  flex items-center relative",
               {
-                'border-emerald-500 shadow-lg shadow-emerald-500/10': open,
+                "border-emerald-500 shadow-lg shadow-emerald-500/10": open,
               }
             )}
           >
@@ -62,8 +63,8 @@ const DropdownSurahLists = ({
             </button>
             <ChevronIcon
               className={classNames(
-                'h-5 ml-2 transition-all text-emerald-500 transform',
-                { 'rotate-180': open }
+                "h-5 ml-2 transition-all text-emerald-500 transform",
+                { "rotate-180": open }
               )}
             />
           </div>
@@ -71,9 +72,9 @@ const DropdownSurahLists = ({
         {/* Dropdown Menu */}
         <div
           className={classNames(
-            'absolute z-50 transition-all flex bg-white dark:bg-slate-700 dark:text-slate-100 rounded-md shadow-lg shadow-emerald-700/20 pt-8',
-            { 'visible top-[80px] opacity-100': open },
-            { 'invisible top-[60px] opacity-0': !open }
+            "absolute z-50 transition-all flex bg-white dark:bg-slate-700 dark:text-slate-100 rounded-md shadow-lg shadow-emerald-700/20 pt-8",
+            { "visible top-[80px] opacity-100": open },
+            { "invisible top-[60px] opacity-0": !open }
           )}
         >
           <div className="w-full left-0 top-0 px-3 absolute">

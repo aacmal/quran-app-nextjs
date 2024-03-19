@@ -1,5 +1,5 @@
-import classNames from 'classnames';
-import Link from 'next/link';
+import classNames from "classnames";
+import Link from "next/link";
 
 type SurahInfoProps = {
   verses_count: number;
@@ -19,7 +19,7 @@ const SurahInfo = ({
   return (
     <div
       className={classNames(
-        'text-left text-sm lg:text-xl transition-all selection:bg-slate-100 selection:text-slate-700',
+        "text-left text-sm lg:text-xl transition-all selection:bg-slate-100 selection:text-slate-700",
         className
       )}
     >
@@ -37,7 +37,7 @@ const SurahInfo = ({
       </div>
       <p className="text-sm lg:text-xl">{short_text}</p>
       <br />
-      <Link href={`/quran/surah/${chapterId}/info`}>
+      <Link href={`/surah/${chapterId}/info`}>
         <span className="text-blue-600 cursor-pointer decoration-blue-600 hover:underline absolute bottom-0">
           Tampilkan lebih lengkap
         </span>

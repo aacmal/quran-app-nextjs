@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import classNames from 'classnames';
+import classNames from "classnames";
 import React, {
   createContext,
   useEffect,
   useReducer,
   useRef,
   useState,
-} from 'react';
-import PlaybackController from './PlaybackController/PlaybackController';
+} from "react";
+import PlaybackController from "./PlaybackController/PlaybackController";
 
-import style from './AudioPlayer.module.css';
+import style from "./AudioPlayer.module.css";
 import {
   useSelectedLayoutSegment,
   useRouter,
   useParams,
-} from 'next/navigation';
-import { getAudioFile } from '../../utils/audio';
-import useSurah from '../../store/surahStore';
-import useSettings from '../../store/settingsStore';
-import { shallow } from 'zustand/shallow';
-import useQuranReader from '@stores/quranReaderStore';
+} from "next/navigation";
+import { getAudioFile } from "../../utils/audio";
+import useSurah from "../../store/surahStore";
+import useSettings from "../../store/settingsStore";
+import { shallow } from "zustand/shallow";
+import useQuranReader from "@stores/quranReaderStore";
 
 // Context
 
@@ -35,23 +35,23 @@ export const AudioContext = createContext(null);
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'play':
+    case "play":
       return { ...state, isPlaying: true };
-    case 'pause':
+    case "pause":
       return { ...state, isPlaying: false };
-    case 'repeat':
+    case "repeat":
       return { ...state, isRepeat: !state.isRepeat };
-    case 'changeReciterId':
+    case "changeReciterId":
       return { ...state, reciterId: action.payload };
     default:
-      throw new Error('dispatch not found');
+      throw new Error("dispatch not found");
   }
 }
 
 const AudioPlayer = () => {
   const router = useRouter();
   // const layoutSegment = useSelectedLayoutSegment();
-  const params = useParams();
+  const params = useParams() as { chapterId: string };
 
   // State
   const allChapters = useSurah((state) => state.chapterData, shallow);
@@ -99,7 +99,7 @@ const AudioPlayer = () => {
 
   // Time State
   const [maxTime, setMaxtime] = useState(0);
-  const [currentTime, setCurrentTime] = useState('0:0');
+  const [currentTime, setCurrentTime] = useState("0:0");
 
   function calculateTime(secs: number) {
     const minutes = Math.floor(secs / 60);
@@ -119,7 +119,7 @@ const AudioPlayer = () => {
     setCurrentTime(calculateTime(Math.floor(audioRef.current.currentTime) + 1));
     setTrackProgress(Math.floor(audioRef.current.currentTime) + 1);
     sliderRef?.current?.style.setProperty(
-      '--seek-before-width',
+      "--seek-before-width",
       `${((Math.floor(audioRef.current.currentTime) + 1) / maxTime) * 100}%`
     );
 
@@ -140,7 +140,7 @@ const AudioPlayer = () => {
             audioRef.current.currentTime >= startTime &&
             audioRef.current.currentTime < endTime
           ) {
-            setHighlightedWord(activeVerse.verse_key + ':' + word);
+            setHighlightedWord(activeVerse.verse_key + ":" + word);
           }
         });
       }
@@ -152,9 +152,9 @@ const AudioPlayer = () => {
     setTrackProgress(0);
     updateCurrentTime(0);
     setMaxtime(Math.floor(value));
-    dispatch({ type: 'pause' });
+    dispatch({ type: "pause" });
     // setPlaying(false)
-    sliderRef?.current?.style.setProperty('--seek-before-width', `0%`);
+    sliderRef?.current?.style.setProperty("--seek-before-width", `0%`);
   }
 
   function handlePointerUp() {
@@ -168,12 +168,12 @@ const AudioPlayer = () => {
       const isOnCurrentChapter = parseInt(params?.chapterId) === audioId;
       if (currentChapter < 114) {
         if (autoScroll && isOnCurrentChapter) {
-          router.push(`/quran/surah/${currentChapter + 1}`);
+          router.push(`/surah/${currentChapter + 1}`);
         }
         setAudioId(currentChapter + 1);
       } else {
         if (autoScroll && isOnCurrentChapter) {
-          router.push('/quran/surah/1');
+          router.push("/surah/1");
         }
         setAudioId(1);
       }
@@ -182,14 +182,14 @@ const AudioPlayer = () => {
 
   function handleOnCanPlayThrough(e: React.SyntheticEvent<HTMLAudioElement>) {
     if (e.eventPhase > 1) {
-      dispatch({ type: 'play' });
+      dispatch({ type: "play" });
     } else {
-      dispatch({ type: 'pause' });
+      dispatch({ type: "pause" });
     }
   }
 
   function reset() {
-    dispatch({ type: 'pause' });
+    dispatch({ type: "pause" });
     setAudioId(null);
     setTimeout(() => {
       setTrackProgress(0);
@@ -211,37 +211,37 @@ const AudioPlayer = () => {
     if (audioId) {
       getAudioFile(audioState.reciterId, audioId)
         .then((res) => setAudioData(res.audio_file))
-        .then(() => dispatch({ type: 'pause' }));
+        .then(() => dispatch({ type: "pause" }));
     }
   }, [audioId, audioState.reciterId]);
 
   useEffect(() => {
-    if (parseInt(params?.chapterId) === audioId && autoScroll === 'verse') {
+    if (parseInt(params?.chapterId) === audioId && autoScroll === "verse") {
       const highlightedElement = document.querySelector(
         `[data-verse="${highlightedVerse}"]`
       ) as HTMLElement;
 
       if (!highlightedElement) return;
       highlightedElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
+        behavior: "smooth",
+        block: "center",
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highlightedVerse]);
 
   useEffect(() => {
-    if (parseInt(params?.chapterId) !== audioId && autoScroll !== 'word')
+    if (parseInt(params?.chapterId) !== audioId && autoScroll !== "word")
       return;
-    if (parseInt(params?.chapterId) === audioId && autoScroll === 'word') {
+    if (parseInt(params?.chapterId) === audioId && autoScroll === "word") {
       const highlightedElement = document.querySelector(
         `[data-word="${highlightedWord}"]`
       ) as HTMLElement;
 
       if (!highlightedElement) return;
       highlightedElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
+        behavior: "smooth",
+        block: "center",
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -255,7 +255,7 @@ const AudioPlayer = () => {
       }}
     >
       <audio
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onLoadedMetadata={(e: React.SyntheticEvent<HTMLAudioElement>) =>
           handleOnLoad(e.currentTarget.duration)
         }
@@ -270,13 +270,13 @@ const AudioPlayer = () => {
       {!isHidden && (
         <div
           className={classNames(
-            'fixed bottom-0 dark:bg-slate-600 bg-white border-t border-emerald-500 lg:shadow-2xl shadow-gray-500/50 w-full ',
+            "fixed bottom-0 dark:bg-slate-600 bg-white border-t border-emerald-500 lg:shadow-2xl shadow-gray-500/50 w-full ",
             { hidden: audioId == null }
           )}
         >
           <div className="py-3 max-w-screen-2xl mx-auto relative">
             <div
-              onClick={() => router.push(`/quran/surah/${audioId}`)}
+              onClick={() => router.push(`/surah/${audioId}`)}
               className="cursor-pointer absolute -top-6 left-2 border border-emerald-500 bg-white dark:bg-slate-600 dark:text-slate-100 py-1 px-2 rounded text-emerald-500 font-bold text-sm md:text-base"
             >
               {audioId && allChapters[audioId - 1].name_simple}
@@ -292,7 +292,7 @@ const AudioPlayer = () => {
                   type="range"
                   className={classNames(
                     style.audioSlider,
-                    'w-[75%] md:w-[90%]'
+                    "w-[75%] md:w-[90%]"
                   )}
                   onChange={(e) => updateCurrentTime(e.target.value)}
                   max={maxTime}

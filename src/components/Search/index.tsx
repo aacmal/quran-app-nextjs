@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useCallback, useState } from 'react';
-import useStore from '../../store/surahStore';
-import Link from 'next/link';
-import { LocalChapter } from 'data/chapter/type';
+import React, { useCallback, useState } from "react";
+import useStore from "../../store/surahStore";
+import Link from "next/link";
+import { LocalChapter } from "data/chapter/type";
 
 type SearchProps = {
   className?: string;
@@ -13,9 +13,9 @@ const Search = ({ className }: SearchProps) => {
   const allChapters = useStore((state) => state.chapterData);
   const notFound = {
     id: null,
-    name_simple: 'Ketik untuk mencari',
+    name_simple: "Ketik untuk mencari",
     verses_count: 0,
-    revelation_place: '',
+    revelation_place: "",
   };
 
   const [filteredChapters, setFilteredChapters] = useState<LocalChapter[]>([
@@ -29,7 +29,7 @@ const Search = ({ className }: SearchProps) => {
     (e) => {
       const keyword = e.target.value;
 
-      if (keyword !== '') {
+      if (keyword !== "") {
         const result = allChapters.filter((chapters) => {
           return chapters.name_simple
             .toLowerCase()
@@ -68,7 +68,7 @@ const Search = ({ className }: SearchProps) => {
         onChange={(e) => handleChange(e)}
         type="text"
         className={
-          'bg-gray-100 w-full dark:bg-slate-600 dark:text-slate-200 dark:ring-emerald-500 py-2 px-3 my-3 rounded-lg outline-none focus:ring-2 ring-emerald-300 transition-all ' +
+          "bg-gray-100 w-full dark:bg-slate-600 dark:text-slate-200 dark:ring-emerald-500 py-2 px-3 my-3 rounded-lg outline-none focus:ring-2 ring-emerald-300 transition-all " +
           className
         }
         placeholder="Cari Surah"
@@ -78,7 +78,7 @@ const Search = ({ className }: SearchProps) => {
           {filteredChapters.length > 0 &&
             filteredChapters.map((e) => (
               <Link
-                href={`/quran/surah/${e.id ? e.id : ''}`}
+                href={`/surah/${e.id ? e.id : ""}`}
                 key={e.id}
                 className="py-1 px-2 hover:bg-emerald-200 dark:hover:bg-emerald-600 rounded cursor-pointer block"
               >

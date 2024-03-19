@@ -1,53 +1,51 @@
-import { NextSeoProps } from 'next-seo';
-import { getBasePath } from './url';
-import { Metadata } from 'next';
-import { Twitter } from 'next/dist/lib/metadata/types/twitter-types';
+import { NextSeoProps } from "next-seo";
+import { getBasePath } from "./url";
+import { Metadata } from "next";
+import { Twitter } from "next/dist/lib/metadata/types/twitter-types";
 
 export const websiteDescription =
-  'Baca Quran adalah aplikasi web interaktif yang memungkinkan pengguna untuk membaca, mencari, dan menjelajahi teks suci Al-Quran secara digital. Aplikasi ini dilengkapi dengan berbagai fitur yang memudahkan pengguna dalam mempelajari dan meresapi ayat-ayat Al-Quran, seperti terjemahan, tafsir, dan audio.';
+  "Baca Quran adalah aplikasi web interaktif yang memungkinkan pengguna untuk membaca, mencari, dan menjelajahi teks suci Al-Quran secara digital. Aplikasi ini dilengkapi dengan berbagai fitur yang memudahkan pengguna dalam mempelajari dan meresapi ayat-ayat Al-Quran, seperti terjemahan, tafsir, dan audio.";
 
 export const config = {
-  siteName: 'Quran App',
+  siteName: "Quran App",
   websiteLogo: `${getBasePath()}/quranapp.jpg`,
-  twitterHandle: '@quran_app',
-  twitterCardType: 'summary_large_image',
-  facebookApp: '5277775832307938',
+  twitterHandle: "@quran_app",
+  twitterCardType: "summary_large_image",
+  facebookApp: "5277775832307938",
 };
 
 export const staticDescription = {
-  '/': 'Pustaka Islam adalah aplikasi untuk membaca Quran, Hadits, dan Doa',
-  '/quran/surah':
-    'Baca Quran secara online yang memungkinkan pengguna untuk membaca, mencari, dan menjelajahi teks suci Al-Quran secara digital. Aplikasi ini dilengkapi dengan berbagai fitur yang memudahkan pengguna dalam mempelajari dan meresapi ayat-ayat Al-Quran, seperti terjemahan, tafsir, dan audio dengan berbagai pilihan qori.',
-  '/quran/juz': 'Baca Quran berdasarkan juz',
-  '/hadits':
-    'Baca Hadits secara online dengan berbagai pilihan kitab hadits dan di lengkapi dengan terjemahan',
+  "/": "Pustaka Islam adalah aplikasi untuk membaca Quran, Hadits, dan Doa",
+  "/surah":
+    "Baca Quran secara online yang memungkinkan pengguna untuk membaca, mencari, dan menjelajahi teks suci Al-Quran secara digital. Aplikasi ini dilengkapi dengan berbagai fitur yang memudahkan pengguna dalam mempelajari dan meresapi ayat-ayat Al-Quran, seperti terjemahan, tafsir, dan audio dengan berbagai pilihan qori.",
+  "/juz": "Baca Quran berdasarkan juz",
+  "/hadits":
+    "Baca Hadits secara online dengan berbagai pilihan kitab hadits dan di lengkapi dengan terjemahan",
 };
 
 export const staticTitle = {
-  '/': 'Pustaka Islam - Baca Quran, Hadits, dan Doa',
-  '/quran/surah': 'Baca Quran - Surah',
-  '/quran/juz': 'Baca Quran - Juz',
-  '/hadits': 'Baca Hadits',
+  "/surah": "Baca Quran - Surah",
+  "/juz": "Baca Quran - Juz",
 };
 
 export const canonicalUrl = new URL(getBasePath());
 
-export const defaultOpenGraph: Metadata['openGraph'] = {
-  title: staticTitle['/'],
-  type: 'website',
-  locale: 'id',
-  description: staticDescription['/'],
-  images: '/quranapp.jpg',
-  siteName: 'Pustaka Islam',
+export const defaultOpenGraph: Metadata["openGraph"] = {
+  title: staticTitle["/"],
+  type: "website",
+  locale: "id",
+  description: staticDescription["/"],
+  images: "/quranapp.jpg",
+  siteName: "Pustaka Islam",
   url: canonicalUrl,
 };
 
-export const defaultTwitter: Metadata['twitter'] = {
-  title: staticTitle['/'],
-  creator: '@acmaul',
-  card: 'summary_large_image',
-  images: '/quranapp.jpg',
-  description: staticDescription['/'],
+export const defaultTwitter: Metadata["twitter"] = {
+  title: staticTitle["/"],
+  creator: "@acmaul",
+  card: "summary_large_image",
+  images: "/quranapp.jpg",
+  description: staticDescription["/"],
 };
 
 // export function createSEOConfig({ title, description, canonicalUrl, locale }) {

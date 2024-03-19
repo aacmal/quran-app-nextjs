@@ -1,31 +1,31 @@
-import { MetadataRoute } from 'next';
+import { getAllChaptersData } from "@utils/chapter";
+import { MetadataRoute } from "next";
 
-const currentDomain = 'https://quran.acml.me';
-export default function sitemap(): MetadataRoute.Sitemap {
+async function getChapterData() {
+  const res = await getAllChaptersData();
+  return res.chapters;
+}
+
+const currentDomain = "https://quran.acml.me";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const data = await getChapterData();
+
+  const surahMap = data.map((d) => ({
+    url: `${currentDomain}/surah/${d.id}`,
+    lastModified: new Date(),
+    priority: 4,
+  })) satisfies MetadataRoute.Sitemap;
   return [
     {
-      url: `${currentDomain}`,
+      url: `${currentDomain}/`,
       lastModified: new Date(),
+      priority: 6,
     },
     {
-      url: `${currentDomain}/quran/surah`,
+      url: `${currentDomain}/juz`,
       lastModified: new Date(),
+      priority: 6,
     },
-    {
-      url: `${currentDomain}/quran/juz`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${currentDomain}/quran/surah/1`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${currentDomain}/quran/juz/1`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${currentDomain}/quran/surah/18`,
-      lastModified: new Date(),
-    },
+    ...surahMap,
   ];
 }

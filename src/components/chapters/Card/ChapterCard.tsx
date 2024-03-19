@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import React from 'react';
-import { StarIcon } from '../../icons';
-import ChapterWrapper from './ChapterWrapper';
-import classNames from 'classnames';
-import { nastaleeqClassName } from '@utils/fonts';
+import Link from "next/link";
+import React from "react";
+import { StarIcon } from "../../icons";
+import ChapterWrapper from "./ChapterWrapper";
+import classNames from "classnames";
+import { nastaleeqClassName } from "@utils/fonts";
 
 type ChapterCardProps = {
   chapterId: number;
@@ -21,7 +21,7 @@ const ChapterCard = ({
   verse_mapping,
 }: ChapterCardProps) => {
   return (
-    <Link scroll={false} href={`/quran/surah/${chapterId}`}>
+    <Link href={`/surah/${chapterId}`}>
       <ChapterWrapper>
         <div className="flex items-center">
           <div className="relative grid place-items-center h-11 w-11 mr-3">
@@ -38,7 +38,7 @@ const ChapterCard = ({
         <div className="flex flex-col items-end">
           <span
             className={classNames(
-              'text-3xl group-hover:text-emerald-500 block mb-1',
+              "text-3xl group-hover:text-emerald-500 block mb-1",
               nastaleeqClassName
             )}
           >

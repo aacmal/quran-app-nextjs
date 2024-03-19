@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
-import { getVerses } from '@utils/verse';
-import { getAllChaptersData, getChapter, getChapterInfo } from '@utils/chapter';
-import Wrapper from '@components/Wrapper';
-import ChapterBanner from '@components/Banner/ChapterBanner';
-import QuranReader from '@components/quranReader/QuranReader';
-import PlayAudioButton from '@components/AudioPlayer/PlayAudioButton';
-import { canonicalUrl, defaultOpenGraph, defaultTwitter } from '@utils/seo';
-import { GetVerseBy } from '@utils/types/Verse';
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import { getVerses } from "@utils/verse";
+import { getAllChaptersData, getChapter, getChapterInfo } from "@utils/chapter";
+import Wrapper from "@components/Wrapper";
+import ChapterBanner from "@components/Banner/ChapterBanner";
+import QuranReader from "@components/quranReader/QuranReader";
+import PlayAudioButton from "@components/AudioPlayer/PlayAudioButton";
+import { canonicalUrl, defaultOpenGraph, defaultTwitter } from "@utils/seo";
+import { GetVerseBy } from "@utils/types/Verse";
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 export async function generateStaticParams() {
   const res = await getAllChaptersData();
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   return {
     title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,
     description: description,
-    robots: IS_PRODUCTION ? 'index, follow' : 'noindex, nofollow',
+    robots: IS_PRODUCTION ? "index, follow" : "noindex, nofollow",
     openGraph: {
       ...defaultOpenGraph,
       title: `${chapterData.name_simple} (${chapterData.translated_name.name})`,

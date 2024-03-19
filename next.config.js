@@ -7,43 +7,33 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 
 /** @type {import('next').NextConfig} */
 const config = {
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/quran/surah',
-        permanent: false
-      },
-      {
-        source: '/juz',
-        destination: '/quran/juz',
-        permanent: false
-      },
-      {
-        source: '/surah',
-        destination: '/quran/surah',
-        permanent: false
-      },
-      {
-        source: '/surah/:id',
-        destination: '/quran/surah/:id',
-        permanent: false
-      },
-      {
-        source: '/surah/:id/:ayah',
-        destination: '/quran/surah/:id/:ayah',
-        permanent: false
-      },
-      {
-        source: '/juz/:id',
-        destination: '/quran/juz/:id',
-        permanent: false
-      }
-    ]
-  },
-  experimental: {
-    scrollRestoration: true,
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/juz',
+  //       destination: '/quran/juz',
+  //       permanent: false
+  //     },
+  //     {
+  //       source: '/surah',
+  //       destination: '/quran/surah',
+  //       permanent: false
+  //     },
+  //     {
+  //       source: '/surah/:id/:ayah',
+  //       destination: '/quran/surah/:id/:ayah',
+  //       permanent: false
+  //     },
+  //     {
+  //       source: '/juz/:id',
+  //       destination: '/quran/juz/:id',
+  //       permanent: false
+  //     }
+  //   ]
+  // },
+  // experimental: {
+  //   scrollRestoration: true,
+  // },
   reactStrictMode: true,
   eslint: {
     // Warning: This allows production builds to successfully complete even if

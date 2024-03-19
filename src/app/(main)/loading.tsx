@@ -1,5 +1,5 @@
-import ChapterCardSkeleton from '@components/chapters/Card/ChapterCardSkeleton';
-import React from 'react';
+import ChapterCardSkeleton from "@components/chapters/Card/ChapterCardSkeleton";
+import React from "react";
 
 const Loading = () => {
   return (

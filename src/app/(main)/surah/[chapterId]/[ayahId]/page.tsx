@@ -1,8 +1,8 @@
-import React from 'react';
-import { getSpecificVerse } from '@utils/verse';
-import Verses from '@components/quranReader/Verses';
-import { Metadata } from 'next';
-import { getChapterInfo, getLocalChapter } from '@utils/chapter';
+import React from "react";
+import { getSpecificVerse } from "@utils/verse";
+import Verses from "@components/quranReader/Verses";
+import { Metadata } from "next";
+import { getLocalChapter } from "@utils/chapter";
 
 type Props = {
   params: {

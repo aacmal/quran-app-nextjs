@@ -1,12 +1,12 @@
-import React from 'react';
-import Link from 'next/link';
-import { ArrowIcon } from '@components/icons';
-import { Metadata } from 'next';
+import React from "react";
+import Link from "next/link";
+import { ArrowIcon } from "@components/icons";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Data tidak ditemukan',
-  description: 'Data tidak ditemukan',
-  robots: 'noindex, nofollow',
+  title: "Data tidak ditemukan",
+  description: "Data tidak ditemukan",
+  robots: "noindex, nofollow",
 };
 
 const NotFound = () => {
@@ -15,7 +15,7 @@ const NotFound = () => {
       <h1 className="font-bold text-3xl dark:text-slate-100">
         Data tidak ditemukan
       </h1>
-      <Link href={'/quran/surah'}>
+      <Link href={"/"}>
         <div className="flex gap-2 p-2 bg-emerald-500 rounded items-center text-white mt-3">
           <ArrowIcon className="h-5" />
           <span>Kembali ke Home</span>
