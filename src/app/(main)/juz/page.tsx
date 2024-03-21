@@ -1,24 +1,24 @@
-import JuzsView from '@components/chapters/JuzsView';
-import { getAllChaptersData } from '@utils/chapter';
-import { getJuzs } from '@utils/juz';
-import { canonicalUrl, staticDescription } from '@utils/seo';
-import { Metadata } from 'next';
-import React from 'react';
+import JuzsView from "@components/chapters/JuzsView";
+import { getAllChaptersData } from "@utils/chapter";
+import { getJuzs } from "@utils/juz";
+import { canonicalUrl, staticDescription } from "@utils/seo";
+import { Metadata } from "next";
+import React from "react";
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 export const metadata: Metadata = {
-  title: 'Baca Quran - Juz',
-  description: staticDescription['/quran/juz'],
-  robots: IS_PRODUCTION ? 'index, follow' : 'noindex, nofollow',
+  title: "Baca Quran - Juz",
+  description: staticDescription["/juz"],
+  robots: IS_PRODUCTION ? "index, follow" : "noindex, nofollow",
   openGraph: {
-    title: 'Baca Quran - Juz',
-    description: staticDescription['/quran/juz'],
+    title: "Baca Quran - Juz",
+    description: staticDescription["/juz"],
     url: `${canonicalUrl}quran/juz}`,
   },
   twitter: {
-    title: 'Baca Quran - Juz',
-    description: staticDescription['/quran/juz'],
+    title: "Baca Quran - Juz",
+    description: staticDescription["/juz"],
   },
 };
 
