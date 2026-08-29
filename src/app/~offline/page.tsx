@@ -5,7 +5,10 @@ type Props = {};
 
 export const metadata: Metadata = {
   title: '~ Anda sedang offline',
-  robots: 'noindex,nofollow',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const OfflineFallback = (props: Props) => {

@@ -45,7 +45,7 @@ const ChapterBanner = ({ chapterData, chapterInfo }: ChapterBannerProps) => {
           <InfoIcon className="h-5 lg:h-8 " />
         </IconWrapper>
         <h1 className="text-2xl lg:text-3xl font-bold mb-0 text-gray-50">
-          {chapterData.name_simple}
+          Surat {chapterData.name_simple}
         </h1>
         <span className="text-sm block lg:text-xl text-gray-50">
           {chapterData.translated_name.name}

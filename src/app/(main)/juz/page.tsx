@@ -1,26 +1,15 @@
 import JuzsView from "@components/chapters/JuzsView";
 import { getAllChaptersData } from "@utils/chapter";
 import { getJuzs } from "@utils/juz";
-import { canonicalUrl, staticDescription } from "@utils/seo";
+import { createPageMetadata, staticDescription, staticTitle } from "@utils/seo";
 import { Metadata } from "next";
 import React from "react";
 
-const IS_PRODUCTION = process.env.NODE_ENV === "production";
-
-export const metadata: Metadata = {
-  title: "Baca Quran - Juz",
+export const metadata: Metadata = createPageMetadata({
+  title: staticTitle["/juz"],
   description: staticDescription["/juz"],
-  robots: IS_PRODUCTION ? "index, follow" : "noindex, nofollow",
-  openGraph: {
-    title: "Baca Quran - Juz",
-    description: staticDescription["/juz"],
-    url: `${canonicalUrl}quran/juz}`,
-  },
-  twitter: {
-    title: "Baca Quran - Juz",
-    description: staticDescription["/juz"],
-  },
-};
+  path: "/juz",
+});
 
 const JuzList = async () => {
   const juzsData = await getJuzs();

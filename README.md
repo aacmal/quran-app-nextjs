@@ -1,12 +1,12 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://quranapp.acmal.me">
+  <a href="https://quran.wanakerta.com">
     <img src="public/quranapp.jpg" alt="Logo"  style="border-radius: 10px">
   </a>
 
   <p align="center">
-    <a href="https://quranapp.acmal.me">Visit QuranApp</a>
+    <a href="https://quran.wanakerta.com">Visit QuranApp</a>
   </p>
 </p>
 

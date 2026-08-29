@@ -10,6 +10,7 @@ import { useSelectedLayoutSegments } from 'next/navigation';
 
 export default function HomePage({ children }) {
   const layoutSegments = useSelectedLayoutSegments();
+  const isJuzPage = layoutSegments[0] === 'juz';
 
   // remove Header and orther components if the path is in surah/[id]
   if (layoutSegments.length >= 2) {
@@ -18,7 +19,9 @@ export default function HomePage({ children }) {
 
   return (
     <Wrapper className="px-0 xl:px-5 2xl:px-0">
-      <ReadQuranHeader />
+      <ReadQuranHeader
+        title={isJuzPage ? "Baca Al-Qur'an per Juz" : "Baca Al-Qur'an Online"}
+      />
       <BookmarkedVerseLists />
       <div
         className={classNames(

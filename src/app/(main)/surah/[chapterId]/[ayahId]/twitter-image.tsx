@@ -1,6 +1,7 @@
 import { getChapter } from "@utils/chapter";
 import { ImageResponse } from "next/og";
 import { Lato } from "next/font/google";
+import { SITE_URL } from "@utils/url";
 
 export const runtime = "edge";
 
@@ -72,7 +73,7 @@ export default async function Image({
               fontWeight: "bold",
             }}
           >
-            https://quran.acml.me
+            {SITE_URL}
           </span>
         </div>
         <div

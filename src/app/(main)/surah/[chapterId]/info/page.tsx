@@ -2,43 +2,79 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getAllChaptersData, getChapter, getChapterInfo } from "@utils/chapter";
+import { getChapter, getChapterInfo, getLocalChapter } from "@utils/chapter";
 import { ArrowIcon } from "@components/icons";
+import {
+  createMetaDescription,
+  createPageMetadata,
+  formatRevelationType,
+  noIndexRobots,
+} from "@utils/seo";
+
+type Props = {
+  params: {
+    chapterId: string;
+  };
+};
+
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const res = await getAllChaptersData();
-  const paths = res.chapters.map((item) => ({
+  const chapters = await getLocalChapter();
+  const paths = chapters.map((item) => ({
     chapterId: item.id.toString(),
   }));
 
   return paths;
 }
 
-export async function generateMetadata({ params }): Promise<Metadata> {
-  const chapterData = await getChapter(params.chapterId);
-  const chapterInfo = await getChapterInfo(params.chapterId);
-
-  if (!chapterData) {
-    return;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const chapterId = Number(params.chapterId);
+  if (!Number.isInteger(chapterId) || chapterId < 1) {
+    return {
+      title: "Informasi surah tidak ditemukan",
+      robots: noIndexRobots,
+    };
   }
 
-  return {
-    title: `${chapterData.name_simple} ~ `,
-    description: `Surah ${chapterData.name_simple} diturunkan di ${chapterData.revelation_place} dengan jumlah ayat ${chapterData.verses_count}. ${chapterInfo.chapter_info.short_text}`,
-  };
+  const [chapterData, chapterInfoResponse] = await Promise.all([
+    getChapter(chapterId),
+    getChapterInfo(chapterId),
+  ]);
+
+  if (!chapterData || !chapterInfoResponse?.chapter_info) {
+    return {
+      title: "Informasi surah tidak ditemukan",
+      robots: noIndexRobots,
+    };
+  }
+
+  const revelationType = formatRevelationType(chapterData.revelation_place);
+  const description = createMetaDescription(
+    `Pelajari Surat ${chapterData.name_simple} (${chapterData.translated_name.name}), surat ke-${chapterData.id} yang terdiri dari ${chapterData.verses_count} ayat ${revelationType}. ${chapterInfoResponse.chapter_info.short_text}`
+  );
+
+  return createPageMetadata({
+    title: `Tentang Surat ${chapterData.name_simple}: Arti, ${chapterData.verses_count} Ayat & ${revelationType}`,
+    description,
+    path: `/surah/${chapterData.id}/info`,
+    type: "article",
+  });
 }
 
-const getChapterInfoData = async (chapterId) => {
-  const res = await getChapterInfo(chapterId);
-  return res.chapter_info;
-};
+const SurahInfoPage = async ({ params }: Props) => {
+  const id = Number(params.chapterId);
+  if (!Number.isInteger(id) || id < 1) {
+    notFound();
+  }
 
-const SurahInfoPage = async ({ params }) => {
-  const { chapterId: id } = params;
-  const chapterInfo = await getChapterInfoData(id);
-  const chapterData = await getChapter(id);
+  const [chapterInfoResponse, chapterData] = await Promise.all([
+    getChapterInfo(id),
+    getChapter(id),
+  ]);
+  const chapterInfo = chapterInfoResponse?.chapter_info;
 
-  if (!chapterData) {
+  if (!chapterData || !chapterInfo) {
     notFound();
   }
 
@@ -53,7 +89,9 @@ const SurahInfoPage = async ({ params }) => {
           <span>Kembali ke surah</span>
         </Link>
         <div className="text-center text-white">
-          <h1 className="text-2xl font-bold">{chapterData.name_complex}</h1>
+          <h1 className="text-2xl font-bold">
+            Tentang Surat {chapterData.name_complex}
+          </h1>
           <span>{chapterData.verses_count} Ayah</span>
           <br />
           <span>

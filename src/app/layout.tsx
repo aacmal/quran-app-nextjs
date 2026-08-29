@@ -13,11 +13,13 @@ import TopBar from "@components/TopBar/TopBar";
 import {
   defaultOpenGraph,
   defaultTwitter,
+  indexableRobots,
+  serializeJsonLd,
+  siteName,
+  siteStructuredData,
   staticDescription,
   staticTitle,
 } from "@utils/seo";
-
-const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -27,9 +29,19 @@ const lato = Lato({
 export const metadata: Metadata = {
   metadataBase: canonicalUrl,
   manifest: "/manifest.json",
-  title: staticTitle["/"],
+  title: {
+    default: staticTitle["/"],
+    template: "%s | Wanakerta",
+  },
   description: staticDescription["/"],
-  robots: IS_PRODUCTION ? "index, follow" : "noindex, nofollow",
+  applicationName: siteName,
+  authors: [{ name: siteName }],
+  creator: siteName,
+  publisher: siteName,
+  alternates: {
+    canonical: "/",
+  },
+  robots: indexableRobots,
   openGraph: {
     ...defaultOpenGraph,
     images: "/quranapp.jpg",
@@ -37,6 +49,10 @@ export const metadata: Metadata = {
   twitter: {
     ...defaultTwitter,
     images: "/quranapp.jpg",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/icon-192x192.png",
   },
 };
 
@@ -60,6 +76,10 @@ export default function RootLayout({ children }) {
           "dark:bg-slate-800 bg-white min-h-screen selection:bg-emerald-500/30"
         )}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteStructuredData) }}
+        />
         <Toaster
           toastOptions={{
             className:

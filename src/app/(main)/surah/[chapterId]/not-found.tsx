@@ -6,7 +6,10 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Data tidak ditemukan",
   description: "Data tidak ditemukan",
-  robots: "noindex, nofollow",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const NotFound = () => {

@@ -1,8 +1,14 @@
 import React from "react";
+import { notFound } from "next/navigation";
 import { getSpecificVerse } from "@utils/verse";
 import Verses from "@components/quranReader/Verses";
 import { Metadata } from "next";
 import { getLocalChapter } from "@utils/chapter";
+import {
+  createMetaDescription,
+  createPageMetadata,
+  noIndexRobots,
+} from "@utils/seo";
 
 type Props = {
   params: {
@@ -12,18 +18,54 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const chapterData = await getLocalChapter();
+  const chapters = await getLocalChapter();
+  const chapterId = Number(params.chapterId);
+  const ayahId = Number(params.ayahId);
+  const chapterData = chapters.find((chapter) => chapter.id === chapterId);
 
-  return {
-    title: `${chapterData[parseInt(params.chapterId) - 1].name_simple} : ${
-      params.ayahId
-    }`,
-  };
+  if (
+    !chapterData ||
+    !Number.isInteger(ayahId) ||
+    ayahId < 1 ||
+    ayahId > chapterData.verses_count
+  ) {
+    return {
+      title: "Ayat tidak ditemukan",
+      robots: noIndexRobots,
+    };
+  }
+
+  return createPageMetadata({
+    title: `Surat ${chapterData.name_simple} Ayat ${ayahId}: Arab, Latin & Terjemahan`,
+    description: createMetaDescription(
+      `Baca Surat ${chapterData.name_simple} ayat ${ayahId} dalam tulisan Arab, transliterasi Latin, dan terjemahan bahasa Indonesia. Buka tafsir untuk memahami makna ayat.`
+    ),
+    path: `/surah/${chapterId}/${ayahId}`,
+    imagePath: `/surah/${chapterId}/${ayahId}/opengraph-image`,
+    type: "article",
+  });
 }
 
 const SingleAyahPage = async ({ params }: Props) => {
   const { chapterId, ayahId } = params;
+  const chapters = await getLocalChapter();
+  const chapter = chapters.find((item) => item.id === Number(chapterId));
+  const verseNumber = Number(ayahId);
+
+  if (
+    !chapter ||
+    !Number.isInteger(verseNumber) ||
+    verseNumber < 1 ||
+    verseNumber > chapter.verses_count
+  ) {
+    notFound();
+  }
+
   const responseData = await getSpecificVerse(`${chapterId}:${ayahId}`);
+
+  if (!responseData?.verse) {
+    notFound();
+  }
 
   return (
     <div className="mt-3 text-justify">
