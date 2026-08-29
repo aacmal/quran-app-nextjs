@@ -4,9 +4,9 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "Baca Quran",
-    "short_name": "Baca Quran",
-    "description": "Baca Quran adalah aplikasi web interaktif yang memungkinkan pengguna untuk membaca, mencari, dan menjelajahi teks suci Al-Quran secara digital. Aplikasi ini dilengkapi dengan berbagai fitur yang memudahkan pengguna dalam mempelajari dan meresapi ayat-ayat Al-Quran, seperti terjemahan, tafsir, dan audio.",
+    "name": "Laman Ayat",
+    "short_name": "Laman Ayat",
+    "description": "Laman Ayat memudahkan Anda membaca 114 surat dan 30 juz Al-Qur'an secara online, lengkap dengan teks Arab, transliterasi Latin, terjemahan Indonesia, tafsir, dan audio murottal.",
     "icons": [
         {
             "src": "/icon-192x192.png",

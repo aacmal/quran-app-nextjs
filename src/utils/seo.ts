@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { absoluteUrl, SITE_URL } from './url';
 
-export const siteName = 'Quran Wanakerta';
+export const siteName = 'Laman Ayat';
 
 export const websiteDescription =
   "Baca Al-Qur'an online berdasarkan 114 surat atau 30 juz. Tersedia teks Arab, transliterasi Latin, terjemahan bahasa Indonesia, tafsir, dan audio murottal.";

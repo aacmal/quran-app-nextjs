@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   title: {
     default: staticTitle["/"],
-    template: "%s | Wanakerta",
+    template: `%s | ${siteName}`,
   },
   description: staticDescription["/"],
   applicationName: siteName,
