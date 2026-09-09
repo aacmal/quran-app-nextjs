@@ -10,7 +10,7 @@ const SurahLayout = ({ children }: { children: React.ReactNode }) => {
       <noscript>
         <div className="text-center pb-4">
           <span className="font-semibold text-lg text-emerald-500">
-            Nyalakan JavaScript untuk men-load semua ayah
+            Nyalakan JavaScript untuk memuat semua ayat
           </span>
         </div>
       </noscript>

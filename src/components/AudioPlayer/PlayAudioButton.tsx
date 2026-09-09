@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { PlayIcon } from '../icons';
-import useQuranReader from '@stores/quranReaderStore';
+import React from "react";
+import { PlayIcon } from "../icons";
+import useQuranReader from "@stores/quranReaderStore";
 
 const PlayAudioButton = ({ surahId }: { surahId: string }) => {
   const { setAudioId } = useQuranReader((state) => ({
@@ -11,6 +11,8 @@ const PlayAudioButton = ({ surahId }: { surahId: string }) => {
 
   return (
     <button
+      type="button"
+      aria-label={`Putar audio Surat ${surahId}`}
       className="bg-emerald-500 text-slate-50 py-1 px-2 text-sm lg:py-2 lg:px-3 lg:text-base font-bold rounded flex items-center ml-auto"
       onClick={() => setAudioId(parseInt(surahId))}
     >

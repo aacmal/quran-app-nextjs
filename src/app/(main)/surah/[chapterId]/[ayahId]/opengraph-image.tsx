@@ -127,7 +127,7 @@ export default async function Image({
                 fontSize: 60,
               }}
             >
-              Ayah {params.ayahId}
+              Ayat {params.ayahId}
             </span>
           </div>
           <div

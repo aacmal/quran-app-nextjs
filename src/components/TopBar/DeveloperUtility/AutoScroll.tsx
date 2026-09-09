@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import AdjustmentWrapper from './AdjustmentWrapper';
-import useSettings from '../../../store/settingsStore';
-import { OptionButton } from './OptionList';
+import React, { useEffect, useState } from "react";
+import AdjustmentWrapper from "./AdjustmentWrapper";
+import useSettings from "../../../store/settingsStore";
+import { OptionButton } from "./OptionList";
 
 const AutoScroll = () => {
   const { autoScroll, setAutoScroll } = useSettings((state) => ({
@@ -23,18 +23,18 @@ const AutoScroll = () => {
             Mati
           </OptionButton>
           <OptionButton
-            onClick={() => setAutoScroll('word')}
+            onClick={() => setAutoScroll("word")}
             label="scroll otomatis per kata"
-            active={autoScroll === 'word'}
+            active={autoScroll === "word"}
           >
             Kata
           </OptionButton>
           <OptionButton
-            onClick={() => setAutoScroll('verse')}
-            label="scroll otomatis per ayah"
-            active={autoScroll === 'verse'}
+            onClick={() => setAutoScroll("verse")}
+            label="scroll otomatis per ayat"
+            active={autoScroll === "verse"}
           >
-            Ayah
+            Ayat
           </OptionButton>
         </div>
       </div>

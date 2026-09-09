@@ -7,8 +7,10 @@ import { getLocalChapter } from "@utils/chapter";
 import {
   createMetaDescription,
   createPageMetadata,
+  createVerseJsonLd,
   noIndexRobots,
 } from "@utils/seo";
+import JsonLd from "@components/Seo/JsonLd";
 
 type Props = {
   params: {
@@ -68,17 +70,31 @@ const SingleAyahPage = async ({ params }: Props) => {
   }
 
   return (
-    <div className="mt-3 text-justify">
-      <Verses
-        key={responseData.verse.id}
-        id={responseData.verse.id}
-        verse_number={responseData.verse.verse_number}
-        translations={responseData.verse.translations}
-        text_uthmani={responseData.verse.text_uthmani}
-        words={responseData.verse.words}
-        verse_key={responseData.verse.verse_key}
+    <>
+      <JsonLd
+        data={createVerseJsonLd({
+          chapter: {
+            name_simple: chapter.name_simple,
+            name_arabic: chapter.name_simple,
+          },
+          verseNumber: responseData.verse.verse_number,
+          path: `/surah/${chapter.id}/${verseNumber}`,
+          text: responseData.verse.text_uthmani,
+          translation: responseData.verse.translations?.[0]?.text,
+        })}
       />
-    </div>
+      <div className="mt-3 text-justify">
+        <Verses
+          key={responseData.verse.id}
+          id={responseData.verse.id}
+          verse_number={responseData.verse.verse_number}
+          translations={responseData.verse.translations}
+          text_uthmani={responseData.verse.text_uthmani}
+          words={responseData.verse.words}
+          verse_key={responseData.verse.verse_key}
+        />
+      </div>
+    </>
   );
 };
 

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import IconWrapper from '../icons/IconWrapper';
-import BannerWrapper from './BannerWrapper';
-import SurahInfo from './SurahInfo';
-import { InfoIcon } from '../icons';
-import { shallow } from 'zustand/shallow';
-import useQuranReader from '@stores/quranReaderStore';
-import { Chapter, ChapterInfo } from '@utils/types/Chapter';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import IconWrapper from "../icons/IconWrapper";
+import BannerWrapper from "./BannerWrapper";
+import SurahInfo from "./SurahInfo";
+import { InfoIcon } from "../icons";
+import { shallow } from "zustand/shallow";
+import useQuranReader from "@stores/quranReaderStore";
+import { Chapter, ChapterInfo } from "@utils/types/Chapter";
 
 type ChapterBannerProps = {
   chapterData: Chapter;
@@ -33,7 +33,7 @@ const ChapterBanner = ({ chapterData, chapterInfo }: ChapterBannerProps) => {
     <BannerWrapper imageOpacity={0.2} imageScale={1.2}>
       <div
         className={`text-center z-20 relative text-gray-50 duration-150 ${
-          isInfoOpen ? 'max-h-96' : 'max-h-32'
+          isInfoOpen ? "max-h-96" : "max-h-32"
         }`}
       >
         <IconWrapper
@@ -52,7 +52,7 @@ const ChapterBanner = ({ chapterData, chapterInfo }: ChapterBannerProps) => {
         </span>
         <hr
           className={`my-3 mx-auto lg:my-5 md:transition-all ${
-            isInfoOpen ? 'max-w-full' : 'max-w-md'
+            isInfoOpen ? "max-w-full" : "max-w-md"
           }`}
         />
         <SurahInfo
@@ -61,18 +61,18 @@ const ChapterBanner = ({ chapterData, chapterInfo }: ChapterBannerProps) => {
           short_text={chapterInfo.short_text}
           className={`${
             isInfoOpen
-              ? 'max-h-96 visible opacity-100'
-              : 'max-h-0 invisible opacity-0'
+              ? "max-h-96 visible opacity-100"
+              : "max-h-0 invisible opacity-0"
           }`}
           chapterId={chapterData.id}
         />
         <span
           className={`text-sm transition-all lg:text-lg text-gray-50 ${
-            isInfoOpen ? 'invisible opacity-0' : 'visible opacity-100'
+            isInfoOpen ? "invisible opacity-0" : "visible opacity-100"
           }`}
         >
-          <span className="capitalize">{chapterData.revelation_place}</span> -{' '}
-          {chapterData.verses_count} Ayah
+          <span className="capitalize">{chapterData.revelation_place}</span> -{" "}
+          {chapterData.verses_count} Ayat
         </span>
       </div>
     </BannerWrapper>

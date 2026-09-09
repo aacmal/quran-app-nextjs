@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import classNames from 'classnames';
-import React from 'react';
-import useSettings from '../../store/settingsStore';
-import useSurah from '../../store/surahStore';
-import { shallow } from 'zustand/shallow';
-import arabicFontStyle from '../../utils/fonts';
-import Word from './Arabic/Word';
-import { VerseWord } from '@utils/types/Verse';
-import useQuranReader from '@stores/quranReaderStore';
+import classNames from "classnames";
+import React from "react";
+import useSettings from "../../store/settingsStore";
+import useSurah from "../../store/surahStore";
+import { shallow } from "zustand/shallow";
+import arabicFontStyle from "../../utils/fonts";
+import Word from "./Arabic/Word";
+import { VerseWord } from "@utils/types/Verse";
+import useQuranReader from "@stores/quranReaderStore";
 
 type ArabicTextProps = {
   textUthmani: string;
   verseNumber: number;
   verseKey?: string;
   words?: VerseWord[];
-  leading?: 'normal' | 'medium' | 'tight';
+  leading?: "normal" | "medium" | "tight";
 };
 
 const ArabicText = ({
@@ -23,7 +23,7 @@ const ArabicText = ({
   verseNumber,
   verseKey,
   words,
-  leading = 'medium',
+  leading = "medium",
 }: ArabicTextProps) => {
   const { fontFace, currentFontSize, autoScroll } = useSettings(
     (state) => ({
@@ -43,7 +43,7 @@ const ArabicText = ({
 
   const arabicNumber = (value) => {
     const arabicNumbers =
-      '\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669';
+      "\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669";
     return String(value).replace(/[0123456789]/g, (d) => {
       return arabicNumbers[d];
     });
@@ -53,17 +53,18 @@ const ArabicText = ({
     <div
       data-verse={verseKey}
       dir="rtl"
+      lang="ar"
       className={classNames(
-        'text-right dark:text-slate-100 transition-all inline',
+        "text-right dark:text-slate-100 transition-all inline",
         {
-          'lg:leading-[100px] leading-[80px]': leading === 'medium',
+          "lg:leading-[100px] leading-[80px]": leading === "medium",
         },
         {
-          'leading-[70px]': leading === 'normal',
+          "leading-[70px]": leading === "normal",
         },
         {
-          '!text-emerald-500 !dark:text-emerald-500':
-            verseKey === highlightedVerse && autoScroll === 'verse',
+          "!text-emerald-500 !dark:text-emerald-500":
+            verseKey === highlightedVerse && autoScroll === "verse",
         }
       )}
     >
@@ -97,14 +98,15 @@ const ArabicText = ({
       </div>
       {!(fontFace === 3) && (
         <div
+          lang="id"
           className={classNames(
-            'h-8 w-8 mx-3 inline-block text-xl font-bold text-center rounded-full border',
+            "h-8 w-8 mx-3 inline-block text-xl font-bold text-center rounded-full border",
             {
-              'border-emerald-500 !text-emerald-500':
+              "border-emerald-500 !text-emerald-500":
                 verseKey === highlightedVerse,
             },
             {
-              'border-gray-900 dark:border-white':
+              "border-gray-900 dark:border-white":
                 verseKey !== highlightedVerse,
             }
           )}

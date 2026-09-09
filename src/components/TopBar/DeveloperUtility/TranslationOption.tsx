@@ -1,7 +1,7 @@
-import React from 'react';
-import AdjustmentWrapper from './AdjustmentWrapper';
-import { OptionButton } from './OptionList';
-import useSettings from '@stores/settingsStore';
+import React from "react";
+import AdjustmentWrapper from "./AdjustmentWrapper";
+import { OptionButton } from "./OptionList";
+import useSettings from "@stores/settingsStore";
 
 type Props = {};
 
@@ -16,18 +16,18 @@ const TranslationOption = (props: Props) => {
       <div className="bg-gray-100 dark:bg-slate-500 dark:text-slate-200 p-1 rounded text-black">
         <div className="flex items-center relative">
           <OptionButton
-            onClick={() => setTranslationMode('word')}
+            onClick={() => setTranslationMode("word")}
             label="scroll otomatis per kata"
-            active={translationMode === 'word'}
+            active={translationMode === "word"}
           >
             Kata
           </OptionButton>
           <OptionButton
-            onClick={() => setTranslationMode('verse')}
-            label="scroll otomatis per ayah"
-            active={translationMode === 'verse'}
+            onClick={() => setTranslationMode("verse")}
+            label="scroll otomatis per ayat"
+            active={translationMode === "verse"}
           >
-            Ayah
+            Ayat
           </OptionButton>
         </div>
       </div>

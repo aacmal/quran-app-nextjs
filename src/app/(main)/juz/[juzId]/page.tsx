@@ -1,17 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
-import { getVerses } from '@utils/verse';
-import Wrapper from '@components/Wrapper';
-import QuranReader from '@components/quranReader/QuranReader';
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import { getVerses } from "@utils/verse";
+import Wrapper from "@components/Wrapper";
+import QuranReader from "@components/quranReader/QuranReader";
 import {
   createMetaDescription,
   createPageMetadata,
   noIndexRobots,
-} from '@utils/seo';
-import { getJuzData, getJuzs } from '@utils/juz';
-import { GetVerseBy } from '@utils/types/Verse';
+} from "@utils/seo";
+import { getJuzData, getJuzs } from "@utils/juz";
+import { GetVerseBy } from "@utils/types/Verse";
+import JsonLd from "@components/Seo/JsonLd";
+import { createJuzJsonLd } from "@utils/seo";
+import Breadcrumbs from "@components/Seo/Breadcrumbs";
 
 type Props = {
   params: {
@@ -34,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const juzId = Number(params.juzId);
   if (!Number.isInteger(juzId) || juzId < 1 || juzId > 30) {
     return {
-      title: 'Juz tidak ditemukan',
+      title: "Juz tidak ditemukan",
       robots: noIndexRobots,
     };
   }
@@ -43,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!juzData) {
     return {
-      title: 'Juz tidak ditemukan',
+      title: "Juz tidak ditemukan",
       robots: noIndexRobots,
     };
   }
@@ -60,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     path: `/juz/${juzData.id}`,
-    type: 'article',
+    type: "article",
   });
 }
 
@@ -81,19 +84,32 @@ export default async function JuzPage({ params }: Props) {
   });
 
   return (
-    <Wrapper className="my-14 px-5 2xl:px-0 pb-20">
-      {/* <ChapterBanner
-        chapterData={chapterData}
-        chapterInfo={chapterInfo.chapter_info}
+    <>
+      <JsonLd
+        data={createJuzJsonLd({
+          juzId: juzData.id,
+          path: `/juz/${juzData.id}`,
+          description: createMetaDescription(
+            `Baca Al-Qur'an Juz ${juzData.id} dalam teks Arab, transliterasi Latin, terjemahan bahasa Indonesia, dan tafsir.`
+          ),
+        })}
       />
-      <PlayAudioButton surahId={id} /> */}
-      <QuranReader
-        bismillahPre={true}
-        type="juz"
-        versesData={juzVerses.verses}
-        versesCount={juzData.verses_count}
-        id={juzData.id}
-      />
-    </Wrapper>
+      <Wrapper className="my-14 px-5 2xl:px-0 pb-20">
+        <Breadcrumbs
+          items={[
+            { label: "Beranda", href: "/" },
+            { label: "Daftar Juz", href: "/juz" },
+            { label: `Juz ${juzData.id}` },
+          ]}
+        />
+        <QuranReader
+          bismillahPre={true}
+          type="juz"
+          versesData={juzVerses.verses}
+          versesCount={juzData.verses_count}
+          id={juzData.id}
+        />
+      </Wrapper>
+    </>
   );
 }

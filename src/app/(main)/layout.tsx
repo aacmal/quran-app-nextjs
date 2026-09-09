@@ -1,20 +1,24 @@
-'use client';
+"use client";
 
-import BookmarkedVerseLists from '@components/Bookmark/BookmarkedVerseLists';
-import Header from '@components/Header';
-import ReadQuranHeader from '@components/Header/ReadQuranHeader';
-import QuranSwitch from '@components/Switch';
-import Wrapper from '@components/Wrapper';
-import classNames from 'classnames';
-import { useSelectedLayoutSegments } from 'next/navigation';
+import BookmarkedVerseLists from "@components/Bookmark/BookmarkedVerseLists";
+import Header from "@components/Header";
+import ReadQuranHeader from "@components/Header/ReadQuranHeader";
+import QuranSwitch from "@components/Switch";
+import Wrapper from "@components/Wrapper";
+import classNames from "classnames";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 export default function HomePage({ children }) {
   const layoutSegments = useSelectedLayoutSegments();
-  const isJuzPage = layoutSegments[0] === 'juz';
+  const isJuzPage = layoutSegments[0] === "juz";
 
   // remove Header and orther components if the path is in surah/[id]
   if (layoutSegments.length >= 2) {
-    return children;
+    return (
+      <main id="konten-utama" aria-label="Konten utama">
+        {children}
+      </main>
+    );
   }
 
   return (
@@ -25,11 +29,13 @@ export default function HomePage({ children }) {
       <BookmarkedVerseLists />
       <div
         className={classNames(
-          'px-5 py-5 lg:p-12 lg:pb-32 pb-32 bg-gray-100 dark:bg-slate-700 min-h-screen rounded-t-2xl '
+          "px-5 py-5 lg:p-12 lg:pb-32 pb-32 bg-gray-100 dark:bg-slate-700 min-h-screen rounded-t-2xl "
         )}
       >
         <QuranSwitch active={layoutSegments[0]} />
-        {children}
+        <main id="konten-utama" aria-label="Konten utama">
+          {children}
+        </main>
       </div>
     </Wrapper>
   );

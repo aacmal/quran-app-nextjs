@@ -2,6 +2,8 @@ import Wrapper from "@components/Wrapper";
 import { ArrowIcon } from "@components/icons";
 import Link from "next/link";
 import React from "react";
+import Breadcrumbs from "@components/Seo/Breadcrumbs";
+import { getLocalChapter } from "@utils/chapter";
 
 type Props = {
   children: React.ReactNode;
@@ -11,9 +13,22 @@ type Props = {
   };
 };
 
-const SpecificAyahLayout = ({ children, params }: Props) => {
+const SpecificAyahLayout = async ({ children, params }: Props) => {
+  const chapters = await getLocalChapter();
+  const chapter = chapters.find((item) => item.id === Number(params.chapterId));
+
   return (
     <Wrapper className="px-5 lg:mt-24 mt-16 pb-20">
+      <Breadcrumbs
+        items={[
+          { label: "Beranda", href: "/" },
+          {
+            label: chapter ? `Surat ${chapter.name_simple}` : "Surat",
+            href: `/surah/${params.chapterId}`,
+          },
+          { label: `Ayat ${params.ayahId}` },
+        ]}
+      />
       <div className="flex justify-between">
         <Link
           href={`/surah/${params.chapterId}`}

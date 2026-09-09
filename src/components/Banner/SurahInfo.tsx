@@ -25,7 +25,7 @@ const SurahInfo = ({
     >
       <div className="mb-3">
         <span>
-          <span className="font-bold">Jumlah Ayah : </span>
+          <span className="font-bold">Jumlah Ayat : </span>
           {verses_count}
         </span>
         <br />

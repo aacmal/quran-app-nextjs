@@ -128,7 +128,7 @@ export default async function Image({
                 fontSize: 25,
               }}
             >
-              {chapterData.verses_count} Ayah
+              {chapterData.verses_count} Ayat
             </span>
             <span
               style={{

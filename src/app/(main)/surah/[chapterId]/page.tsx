@@ -3,11 +3,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { getVerses } from "@utils/verse";
-import {
-  getChapter,
-  getChapterInfo,
-  getLocalChapter,
-} from "@utils/chapter";
+import { getChapter, getChapterInfo, getLocalChapter } from "@utils/chapter";
 import Wrapper from "@components/Wrapper";
 import ChapterBanner from "@components/Banner/ChapterBanner";
 import QuranReader from "@components/quranReader/QuranReader";
@@ -19,6 +15,9 @@ import {
   noIndexRobots,
 } from "@utils/seo";
 import { GetVerseBy } from "@utils/types/Verse";
+import JsonLd from "@components/Seo/JsonLd";
+import { createSurahJsonLd } from "@utils/seo";
+import Breadcrumbs from "@components/Seo/Breadcrumbs";
 
 type Props = {
   params: {
@@ -82,6 +81,16 @@ export default async function SurahPage({ params }: Props) {
     notFound();
   }
 
+  const description = createMetaDescription(
+    `Baca Surat ${chapterData.name_simple} (${
+      chapterData.translated_name.name
+    }), surat ke-${chapterData.id} dengan ${
+      chapterData.verses_count
+    } ayat ${formatRevelationType(
+      chapterData.revelation_place
+    )}. Teks Arab, Latin, terjemahan Indonesia, tafsir, dan audio murottal.`
+  );
+
   const [chapterVerses, chapterInfo] = await Promise.all([
     getVerses({
       id,
@@ -91,19 +100,34 @@ export default async function SurahPage({ params }: Props) {
   ]);
 
   return (
-    <Wrapper className="my-14 px-5 2xl:px-0 pb-20">
-      <ChapterBanner
-        chapterData={chapterData}
-        chapterInfo={chapterInfo.chapter_info}
+    <>
+      <JsonLd
+        data={createSurahJsonLd({
+          chapter: chapterData,
+          path: `/surah/${chapterData.id}`,
+          description,
+        })}
       />
-      <PlayAudioButton surahId={params.chapterId} />
-      <QuranReader
-        type="chapter"
-        bismillahPre={chapterData.bismillah_pre}
-        versesData={chapterVerses.verses}
-        versesCount={chapterData.verses_count}
-        id={chapterData.id}
-      />
-    </Wrapper>
+      <Wrapper className="my-14 px-5 2xl:px-0 pb-20">
+        <Breadcrumbs
+          items={[
+            { label: "Beranda", href: "/" },
+            { label: `Surat ${chapterData.name_simple}` },
+          ]}
+        />
+        <ChapterBanner
+          chapterData={chapterData}
+          chapterInfo={chapterInfo.chapter_info}
+        />
+        <PlayAudioButton surahId={params.chapterId} />
+        <QuranReader
+          type="chapter"
+          bismillahPre={chapterData.bismillah_pre}
+          versesData={chapterVerses.verses}
+          versesCount={chapterData.verses_count}
+          id={chapterData.id}
+        />
+      </Wrapper>
+    </>
   );
 }
