@@ -2,6 +2,7 @@ import Bismillah from "./Bismillah";
 import { GetVerseBy, Verse } from "@utils/types/Verse";
 import InitialSurahVerse from "./InitialSurahVerse";
 import dynamic from "next/dynamic";
+import ContentSource from "@components/Seo/ContentSource";
 
 const FetchInfiniteVerse = dynamic(() => import("./FetchInfiniteVerse"), {
   ssr: false,
@@ -26,6 +27,7 @@ const QuranReader = ({
     <div className="mt-3">
       <>
         <Bismillah className={!bismillahPre && "hidden"} />
+        <ContentSource />
         <div className="text-justify mt-12">
           <InitialSurahVerse versesData={versesData} />
           <FetchInfiniteVerse

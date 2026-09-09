@@ -83,6 +83,9 @@ const SingleAyahPage = async ({ params }: Props) => {
           translation: responseData.verse.translations?.[0]?.text,
         })}
       />
+      <h1 className="mb-5 text-xl font-bold text-emerald-500">
+        Surat {chapter.name_simple} Ayat {verseNumber}
+      </h1>
       <div className="mt-3 text-justify">
         <Verses
           key={responseData.verse.id}

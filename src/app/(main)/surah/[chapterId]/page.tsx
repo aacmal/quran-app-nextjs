@@ -18,6 +18,7 @@ import { GetVerseBy } from "@utils/types/Verse";
 import JsonLd from "@components/Seo/JsonLd";
 import { createSurahJsonLd } from "@utils/seo";
 import Breadcrumbs from "@components/Seo/Breadcrumbs";
+import ContentNavigation from "@components/Seo/ContentNavigation";
 
 type Props = {
   params: {
@@ -81,6 +82,11 @@ export default async function SurahPage({ params }: Props) {
     notFound();
   }
 
+  const localChapters = await getLocalChapter();
+  const chapterIndex = localChapters.findIndex((item) => item.id === id);
+  const previousChapter = localChapters[chapterIndex - 1];
+  const nextChapter = localChapters[chapterIndex + 1];
+
   const description = createMetaDescription(
     `Baca Surat ${chapterData.name_simple} (${
       chapterData.translated_name.name
@@ -126,6 +132,24 @@ export default async function SurahPage({ params }: Props) {
           versesData={chapterVerses.verses}
           versesCount={chapterData.verses_count}
           id={chapterData.id}
+        />
+        <ContentNavigation
+          previous={
+            previousChapter
+              ? {
+                  href: `/surah/${previousChapter.id}`,
+                  label: `Surat sebelumnya: ${previousChapter.name_simple}`,
+                }
+              : undefined
+          }
+          next={
+            nextChapter
+              ? {
+                  href: `/surah/${nextChapter.id}`,
+                  label: `Surat berikutnya: ${nextChapter.name_simple}`,
+                }
+              : undefined
+          }
         />
       </Wrapper>
     </>

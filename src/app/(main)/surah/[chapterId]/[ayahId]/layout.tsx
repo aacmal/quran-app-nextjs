@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import Breadcrumbs from "@components/Seo/Breadcrumbs";
 import { getLocalChapter } from "@utils/chapter";
+import ContentNavigation from "@components/Seo/ContentNavigation";
 
 type Props = {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ type Props = {
 const SpecificAyahLayout = async ({ children, params }: Props) => {
   const chapters = await getLocalChapter();
   const chapter = chapters.find((item) => item.id === Number(params.chapterId));
+  const verseNumber = Number(params.ayahId);
 
   return (
     <Wrapper className="px-5 lg:mt-24 mt-16 pb-20">
@@ -39,6 +41,24 @@ const SpecificAyahLayout = async ({ children, params }: Props) => {
         </Link>
       </div>
       {children}
+      <ContentNavigation
+        previous={
+          verseNumber > 1
+            ? {
+                href: `/surah/${params.chapterId}/${verseNumber - 1}`,
+                label: "Ayat sebelumnya",
+              }
+            : undefined
+        }
+        next={
+          chapter && verseNumber < chapter.verses_count
+            ? {
+                href: `/surah/${params.chapterId}/${verseNumber + 1}`,
+                label: "Ayat berikutnya",
+              }
+            : undefined
+        }
+      />
     </Wrapper>
   );
 };

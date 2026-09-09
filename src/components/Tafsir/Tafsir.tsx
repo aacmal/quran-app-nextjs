@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import classNames from 'classnames';
-import { useEffect, useState } from 'react';
-import { getTafsirByVerseId } from '../../utils/tafsir';
-import IconWrapper from '../icons/IconWrapper';
-import { XIcon } from '../icons';
-import TafsirSkeleton from './TafsirSkeleton';
-import ArabicText from '../quranReader/ArabicText';
-import useSurah from '../../store/surahStore';
-import { shallow } from 'zustand/shallow';
-import useQuranReader from '@stores/quranReaderStore';
-import { Tafsir } from '@utils/types/Tafsir';
+import classNames from "classnames";
+import { useEffect, useState } from "react";
+import { getTafsirByVerseId } from "../../utils/tafsir";
+import IconWrapper from "../icons/IconWrapper";
+import { XIcon } from "../icons";
+import TafsirSkeleton from "./TafsirSkeleton";
+import ArabicText from "../quranReader/ArabicText";
+import useSurah from "../../store/surahStore";
+import { shallow } from "zustand/shallow";
+import useQuranReader from "@stores/quranReaderStore";
+import { Tafsir } from "@utils/types/Tafsir";
 
 const TafsirModal = () => {
   const chapterData = useSurah((state) => state.chapterData);
@@ -40,7 +40,7 @@ const TafsirModal = () => {
       setLoading(true);
     }
 
-    document.body.style.overflow = !!tafsirState ? 'hidden' : 'auto';
+    document.body.style.overflow = !!tafsirState ? "hidden" : "auto";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tafsirState]);
 
@@ -52,22 +52,22 @@ const TafsirModal = () => {
     <div>
       <div
         className={classNames(
-          'h-screen w-screen fixed bg-black/60 dark:bg-black/50 top-0 left-0 z-[60] transition-all',
-          { 'visible opacity-100': tafsirState },
-          { 'invisible opacity-0': !tafsirState }
+          "h-screen w-screen fixed bg-black/60 dark:bg-black/50 top-0 left-0 z-[60] transition-all",
+          { "visible opacity-100": tafsirState },
+          { "invisible opacity-0": !tafsirState }
         )}
       ></div>
 
       <div
         className={classNames(
-          'z-[70] h-screen pb-20 fixed w-screen top-0 left-0 overflow-y-scroll flex justify-center pt-28',
+          "z-[70] h-screen pb-20 fixed w-screen top-0 left-0 overflow-y-scroll flex justify-center pt-28",
           { visivle: tafsirState },
           { invisible: !tafsirState }
         )}
       >
         <div
           className={classNames(
-            'left-0 top-0 h-screen w-screen',
+            "left-0 top-0 h-screen w-screen",
             { fixed: tafsirState },
             { hidden: !tafsirState }
           )}
@@ -75,9 +75,9 @@ const TafsirModal = () => {
         ></div>
         <div
           className={classNames(
-            'z-[70] h-min min-h-[80%] w-[94%] max-w-7xl bg-gray-100 dark:bg-slate-600 dark:text-slate-100  p-6 xl:p-12 lg:pt-16 relative rounded-md transform transition-all',
-            { 'translate-y-0 opacity-100': tafsirState },
-            { 'translate-y-52 opacity-0': !tafsirState }
+            "z-[70] h-min min-h-[80%] w-[94%] max-w-7xl bg-gray-100 dark:bg-slate-600 dark:text-slate-100  p-6 xl:p-12 lg:pt-16 relative rounded-md transform transition-all",
+            { "translate-y-0 opacity-100": tafsirState },
+            { "translate-y-52 opacity-0": !tafsirState }
           )}
         >
           <IconWrapper
@@ -90,7 +90,7 @@ const TafsirModal = () => {
           {!isLoading && !!tafsirState ? (
             <>
               <div className="bg-emerald-500 w-fit py-2 px-3 font-bold text-white rounded-md">
-                {chapterData[tafsirData.surah_id - 1].name_simple} :{' '}
+                {chapterData[tafsirData.surah_id - 1].name_simple} :{" "}
                 {tafsirData.ayah}
               </div>
               <div className="w-full flex flex-col dark:text-slate-100">
@@ -107,18 +107,18 @@ const TafsirModal = () => {
               </div>
               <div className="h-px w-full bg-emerald-500  my-6"></div>
               <section className="mb-4">
-                <h1 className="text-lg font-semibold text-emerald-500">
+                <h2 className="text-lg font-semibold text-emerald-500">
                   Tafsir Wajiz
-                </h1>
+                </h2>
                 <p className="text-base md:text-lg">
                   {tafsirData.tafsir.wajiz}
                 </p>
               </section>
               <hr className="my-4 opacity-30" />
               <section className="mb-4">
-                <h1 className="text-lg font-semibold text-emerald-500">
+                <h2 className="text-lg font-semibold text-emerald-500">
                   Tafsir Tahlili
-                </h1>
+                </h2>
                 <p className="text-base md:text-lg">
                   {tafsirData.tafsir.tahlili}
                 </p>

@@ -174,24 +174,18 @@ export const createSurahJsonLd = ({
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Article",
-      "@id": `${absoluteUrl(path)}#article`,
-      headline: `Surat ${chapter.name_simple}: Arab, Latin, Terjemahan & Tafsir`,
+      "@type": "WebPage",
+      "@id": `${absoluteUrl(path)}#webpage`,
+      name: `Surat ${chapter.name_simple}: Arab, Latin, Terjemahan & Tafsir`,
       description,
       url: absoluteUrl(path),
       inLanguage: ["id-ID", "ar"],
       isPartOf: { "@id": `${SITE_URL}/#website` },
-      about: {
+      mainEntity: {
         "@type": "Thing",
         name: `Surat ${chapter.name_simple}`,
         alternateName: chapter.name_arabic,
       },
-      keywords: [
-        `Surat ${chapter.name_simple}`,
-        chapter.translated_name.name,
-        "Al-Qur'an bahasa Indonesia",
-        "tafsir dan terjemahan",
-      ],
     },
     createBreadcrumbJsonLd([
       { name: "Beranda", url: "/" },
@@ -216,14 +210,14 @@ export const createVerseJsonLd = ({
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Article",
-      "@id": `${absoluteUrl(path)}#article`,
-      headline: `Surat ${chapter.name_simple} Ayat ${verseNumber}: Arab, Latin & Terjemahan`,
+      "@type": "WebPage",
+      "@id": `${absoluteUrl(path)}#webpage`,
+      name: `Surat ${chapter.name_simple} Ayat ${verseNumber}: Arab, Latin & Terjemahan`,
       url: absoluteUrl(path),
       inLanguage: ["id-ID", "ar"],
       isPartOf: { "@id": `${SITE_URL}/#website` },
-      articleBody: translation,
-      about: {
+      description: translation,
+      mainEntity: {
         "@type": "CreativeWork",
         name: `${chapter.name_arabic} ayat ${verseNumber}`,
         text,
@@ -253,9 +247,9 @@ export const createJuzJsonLd = ({
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Article",
-      "@id": `${absoluteUrl(path)}#article`,
-      headline: `Al-Qur'an Juz ${juzId}: Arab, Latin, Terjemahan & Tafsir`,
+      "@type": "WebPage",
+      "@id": `${absoluteUrl(path)}#webpage`,
+      name: `Al-Qur'an Juz ${juzId}: Arab, Latin, Terjemahan & Tafsir`,
       description,
       url: absoluteUrl(path),
       inLanguage: ["id-ID", "ar"],

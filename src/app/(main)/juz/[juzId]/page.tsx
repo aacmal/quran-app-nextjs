@@ -1,3 +1,4 @@
+import ContentNavigation from "@components/Seo/ContentNavigation";
 import React from "react";
 
 import { notFound } from "next/navigation";
@@ -102,12 +103,33 @@ export default async function JuzPage({ params }: Props) {
             { label: `Juz ${juzData.id}` },
           ]}
         />
+        <h1 className="mb-5 text-xl font-bold text-emerald-500">
+          Al-Qur&apos;an Juz {juzData.id}
+        </h1>
         <QuranReader
           bismillahPre={true}
           type="juz"
           versesData={juzVerses.verses}
           versesCount={juzData.verses_count}
           id={juzData.id}
+        />
+        <ContentNavigation
+          previous={
+            juzData.id > 1
+              ? {
+                  href: `/juz/${juzData.id - 1}`,
+                  label: `Juz sebelumnya: ${juzData.id - 1}`,
+                }
+              : undefined
+          }
+          next={
+            juzData.id < 30
+              ? {
+                  href: `/juz/${juzData.id + 1}`,
+                  label: `Juz berikutnya: ${juzData.id + 1}`,
+                }
+              : undefined
+          }
         />
       </Wrapper>
     </>
