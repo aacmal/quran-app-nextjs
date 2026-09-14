@@ -7,6 +7,20 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 
 /** @type {import('next').NextConfig} */
 const config = {
+  async redirects() {
+    return [
+      {
+        source: "/privacy-policy",
+        destination: "/kebijakan-privasi",
+        permanent: true,
+      },
+      {
+        source: "/terms",
+        destination: "/syarat-ketentuan",
+        permanent: true,
+      },
+    ];
+  },
   // async redirects() {
   //   return [
   //     {

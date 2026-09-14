@@ -6,6 +6,8 @@ export async function GET() {
   const chapters = await getLocalChapter();
   const entries = [
     { url: absoluteUrl("/") },
+    { url: absoluteUrl("/kebijakan-privasi") },
+    { url: absoluteUrl("/syarat-ketentuan") },
     ...chapters.flatMap((chapter) => [
       { url: absoluteUrl(`/surah/${chapter.id}`) },
       { url: absoluteUrl(`/surah/${chapter.id}/info`) },

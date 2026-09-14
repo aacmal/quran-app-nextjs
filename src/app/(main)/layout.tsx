@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import BookmarkedVerseLists from "@components/Bookmark/BookmarkedVerseLists";
 import Header from "@components/Header";
 import ReadQuranHeader from "@components/Header/ReadQuranHeader";
@@ -37,6 +38,22 @@ export default function HomePage({ children }) {
           {children}
         </main>
       </div>
+      <footer className="border-t border-emerald-500/20 px-5 py-5 text-center text-sm text-slate-500 dark:border-emerald-400/20 dark:text-slate-300 xl:px-0">
+        <nav aria-label="Halaman informasi" className="flex flex-wrap justify-center gap-x-5 gap-y-2">
+          <Link
+            href="/kebijakan-privasi"
+            className="text-emerald-600 hover:underline dark:text-emerald-400"
+          >
+            Kebijakan Privasi
+          </Link>
+          <Link
+            href="/syarat-ketentuan"
+            className="text-emerald-600 hover:underline dark:text-emerald-400"
+          >
+            Syarat &amp; Ketentuan
+          </Link>
+        </nav>
+      </footer>
     </Wrapper>
   );
 }

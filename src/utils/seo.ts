@@ -155,6 +155,33 @@ export const createBreadcrumbJsonLd = (items: BreadcrumbItem[]) => ({
   })),
 });
 
+export const createLegalPageJsonLd = ({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${absoluteUrl(path)}#webpage`,
+      name: title,
+      description,
+      url: absoluteUrl(path),
+      inLanguage: "id-ID",
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+    },
+    createBreadcrumbJsonLd([
+      { name: "Beranda", url: "/" },
+      { name: title, url: path },
+    ]),
+  ],
+});
+
 export const createSurahJsonLd = ({
   chapter,
   path,
