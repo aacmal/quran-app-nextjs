@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import ArabicText from "./ArabicText";
 import { StarIcon } from "../icons";
 import HandleBookmark from "./action/HandleBookmark";
@@ -41,10 +42,14 @@ const Verses = ({
       >
         <div className="flex md:flex-col flex-row items-center mb-4">
           <div className="relative grid place-items-center h-9 w-9 md:h-12 md:w-12">
-            <span className="text-xs font-semibold md:text-lg text-gray-900 dark:text-slate-100">
+            <Link
+              href={`/surah/${verse_key.replace(":", "/")}`}
+              aria-label={`Buka halaman ayat ${verse_key}`}
+              className="relative z-10 text-xs font-semibold md:text-lg text-gray-900 dark:text-slate-100"
+            >
               {verse_number}
-            </span>
-            <StarIcon className="absolute h-8 w-8 md:h-12 md:w-12 left-0" />
+            </Link>
+            <StarIcon className="pointer-events-none absolute h-8 w-8 md:h-12 md:w-12 left-0" />
           </div>
           <div className="md:mt-3 md:ml-0 ml-2  flex md:flex-col flex-row items-center justify-between md:h-28 w-full md:w-fit">
             <div className="flex md:flex-col">
