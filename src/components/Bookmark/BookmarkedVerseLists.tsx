@@ -7,7 +7,11 @@ import { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
 import BookmarkWrapper from './BookmarkWrapper';
 
-const BookmarkedVerseLists = () => {
+type BookmarkedVerseListsProps = {
+  compact?: boolean;
+};
+
+const BookmarkedVerseLists = ({ compact = false }: BookmarkedVerseListsProps) => {
   const { bookmarkData, chapterData, setBookmarked } = useSurah(
     (state) => ({
       bookmarkData: state.bookmarked,
@@ -17,12 +21,15 @@ const BookmarkedVerseLists = () => {
     shallow
   );
 
-  if (chapterData.length === 0) return <></>;
+  if (chapterData.length === 0 && (bookmarkData.length > 0 || !compact)) {
+    return <></>;
+  }
 
   return (
     <BookmarkWrapper
       onClickDelete={() => setBookmarked([])}
       isEmpty={bookmarkData.length < 1}
+      compact={compact}
     >
       {bookmarkData.map((e, index) => {
         const chapterId = e.split(':');

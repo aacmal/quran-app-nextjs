@@ -7,14 +7,14 @@ type WrapperProps = {
 
 const Wrapper = ({ children, className }: WrapperProps) => {
   return (
-    <main
+    <div
       className={classNames(
         'pt-5 max-w-screen-2xl mx-auto relative',
         className
       )}
     >
       {children}
-    </main>
+    </div>
   );
 };
 

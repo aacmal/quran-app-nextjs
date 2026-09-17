@@ -12,6 +12,7 @@ export const metadata: Metadata = createPageMetadata({
   title: staticTitle["/"],
   description: staticDescription["/"],
   path: "/",
+  absoluteTitle: `${staticTitle["/"]} | Laman Ayat`,
 });
 
 export default async function HomePage() {

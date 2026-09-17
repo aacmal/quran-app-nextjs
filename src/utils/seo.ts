@@ -4,7 +4,7 @@ import { absoluteUrl, SITE_URL } from "./url";
 export const siteName = "Laman Ayat";
 
 export const websiteDescription =
-  "Baca Al-Qur'an online berdasarkan 114 surat atau 30 juz. Tersedia teks Arab, transliterasi Latin, terjemahan bahasa Indonesia, tafsir, dan audio murottal.";
+  "Baca 114 surat Al-Qur’an dengan teks Arab, Latin, terjemahan bahasa Indonesia, dan audio murottal. Pilih surat atau lanjutkan bacaan melalui daftar juz.";
 
 export const staticDescription = {
   "/": websiteDescription,
@@ -17,7 +17,7 @@ export const staticDescription = {
 };
 
 export const staticTitle = {
-  "/": "Baca Al-Qur'an Online: 30 Juz & Terjemahan",
+  "/": "Baca Al-Qur’an Online, Arab, Latin & Terjemahan",
   "/surah": "114 Surat Al-Qur'an: Arab, Latin & Terjemahan",
   "/juz": "Al-Qur'an 30 Juz: Arab, Latin & Terjemahan",
   "/hadits": "Baca Hadits Online",
@@ -75,6 +75,7 @@ type PageMetadataOptions = {
   path: string;
   imagePath?: string;
   type?: "website" | "article";
+  absoluteTitle?: string;
 };
 
 export function createPageMetadata({
@@ -83,12 +84,14 @@ export function createPageMetadata({
   path,
   imagePath = "/quranapp.jpg",
   type = "website",
+  absoluteTitle,
 }: PageMetadataOptions): Metadata {
   const image = absoluteUrl(imagePath);
   const url = absoluteUrl(path);
+  const sharingTitle = absoluteTitle ?? title;
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: absoluteTitle } : title,
     description,
     alternates: {
       canonical: url,
@@ -97,14 +100,14 @@ export function createPageMetadata({
     openGraph: {
       ...defaultOpenGraph,
       type,
-      title,
+      title: sharingTitle,
       description,
       url,
-      images: [{ url: image, alt: title }],
+      images: [{ url: image, alt: sharingTitle }],
     },
     twitter: {
       ...defaultTwitter,
-      title,
+      title: sharingTitle,
       description,
       images: [image],
     },
