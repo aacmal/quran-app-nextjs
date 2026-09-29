@@ -10,6 +10,16 @@ const config = {
   async redirects() {
     return [
       {
+        source: "/surah/:chapterId/opengraph-image",
+        destination: "/og/surah/:chapterId",
+        permanent: true,
+      },
+      {
+        source: "/surah/:chapterId/:ayahId/opengraph-image",
+        destination: "/og/surah/:chapterId/:ayahId",
+        permanent: true,
+      },
+      {
         source: "/privacy-policy",
         destination: "/kebijakan-privasi",
         permanent: true,

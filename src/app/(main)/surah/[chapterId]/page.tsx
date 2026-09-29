@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     path: `/surah/${chapterData.id}`,
-    imagePath: `/surah/${chapterData.id}/opengraph-image`,
+    imagePath: `/og/surah/${chapterData.id}`,
     type: "article",
   });
 }

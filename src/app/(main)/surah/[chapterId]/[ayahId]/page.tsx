@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `Baca Surat ${chapterData.name_simple} ayat ${ayahId} dalam tulisan Arab, transliterasi Latin, dan terjemahan bahasa Indonesia. Buka tafsir untuk memahami makna ayat.`
     ),
     path: `/surah/${chapterId}/${ayahId}`,
-    imagePath: `/surah/${chapterId}/${ayahId}/opengraph-image`,
+    imagePath: `/og/surah/${chapterId}/${ayahId}`,
     type: "article",
   });
 }

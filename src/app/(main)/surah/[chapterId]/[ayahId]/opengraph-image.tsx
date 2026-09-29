@@ -1,14 +1,8 @@
 import { getChapter } from "@utils/chapter";
 import { ImageResponse } from "next/og";
-import { Lato } from "next/font/google";
 import { SITE_URL } from "@utils/url";
 
 export const runtime = "edge";
-
-const lato = Lato({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "700", "900"],
-});
 
 export const size = {
   width: 1200,
@@ -21,7 +15,16 @@ export default async function Image({
 }: {
   params: { chapterId: string; ayahId: string };
 }) {
-  const chapterData = await getChapter(parseInt(params.chapterId));
+  const chapterId = Number(params.chapterId);
+  const ayahId = Number(params.ayahId);
+  if (!/^\d+$/.test(params.chapterId) || !Number.isInteger(chapterId) || chapterId < 1 || chapterId > 114 ||
+      !/^\d+$/.test(params.ayahId) || !Number.isInteger(ayahId) || ayahId < 1) {
+    return new Response("Ayat tidak ditemukan", { status: 404 });
+  }
+  const chapterData = await getChapter(chapterId);
+  if (!chapterData || ayahId > chapterData.verses_count) {
+    return new Response("Ayat tidak ditemukan", { status: 404 });
+  }
   const NastaleeqFont = await fetch(
     new URL(
       "../../../../../utils/fonts/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.ttf",
